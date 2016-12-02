@@ -79,7 +79,7 @@ LB-BusinessServices:
     io.rancher.loadbalancer.target.RulesService: 8080/rulesservice=8080
     io.rancher.loadbalancer.target.CMS-BusinessService: 8080/cmsbusservice=8080
     io.rancher.loadbalancer.target.EmailService: 8080/emailservice=8080
-    environment_name: $ENV_SHORTCODE
+    environment_name: ${env_shortcode}
     service_name: LB-BusinessServices
     project.service.name: lb-business-services
     project.name: cis-urs
@@ -112,7 +112,7 @@ LB-Secure:
   expose:
   - 8443:8443/tcp
   labels:
-    environment_name: $ENV_SHORTCODE
+    environment_name: ${env_shortcode}
     service_name: LB-Secure
     project.service.name: lb-secure
     project.name: cis-urs
@@ -126,7 +126,7 @@ LB-Secure:
 Audit:
   labels:
     io.rancher.container.hostname_override: container_name
-    environment_name: $ENV_SHORTCODE
+    environment_name: ${env_shortcode}
     service_name: Audit
     project.service.name: audit
     project.name: cis-urs
@@ -134,8 +134,8 @@ Audit:
   mem_limit: 250000000
   volumes:
   - /var/log/iam:/var/log/iam
-  - $PROPERTY_FILE_LOCATION/services.properties:/home/iam_user/careidconfig/services.properties
-  image: localhost:5000/cis-audit:$IAM_APPS_VERSION
+  - /mnt/git/CareID_Rancher/env_config/lh-careidconfig/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
+  image: ${registry_url}/cis-audit:${app_version}
   environment:
     JAVA_OPTS: -server -Xms60m -Xms150m -XX:NewSize=128m -XX:MaxNewSize=256m -XX:PermSize=64m -XX:MaxPermSize=128m -XX:+UseConcMarkSweepGC  -XX:+UseParNewGC   -XX:ParallelGCThreads=2 -Djava.security.egd=file:/dev/./urandom
   tty: true
@@ -147,7 +147,7 @@ Audit:
 GuvnorService:
   labels:
     io.rancher.container.hostname_override: container_name
-    environment_name: $ENV_SHORTCODE
+    environment_name: ${env_shortcode}
     service_name: GuvnorService
     project.service.name: guvnor-service
     project.name: cis-urs
@@ -155,8 +155,8 @@ GuvnorService:
   mem_limit: 7491026944
   volumes:
   - /var/log/iam:/var/log/iam
-  - $PROPERTY_FILE_LOCATION/services.properties:/home/iam_user/careidconfig/services.properties
-  image: localhost:5000/cis-guvnor:$IAM_APPS_VERSION
+  - /mnt/git/CareID_Rancher/env_config/lh-careidconfig/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
+  image: ${registry_url}/cis-guvnor:${app_version}
   tty: true
   stdin_open: true
   links:
@@ -166,7 +166,7 @@ GuvnorService:
 CMS-BusinessService:
   labels:
     io.rancher.container.hostname_override: container_name
-    environment_name: $ENV_SHORTCODE
+    environment_name: ${env_shortcode}
     service_name: CMS-BusinessService
     project.service.name: cms-business-service
     project.name: cis-urs
@@ -174,23 +174,23 @@ CMS-BusinessService:
   mem_limit: 300000000
   volumes:
   - /var/log/iam:/var/log/iam
-  - $PROPERTY_FILE_LOCATION/services.properties:/home/iam_user/careidconfig/services.properties
+  - /mnt/git/CareID_Rancher/env_config/lh-careidconfig/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
   privileged: true
   environment:
-    GLUSTER_URL: $GLUSTER_URL
-    GLUSTER_FOLDER: $ENV_SHORTCODE
-    ENTRUST_AUTHCA_CA_PORT: $ENTRUST_AUTHCA_CA_PORT
-    ENTRUST_AUTHCA_MANAGER_PORT: $ENTRUST_AUTHCA_MANAGER_PORT
-    ENTRUST_AUTHCA_ASH_PORT: $ENTRUST_AUTHCA_ASH_PORT
-    ENTRUST_AUTHCA_XAP_PORT: $ENTRUST_AUTHCA_XAP_PORT
-    ENTRUST_AUTHCA_SEARCH_BASE: $ENTRUST_AUTHCA_SEARCH_BASE
-    ENTRUST_CCCA_CA_PORT: $ENTRUST_CCCA_CA_PORT
-    ENTRUST_CCCA_MANAGER_PORT: $ENTRUST_CCCA_MANAGER_PORT
-    ENTRUST_CCCA_ASH_PORT: $ENTRUST_CCCA_ASH_PORT
-    ENTRUST_CCCA_XAP_PORT: $ENTRUST_CCCA_XAP_PORT
-    ENTRUST_CCCA_SEARCH_BASE: $ENTRUST_CCCA_SEARCH_BASE
+    GLUSTER_URL: ${gluster_url}
+    GLUSTER_FOLDER: ${env_shortcode}
+    ENTRUST_AUTHCA_CA_PORT: 1829
+    ENTRUST_AUTHCA_MANAGER_PORT: 1709
+    ENTRUST_AUTHCA_ASH_PORT: 1710
+    ENTRUST_AUTHCA_XAP_PORT: 1443
+    ENTRUST_AUTHCA_SEARCH_BASE: CN=DOCKER_SUBCA,ou=CA,o=nhs
+    ENTRUST_CCCA_CA_PORT: 2829
+    ENTRUST_CCCA_MANAGER_PORT: 2709
+    ENTRUST_CCCA_ASH_PORT: 2710
+    ENTRUST_CCCA_XAP_PORT: 2443
+    ENTRUST_CCCA_SEARCH_BASE: DOCKER_SUBCC,ou=CA,o=nhs
     JAVA_OPTS: -server -Xms128m -Xms256m -XX:NewSize=128m -XX:MaxNewSize=256m -XX:PermSize=64m -XX:MaxPermSize=128m -XX:+UseConcMarkSweepGC  -XX:+UseParNewGC   -XX:ParallelGCThreads=2 -Djava.security.egd=file:/dev/./urandom
-  image: localhost:5000/cis-cms-business:$IAM_APPS_VERSION
+  image: ${registry_url}/cis-cms-business:${app_version}
   tty: true
   stdin_open: true
   links:
@@ -204,7 +204,7 @@ CMS-BusinessService:
 EPR-BusinessService:
   labels:
     io.rancher.container.hostname_override: container_name
-    environment_name: $ENV_SHORTCODE
+    environment_name: ${env_shortcode}
     service_name: EPR-BusinessService
     project.service.name: epr-business-service
     project.name: cis-urs
@@ -212,8 +212,8 @@ EPR-BusinessService:
   mem_limit: 350000000
   volumes:
   - /var/log/iam:/var/log/iam
-  - $PROPERTY_FILE_LOCATION/services.properties:/home/iam_user/careidconfig/services.properties
-  image: localhost:5000/cis-epr-business:$IAM_APPS_VERSION
+  - /mnt/git/CareID_Rancher/env_config/lh-careidconfig/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
+  image: ${registry_url}/cis-epr-business:${app_version}
   environment:
     JAVA_OPTS: -server -Xms128m -Xms256m -XX:NewSize=128m -XX:MaxNewSize=256m -XX:PermSize=64m -XX:MaxPermSize=128m -XX:+UseConcMarkSweepGC  -XX:+UseParNewGC   -XX:ParallelGCThreads=2 -Djava.security.egd=file:/dev/./urandom
   tty: true
@@ -223,12 +223,12 @@ EPR-BusinessService:
   - LB-BusinessServices:LB-BusinessServices
 
 UID-Service:
-  image: localhost:5000/cis-urs-uid:$IAM_APPS_VERSION
+  image: ${registry_url}/cis-urs-uid:${app_version}
   tty: true
   stdin_open: true
   labels:
     io.rancher.container.hostname_override: container_name
-    environment_name: $ENV_SHORTCODE
+    environment_name: ${env_shortcode}
     service_name: UID-Service
     project.service.name: uid-service
     project.name: cis-urs
@@ -238,18 +238,18 @@ UID-Service:
     JAVA_OPTS: -server -Xms128m -Xms256m -XX:NewSize=128m -XX:MaxNewSize=256m -XX:PermSize=64m -XX:MaxPermSize=128m -XX:+UseConcMarkSweepGC  -XX:+UseParNewGC   -XX:ParallelGCThreads=2 -Djava.security.egd=file:/dev/./urandom
   volumes:
   - /var/log/iam:/var/log/iam
-  - $PROPERTY_FILE_LOCATION/services.properties:/home/iam_user/careidconfig/services.properties
+  - /mnt/git/CareID_Rancher/env_config/lh-careidconfig/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
   links:
   - IAM-Database:IAM-Database
   - LB-BusinessServices:LB-BusinessServices
 
 URS-BusinessService:
-  image: localhost:5000/cis-urs-business:$IAM_APPS_VERSION
+  image: ${registry_url}/cis-urs-business:${app_version}
   tty: true
   stdin_open: true
   labels:
     io.rancher.container.hostname_override: container_name
-    environment_name: $ENV_SHORTCODE
+    environment_name: ${env_shortcode}
     service_name: URS-BusinessService
     project.service.name: urs-business-service
     project.name: cis-urs
@@ -257,12 +257,12 @@ URS-BusinessService:
   mem_limit: 7491026944
   volumes:
   - /var/log/iam:/var/log/iam
-  - $PROPERTY_FILE_LOCATION/services.properties:/home/iam_user/careidconfig/services.properties
-  - /home/rancher/env_config/$ENV_SHORTCODE/secaudit/client:/home/iam_user/secaudcertificates/client
+  - /mnt/git/CareID_Rancher/env_config/lh-careidconfig/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
+  - /home/rancher/env_config/${env_shortcode}/secaudit/client:/home/iam_user/secaudcertificates/client
   privileged: true
   environment:
-    GLUSTER_URL: $GLUSTER_URL
-    GLUSTER_FOLDER: $ENV_SHORTCODE
+    GLUSTER_URL: ${gluster_url}
+    GLUSTER_FOLDER: ${env_shortcode}
     GLUSTER_PHOTOS: 'true'
     GLUSTER_REPORTS: 'true'
   links:
@@ -273,7 +273,7 @@ URS-BusinessService:
 Integration:
   labels:
     io.rancher.container.hostname_override: container_name
-    environment_name: $ENV_SHORTCODE
+    environment_name: ${env_shortcode}
     service_name: Integration
     project.service.name: integration
     project.name: cis-urs
@@ -281,8 +281,8 @@ Integration:
   mem_limit: 2147483648
   volumes:
   - /var/log/iam:/var/log/iam
-  - $PROPERTY_FILE_LOCATION/services.properties:/home/iam_user/careidconfig/services.properties
-  image: localhost:5000/cis-integration:$IAM_APPS_VERSION
+  - /mnt/git/CareID_Rancher/env_config/lh-careidconfig/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
+  image: ${registry_url}/cis-integration:${app_version}
   environment:
     JAVA_OPTS: -server -Xms128m -Xms256m -XX:NewSize=128m -XX:MaxNewSize=256m -XX:PermSize=64m -XX:MaxPermSize=128m -XX:+UseConcMarkSweepGC  -XX:+UseParNewGC   -XX:ParallelGCThreads=2 -Djava.security.egd=file:/dev/./urandom
   tty: true
@@ -294,7 +294,7 @@ Integration:
 OMS-BusinessService:
   labels:
     io.rancher.container.hostname_override: container_name
-    environment_name: $ENV_SHORTCODE
+    environment_name: ${env_shortcode}
     service_name: OMS-BusinessService
     project.service.name: oms-business-service
     project.name: cis-urs
@@ -302,8 +302,8 @@ OMS-BusinessService:
   mem_limit: 250000000
   volumes:
   - /var/log/iam:/var/log/iam
-  - $PROPERTY_FILE_LOCATION/services.properties:/home/iam_user/careidconfig/services.properties
-  image: localhost:5000/cis-oms-business:$IAM_APPS_VERSION
+  - /mnt/git/CareID_Rancher/env_config/lh-careidconfig/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
+  image: ${registry_url}/cis-oms-business:${app_version}
   environment:
     JAVA_OPTS: -server -Xms128m -Xms256m -XX:NewSize=128m -XX:MaxNewSize=256m -XX:PermSize=64m -XX:MaxPermSize=128m -XX:+UseConcMarkSweepGC  -XX:+UseParNewGC   -XX:ParallelGCThreads=2 -Djava.security.egd=file:/dev/./urandom
   tty: true
@@ -316,7 +316,7 @@ OMS-BusinessService:
 OSCAR-BusinessService:
   labels:
     io.rancher.container.hostname_override: container_name
-    environment_name: $ENV_SHORTCODE
+    environment_name: ${env_shortcode}
     service_name: OSCAR-BusinessService
     project.service.name: oscar-business-service
     project.name: cis-urs
@@ -324,8 +324,8 @@ OSCAR-BusinessService:
   mem_limit: 250000000
   volumes:
   - /var/log/iam:/var/log/iam
-  - $PROPERTY_FILE_LOCATION/services.properties:/home/iam_user/careidconfig/services.properties
-  image: localhost:5000/cis-oscar-business:$IAM_APPS_VERSION
+  - /mnt/git/CareID_Rancher/env_config/lh-careidconfig/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
+  image: ${registry_url}/cis-oscar-business:${app_version}
   environment:
     JAVA_OPTS: -server -Xms128m -Xms256m -XX:NewSize=128m -XX:MaxNewSize=256m -XX:PermSize=64m -XX:MaxPermSize=128m -XX:+UseConcMarkSweepGC  -XX:+UseParNewGC   -XX:ParallelGCThreads=2 -Djava.security.egd=file:/dev/./urandom
   tty: true
@@ -337,7 +337,7 @@ OSCAR-BusinessService:
 RulesService:
   labels:
     io.rancher.container.hostname_override: container_name
-    environment_name: $ENV_SHORTCODE
+    environment_name: ${env_shortcode}
     service_name: RulesService
     project.service.name: rules-service
     project.name: cis-urs
@@ -345,8 +345,8 @@ RulesService:
   mem_limit: 250000000
   volumes:
   - /var/log/iam:/var/log/iam
-  - $PROPERTY_FILE_LOCATION/services.properties:/home/iam_user/careidconfig/services.properties
-  image: localhost:5000/cis-rules:$IAM_APPS_VERSION
+  - /mnt/git/CareID_Rancher/env_config/lh-careidconfig/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
+  image: ${registry_url}/cis-rules:${app_version}
   environment:
     JAVA_OPTS: -server -Xms128m -Xms256m -XX:NewSize=128m -XX:MaxNewSize=256m -XX:PermSize=64m -XX:MaxPermSize=128m -XX:+UseConcMarkSweepGC  -XX:+UseParNewGC   -XX:ParallelGCThreads=2 -Djava.security.egd=file:/dev/./urandom
   tty: true
@@ -358,7 +358,7 @@ RulesService:
 SecureAudit:
   labels:
     io.rancher.container.hostname_override: container_name
-    environment_name: $ENV_SHORTCODE
+    environment_name: ${env_shortcode}
     service_name: SecureAudit
     project.service.name: secure-audit
     project.name: cis-urs
@@ -366,9 +366,9 @@ SecureAudit:
   mem_limit: 250000000
   volumes:
   - /var/log/iam:/var/log/iam
-  - $PROPERTY_FILE_LOCATION/services.properties:/home/iam_user/careidconfig/services.properties
-  - /home/rancher/env_config/$ENV_SHORTCODE/secaudit/server:/home/iam_user/secaudcertificates/server
-  image: localhost:5000/cis-secureaudit:$IAM_APPS_VERSION
+  - /mnt/git/CareID_Rancher/env_config/lh-careidconfig/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
+  - /home/rancher/env_config/${env_shortcode}/secaudit/server:/home/iam_user/secaudcertificates/server
+  image: ${registry_url}/cis-secureaudit:${app_version}
   environment:
     JAVA_OPTS: -server -Xms128m -Xms256m -XX:NewSize=128m -XX:MaxNewSize=256m -XX:PermSize=64m -XX:MaxPermSize=128m -XX:+UseConcMarkSweepGC  -XX:+UseParNewGC   -XX:ParallelGCThreads=2 -Djava.security.egd=file:/dev/./urandom
   tty: true
@@ -380,7 +380,7 @@ SecureAudit:
 Scheduler:
   labels:
     io.rancher.container.hostname_override: container_name
-    environment_name: $ENV_SHORTCODE
+    environment_name: ${env_shortcode}
     service_name: Scheduler
     project.service.name: scheduler
     project.name: cis-urs
@@ -388,9 +388,9 @@ Scheduler:
   mem_limit: 250000000
   volumes:
   - /var/log/iam:/var/log/iam
-  - /home/rancher/env_config/$ENV_SHORTCODE/quartz.properties:/home/iam_user/careidconfig/quartz.properties
-  - $PROPERTY_FILE_LOCATION/services.properties:/home/iam_user/careidconfig/services.properties
-  image: localhost:5000/cis-scheduler:$IAM_APPS_VERSION
+  - /home/rancher/env_config/${env_shortcode}/quartz.properties:/home/iam_user/careidconfig/quartz.properties
+  - /mnt/git/CareID_Rancher/env_config/lh-careidconfig/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
+  image: ${registry_url}/cis-scheduler:${app_version}
   environment:
     JAVA_OPTS: -server -Xms128m -Xms256m -XX:NewSize=128m -XX:MaxNewSize=256m -XX:PermSize=64m -XX:MaxPermSize=128m -XX:+UseConcMarkSweepGC  -XX:+UseParNewGC   -XX:ParallelGCThreads=2 -Djava.security.egd=file:/dev/./urandom
   tty: true
@@ -402,7 +402,7 @@ Scheduler:
 ID-StoreSyncService:
   labels:
     io.rancher.container.hostname_override: container_name
-    environment_name: $ENV_SHORTCODE
+    environment_name: ${env_shortcode}
     service_name: ID-StoreSyncService
     project.service.name: id-store-sync-service
     project.name: cis-urs
@@ -410,8 +410,8 @@ ID-StoreSyncService:
   mem_limit: 2147483648
   volumes:
   - /var/log/iam:/var/log/iam
-  - $PROPERTY_FILE_LOCATION/services.properties:/home/iam_user/careidconfig/services.properties
-  image: localhost:5000/cis-id-storesync:$IAM_APPS_VERSION
+  - /mnt/git/CareID_Rancher/env_config/lh-careidconfig/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
+  image: ${registry_url}/cis-id-storesync:${app_version}
   tty: true
   stdin_open: true
   environment:
@@ -425,7 +425,7 @@ ID-StoreSyncService:
 CC-CheckerService:
   labels:
     io.rancher.container.hostname_override: container_name
-    environment_name: $ENV_SHORTCODE
+    environment_name: ${env_shortcode}
     service_name: CC-CheckerService
     project.service.name: cc-checker-service
     project.name: cis-urs
@@ -433,10 +433,10 @@ CC-CheckerService:
   mem_limit: 250000000
   volumes:
   - /var/log/iam:/var/log/iam
-  - $PROPERTY_FILE_LOCATION/services.properties:/home/iam_user/careidconfig/services.properties
+  - /mnt/git/CareID_Rancher/env_config/lh-careidconfig/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
   environment:
     JAVA_OPTS: -server -Xms128m -Xms256m -XX:NewSize=128m -XX:MaxNewSize=256m -XX:PermSize=64m -XX:MaxPermSize=128m -XX:+UseConcMarkSweepGC  -XX:+UseParNewGC   -XX:ParallelGCThreads=2 -Djava.security.egd=file:/dev/./urandom
-  image: localhost:5000/cis-ccc:$IAM_APPS_VERSION
+  image: ${registry_url}/cis-ccc:${app_version}
   tty: true
   stdin_open: true
   links:
@@ -447,7 +447,7 @@ CC-CheckerService:
 ReportingService:
   labels:
     io.rancher.container.hostname_override: container_name
-    environment_name: $ENV_SHORTCODE
+    environment_name: ${env_shortcode}
     service_name: ReportingService
     project.service.name: reporting-service
     project.name: cis-urs
@@ -455,14 +455,14 @@ ReportingService:
   mem_limit: 250000000
   volumes:
   - /var/log/iam:/var/log/iam
-  - $PROPERTY_FILE_LOCATION/services.properties:/home/iam_user/careidconfig/services.properties
-  image: localhost:5000/cis-reporting:$IAM_APPS_VERSION
+  - /mnt/git/CareID_Rancher/env_config/lh-careidconfig/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
+  image: ${registry_url}/cis-reporting:${app_version}
   tty: true
   stdin_open: true
   privileged: true
   environment:
-    GLUSTER_URL: $GLUSTER_URL
-    GLUSTER_FOLDER: $ENV_SHORTCODE
+    GLUSTER_URL: ${gluster_url}
+    GLUSTER_FOLDER: ${env_shortcode}
     GLUSTER_REPORTS: 'true'
     JAVA_OPTS: -server -Xms256m -Xmx512m -XX:NewSize=128m -XX:MaxNewSize=256m -XX:PermSize=64m -XX:MaxPermSize=128m -XX:+UseConcMarkSweepGC  -XX:+UseParNewGC   -XX:ParallelGCThreads=2 -Djava.security.egd=file:/dev/./urandom
   links:
@@ -472,7 +472,7 @@ ReportingService:
 SCEP:
   labels:
     io.rancher.container.hostname_override: container_name
-    environment_name: $ENV_SHORTCODE
+    environment_name: ${env_shortcode}
     service_name: SCEP
     project.service.name: scep
     project.name: cis-urs
@@ -480,10 +480,10 @@ SCEP:
   mem_limit: 250000000
   environment:
     CMS_SERVICE_URL: http://LB-BusinessServices:8080/cmsbusservice/rest/cms/
-    PKI_URL: https://wfe.$ENV_SHORTCODE.iam.spine2.ncrs.nhs.uk/scep/pkiclient.exe
-    RETURN_URL: https://wfe.$ENV_SHORTCODE.iam.spine2.ncrs.nhs.uk/scep/
+    PKI_URL: https://wfe.${env_shortcode}.iam.spine2.ncrs.nhs.uk/scep/pkiclient.exe
+    RETURN_URL: https://wfe.${env_shortcode}.iam.spine2.ncrs.nhs.uk/scep/
   tty: true
-  image: localhost:5000/cis-scep:$IAM_APPS_VERSION
+  image: ${registry_url}/cis-scep:${app_version}
   stdin_open: true
   links:
   - IAM-Database:IAM-Database
@@ -493,7 +493,7 @@ SCEP:
 EPR-WebFrontEnd:
   labels:
     io.rancher.container.hostname_override: container_name
-    environment_name: $ENV_SHORTCODE
+    environment_name: ${env_shortcode}
     service_name: EPR-WebFrontEnd
     project.service.name: epr-web-frontend
     project.name: cis-urs
@@ -501,8 +501,8 @@ EPR-WebFrontEnd:
   mem_limit: 250000000
   volumes:
   - /var/log/iam:/var/log/iam
-  - $PROPERTY_FILE_LOCATION/services.properties:/home/iam_user/careidconfig/services.properties
-  image: localhost:5000/cis-epr-webfrontend:$IAM_APPS_VERSION
+  - /mnt/git/CareID_Rancher/env_config/lh-careidconfig/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
+  image: ${registry_url}/cis-epr-webfrontend:${app_version}
   environment:
     JAVA_OPTS: -server -Xms128m -Xms256m -XX:NewSize=128m -XX:MaxNewSize=256m -XX:PermSize=64m -XX:MaxPermSize=128m -XX:+UseConcMarkSweepGC  -XX:+UseParNewGC   -XX:ParallelGCThreads=2 -Djava.security.egd=file:/dev/./urandom
   tty: true
@@ -515,7 +515,7 @@ EPR-WebFrontEnd:
 URS-WebFrontEnd:
   labels:
     io.rancher.container.hostname_override: container_name
-    environment_name: $ENV_SHORTCODE
+    environment_name: ${env_shortcode}
     service_name: URS-WebFrontEnd
     io.rancher.container.dns: true
     project.service.name: urs-web-frontend
@@ -524,14 +524,14 @@ URS-WebFrontEnd:
   mem_limit: 5591026944
   volumes:
   - /var/log/iam:/var/log/iam
-  - $PROPERTY_FILE_LOCATION/services.properties:/home/iam_user/careidconfig/services.properties
-  image: localhost:5000/cis-urs-webfrontend:$IAM_APPS_VERSION
+  - /mnt/git/CareID_Rancher/env_config/lh-careidconfig/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
+  image: ${registry_url}/cis-urs-webfrontend:${app_version}
   tty: true
   stdin_open: true
   privileged: true
   environment:
-    GLUSTER_URL: $GLUSTER_URL
-    GLUSTER_FOLDER: $ENV_SHORTCODE
+    GLUSTER_URL: ${gluster_url}
+    GLUSTER_FOLDER: ${env_shortcode}
     GLUSTER_PHOTOS: true
     GLUSTER_REPORTS: true
     JAVA_OPTS: -server -XX:+UseConcMarkSweepGC -XX:+UseParNewGC -XX:ParallelGCThreads=2 -Xms512m -Xmx1500m
@@ -543,7 +543,7 @@ URS-WebFrontEnd:
 Portal:
   labels:
     io.rancher.container.hostname_override: container_name
-    environment_name: $ENV_SHORTCODE
+    environment_name: ${env_shortcode}
     service_name: Portal
     io.rancher.container.dns: true
     project.service.name: portal
@@ -552,14 +552,14 @@ Portal:
   mem_limit: 250000000
   volumes:
   - /var/log/iam:/var/log/iam
-  - $PROPERTY_FILE_LOCATION/services.properties:/home/iam_user/careidconfig/services.properties
-  image: localhost:5000/cis-portal:$IAM_APPS_VERSION
+  - /mnt/git/CareID_Rancher/env_config/lh-careidconfig/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
+  image: ${registry_url}/cis-portal:${app_version}
   tty: true
   stdin_open: true
   privileged: true
   environment:
-    GLUSTER_URL: $GLUSTER_URL
-    GLUSTER_FOLDER: $ENV_SHORTCODE
+    GLUSTER_URL: ${gluster_url}
+    GLUSTER_FOLDER: ${env_shortcode}
     GLUSTER_PHOTOS: true
     GLUSTER_REPORTS: true
     JAVA_OPTS: -server -XX:+UseConcMarkSweepGC -XX:+UseParNewGC -XX:ParallelGCThreads=2 -Xms512m -Xmx1500m
@@ -573,7 +573,7 @@ haproxy-fe:
     io.rancher.container.hostname_override: container_name
     io.rancher.container.dns: true
     io.rancher.sidekicks: keepalived-fe
-    environment_name: $ENV_SHORTCODE
+    environment_name: ${env_shortcode}
     service_name: haproxy-fe
     project.service.name: haproxy-fe
     project.name: cis-urs
@@ -581,11 +581,11 @@ haproxy-fe:
   volumes:
   - /home/rancher:/mnt/gluster
   links:
-  - URS-WebFrontEnd:$ENV_SHORTCODE-URS-WebFrontEnd
-  - EPR-WebFrontEnd:$ENV_SHORTCODE-EPR-WebFrontEnd
-  - Integration:$ENV_SHORTCODE-Integration
-  - Portal:$ENV_SHORTCODE-Portal
-  - SelfService-WebFrontEnd:$ENV_SHORTCODE-SelfService-WebFrontEnd
+  - URS-WebFrontEnd:${env_shortcode}-URS-WebFrontEnd
+  - EPR-WebFrontEnd:${env_shortcode}-EPR-WebFrontEnd
+  - Integration:${env_shortcode}-Integration
+  - Portal:${env_shortcode}-Portal
+  - SelfService-WebFrontEnd:${env_shortcode}-SelfService-WebFrontEnd
   environment:
     - fe1ip=$VIP_ONE
     - fe2ip=$VIP_TWO
@@ -603,9 +603,9 @@ haproxy-fe:
     - be2fqdn=$VIP_TWO_BE
     - be3fqdn=$VIP_THREE_BE
     - be4fqdn=$VIP_FOUR_BE	
-    - GLUSTER_URL=$GLUSTER_URL
-    - envcode=$ENV_SHORTCODE
-  image: localhost:5000/cis-fe-haproxy
+    - GLUSTER_URL=${gluster_url}
+    - envcode=${env_shortcode}
+  image: ${registry_url}/cis-fe-haproxy
   tty: true
   stdin_open: true
   privileged: true
@@ -616,7 +616,7 @@ keepalived-fe:
     io.rancher.scheduler.global: 'true'
     io.rancher.container.hostname_override: container_name
     io.rancher.container.dns: true
-    environment_name: $ENV_SHORTCODE
+    environment_name: ${env_shortcode}
     service_name: keepalived-fe
     project.service.name: keepalived-fe
     project.name: cis-urs
@@ -628,8 +628,8 @@ keepalived-fe:
     - fe4ip=$VIP_FOUR
     - interface=$VIP_INTERFACE
     - vrid=$VIP_VRID
-    - envcode=$ENV_SHORTCODE
-  image: localhost:5000/cis-fe-keepalived
+    - envcode=${env_shortcode}
+  image: ${registry_url}/cis-fe-keepalived
   tty: true
   stdin_open: true
   cap_add:
@@ -638,8 +638,8 @@ keepalived-fe:
 
 SelfService-WebFrontEnd:
   environment:
-    GLUSTER_URL: $GLUSTER_URL
-    GLUSTER_FOLDER: $ENV_SHORTCODE
+    GLUSTER_URL: ${gluster_url}
+    GLUSTER_FOLDER: ${env_shortcode}
     GLUSTER_PHOTOS: true
     GLUSTER_REPORTS: true
     JAVA_OPTS: -server -XX:+UseConcMarkSweepGC -XX:+UseParNewGC -XX:ParallelGCThreads=2 -Xms512m -Xmx1500m
@@ -655,21 +655,21 @@ SelfService-WebFrontEnd:
     - WebSessionStore:RedisSessionStore
   tty: true
   log_opt: {}
-  image: localhost:5000/cis-selfservice-webfrontend:latest
+  image: ${registry_url}/cis-selfservice-webfrontend:latest
   privileged: true
   volumes:
   - /var/log/iam:/var/log/iam
-  - $PROPERTY_FILE_LOCATION/services.properties:/home/iam_user/careidconfig/services.properties
+  - /mnt/git/CareID_Rancher/env_config/lh-careidconfig/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
   stdin_open: true
   mem_limit: 5591026944
   
 EmailService:
-  image: localhost:5000/cis-emailservice:$IAM_APPS_VERSION
+  image: ${registry_url}/cis-emailservice:${app_version}
   tty: true
   stdin_open: true
   labels:
     io.rancher.container.hostname_override: container_name
-    environment_name: $ENV_SHORTCODE
+    environment_name: ${env_shortcode}
     service_name: EmailService
     project.service.name: emailservice
     project.name: cis-urs
@@ -677,7 +677,7 @@ EmailService:
   mem_limit: 7491026944
   volumes:
   - /var/log/iam:/var/log/iam
-  - $PROPERTY_FILE_LOCATION/services.properties:/home/iam_user/careidconfig/services.properties
+  - /mnt/git/CareID_Rancher/env_config/lh-careidconfig/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
   privileged: true
   links:
   - LB-BusinessServices:LB-BusinessServices
