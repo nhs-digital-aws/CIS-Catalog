@@ -1,35 +1,48 @@
+.catalog:
+  name: "NHS Digital - CIS - URS App"
+  version: "0.1"
+  description: |
+    Enter Description Here
+  minimum_rancher_version: "v1.1.4"
+  questions:
+    - variable: "APP Version"
+      description: "Which version of the app do you want to deploy?"
+      label: "Version"
+      required: true
+      default: rel.141
+      type: "string"
+
 IAM-Database:
   external_ips:
-    - $IAM_DB_IP
+    - 192.168.99.1
 
 Directory:
   external_ips:
-    - $DIR_IP
+    - 192.168.99.1
 
 Entrust-CA1-Manager:
   external_ips:
-    - $CA1_MAN
+    - 192.168.99.1
 
 Entrust-CA2-Manager:
   external_ips:
-    - $CA2_MAN
+    - 192.168.99.1
 
 Entrust-CA3-Manager:
   external_ips:
-    - $CA3_MAN
+    - 192.168.99.1
 
 Outbound-Messaging-Service:
   external_ips:
-    - $OUTBOUND_MESSAGING_IP
+    - 192.168.99.1
 
 WebSessionStore:
   external_ips:
-    - $WEB_SESSION_IP
+    - 192.168.99.1
 
 RedisSessionStore:
   external_ips:
-    - $WEB_SESSION_IP
-
+    - 192.168.99.1
 pacemaker-fe:
   upgrade_strategy:
     start_first: true
