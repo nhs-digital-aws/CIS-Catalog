@@ -1,0 +1,304 @@
+IAM-Database:
+  external_ips:
+    - $IAM_DB_IP
+
+Directory:
+  external_ips:
+    - $DIR_IP
+
+Entrust-CA1-Manager:
+  external_ips:
+    - $CA1_MAN
+
+Entrust-CA2-Manager:
+  external_ips:
+    - $CA2_MAN
+
+Entrust-CA3-Manager:
+  external_ips:
+    - $CA3_MAN
+
+Outbound-Messaging-Service:
+  external_ips:
+    - $OUTBOUND_MESSAGING_IP
+
+WebSessionStore:
+  external_ips:
+    - $WEB_SESSION_IP
+
+RedisSessionStore:
+  external_ips:
+    - $WEB_SESSION_IP
+
+pacemaker-fe:
+  upgrade_strategy:
+    start_first: true
+
+haproxy-fe:
+  upgrade_strategy:
+    start_first: true
+
+LB-BusinessServices:
+  upgrade_strategy:
+    start_first: true
+  scale: 1
+  load_balancer_config:
+    name: lb-bus config
+
+LB-Secure:
+  upgrade_strategy:
+    start_first: true
+  load_balancer_config: {}
+  scale: 1
+
+Audit:
+  upgrade_strategy:
+    start_first: true
+  scale: 1
+  health_check:
+    port: 8080
+    interval: 2000
+    unhealthy_threshold: 3
+    request_line: 'GET /auditloggerws/?lbchk=1 HTTP/1.0'
+    healthy_threshold: 2
+    response_timeout: 2000
+
+GuvnorService:
+  upgrade_strategy:
+    start_first: true
+  scale: 1
+  health_check:
+    port: 8080
+    interval: 2000
+    unhealthy_threshold: 3
+    request_line: 'GET /guvnor-5.5.0.Final-tomcat-6.0/org.drools.guvnor.Guvnor/Guvnor.jsp?lbchk=1 HTTP/1.0'
+    healthy_threshold: 2
+    response_timeout: 2000
+
+CMS-BusinessService:
+  upgrade_strategy:
+    start_first: true
+  scale: 1
+  health_check:
+    port: 8080
+    interval: 2000
+    unhealthy_threshold: 3
+    request_line: 'GET /cmsbusservice/?lbchk=1 HTTP/1.0'
+    healthy_threshold: 2
+    response_timeout: 2000
+
+EPR-BusinessService:
+  upgrade_strategy:
+    start_first: true
+  scale: 1
+  health_check:
+    port: 8080
+    interval: 2000
+    unhealthy_threshold: 3
+    request_line: 'GET /eprbusservice/?lbchk=1 HTTP/1.0'
+    healthy_threshold: 2
+    response_timeout: 2000
+
+UID-Service:
+  upgrade_strategy:
+    start_first: true
+  scale: 1
+  health_check:
+    port: 8080
+    interval: 2000
+    unhealthy_threshold: 3
+    request_line: 'GET /uidservice/?lbchk=1 HTTP/1.0'
+    healthy_threshold: 2
+    response_timeout: 2000
+
+URS-BusinessService:
+  upgrade_strategy:
+    start_first: true
+  scale: 1
+  health_check:
+    port: 8080
+    interval: 2000
+    unhealthy_threshold: 3
+    request_line: 'GET /ursbusservice/?lbchk=1 HTTP/1.0'
+    healthy_threshold: 2
+    response_timeout: 2000
+
+Integration:
+  upgrade_strategy:
+    start_first: true
+  scale: 1
+  health_check:
+    port: 8181
+    interval: 2000
+    unhealthy_threshold: 3
+    request_line: 'GET /cxf/esrNotificationService?_wadl HTTP/1.0'
+    healthy_threshold: 2
+    response_timeout: 2000
+
+OMS-BusinessService:
+  upgrade_strategy:
+    start_first: true
+  scale: 1
+  health_check:
+    port: 8080
+    interval: 2000
+    unhealthy_threshold: 3
+    request_line: 'GET /omsbusservice/?lbchk=1 HTTP/1.0'
+    healthy_threshold: 2
+    response_timeout: 2000
+
+OSCAR-BusinessService:
+  upgrade_strategy:
+    start_first: true
+  scale: 1
+  health_check:
+    port: 8080
+    interval: 2000
+    unhealthy_threshold: 3
+    request_line: ''
+    healthy_threshold: 2
+    response_timeout: 2000
+
+RulesService:
+  upgrade_strategy:
+    start_first: true
+  scale: 1
+  health_check:
+    port: 8080
+    interval: 2000
+    unhealthy_threshold: 3
+    request_line: ''
+    healthy_threshold: 2
+    response_timeout: 2000
+
+SecureAudit:
+  upgrade_strategy:
+    start_first: true
+  scale: 1
+  health_check:
+    port: 8080
+    interval: 2000
+    unhealthy_threshold: 3
+    request_line: ''
+    healthy_threshold: 2
+    response_timeout: 2000
+
+Scheduler:
+  upgrade_strategy:
+    start_first: true
+  scale: 1
+  health_check:
+    port: 8080
+    interval: 2000
+    unhealthy_threshold: 3
+    request_line: ''
+    healthy_threshold: 2
+    response_timeout: 2000
+
+ID-StoreSyncService:
+  upgrade_strategy:
+    start_first: true
+  scale: 1
+  health_check:
+    port: 8080
+    interval: 2000
+    unhealthy_threshold: 3
+    request_line: 'GET /idstoresyncmanager/?lbchk=1 HTTP/1.0'
+    healthy_threshold: 2
+    response_timeout: 2000
+
+CC-CheckerService:
+  upgrade_strategy:
+    start_first: true
+  scale: 1
+  health_check:
+    port: 8080
+    interval: 2000
+    unhealthy_threshold: 3
+    request_line: 'GET /cccheckerservice/?lbchk=1 HTTP/1.0'
+    healthy_threshold: 2
+    response_timeout: 2000
+
+ReportingService:
+  upgrade_strategy:
+    start_first: true
+  scale: 1
+  health_check:
+    port: 8080
+    interval: 2000
+    unhealthy_threshold: 3
+    request_line: 'GET /iamrepservice/?lbchk=1 HTTP/1.0'
+    healthy_threshold: 2
+    response_timeout: 2000
+
+SCEP:
+  upgrade_strategy:
+    start_first: true
+  scale: 1
+  health_check:
+    port: 9098
+    interval: 2000
+    unhealthy_threshold: 3
+    request_line: 'GET /healthcheck HTTP/1.0'
+    healthy_threshold: 2
+    response_timeout: 2000
+
+EPR-WebFrontEnd:
+  upgrade_strategy:
+    start_first: true
+  scale: 1
+  health_check:
+    port: 8080
+    interval: 2000
+    unhealthy_threshold: 3
+    response_timeout: 2000
+    request_line: 'GET /eprwebapp/img/common/loader.GIF?lbchk=1 HTTP/1.0'
+    healthy_threshold: 2
+
+URS-WebFrontEnd:
+  upgrade_strategy:
+    start_first: true
+  scale: 1
+  health_check:
+    port: 8080
+    interval: 2000
+    unhealthy_threshold: 3
+    request_line: 'GET /urswebapp/img/loader.GIF?lbchk=1 HTTP/1.0'
+    healthy_threshold: 2
+    response_timeout: 2000
+
+Portal:
+  upgrade_strategy:
+    start_first: true
+  scale: 1
+  health_check:
+    port: 8080
+    interval: 2000
+    unhealthy_threshold: 3
+    request_line: 'GET /portal/img/spacer.gif?lbchk=1 HTTP/1.0'
+    healthy_threshold: 2
+    response_timeout: 2000
+
+SelfService-WebFrontEnd:
+  scale: 1
+  health_check:
+    port: 8080
+    interval: 2000
+    initializing_timeout: 60000
+    unhealthy_threshold: 3
+    strategy: recreate
+    response_timeout: 2000
+    request_line: GET "/selfservicewebapp/img/self-service.jpg?lbchk=1" "HTTP/1.0"
+    healthy_threshold: 2
+
+EmailService:
+  upgrade_strategy:
+    start_first: true
+  scale: 1
+  health_check:
+    port: 8080
+    interval: 2000
+    unhealthy_threshold: 3
+    request_line: 'GET /emailservice/?lbchk=1 HTTP/1.0'
+    healthy_threshold: 2
+    response_timeout: 2000
