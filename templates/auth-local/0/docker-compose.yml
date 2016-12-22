@@ -49,7 +49,7 @@ AuditService:
   mem_limit: 1572864000
   volumes:
   - /var/log/iam:/var/log/iam
-  - /mnt/git/CareID_Rancher/env_config/lh-careidconfig/env_config/${env_shortcode}/authServices.properties:/home/iam_user/careidconfig/authServices.properties
+  - /home/rancher/env_config/${env_shortcode}/authServices.properties:/home/iam_user/careidconfig/authServices.properties
   image: ${registry_url}/auth-audit:${app_version}
   environment:
     JAVA_OPTS: -server -Xms256m -Xmx512m  -XX:NewSize=128m   -XX:MaxNewSize=256m   -XX:PermSize=64m  -XX:MaxPermSize=128m  -XX:+UseConcMarkSweepGC  -XX:+UseParNewGC   -XX:ParallelGCThreads=2 -Djava.security.egd=file:/dev/./urandom
@@ -71,9 +71,9 @@ AuthenticatorService:
   environment:
     JAVA_OPTS: -server -Xms256m -Xmx512m  -XX:NewSize=128m   -XX:MaxNewSize=256m   -XX:PermSize=64m  -XX:MaxPermSize=128m  -XX:+UseConcMarkSweepGC  -XX:+UseParNewGC   -XX:ParallelGCThreads=2 -Djava.security.egd=file:/dev/./urandom
   volumes:
-  - /mnt/git/CareID_Rancher/env_config/lh-careidconfig/env_config/${env_shortcode}/LegacyAuth_Files:/home/iam_user/LegacyAuth_Files 
+  - /home/rancher/env_config/${env_shortcode}/LegacyAuth_Files:/home/iam_user/LegacyAuth_Files 
   - /var/log/iam:/var/log/iam
-  - /mnt/git/CareID_Rancher/env_config/lh-careidconfig/env_config/${env_shortcode}/authServices.properties:/home/iam_user/careidconfig/authServices.properties
+  - /home/rancher/env_config/${env_shortcode}/authServices.properties:/home/iam_user/careidconfig/authServices.properties
   image: ${registry_url}/auth-authenticator:${app_version}
   tty: true
   stdin_open: true
@@ -92,7 +92,7 @@ SessionManager:
   mem_limit: 1572864000
   volumes:
   - /var/log/iam:/var/log/iam
-  - /mnt/git/CareID_Rancher/env_config/lh-careidconfig/env_config/${env_shortcode}/authServices.properties:/home/iam_user/careidconfig/authServices.properties
+  - /home/rancher/env_config/${env_shortcode}/authServices.properties:/home/iam_user/careidconfig/authServices.properties
   privileged: true
   environment:
     GLUSTER_URL: ${gluster_url}
@@ -118,7 +118,7 @@ SAMLService:
   mem_limit: 250864000
   volumes:
   - /var/log/iam:/var/log/iam
-  - /mnt/git/CareID_Rancher/env_config/lh-careidconfig/env_config/${env_shortcode}/authServices.properties:/home/iam_user/careidconfig/authServices.properties
+  - /home/rancher/env_config/${env_shortcode}/authServices.properties:/home/iam_user/careidconfig/authServices.properties
   image: ${registry_url}/auth-saml:${app_version}
   environment:
     JAVA_OPTS: -server -Xms256m -Xmx256m  -XX:NewSize=128m   -XX:MaxNewSize=256m   -XX:PermSize=64m  -XX:MaxPermSize=128m  -XX:+UseConcMarkSweepGC  -XX:+UseParNewGC   -XX:ParallelGCThreads=2 -Djava.security.egd=file:/dev/./urandom
@@ -144,7 +144,7 @@ TokenValidationService:
     JAVA_OPTS: -server -Xms256m -Xmx512m  -XX:NewSize=128m   -XX:MaxNewSize=256m   -XX:PermSize=64m  -XX:MaxPermSize=128m  -XX:+UseConcMarkSweepGC  -XX:+UseParNewGC   -XX:ParallelGCThreads=2 -Djava.security.egd=file:/dev/./urandom
   volumes:
   - /var/log/iam:/var/log/iam
-  - /mnt/git/CareID_Rancher/env_config/lh-careidconfig/env_config/${env_shortcode}/authServices.properties:/home/iam_user/careidconfig/authServices.properties
+  - /home/rancher/env_config/${env_shortcode}/authServices.properties:/home/iam_user/careidconfig/authServices.properties
   links:
   - LB-AuthBusinessService:LB-AuthBusinessService
   - Directory:Directory

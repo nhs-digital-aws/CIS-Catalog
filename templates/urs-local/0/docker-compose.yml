@@ -134,7 +134,7 @@ Audit:
   mem_limit: 250000000
   volumes:
   - /var/log/iam:/var/log/iam
-  - /mnt/git/CareID_Rancher/env_config/lh-careidconfig/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
+  - /home/rancher/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
   image: ${registry_url}/cis-audit:${app_version}
   environment:
     JAVA_OPTS: -server -Xms60m -Xms150m -XX:NewSize=128m -XX:MaxNewSize=256m -XX:PermSize=64m -XX:MaxPermSize=128m -XX:+UseConcMarkSweepGC  -XX:+UseParNewGC   -XX:ParallelGCThreads=2 -Djava.security.egd=file:/dev/./urandom
@@ -155,7 +155,7 @@ GuvnorService:
   mem_limit: 7491026944
   volumes:
   - /var/log/iam:/var/log/iam
-  - /mnt/git/CareID_Rancher/env_config/lh-careidconfig/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
+  - /home/rancher/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
   image: ${registry_url}/cis-guvnor:${app_version}
   tty: true
   stdin_open: true
@@ -174,7 +174,7 @@ CMS-BusinessService:
   mem_limit: 300000000
   volumes:
   - /var/log/iam:/var/log/iam
-  - /mnt/git/CareID_Rancher/env_config/lh-careidconfig/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
+  - /home/rancher/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
   privileged: true
   environment:
     GLUSTER_URL: ${gluster_url}
@@ -212,7 +212,7 @@ EPR-BusinessService:
   mem_limit: 350000000
   volumes:
   - /var/log/iam:/var/log/iam
-  - /mnt/git/CareID_Rancher/env_config/lh-careidconfig/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
+  - /home/rancher/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
   image: ${registry_url}/cis-epr-business:${app_version}
   environment:
     JAVA_OPTS: -server -Xms128m -Xms256m -XX:NewSize=128m -XX:MaxNewSize=256m -XX:PermSize=64m -XX:MaxPermSize=128m -XX:+UseConcMarkSweepGC  -XX:+UseParNewGC   -XX:ParallelGCThreads=2 -Djava.security.egd=file:/dev/./urandom
@@ -238,7 +238,7 @@ UID-Service:
     JAVA_OPTS: -server -Xms128m -Xms256m -XX:NewSize=128m -XX:MaxNewSize=256m -XX:PermSize=64m -XX:MaxPermSize=128m -XX:+UseConcMarkSweepGC  -XX:+UseParNewGC   -XX:ParallelGCThreads=2 -Djava.security.egd=file:/dev/./urandom
   volumes:
   - /var/log/iam:/var/log/iam
-  - /mnt/git/CareID_Rancher/env_config/lh-careidconfig/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
+  - /home/rancher/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
   links:
   - IAM-Database:IAM-Database
   - LB-BusinessServices:LB-BusinessServices
@@ -257,7 +257,7 @@ URS-BusinessService:
   mem_limit: 7491026944
   volumes:
   - /var/log/iam:/var/log/iam
-  - /mnt/git/CareID_Rancher/env_config/lh-careidconfig/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
+  - /home/rancher/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
   - /home/rancher/env_config/${env_shortcode}/secaudit/client:/home/iam_user/secaudcertificates/client
   privileged: true
   environment:
@@ -281,7 +281,7 @@ Integration:
   mem_limit: 2147483648
   volumes:
   - /var/log/iam:/var/log/iam
-  - /mnt/git/CareID_Rancher/env_config/lh-careidconfig/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
+  - /home/rancher/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
   image: ${registry_url}/cis-integration:${app_version}
   environment:
     JAVA_OPTS: -server -Xms128m -Xms256m -XX:NewSize=128m -XX:MaxNewSize=256m -XX:PermSize=64m -XX:MaxPermSize=128m -XX:+UseConcMarkSweepGC  -XX:+UseParNewGC   -XX:ParallelGCThreads=2 -Djava.security.egd=file:/dev/./urandom
@@ -302,7 +302,7 @@ OMS-BusinessService:
   mem_limit: 250000000
   volumes:
   - /var/log/iam:/var/log/iam
-  - /mnt/git/CareID_Rancher/env_config/lh-careidconfig/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
+  - /home/rancher/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
   image: ${registry_url}/cis-oms-business:${app_version}
   environment:
     JAVA_OPTS: -server -Xms128m -Xms256m -XX:NewSize=128m -XX:MaxNewSize=256m -XX:PermSize=64m -XX:MaxPermSize=128m -XX:+UseConcMarkSweepGC  -XX:+UseParNewGC   -XX:ParallelGCThreads=2 -Djava.security.egd=file:/dev/./urandom
@@ -324,7 +324,7 @@ OSCAR-BusinessService:
   mem_limit: 250000000
   volumes:
   - /var/log/iam:/var/log/iam
-  - /mnt/git/CareID_Rancher/env_config/lh-careidconfig/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
+  - /home/rancher/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
   image: ${registry_url}/cis-oscar-business:${app_version}
   environment:
     JAVA_OPTS: -server -Xms128m -Xms256m -XX:NewSize=128m -XX:MaxNewSize=256m -XX:PermSize=64m -XX:MaxPermSize=128m -XX:+UseConcMarkSweepGC  -XX:+UseParNewGC   -XX:ParallelGCThreads=2 -Djava.security.egd=file:/dev/./urandom
@@ -345,7 +345,7 @@ RulesService:
   mem_limit: 250000000
   volumes:
   - /var/log/iam:/var/log/iam
-  - /mnt/git/CareID_Rancher/env_config/lh-careidconfig/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
+  - /home/rancher/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
   image: ${registry_url}/cis-rules:${app_version}
   environment:
     JAVA_OPTS: -server -Xms128m -Xms256m -XX:NewSize=128m -XX:MaxNewSize=256m -XX:PermSize=64m -XX:MaxPermSize=128m -XX:+UseConcMarkSweepGC  -XX:+UseParNewGC   -XX:ParallelGCThreads=2 -Djava.security.egd=file:/dev/./urandom
@@ -366,7 +366,7 @@ SecureAudit:
   mem_limit: 250000000
   volumes:
   - /var/log/iam:/var/log/iam
-  - /mnt/git/CareID_Rancher/env_config/lh-careidconfig/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
+  - /home/rancher/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
   - /home/rancher/env_config/${env_shortcode}/secaudit/server:/home/iam_user/secaudcertificates/server
   image: ${registry_url}/cis-secureaudit:${app_version}
   environment:
@@ -389,7 +389,7 @@ Scheduler:
   volumes:
   - /var/log/iam:/var/log/iam
   - /home/rancher/env_config/${env_shortcode}/quartz.properties:/home/iam_user/careidconfig/quartz.properties
-  - /mnt/git/CareID_Rancher/env_config/lh-careidconfig/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
+  - /home/rancher/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
   image: ${registry_url}/cis-scheduler:${app_version}
   environment:
     JAVA_OPTS: -server -Xms128m -Xms256m -XX:NewSize=128m -XX:MaxNewSize=256m -XX:PermSize=64m -XX:MaxPermSize=128m -XX:+UseConcMarkSweepGC  -XX:+UseParNewGC   -XX:ParallelGCThreads=2 -Djava.security.egd=file:/dev/./urandom
@@ -410,7 +410,7 @@ ID-StoreSyncService:
   mem_limit: 2147483648
   volumes:
   - /var/log/iam:/var/log/iam
-  - /mnt/git/CareID_Rancher/env_config/lh-careidconfig/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
+  - /home/rancher/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
   image: ${registry_url}/cis-id-storesync:${app_version}
   tty: true
   stdin_open: true
@@ -433,7 +433,7 @@ CC-CheckerService:
   mem_limit: 250000000
   volumes:
   - /var/log/iam:/var/log/iam
-  - /mnt/git/CareID_Rancher/env_config/lh-careidconfig/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
+  - /home/rancher/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
   environment:
     JAVA_OPTS: -server -Xms128m -Xms256m -XX:NewSize=128m -XX:MaxNewSize=256m -XX:PermSize=64m -XX:MaxPermSize=128m -XX:+UseConcMarkSweepGC  -XX:+UseParNewGC   -XX:ParallelGCThreads=2 -Djava.security.egd=file:/dev/./urandom
   image: ${registry_url}/cis-ccc:${app_version}
@@ -455,7 +455,7 @@ ReportingService:
   mem_limit: 250000000
   volumes:
   - /var/log/iam:/var/log/iam
-  - /mnt/git/CareID_Rancher/env_config/lh-careidconfig/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
+  - /home/rancher/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
   image: ${registry_url}/cis-reporting:${app_version}
   tty: true
   stdin_open: true
@@ -501,7 +501,7 @@ EPR-WebFrontEnd:
   mem_limit: 250000000
   volumes:
   - /var/log/iam:/var/log/iam
-  - /mnt/git/CareID_Rancher/env_config/lh-careidconfig/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
+  - /home/rancher/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
   image: ${registry_url}/cis-epr-webfrontend:${app_version}
   environment:
     JAVA_OPTS: -server -Xms128m -Xms256m -XX:NewSize=128m -XX:MaxNewSize=256m -XX:PermSize=64m -XX:MaxPermSize=128m -XX:+UseConcMarkSweepGC  -XX:+UseParNewGC   -XX:ParallelGCThreads=2 -Djava.security.egd=file:/dev/./urandom
@@ -524,7 +524,7 @@ URS-WebFrontEnd:
   mem_limit: 5591026944
   volumes:
   - /var/log/iam:/var/log/iam
-  - /mnt/git/CareID_Rancher/env_config/lh-careidconfig/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
+  - /home/rancher/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
   image: ${registry_url}/cis-urs-webfrontend:${app_version}
   tty: true
   stdin_open: true
@@ -552,7 +552,7 @@ Portal:
   mem_limit: 250000000
   volumes:
   - /var/log/iam:/var/log/iam
-  - /mnt/git/CareID_Rancher/env_config/lh-careidconfig/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
+  - /home/rancher/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
   image: ${registry_url}/cis-portal:${app_version}
   tty: true
   stdin_open: true
@@ -659,7 +659,7 @@ SelfService-WebFrontEnd:
   privileged: true
   volumes:
   - /var/log/iam:/var/log/iam
-  - /mnt/git/CareID_Rancher/env_config/lh-careidconfig/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
+  - /home/rancher/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
   stdin_open: true
   mem_limit: 5591026944
   
@@ -677,7 +677,7 @@ EmailService:
   mem_limit: 7491026944
   volumes:
   - /var/log/iam:/var/log/iam
-  - /mnt/git/CareID_Rancher/env_config/lh-careidconfig/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
+  - /home/rancher/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
   privileged: true
   links:
   - LB-BusinessServices:LB-BusinessServices

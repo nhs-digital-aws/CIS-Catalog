@@ -1,6 +1,6 @@
 .catalog:
   name: "NHS Digital - CIS - URS App"
-  version: "0.1"
+  version: "0.2"
   description: |
     Enter Description Here
   minimum_rancher_version: "v1.1.4"
