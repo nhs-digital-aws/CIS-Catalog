@@ -23,7 +23,7 @@ LB-AuthBusinessService:
     io.rancher.loadbalancer.target.SAMLService: /saml=8080
     io.rancher.loadbalancer.target.AuditService: /authauditlogger=8080
     io.rancher.loadbalancer.target.SessionManager: /sessionmanager=8080
-    environment_name: $ENV_SHORTCODE
+    environment_name: ${env_shortcode}
     service_name: LB-AuthBusinessService
     project.service.name: lb-auth-business-service
     project.name: cis-auth
@@ -41,7 +41,7 @@ LB-AuthBusinessService:
 AuditService:
   labels:
     io.rancher.container.hostname_override: container_name
-    environment_name: $ENV_SHORTCODE
+    environment_name: ${env_shortcode}
     service_name: AuthAudit
     project.service.name: audit-service
     project.name: cis-auth
@@ -49,8 +49,8 @@ AuditService:
   mem_limit: 1572864000
   volumes:
   - /var/log/iam:/var/log/iam
-  - $PROPERTY_FILE_LOCATION/authServices.properties:/home/iam_user/careidconfig/authServices.properties
-  image: localhost:5000/auth-audit:$IAM_APPS_VERSION
+  - /mnt/git/CareID_Rancher/env_config/lh-careidconfig/env_config/${env_shortcode}/authServices.properties:/home/iam_user/careidconfig/authServices.properties
+  image: ${registry_url}/auth-audit:${app_version}
   environment:
     JAVA_OPTS: -server -Xms256m -Xmx512m  -XX:NewSize=128m   -XX:MaxNewSize=256m   -XX:PermSize=64m  -XX:MaxPermSize=128m  -XX:+UseConcMarkSweepGC  -XX:+UseParNewGC   -XX:ParallelGCThreads=2 -Djava.security.egd=file:/dev/./urandom
   tty: true
@@ -61,7 +61,7 @@ AuditService:
 AuthenticatorService:
   labels:
     io.rancher.container.hostname_override: container_name
-    environment_name: $ENV_SHORTCODE
+    environment_name: ${env_shortcode}
     service_name: Authenticator
     project.service.name: authenticator-service
     project.name: cis-auth
@@ -71,10 +71,10 @@ AuthenticatorService:
   environment:
     JAVA_OPTS: -server -Xms256m -Xmx512m  -XX:NewSize=128m   -XX:MaxNewSize=256m   -XX:PermSize=64m  -XX:MaxPermSize=128m  -XX:+UseConcMarkSweepGC  -XX:+UseParNewGC   -XX:ParallelGCThreads=2 -Djava.security.egd=file:/dev/./urandom
   volumes:
-  - $PROPERTY_FILE_LOCATION/LegacyAuth_Files:/home/iam_user/LegacyAuth_Files 
+  - /mnt/git/CareID_Rancher/env_config/lh-careidconfig/env_config/${env_shortcode}/LegacyAuth_Files:/home/iam_user/LegacyAuth_Files 
   - /var/log/iam:/var/log/iam
-  - $PROPERTY_FILE_LOCATION/authServices.properties:/home/iam_user/careidconfig/authServices.properties
-  image: localhost:5000/auth-authenticator:$IAM_APPS_VERSION
+  - /mnt/git/CareID_Rancher/env_config/lh-careidconfig/env_config/${env_shortcode}/authServices.properties:/home/iam_user/careidconfig/authServices.properties
+  image: ${registry_url}/auth-authenticator:${app_version}
   tty: true
   stdin_open: true
   links:
@@ -84,7 +84,7 @@ AuthenticatorService:
 SessionManager:
   labels:
     io.rancher.container.hostname_override: container_name
-    environment_name: $ENV_SHORTCODE
+    environment_name: ${env_shortcode}
     service_name: SessionManager
     project.service.name: session-manager
     project.name: cis-auth
@@ -92,12 +92,12 @@ SessionManager:
   mem_limit: 1572864000
   volumes:
   - /var/log/iam:/var/log/iam
-  - $PROPERTY_FILE_LOCATION/authServices.properties:/home/iam_user/careidconfig/authServices.properties
+  - /mnt/git/CareID_Rancher/env_config/lh-careidconfig/env_config/${env_shortcode}/authServices.properties:/home/iam_user/careidconfig/authServices.properties
   privileged: true
   environment:
-    GLUSTER_URL: $GLUSTER_URL
-    GLUSTER_FOLDER: $ENV_SHORTCODE
-  image: localhost:5000/auth-sessionmanager:$IAM_APPS_VERSION
+    GLUSTER_URL: ${gluster_url}
+    GLUSTER_FOLDER: ${env_shortcode}
+  image: ${registry_url}/auth-sessionmanager:${app_version}
   environment:
     JAVA_OPTS: -server -Xms256m -Xmx512m  -XX:NewSize=128m   -XX:MaxNewSize=256m   -XX:PermSize=64m  -XX:MaxPermSize=128m  -XX:+UseConcMarkSweepGC  -XX:+UseParNewGC   -XX:ParallelGCThreads=2 -Djava.security.egd=file:/dev/./urandom
   tty: true
@@ -110,7 +110,7 @@ SessionManager:
 SAMLService:
   labels:
     io.rancher.container.hostname_override: container_name
-    environment_name: $ENV_SHORTCODE
+    environment_name: ${env_shortcode}
     service_name: SAMLService
     project.service.name: saml-service
     project.name: cis-auth
@@ -118,8 +118,8 @@ SAMLService:
   mem_limit: 250864000
   volumes:
   - /var/log/iam:/var/log/iam
-  - $PROPERTY_FILE_LOCATION/authServices.properties:/home/iam_user/careidconfig/authServices.properties
-  image: localhost:5000/auth-saml:$IAM_APPS_VERSION
+  - /mnt/git/CareID_Rancher/env_config/lh-careidconfig/env_config/${env_shortcode}/authServices.properties:/home/iam_user/careidconfig/authServices.properties
+  image: ${registry_url}/auth-saml:${app_version}
   environment:
     JAVA_OPTS: -server -Xms256m -Xmx256m  -XX:NewSize=128m   -XX:MaxNewSize=256m   -XX:PermSize=64m  -XX:MaxPermSize=128m  -XX:+UseConcMarkSweepGC  -XX:+UseParNewGC   -XX:ParallelGCThreads=2 -Djava.security.egd=file:/dev/./urandom
   tty: true
@@ -129,12 +129,12 @@ SAMLService:
   - Directory:Directory
 
 TokenValidationService:
-  image: localhost:5000/auth-tokenvalidation:$IAM_APPS_VERSION
+  image: ${registry_url}/auth-tokenvalidation:${app_version}
   tty: true
   stdin_open: true
   labels:
     io.rancher.container.hostname_override: container_name
-    environment_name: $ENV_SHORTCODE
+    environment_name: ${env_shortcode}
     service_name: TokenValidationService
     project.service.name: token-validation-service
     project.name: cis-auth
@@ -144,7 +144,7 @@ TokenValidationService:
     JAVA_OPTS: -server -Xms256m -Xmx512m  -XX:NewSize=128m   -XX:MaxNewSize=256m   -XX:PermSize=64m  -XX:MaxPermSize=128m  -XX:+UseConcMarkSweepGC  -XX:+UseParNewGC   -XX:ParallelGCThreads=2 -Djava.security.egd=file:/dev/./urandom
   volumes:
   - /var/log/iam:/var/log/iam
-  - $PROPERTY_FILE_LOCATION/authServices.properties:/home/iam_user/careidconfig/authServices.properties
+  - /mnt/git/CareID_Rancher/env_config/lh-careidconfig/env_config/${env_shortcode}/authServices.properties:/home/iam_user/careidconfig/authServices.properties
   links:
   - LB-AuthBusinessService:LB-AuthBusinessService
   - Directory:Directory
@@ -156,15 +156,15 @@ haproxy-fe:
     io.rancher.container.hostname_override: container_name
     io.rancher.container.dns: true
     io.rancher.sidekicks: keepalived-fe
-    environment_name: $ENV_SHORTCODE
+    environment_name: ${env_shortcode}
     service_name: haproxy-fe
     project.service.name: haproxy-fe
     project.name: cis-auth
     project.stack: auth
   links:
-  - AuthenticatorService:$ENV_SHORTCODE-AUTH-GAS
-  - TokenValidationService:$ENV_SHORTCODE-AUTH-TVS
-  - SAMLService:$ENV_SHORTCODE-AUTH-SBAPI
+  - AuthenticatorService:${env_shortcode}-AUTH-GAS
+  - TokenValidationService:${env_shortcode}-AUTH-TVS
+  - SAMLService:${env_shortcode}-AUTH-SBAPI
   environment:
     - fe1ip=$AUTH_VIP_ONE
     - fe2ip=$AUTH_VIP_TWO
@@ -181,14 +181,14 @@ haproxy-fe:
     - be2fqdn=$AUTH_VIP_TWO_BE
     - be3fqdn=$AUTH_VIP_THREE_BE
     - be4fqdn=$AUTH_VIP_FOUR_BE
-    - GLUSTER_URL=$GLUSTER_URL
-    - envcode=$ENV_SHORTCODE
-  image: localhost:5000/auth-fe-haproxy
+    - GLUSTER_URL=${gluster_url}
+    - envcode=${env_shortcode}
+  image: ${registry_url}/auth-fe-haproxy
   tty: true
   stdin_open: true
   privileged: true
   external_links:
-  - $ENV_SHORTCODE-cis-externals/Nfs:nfs
+  - ${env_shortcode}-cis-externals/Nfs:nfs
   
 keepalived-fe: 
   net: "host"
@@ -196,7 +196,7 @@ keepalived-fe:
     io.rancher.scheduler.global: 'true'
     io.rancher.container.hostname_override: container_name
     io.rancher.container.dns: true
-    environment_name: $ENV_SHORTCODE
+    environment_name: ${env_shortcode}
     service_name: keepalived-fe
     project.service.name: keepalived-fe
     project.name: cis-auth
@@ -208,8 +208,8 @@ keepalived-fe:
     - fe4ip=$AUTH_VIP_FOUR
     - interface=$AUTH_VIP_INTERFACE
     - vrid=$AUTH_VIP_VRID
-    - envcode=$ENV_SHORTCODE
-  image: localhost:5000/auth-fe-keepalived
+    - envcode=${env_shortcode}
+  image: ${registry_url}/auth-fe-keepalived
   tty: true
   stdin_open: true
   cap_add:

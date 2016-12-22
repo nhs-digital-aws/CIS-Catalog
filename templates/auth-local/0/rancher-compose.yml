@@ -1,10 +1,41 @@
+.catalog:
+  name: "NHS Digital - CIS - AUTH App"
+  version: "0.1"
+  description: |
+    Enter Description Here
+  minimum_rancher_version: "v1.1.4"
+  questions:
+    - variable: "app_version"
+      description: "Which version of the app do you want to deploy?"
+      label: "Version"
+      required: true
+      default: master
+      type: "string"
+    - variable: "registry_url"
+      description: "Please enter the url of your registry"
+      label: "e.g. registry.nhs.uk:5000"
+      required: true
+      default: registry.ptl.cis.ncrs.nhs.uk:5000
+      type: "string"
+    - variable: "env_shortcode"
+      description: "Please enter the shortcode of your environment"
+      label: "Environment Shortcode"
+      required: true
+      default: lh
+      type: "string"
+    - variable: "gluster_url"
+      description: "Please enter your Gluster URL"
+      label: "GlusterURL"
+      required: true
+      default: gluster.cisptl.local
+      type: "string"
 Directory:
   external_ips:
-    - $DIR_IP
+    - 192.168.99.1
 
 RedisSessionStore:
   external_ips:
-    - $DIR_IP
+    - 192.168.99.1
     
 LB-ABS:
   upgrade_strategy:
