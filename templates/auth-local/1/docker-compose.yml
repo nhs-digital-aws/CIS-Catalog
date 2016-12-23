@@ -161,17 +161,17 @@ haproxy-fe:
   - TokenValidationService:${env_shortcode}-AUTH-TVS
   - SAMLService:${env_shortcode}-AUTH-SBAPI
   environment:
-    - fe1ip=$AUTH_VIP_ONE
+    - fe1ip=0.0.0.0
     - fe2ip=$AUTH_VIP_TWO
     - fe3ip=$AUTH_VIP_THREE
     - fe4ip=$AUTH_VIP_FOUR
-    - fe1pemfile=$AUTH_VIP_ONE_PEM
+    - fe1pemfile=gas.lh.iam.spine2.ncrs.nhs.uk
     - fe2pemfile=$AUTH_VIP_TWO_PEM
     - fe3pemfile=$AUTH_VIP_THREE_PEM
     - fe4pemfile=$AUTH_VIP_FOUR_PEM
-    - be1-1fqdn=$AUTH_VIP_ONE_ONE_BE
-    - be1-2fqdn=$AUTH_VIP_ONE_TWO_BE
-    - be1-3fqdn=$AUTH_VIP_ONE_THREE_BE
+    - be1-1fqdn=AuthenticatorService.auth-local.rancher.internal
+    - be1-2fqdn=TokenValidationService.auth-local.rancher.internal
+    - be1-3fqdn=SAMLService.auth-local.rancher.internal
     - be1-4fqdn=$AUTH_VIP_ONE_FOUR_BE
     - be2fqdn=$AUTH_VIP_TWO_BE
     - be3fqdn=$AUTH_VIP_THREE_BE
