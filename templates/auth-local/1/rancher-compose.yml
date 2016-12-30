@@ -30,12 +30,10 @@
       default: gluster.cisptl.local
       type: "string"
 Directory:
-  external_ips:
-    - 192.168.99.1
+  hostname: directory.cis-externals.rancher.internal
 
 RedisSessionStore:
-  external_ips:
-    - 192.168.99.1
+  hostname: redis.cis-externals.rancher.internal
     
 LB-ABS:
   upgrade_strategy:

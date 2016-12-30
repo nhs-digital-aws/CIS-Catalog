@@ -31,36 +31,30 @@
       type: "string"
 
 IAM-Database:
-  external_ips:
-    - 192.168.99.1
+  hostname: iam-database.cis-externals.rancher.internal
 
 Directory:
-  external_ips:
-    - 192.168.99.1
+  hostname: directory.cis-externals.rancher.internal
 
 Entrust-CA1-Manager:
-  external_ips:
-    - 192.168.99.1
+  hostname: subca.cis-externals.rancher.internal
 
 Entrust-CA2-Manager:
-  external_ips:
-    - 192.168.99.1
+  hostname: subcc.cis-externals.rancher.internal
 
 Entrust-CA3-Manager:
-  external_ips:
-    - 192.168.99.1
+  hostname: subca.cis-externals.rancher.internal
 
 Outbound-Messaging-Service:
   external_ips:
-    - 192.168.99.1
+    - 127.0.0.1
 
 WebSessionStore:
-  external_ips:
-    - 192.168.99.1
+  hostname: redis.cis-externals.rancher.internal
 
 RedisSessionStore:
-  external_ips:
-    - 192.168.99.1
+  hostname: redis.cis-externals.rancher.internal
+
 pacemaker-fe:
   upgrade_strategy:
     start_first: true
