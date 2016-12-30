@@ -568,19 +568,19 @@ haproxy-fe:
   - Portal:${env_shortcode}-Portal
   - SelfService-WebFrontEnd:${env_shortcode}-SelfService-WebFrontEnd
   environment:
-    - fe1ip=$VIP_ONE
+    - fe1ip=0.0.0.0
     - fe2ip=$VIP_TWO
     - fe3ip=$VIP_THREE
     - fe4ip=$VIP_FOUR
-    - fe1pemfile=$VIP_ONE_PEM
+    - fe1pemfile=wfe.lh.iam.spine2.ncrs.nhs.uk
     - fe2pemfile=$VIP_TWO_PEM
     - fe3pemfile=$VIP_THREE_PEM
     - fe4pemfile=$VIP_FOUR_PEM
-    - be1-1fqdn=$VIP_ONE_ONE_BE
-    - be1-2fqdn=$VIP_ONE_TWO_BE
-    - be1-3fqdn=$VIP_ONE_THREE_BE
-    - be1-4fqdn=$VIP_ONE_FOUR_BE
-    - be1-5fqdn=$VIP_ONE_FIVE_BE
+    - be1-1fqdn=urs-webfrontend.urs-local.rancher.internal
+    - be1-2fqdn=epr-webfrontend.urs-local.rancher.internal
+    - be1-3fqdn=portal.urs-local.rancher.internal
+    - be1-4fqdn=integration.urs-local.rancher.internal
+    - be1-5fqdn=
     - be2fqdn=$VIP_TWO_BE
     - be3fqdn=$VIP_THREE_BE
     - be4fqdn=$VIP_FOUR_BE	
