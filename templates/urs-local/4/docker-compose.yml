@@ -54,55 +54,6 @@ RedisSessionStore:
     project.name: cis-urs
     project.stack: urs
 
-LB-BusinessServices:
-  expose:
-  - 8080:8080
-  ports:
-  - 8080:8080
-  labels:
-    io.rancher.loadbalancer.target.URS-BusinessService: 8080/ursbusservice=8080
-    io.rancher.loadbalancer.target.EPR-WebFrontEnd: 8080/eprwebapp=8080
-    io.rancher.loadbalancer.target.Portal: 8080/portal=8080
-    io.rancher.loadbalancer.target.OSCAR-BusinessService: 8080/orsservice=8080
-    io.rancher.loadbalancer.target.Integration: 8080/cxf=8181
-    io.rancher.loadbalancer.target.ReportingService: 8080/iamrepservice=8080
-    io.rancher.loadbalancer.target.Audit: 8080/auditloggerws=8080
-    io.rancher.loadbalancer.target.SCEP: 8080/mobileconfig=9098
-    io.rancher.loadbalancer.target.UID-Service: 8080/uidservice=8080
-    io.rancher.loadbalancer.target.GuvnorService: 8080/guvnor-5.5.0.Final-tomcat-6.0=8080
-    io.rancher.loadbalancer.target.OMS-BusinessService: 8080/omsbusservice=8080
-    io.rancher.loadbalancer.target.ID-StoreSyncService: 8080/idstoresyncmanager=8080,8080/openidm=8081
-    io.rancher.loadbalancer.target.CC-CheckerService: 8080/cccheckerservice/8080
-    io.rancher.loadbalancer.target.Outbound-Messaging-Service: 8080/esrNotification=8080,8080/eprNotification=8080,8080/AckRecord=8104
-    io.rancher.loadbalancer.target.URS-WebFrontEnd: 8080/urswebapp=8080
-    io.rancher.loadbalancer.target.EPR-BusinessService: 8080/eprbusservice=8080
-    io.rancher.loadbalancer.target.RulesService: 8080/rulesservice=8080
-    io.rancher.loadbalancer.target.CMS-BusinessService: 8080/cmsbusservice=8080
-    io.rancher.loadbalancer.target.EmailService: 8080/emailservice=8080
-    environment_name: ${env_shortcode}
-    service_name: LB-BusinessServices
-    project.service.name: lb-businessservices
-    project.name: cis-urs
-    project.stack: urs
-  tty: true
-  image: rancher/load-balancer-service
-  stdin_open: true
-
-LB-Secure:
-  expose:
-  - 8443:8443/tcp
-  labels:
-    environment_name: ${env_shortcode}
-    service_name: LB-Secure
-    project.service.name: lb-secure
-    project.name: cis-urs
-    project.stack: urs
-  image: rancher/load-balancer-service
-  tty: true
-  stdin_open: true
-  links:
-  - SecureAudit:SecureAudit
-
 Audit:
   labels:
     io.rancher.container.hostname_override: container_name
@@ -640,3 +591,72 @@ EmailService:
   privileged: true
   links:
   - LB-BusinessServices:LB-BusinessServices
+
+LB-BusinessServices:
+  expose:
+  - 8080:8080
+  ports:
+  - 8080:8080
+  labels:
+    io.rancher.loadbalancer.target.URS-BusinessService: 8080/ursbusservice=8080
+    io.rancher.loadbalancer.target.EPR-WebFrontEnd: 8080/eprwebapp=8080
+    io.rancher.loadbalancer.target.Portal: 8080/portal=8080
+    io.rancher.loadbalancer.target.OSCAR-BusinessService: 8080/orsservice=8080
+    io.rancher.loadbalancer.target.Integration: 8080/cxf=8181
+    io.rancher.loadbalancer.target.ReportingService: 8080/iamrepservice=8080
+    io.rancher.loadbalancer.target.Audit: 8080/auditloggerws=8080
+    io.rancher.loadbalancer.target.SCEP: 8080/mobileconfig=9098
+    io.rancher.loadbalancer.target.UID-Service: 8080/uidservice=8080
+    io.rancher.loadbalancer.target.GuvnorService: 8080/guvnor-5.5.0.Final-tomcat-6.0=8080
+    io.rancher.loadbalancer.target.OMS-BusinessService: 8080/omsbusservice=8080
+    io.rancher.loadbalancer.target.ID-StoreSyncService: 8080/idstoresyncmanager=8080,8080/openidm=8081
+    io.rancher.loadbalancer.target.CC-CheckerService: 8080/cccheckerservice/8080
+    io.rancher.loadbalancer.target.Outbound-Messaging-Service: 8080/esrNotification=8080,8080/eprNotification=8080,8080/AckRecord=8104
+    io.rancher.loadbalancer.target.URS-WebFrontEnd: 8080/urswebapp=8080
+    io.rancher.loadbalancer.target.EPR-BusinessService: 8080/eprbusservice=8080
+    io.rancher.loadbalancer.target.RulesService: 8080/rulesservice=8080
+    io.rancher.loadbalancer.target.CMS-BusinessService: 8080/cmsbusservice=8080
+    io.rancher.loadbalancer.target.EmailService: 8080/emailservice=8080
+    environment_name: ${env_shortcode}
+    service_name: LB-BusinessServices
+    project.service.name: lb-businessservices
+    project.name: cis-urs
+    project.stack: urs
+  tty: true
+  image: rancher/load-balancer-service
+  links:
+  - UID-Service:UID-Service
+  - OSCAR-BusinessService:OSCAR-BusinessService
+  - EPR-BusinessService:EPR-BusinessService
+  - RulesService:RulesService
+  - SCEP:SCEP
+  - ID-StoreSyncService:ID-StoreSyncService
+  - CC-CheckerService:CC-CheckerService
+  - ReportingService:ReportingService
+  - Outbound-Messaging-Service:Outbound-Messaging-Service
+  - Integration:Integration
+  - GuvnorService:GuvnorService
+  - CMS-BusinessService:CMS-BusinessService
+  - Audit:Audit
+  - EPR-WebFrontEnd:EPR-WebFrontEnd
+  - OMS-BusinessService:OMS-BusinessService
+  - URS-BusinessService:URS-BusinessService
+  - Portal:Portal
+  - EmailService:EmailService
+  stdin_open: true
+
+LB-Secure:
+  expose:
+  - 8443:8443/tcp
+  labels:
+    environment_name: ${env_shortcode}
+    service_name: LB-Secure
+    project.service.name: lb-secure
+    project.name: cis-urs
+    project.stack: urs
+  image: rancher/load-balancer-service
+  tty: true
+  stdin_open: true
+  links:
+  - SecureAudit:SecureAudit
+
