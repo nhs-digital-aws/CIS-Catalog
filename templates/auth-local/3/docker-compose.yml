@@ -92,7 +92,7 @@ SessionManager:
   - /home/rancher/env_config/${env_shortcode}/authServices.properties:/home/iam_user/careidconfig/authServices.properties
   privileged: true
   environment:
-    GLUSTER_URL: ${gluster_url}
+    GLUSTER_URL: gluster
     GLUSTER_FOLDER: ${env_shortcode}
   image: ${registry_url}/auth-sessionmanager:${app_version}
   environment:
@@ -102,8 +102,8 @@ SessionManager:
   links:
   - LB-AuthBusinessService:LB-AuthBusinessService
   - RedisSessionStore:RedisSessionStore
-
-
+  external_links:
+  - ${gluster_url}:gluster
 SAMLService:
   labels:
     io.rancher.container.hostname_override: container_name
@@ -176,14 +176,14 @@ haproxy-fe:
     - be2fqdn=$AUTH_VIP_TWO_BE
     - be3fqdn=$AUTH_VIP_THREE_BE
     - be4fqdn=$AUTH_VIP_FOUR_BE
-    - GLUSTER_URL=${gluster_url}
+    - GLUSTER_URL=gluster
     - envcode=${env_shortcode}
   image: ${registry_url}/auth-fe-haproxy
   tty: true
   stdin_open: true
   privileged: true
   external_links:
-  - ${env_shortcode}-cis-externals/Nfs:nfs
+  - ${gluster_url}:gluster
   
 keepalived-fe: 
   net: "host"

@@ -1,6 +1,6 @@
 .catalog:
   name: "NHS Digital - CIS - AUTH App"
-  version: "0.5"
+  version: "0.6"
   description: |
     Enter Description Here
   minimum_rancher_version: "v1.1.4"
