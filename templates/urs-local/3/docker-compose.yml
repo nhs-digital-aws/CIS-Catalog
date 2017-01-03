@@ -562,11 +562,11 @@ haproxy-fe:
   volumes:
   - /home/rancher:/mnt/gluster
   links:
-  - URS-WebFrontEnd:${env_shortcode}-URS-WebFrontEnd
-  - EPR-WebFrontEnd:${env_shortcode}-EPR-WebFrontEnd
-  - Integration:${env_shortcode}-Integration
-  - Portal:${env_shortcode}-Portal
-  - SelfService-WebFrontEnd:${env_shortcode}-SelfService-WebFrontEnd
+  - URS-WebFrontEnd:URS-WebFrontEnd
+  - EPR-WebFrontEnd:EPR-WebFrontEnd
+  - Integration:Integration
+  - Portal:Portal
+  - SelfService-WebFrontEnd:SelfService-WebFrontEnd
   environment:
     - fe1ip=0.0.0.0
     - fe2ip=$VIP_TWO
