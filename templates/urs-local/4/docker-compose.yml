@@ -86,25 +86,6 @@ LB-BusinessServices:
     project.stack: urs
   tty: true
   image: rancher/load-balancer-service
-  links:
-  - UID-Service:UID-Service
-  - OSCAR-BusinessService:OSCAR-BusinessService
-  - EPR-BusinessService:EPR-BusinessService
-  - RulesService:RulesService
-  - SCEP:SCEP
-  - ID-StoreSyncService:ID-StoreSyncService
-  - CC-CheckerService:CC-CheckerService
-  - ReportingService:ReportingService
-  - Outbound-Messaging-Service:Outbound-Messaging-Service
-  - Integration:Integration
-  - GuvnorService:GuvnorService
-  - CMS-BusinessService:CMS-BusinessService
-  - Audit:Audit
-  - EPR-WebFrontEnd:EPR-WebFrontEnd
-  - OMS-BusinessService:OMS-BusinessService
-  - URS-BusinessService:URS-BusinessService
-  - Portal:Portal
-  - EmailService:EmailService
   stdin_open: true
 
 LB-Secure:
