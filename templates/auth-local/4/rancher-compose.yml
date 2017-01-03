@@ -1,6 +1,6 @@
 .catalog:
   name: "NHS Digital - CIS - AUTH App"
-  version: "0.3"
+  version: "0.7"
   description: |
     Enter Description Here
   minimum_rancher_version: "v1.1.4"
@@ -25,12 +25,12 @@
       type: "string"
     - variable: "gluster_url"
       description: "Please enter your Gluster URL"
-      label: "GlusterURL"
+      label: "Gluster Service"
       required: true
-      default: gluster.cisptl.local
       type: "string"
+      default: "nfs.cis-externals.rancher.internal"
 Directory:
-  hostname: directory.cis-externals.rancher.internal
+  hostname: dir.cis-externals.rancher.internal
 
 RedisSessionStore:
   hostname: redis.cis-externals.rancher.internal
