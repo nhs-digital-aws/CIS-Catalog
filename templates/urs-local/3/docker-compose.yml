@@ -43,14 +43,14 @@ Outbound-Messaging-Service:
 WebSessionStore:
   image: rancher/external-service
   labels:
-    project.service.name: web-session-store
+    project.service.name: web-sessionstore
     project.name: cis-urs
     project.stack: urs
 
 RedisSessionStore:
   image: rancher/external-service
   labels:
-    project.service.name: redis-session-store
+    project.service.name: redis-sessionstore
     project.name: cis-urs
     project.stack: urs
 
@@ -81,7 +81,7 @@ LB-BusinessServices:
     io.rancher.loadbalancer.target.EmailService: 8080/emailservice=8080
     environment_name: ${env_shortcode}
     service_name: LB-BusinessServices
-    project.service.name: lb-business-services
+    project.service.name: lb-businessservices
     project.name: cis-urs
     project.stack: urs
   tty: true
@@ -166,7 +166,7 @@ CMS-BusinessService:
     io.rancher.container.hostname_override: container_name
     environment_name: ${env_shortcode}
     service_name: CMS-BusinessService
-    project.service.name: cms-business-service
+    project.service.name: cms-businessservice
     project.name: cis-urs
     project.stack: urs
   volumes:
@@ -203,7 +203,7 @@ EPR-BusinessService:
     io.rancher.container.hostname_override: container_name
     environment_name: ${env_shortcode}
     service_name: EPR-BusinessService
-    project.service.name: epr-business-service
+    project.service.name: epr-businessservice
     project.name: cis-urs
     project.stack: urs
   volumes:
@@ -246,7 +246,7 @@ URS-BusinessService:
     io.rancher.container.hostname_override: container_name
     environment_name: ${env_shortcode}
     service_name: URS-BusinessService
-    project.service.name: urs-business-service
+    project.service.name: urs-businessservice
     project.name: cis-urs
     project.stack: urs
   volumes:
@@ -310,7 +310,7 @@ OSCAR-BusinessService:
     io.rancher.container.hostname_override: container_name
     environment_name: ${env_shortcode}
     service_name: OSCAR-BusinessService
-    project.service.name: oscar-business-service
+    project.service.name: oscar-businessservice
     project.name: cis-urs
     project.stack: urs
   volumes:
@@ -479,7 +479,7 @@ EPR-WebFrontEnd:
     io.rancher.container.hostname_override: container_name
     environment_name: ${env_shortcode}
     service_name: EPR-WebFrontEnd
-    project.service.name: epr-web-frontend
+    project.service.name: epr-webfrontend
     project.name: cis-urs
     project.stack: urs
   volumes:
@@ -501,7 +501,7 @@ URS-WebFrontEnd:
     environment_name: ${env_shortcode}
     service_name: URS-WebFrontEnd
     io.rancher.container.dns: true
-    project.service.name: urs-web-frontend
+    project.service.name: urs-webfrontend
     project.name: cis-urs
     project.stack: urs
   volumes:

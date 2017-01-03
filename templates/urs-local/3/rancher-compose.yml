@@ -27,7 +27,8 @@
       description: "Please enter your Gluster URL"
       label: "GlusterURL"
       required: true
-      type: "service"
+      default: nfs.cis-externals.rancher.internal
+      type: "string"
 
 IAM-Database:
   hostname: iam-database.cis-externals.rancher.internal
