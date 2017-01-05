@@ -4,7 +4,7 @@ Directory:
     project.service.name: directory
     project.name: cis-auth
     project.stack: auth
-    io.rancher.scheduler.affinity:host_label_soft: stacktype=urs
+    io.rancher.scheduler.affinity:host_label_soft: stacktype=auth
 
 RedisSessionStore:
   image: rancher/external-service
@@ -12,7 +12,7 @@ RedisSessionStore:
     project.service.name: redis-session-store
     project.name: cis-auth
     project.stack: auth
-    io.rancher.scheduler.affinity:host_label_soft: stacktype=urs  
+    io.rancher.scheduler.affinity:host_label_soft: stacktype=auth  
 
 LB-AuthBusinessService:
   expose:
@@ -30,7 +30,7 @@ LB-AuthBusinessService:
     project.service.name: lb-auth-business-service
     project.name: cis-auth
     project.stack: auth
-    io.rancher.scheduler.affinity:host_label_soft: stacktype=urs
+    io.rancher.scheduler.affinity:host_label_soft: stacktype=auth
   tty: true
   image: rancher/load-balancer-service
   links:
@@ -49,7 +49,7 @@ AuditService:
     project.service.name: audit-service
     project.name: cis-auth
     project.stack: auth
-    io.rancher.scheduler.affinity:host_label_soft: stacktype=urs
+    io.rancher.scheduler.affinity:host_label_soft: stacktype=auth
   volumes:
   - /var/log/iam:/var/log/iam
   - /home/rancher/env_config/${env_shortcode}/authServices.properties:/home/iam_user/careidconfig/authServices.properties
@@ -69,7 +69,7 @@ AuthenticatorService:
     project.service.name: authenticatorservice
     project.name: cis-auth
     project.stack: auth
-    io.rancher.scheduler.affinity:host_label_soft: stacktype=urs
+    io.rancher.scheduler.affinity:host_label_soft: stacktype=auth
   privileged: true
   environment:
     JAVA_OPTS: -server -Xms256m -Xmx512m  -XX:NewSize=128m   -XX:MaxNewSize=256m   -XX:PermSize=64m  -XX:MaxPermSize=128m  -XX:+UseConcMarkSweepGC  -XX:+UseParNewGC   -XX:ParallelGCThreads=2 -Djava.security.egd=file:/dev/./urandom
@@ -92,7 +92,7 @@ SessionManager:
     project.service.name: session-manager
     project.name: cis-auth
     project.stack: auth
-    io.rancher.scheduler.affinity:host_label_soft: stacktype=urs
+    io.rancher.scheduler.affinity:host_label_soft: stacktype=auth
   volumes:
   - /var/log/iam:/var/log/iam
   - /home/rancher/env_config/${env_shortcode}/authServices.properties:/home/iam_user/careidconfig/authServices.properties
@@ -116,7 +116,7 @@ SAMLService:
     project.service.name: saml-service
     project.name: cis-auth
     project.stack: auth
-    io.rancher.scheduler.affinity:host_label_soft: stacktype=urs
+    io.rancher.scheduler.affinity:host_label_soft: stacktype=auth
   volumes:
   - /var/log/iam:/var/log/iam
   - /home/rancher/env_config/${env_shortcode}/authServices.properties:/home/iam_user/careidconfig/authServices.properties
@@ -140,7 +140,7 @@ TokenValidationService:
     project.service.name: token-validation-service
     project.name: cis-auth
     project.stack: auth
-    io.rancher.scheduler.affinity:host_label_soft: stacktype=urs
+    io.rancher.scheduler.affinity:host_label_soft: stacktype=auth
   environment:
     JAVA_OPTS: -server -Xms256m -Xmx512m  -XX:NewSize=128m   -XX:MaxNewSize=256m   -XX:PermSize=64m  -XX:MaxPermSize=128m  -XX:+UseConcMarkSweepGC  -XX:+UseParNewGC   -XX:ParallelGCThreads=2 -Djava.security.egd=file:/dev/./urandom
   volumes:
@@ -162,7 +162,7 @@ haproxy-fe:
     project.service.name: haproxy-fe
     project.name: cis-auth
     project.stack: auth
-    io.rancher.scheduler.affinity:host_label: stacktype=urs
+    io.rancher.scheduler.affinity:host_label: stacktype=auth
   links:
   - AuthenticatorService:${env_shortcode}-AUTH-GAS
   - TokenValidationService:${env_shortcode}-AUTH-TVS
@@ -201,7 +201,7 @@ keepalived-fe:
     project.service.name: keepalived-fe
     project.name: cis-auth
     project.stack: auth
-    io.rancher.scheduler.affinity:host_label: stacktype=urs
+    io.rancher.scheduler.affinity:host_label: stacktype=auth
   environment:
     - fe1ip=$AUTH_VIP_ONE
     - fe2ip=$AUTH_VIP_TWO
