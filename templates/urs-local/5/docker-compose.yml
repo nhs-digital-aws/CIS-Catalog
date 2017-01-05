@@ -594,7 +594,6 @@ EmailService:
   - /var/log/iam:/var/log/iam
   - /home/rancher/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
   privileged: true
-  links:
 
 LB-BusinessServices:
   expose:
