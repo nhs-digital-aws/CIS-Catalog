@@ -478,7 +478,6 @@ URS-WebFrontEnd:
     project.name: cis-urs
     project.stack: urs
     io.rancher.scheduler.affinity:host_label_soft: stacktype=urs
- 
  volumes:
   - /var/log/iam:/var/log/iam
   - /home/rancher/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties

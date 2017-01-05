@@ -12,7 +12,7 @@ RedisSessionStore:
     project.service.name: redis-session-store
     project.name: cis-auth
     project.stack: auth
-    io.rancher.scheduler.affinity:host_label_soft: stacktype=auth  
+    io.rancher.scheduler.affinity:host_label_soft: stacktype=auth
 
 LB-AuthBusinessService:
   expose:
@@ -137,7 +137,7 @@ TokenValidationService:
     io.rancher.container.hostname_override: container_name
     environment_name: ${env_shortcode}
     service_name: TokenValidationService
-    project.service.name: token-validation-service
+    project.service.name: tokenvalidationservice
     project.name: cis-auth
     project.stack: auth
     io.rancher.scheduler.affinity:host_label_soft: stacktype=auth

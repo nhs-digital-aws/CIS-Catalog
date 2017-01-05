@@ -34,7 +34,7 @@ Directory:
 
 RedisSessionStore:
   hostname: redis.cis-externals.rancher.internal
-    
+
 LB-ABS:
   upgrade_strategy:
     start_first: true
