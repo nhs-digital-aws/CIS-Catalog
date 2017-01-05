@@ -5,7 +5,6 @@ IAM-Database:
     project.name: cis-urs
     project.stack: urs
     io.rancher.scheduler.affinity:host_label_soft: stacktype=urs
-
 Directory:
   image: rancher/external-service
   labels:
@@ -13,7 +12,6 @@ Directory:
     project.name: cis-urs
     project.stack: urs
     io.rancher.scheduler.affinity:host_label_soft: stacktype=urs
-
 Entrust-CA1-Manager:
   image: rancher/external-service
   labels:
@@ -21,7 +19,6 @@ Entrust-CA1-Manager:
     project.name: cis-urs
     project.stack: urs
     io.rancher.scheduler.affinity:host_label_soft: stacktype=urs
-
 Entrust-CA2-Manager:
   image: rancher/external-service
   labels:
@@ -29,7 +26,6 @@ Entrust-CA2-Manager:
     project.name: cis-urs
     project.stack: urs
     io.rancher.scheduler.affinity:host_label_soft: stacktype=urs
-
 Entrust-CA3-Manager:
   image: rancher/external-service
   labels:
@@ -37,7 +33,6 @@ Entrust-CA3-Manager:
     project.name: cis-urs
     project.stack: urs
     io.rancher.scheduler.affinity:host_label_soft: stacktype=urs
-
 Outbound-Messaging-Service:
   image: rancher/external-service
   labels:
@@ -45,7 +40,6 @@ Outbound-Messaging-Service:
     project.name: cis-urs
     project.stack: urs
     io.rancher.scheduler.affinity:host_label_soft: stacktype=urs
-
 WebSessionStore:
   image: rancher/external-service
   labels:
@@ -53,7 +47,6 @@ WebSessionStore:
     project.name: cis-urs
     project.stack: urs
     io.rancher.scheduler.affinity:host_label_soft: stacktype=urs
-
 RedisSessionStore:
   image: rancher/external-service
   labels:
@@ -61,7 +54,6 @@ RedisSessionStore:
     project.name: cis-urs
     project.stack: urs
     io.rancher.scheduler.affinity:host_label_soft: stacktype=urs
-
 Audit:
   labels:
     io.rancher.container.hostname_override: container_name
@@ -71,7 +63,6 @@ Audit:
     project.name: cis-urs
     project.stack: urs
     io.rancher.scheduler.affinity:host_label_soft: stacktype=urs
-
   volumes:
   - /var/log/iam:/var/log/iam
   - /home/rancher/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
@@ -93,7 +84,6 @@ GuvnorService:
     project.name: cis-urs
     project.stack: urs
     io.rancher.scheduler.affinity:host_label_soft: stacktype=urs
-
   volumes:
   - /var/log/iam:/var/log/iam
   - /home/rancher/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
@@ -113,7 +103,6 @@ CMS-BusinessService:
     project.name: cis-urs
     project.stack: urs
     io.rancher.scheduler.affinity:host_label_soft: stacktype=urs
-
   volumes:
   - /var/log/iam:/var/log/iam
   - /home/rancher/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
@@ -152,7 +141,6 @@ EPR-BusinessService:
     project.name: cis-urs
     project.stack: urs
     io.rancher.scheduler.affinity:host_label_soft: stacktype=urs
-
   volumes:
   - /var/log/iam:/var/log/iam
   - /home/rancher/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
@@ -177,7 +165,6 @@ UID-Service:
     project.name: cis-urs
     project.stack: urs
     io.rancher.scheduler.affinity:host_label_soft: stacktype=urs
-
   environment:
     JAVA_OPTS: -server -Xms128m -Xms256m -XX:NewSize=128m -XX:MaxNewSize=256m -XX:PermSize=64m -XX:MaxPermSize=128m -XX:+UseConcMarkSweepGC  -XX:+UseParNewGC   -XX:ParallelGCThreads=2 -Djava.security.egd=file:/dev/./urandom
   volumes:
@@ -199,7 +186,6 @@ URS-BusinessService:
     project.name: cis-urs
     project.stack: urs
     io.rancher.scheduler.affinity:host_label_soft: stacktype=urs
-
   volumes:
   - /var/log/iam:/var/log/iam
   - /home/rancher/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
@@ -224,7 +210,6 @@ Integration:
     project.name: cis-urs
     project.stack: urs
     io.rancher.scheduler.affinity:host_label_soft: stacktype=urs
-
   volumes:
   - /var/log/iam:/var/log/iam
   - /home/rancher/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
@@ -246,7 +231,6 @@ OMS-BusinessService:
     project.name: cis-urs
     project.stack: urs
     io.rancher.scheduler.affinity:host_label_soft: stacktype=urs
-
   volumes:
   - /var/log/iam:/var/log/iam
   - /home/rancher/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
@@ -269,7 +253,6 @@ OSCAR-BusinessService:
     project.name: cis-urs
     project.stack: urs
     io.rancher.scheduler.affinity:host_label_soft: stacktype=urs
-
   volumes:
   - /var/log/iam:/var/log/iam
   - /home/rancher/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
@@ -291,7 +274,6 @@ RulesService:
     project.name: cis-urs
     project.stack: urs
     io.rancher.scheduler.affinity:host_label_soft: stacktype=urs
-
   volumes:
   - /var/log/iam:/var/log/iam
   - /home/rancher/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
@@ -313,7 +295,6 @@ SecureAudit:
     project.name: cis-urs
     project.stack: urs
     io.rancher.scheduler.affinity:host_label_soft: stacktype=urs
-
   volumes:
   - /var/log/iam:/var/log/iam
   - /home/rancher/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
@@ -336,7 +317,6 @@ Scheduler:
     project.name: cis-urs
     project.stack: urs
     io.rancher.scheduler.affinity:host_label_soft: stacktype=urs
-
   volumes:
   - /var/log/iam:/var/log/iam
   - /home/rancher/env_config/${env_shortcode}/quartz.properties:/home/iam_user/careidconfig/quartz.properties
@@ -359,7 +339,6 @@ ID-StoreSyncService:
     project.name: cis-urs
     project.stack: urs
     io.rancher.scheduler.affinity:host_label_soft: stacktype=urs
-
   volumes:
   - /var/log/iam:/var/log/iam
   - /home/rancher/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
@@ -383,7 +362,6 @@ CC-CheckerService:
     project.name: cis-urs
     project.stack: urs
     io.rancher.scheduler.affinity:host_label_soft: stacktype=urs
-
   volumes:
   - /var/log/iam:/var/log/iam
   - /home/rancher/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
@@ -406,7 +384,6 @@ ReportingService:
     project.name: cis-urs
     project.stack: urs
     io.rancher.scheduler.affinity:host_label_soft: stacktype=urs
-
   volumes:
   - /var/log/iam:/var/log/iam
   - /home/rancher/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
@@ -432,7 +409,6 @@ SCEP:
     project.name: cis-urs
     project.stack: urs
     io.rancher.scheduler.affinity:host_label_soft: stacktype=urs
-
   environment:
     CMS_SERVICE_URL: http://LB-BusinessServices:8080/cmsbusservice/rest/cms/
     PKI_URL: https://wfe.${env_shortcode}.iam.spine2.ncrs.nhs.uk/scep/pkiclient.exe
@@ -454,7 +430,6 @@ EPR-WebFrontEnd:
     project.name: cis-urs
     project.stack: urs
     io.rancher.scheduler.affinity:host_label_soft: stacktype=urs
-
   volumes:
   - /var/log/iam:/var/log/iam
   - /home/rancher/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
@@ -478,7 +453,7 @@ URS-WebFrontEnd:
     project.name: cis-urs
     project.stack: urs
     io.rancher.scheduler.affinity:host_label_soft: stacktype=urs
- volumes:
+  volumes:
   - /var/log/iam:/var/log/iam
   - /home/rancher/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
   image: ${registry_url}/cis-urs-webfrontend:${app_version}
@@ -506,7 +481,6 @@ Portal:
     project.name: cis-urs
     project.stack: urs
     io.rancher.scheduler.affinity:host_label_soft: stacktype=urs
-
   volumes:
   - /var/log/iam:/var/log/iam
   - /home/rancher/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
@@ -561,7 +535,7 @@ haproxy-fe:
     - be1-5fqdn=
     - be2fqdn=$VIP_TWO_BE
     - be3fqdn=$VIP_THREE_BE
-    - be4fqdn=$VIP_FOUR_BE	
+    - be4fqdn=$VIP_FOUR_BE
     - GLUSTER_URL=${gluster_url}
     - envcode=${env_shortcode}
   image: ${registry_url}/cis-fe-haproxy
@@ -612,7 +586,6 @@ SelfService-WebFrontEnd:
     project.stack: urs
     io.rancher.container.dns: 'true'
     io.rancher.scheduler.affinity:host_label_soft: stacktype=urs
-
   links:
     - WebSessionStore:RedisSessionStore
   tty: true
@@ -623,7 +596,6 @@ SelfService-WebFrontEnd:
   - /var/log/iam:/var/log/iam
   - /home/rancher/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
   stdin_open: true
-  
 EmailService:
   image: ${registry_url}/cis-emailservice:${app_version}
   tty: true
@@ -636,7 +608,6 @@ EmailService:
     project.name: cis-urs
     project.stack: urs
     io.rancher.scheduler.affinity:host_label_soft: stacktype=urs
-
   volumes:
   - /var/log/iam:/var/log/iam
   - /home/rancher/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
@@ -675,7 +646,6 @@ LB-BusinessServices:
     project.name: cis-urs
     project.stack: urs
     io.rancher.scheduler.affinity:host_label_soft: stacktype=urs
-
   tty: true
   image: rancher/load-balancer-service
   links:
@@ -709,7 +679,6 @@ LB-Secure:
     project.name: cis-urs
     project.stack: urs
     io.rancher.scheduler.affinity:host_label_soft: stacktype=urs
-
   image: rancher/load-balancer-service
   tty: true
   stdin_open: true
