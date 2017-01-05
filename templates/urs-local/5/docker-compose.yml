@@ -73,7 +73,6 @@ Audit:
   stdin_open: true
   links:
   - IAM-Database:IAM-Database
-  - LB-BusinessServices:LB-BusinessServices
 
 GuvnorService:
   labels:
@@ -92,7 +91,6 @@ GuvnorService:
   stdin_open: true
   links:
   - IAM-Database:IAM-Database
-  - LB-BusinessServices:LB-BusinessServices
 
 CMS-BusinessService:
   labels:
@@ -126,7 +124,6 @@ CMS-BusinessService:
   stdin_open: true
   links:
   - IAM-Database:IAM-Database
-  - LB-BusinessServices:LB-BusinessServices
   - Directory:Directory
   - Entrust-CA1-Manager:Entrust-CA1-Manager
   - Entrust-CA2-Manager:Entrust-CA2-Manager
@@ -151,7 +148,6 @@ EPR-BusinessService:
   stdin_open: true
   links:
   - IAM-Database:IAM-Database
-  - LB-BusinessServices:LB-BusinessServices
 
 UID-Service:
   image: ${registry_url}/cis-urs-uid:${app_version}
@@ -172,7 +168,6 @@ UID-Service:
   - /home/rancher/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
   links:
   - IAM-Database:IAM-Database
-  - LB-BusinessServices:LB-BusinessServices
 
 URS-BusinessService:
   image: ${registry_url}/cis-urs-business:${app_version}
@@ -198,7 +193,6 @@ URS-BusinessService:
     GLUSTER_REPORTS: 'true'
   links:
   - IAM-Database:IAM-Database
-  - LB-BusinessServices:LB-BusinessServices
   - LB-Secure:LB-Secure
 
 Integration:
@@ -220,7 +214,6 @@ Integration:
   stdin_open: true
   links:
   - IAM-Database:IAM-Database
-  - LB-BusinessServices:LB-BusinessServices
 
 OMS-BusinessService:
   labels:
@@ -241,7 +234,6 @@ OMS-BusinessService:
   stdin_open: true
   links:
   - IAM-Database:IAM-Database
-  - LB-BusinessServices:LB-BusinessServices
   - LB-Secure:LB-Secure
 
 OSCAR-BusinessService:
@@ -263,7 +255,6 @@ OSCAR-BusinessService:
   stdin_open: true
   links:
   - IAM-Database:IAM-Database
-  - LB-BusinessServices:LB-BusinessServices
 
 RulesService:
   labels:
@@ -284,7 +275,6 @@ RulesService:
   stdin_open: true
   links:
   - IAM-Database:IAM-Database
-  - LB-BusinessServices:LB-BusinessServices
 
 SecureAudit:
   labels:
@@ -306,7 +296,6 @@ SecureAudit:
   stdin_open: true
   links:
   - IAM-Database:IAM-Database
-  - LB-BusinessServices:LB-BusinessServices
 
 Scheduler:
   labels:
@@ -328,7 +317,6 @@ Scheduler:
   stdin_open: true
   links:
   - IAM-Database:IAM-Database
-  - LB-BusinessServices:LB-BusinessServices
 
 ID-StoreSyncService:
   labels:
@@ -350,7 +338,6 @@ ID-StoreSyncService:
     OPENIDM_PORT: '389'
   links:
   - IAM-Database:IAM-Database
-  - LB-BusinessServices:LB-BusinessServices
   - Directory:Directory
 
 CC-CheckerService:
@@ -372,7 +359,6 @@ CC-CheckerService:
   stdin_open: true
   links:
   - IAM-Database:IAM-Database
-  - LB-BusinessServices:LB-BusinessServices
   - Directory:Directory
 
 ReportingService:
@@ -398,7 +384,6 @@ ReportingService:
     JAVA_OPTS: -server -Xms256m -Xmx512m -XX:NewSize=128m -XX:MaxNewSize=256m -XX:PermSize=64m -XX:MaxPermSize=128m -XX:+UseConcMarkSweepGC  -XX:+UseParNewGC   -XX:ParallelGCThreads=2 -Djava.security.egd=file:/dev/./urandom
   links:
   - IAM-Database:IAM-Database
-  - LB-BusinessServices:LB-BusinessServices
 
 SCEP:
   labels:
@@ -418,7 +403,6 @@ SCEP:
   stdin_open: true
   links:
   - IAM-Database:IAM-Database
-  - LB-BusinessServices:LB-BusinessServices
 
 
 EPR-WebFrontEnd:
@@ -440,7 +424,6 @@ EPR-WebFrontEnd:
   stdin_open: true
   links:
   - IAM-Database:IAM-Database
-  - LB-BusinessServices:LB-BusinessServices
   - WebSessionStore:RedisSessionStore
 
 URS-WebFrontEnd:
@@ -468,7 +451,6 @@ URS-WebFrontEnd:
     JAVA_OPTS: -server -XX:+UseConcMarkSweepGC -XX:+UseParNewGC -XX:ParallelGCThreads=2 -Xms512m -Xmx1500m
   links:
   - IAM-Database:IAM-Database
-  - LB-BusinessServices:LB-BusinessServices
   - WebSessionStore:RedisSessionStore
 
 Portal:
@@ -613,7 +595,6 @@ EmailService:
   - /home/rancher/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
   privileged: true
   links:
-  - LB-BusinessServices:LB-BusinessServices
 
 LB-BusinessServices:
   expose:
