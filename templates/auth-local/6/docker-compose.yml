@@ -33,7 +33,7 @@ LB-AuthBusinessService:
     project.stack: auth
     io.rancher.scheduler.affinity:host_label_soft: stacktype=auth
   tty: true
-  image: rancher/lb-service-haproxy:v0.4.9
+  image: rancher/load-balancer-service
   links:
   - AuthenticatorService:AuthenticatorService
   - AuditService:AuditService
