@@ -1,11 +1,11 @@
-  Directory:
-    image: rancher/lb-service-haproxy:v0.4.9
-    expose:
-    - 389:389/tcp
-    labels:
-      io.rancher.container.agent.role: environmentAdmin
-      io.rancher.container.create_agent: 'true'
-      io.rancher.scheduler.affinity:host_label_soft: stacktype=auth
+Directory:
+  image: rancher/lb-service-haproxy:v0.4.9
+  expose:
+  - 389:389/tcp
+  labels:
+    io.rancher.container.agent.role: environmentAdmin
+    io.rancher.container.create_agent: 'true'
+    io.rancher.scheduler.affinity:host_label_soft: stacktype=auth
 
 RedisSessionStore:
   image: rancher/external-service
