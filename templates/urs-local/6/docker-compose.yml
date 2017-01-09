@@ -631,7 +631,7 @@ LB-BusinessServices:
     project.stack: urs
     io.rancher.scheduler.affinity:host_label_soft: stacktype=urs
   tty: true
-  image: rancher/lb-service-haproxy:v0.4.9
+  image: rancher/load-balancer-service
   links:
   - UID-Service:UID-Service
   - OSCAR-BusinessService:OSCAR-BusinessService
@@ -663,7 +663,7 @@ LB-Secure:
     project.name: cis-urs
     project.stack: urs
     io.rancher.scheduler.affinity:host_label_soft: stacktype=urs
-  image: rancher/lb-service-haproxy:v0.4.9
+  image: rancher/load-balancer-service
   tty: true
   stdin_open: true
   links:
