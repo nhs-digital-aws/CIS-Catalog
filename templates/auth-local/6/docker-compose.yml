@@ -1,0 +1,214 @@
+  Directory:
+    image: rancher/lb-service-haproxy:v0.4.9
+    expose:
+    - 389:389/tcp
+    labels:
+      io.rancher.container.agent.role: environmentAdmin
+      io.rancher.container.create_agent: 'true'
+      io.rancher.scheduler.affinity:host_label_soft: stacktype=auth
+
+RedisSessionStore:
+  image: rancher/external-service
+  labels:
+    project.service.name: redis-session-store
+    project.name: cis-auth
+    project.stack: auth
+    io.rancher.scheduler.affinity:host_label_soft: stacktype=auth
+
+LB-AuthBusinessService:
+  expose:
+  - 8080:8080
+  ports:
+  - 8180:8080
+  labels:
+    io.rancher.loadbalancer.target.AuthenticatorService: /authenticator=8080
+    io.rancher.loadbalancer.target.TokenValidationService: /amserver=8080
+    io.rancher.loadbalancer.target.SAMLService: /saml=8080
+    io.rancher.loadbalancer.target.AuditService: /authauditlogger=8080
+    io.rancher.loadbalancer.target.SessionManager: /sessionmanager=8080
+    environment_name: ${env_shortcode}
+    service_name: LB-AuthBusinessService
+    project.service.name: lb-auth-business-service
+    project.name: cis-auth
+    project.stack: auth
+    io.rancher.scheduler.affinity:host_label_soft: stacktype=auth
+  tty: true
+  image: rancher/lb-service-haproxy:v0.4.9
+  links:
+  - AuthenticatorService:AuthenticatorService
+  - AuditService:AuditService
+  - SessionManager:SessionManager
+  - SAMLService:SAMLService
+  - TokenValidationService:TokenValidationService
+  stdin_open: true
+
+AuditService:
+  labels:
+    io.rancher.container.hostname_override: container_name
+    environment_name: ${env_shortcode}
+    service_name: AuthAudit
+    project.service.name: audit-service
+    project.name: cis-auth
+    project.stack: auth
+    io.rancher.scheduler.affinity:host_label_soft: stacktype=auth
+  volumes:
+  - /var/log/iam:/var/log/iam
+  - /home/rancher/env_config/${env_shortcode}/authServices.properties:/home/iam_user/careidconfig/authServices.properties
+  image: ${registry_url}/auth-audit:${app_version}
+  environment:
+    JAVA_OPTS: -server -Xms256m -Xmx512m  -XX:NewSize=128m   -XX:MaxNewSize=256m   -XX:PermSize=64m  -XX:MaxPermSize=128m  -XX:+UseConcMarkSweepGC  -XX:+UseParNewGC   -XX:ParallelGCThreads=2 -Djava.security.egd=file:/dev/./urandom
+  tty: true
+  stdin_open: true
+
+AuthenticatorService:
+  labels:
+    io.rancher.container.hostname_override: container_name
+    environment_name: ${env_shortcode}
+    service_name: Authenticator
+    project.service.name: authenticatorservice
+    project.name: cis-auth
+    project.stack: auth
+    io.rancher.scheduler.affinity:host_label_soft: stacktype=auth
+  privileged: true
+  environment:
+    JAVA_OPTS: -server -Xms256m -Xmx512m  -XX:NewSize=128m   -XX:MaxNewSize=256m   -XX:PermSize=64m  -XX:MaxPermSize=128m  -XX:+UseConcMarkSweepGC  -XX:+UseParNewGC   -XX:ParallelGCThreads=2 -Djava.security.egd=file:/dev/./urandom
+  volumes:
+  - /home/rancher/env_config/${env_shortcode}/LegacyAuth_Files:/home/iam_user/LegacyAuth_Files 
+  - /var/log/iam:/var/log/iam
+  - /home/rancher/env_config/${env_shortcode}/authServices.properties:/home/iam_user/careidconfig/authServices.properties
+  image: ${registry_url}/auth-authenticator:${app_version}
+  tty: true
+  stdin_open: true
+  links:
+  - Directory:Directory
+
+SessionManager:
+  labels:
+    io.rancher.container.hostname_override: container_name
+    environment_name: ${env_shortcode}
+    service_name: SessionManager
+    project.service.name: session-manager
+    project.name: cis-auth
+    project.stack: auth
+    io.rancher.scheduler.affinity:host_label_soft: stacktype=auth
+  volumes:
+  - /var/log/iam:/var/log/iam
+  - /home/rancher/env_config/${env_shortcode}/authServices.properties:/home/iam_user/careidconfig/authServices.properties
+  privileged: true
+  environment:
+    GLUSTER_URL: ${gluster_url}
+    GLUSTER_FOLDER: ${env_shortcode}
+  image: ${registry_url}/auth-sessionmanager:${app_version}
+  environment:
+    JAVA_OPTS: -server -Xms256m -Xmx512m  -XX:NewSize=128m   -XX:MaxNewSize=256m   -XX:PermSize=64m  -XX:MaxPermSize=128m  -XX:+UseConcMarkSweepGC  -XX:+UseParNewGC   -XX:ParallelGCThreads=2 -Djava.security.egd=file:/dev/./urandom
+  tty: true
+  stdin_open: true
+  links:
+  - RedisSessionStore:RedisSessionStore
+SAMLService:
+  labels:
+    io.rancher.container.hostname_override: container_name
+    environment_name: ${env_shortcode}
+    service_name: SAMLService
+    project.service.name: saml-service
+    project.name: cis-auth
+    project.stack: auth
+    io.rancher.scheduler.affinity:host_label_soft: stacktype=auth
+  volumes:
+  - /var/log/iam:/var/log/iam
+  - /home/rancher/env_config/${env_shortcode}/authServices.properties:/home/iam_user/careidconfig/authServices.properties
+  image: ${registry_url}/auth-saml:${app_version}
+  environment:
+    JAVA_OPTS: -server -Xms256m -Xmx256m  -XX:NewSize=128m   -XX:MaxNewSize=256m   -XX:PermSize=64m  -XX:MaxPermSize=128m  -XX:+UseConcMarkSweepGC  -XX:+UseParNewGC   -XX:ParallelGCThreads=2 -Djava.security.egd=file:/dev/./urandom
+  tty: true
+  stdin_open: true
+  links:
+
+  - Directory:Directory
+
+TokenValidationService:
+  image: ${registry_url}/auth-tokenvalidation:${app_version}
+  tty: true
+  stdin_open: true
+  labels:
+    io.rancher.container.hostname_override: container_name
+    environment_name: ${env_shortcode}
+    service_name: TokenValidationService
+    project.service.name: tokenvalidationservice
+    project.name: cis-auth
+    project.stack: auth
+    io.rancher.scheduler.affinity:host_label_soft: stacktype=auth
+  environment:
+    JAVA_OPTS: -server -Xms256m -Xmx512m  -XX:NewSize=128m   -XX:MaxNewSize=256m   -XX:PermSize=64m  -XX:MaxPermSize=128m  -XX:+UseConcMarkSweepGC  -XX:+UseParNewGC   -XX:ParallelGCThreads=2 -Djava.security.egd=file:/dev/./urandom
+  volumes:
+  - /var/log/iam:/var/log/iam
+  - /home/rancher/env_config/${env_shortcode}/authServices.properties:/home/iam_user/careidconfig/authServices.properties
+  links:
+  - Directory:Directory
+
+haproxy-fe:
+  net: "host"
+  labels:
+    io.rancher.scheduler.global: 'true'
+    io.rancher.container.hostname_override: container_name
+    io.rancher.container.dns: true
+    io.rancher.sidekicks: keepalived-fe
+    environment_name: ${env_shortcode}
+    service_name: haproxy-fe
+    project.service.name: haproxy-fe
+    project.name: cis-auth
+    project.stack: auth
+    io.rancher.scheduler.affinity:host_label: stacktype=auth
+  links:
+  - AuthenticatorService:${env_shortcode}-AUTH-GAS
+  - TokenValidationService:${env_shortcode}-AUTH-TVS
+  - SAMLService:${env_shortcode}-AUTH-SBAPI
+  environment:
+    - fe1ip=0.0.0.0
+    - fe2ip=$AUTH_VIP_TWO
+    - fe3ip=$AUTH_VIP_THREE
+    - fe4ip=$AUTH_VIP_FOUR
+    - fe1pemfile=gas.lh.iam.spine2.ncrs.nhs.uk
+    - fe2pemfile=$AUTH_VIP_TWO_PEM
+    - fe3pemfile=$AUTH_VIP_THREE_PEM
+    - fe4pemfile=$AUTH_VIP_FOUR_PEM
+    - be1-1fqdn=AuthenticatorService.auth-local.rancher.internal
+    - be1-2fqdn=TokenValidationService.auth-local.rancher.internal
+    - be1-3fqdn=SAMLService.auth-local.rancher.internal
+    - be1-4fqdn=$AUTH_VIP_ONE_FOUR_BE
+    - be2fqdn=$AUTH_VIP_TWO_BE
+    - be3fqdn=$AUTH_VIP_THREE_BE
+    - be4fqdn=$AUTH_VIP_FOUR_BE
+    - GLUSTER_URL=${gluster_url}
+    - envcode=${env_shortcode}
+  image: ${registry_url}/auth-fe-haproxy
+  tty: true
+  stdin_open: true
+  privileged: true
+  
+keepalived-fe: 
+  net: "host"
+  labels:
+    io.rancher.scheduler.global: 'true'
+    io.rancher.container.hostname_override: container_name
+    io.rancher.container.dns: true
+    environment_name: ${env_shortcode}
+    service_name: keepalived-fe
+    project.service.name: keepalived-fe
+    project.name: cis-auth
+    project.stack: auth
+    io.rancher.scheduler.affinity:host_label: stacktype=auth
+  environment:
+    - fe1ip=$AUTH_VIP_ONE
+    - fe2ip=$AUTH_VIP_TWO
+    - fe3ip=$AUTH_VIP_THREE
+    - fe4ip=$AUTH_VIP_FOUR
+    - interface=$AUTH_VIP_INTERFACE
+    - vrid=$AUTH_VIP_VRID
+    - envcode=${env_shortcode}
+  image: ${registry_url}/auth-fe-keepalived
+  tty: true
+  stdin_open: true
+  cap_add:
+    - NET_ADMIN
+    - NET_BROADCAST
