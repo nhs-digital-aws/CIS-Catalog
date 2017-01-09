@@ -11,9 +11,9 @@
       required: true
       default: latest
       type: "string"
-    - variable: "ext_version"
+    - variable: "pki_version"
       description: "Which version of the PKI Services do you want to deploy?"
-      label: "Version"
+      label: "PKI Image Version"
       required: true
       default: 2
       type: "string"
