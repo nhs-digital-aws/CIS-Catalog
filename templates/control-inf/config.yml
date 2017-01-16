@@ -1,0 +1,5 @@
+name: NHS Digital - Monitoring System Stack
+description: |
+  Stands up a Monitoring stack, containing Prometheus and others. This should really be hosted on different hosts to production services.
+version: 0.1
+category: NHS-Digital

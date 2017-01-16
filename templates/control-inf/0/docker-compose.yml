@@ -1,0 +1,138 @@
+environment-monitor:
+  labels:
+    io.rancher.container.create_agent: 'true'
+    io.rancher.container.agent.role: environment
+  tty: true
+  image: rucknar/prometheus-rancher-exporter:01
+  stdin_open: true
+
+prometheus:
+  ports:
+  - 9090:9090/tcp
+  command:
+  - -config.file=/prometheus.conf
+  - -alertmanager.url=http://alertmanager:9093
+  tty: true
+  stdin_open: true
+  image: prom/prometheus:latest
+  volumes:
+  - /home/rancher/env_config/infrastructure/prometheus/prometheus.conf:/prometheus.conf
+  - /home/rancher/env_config/infrastructure/prometheus/alertrules.conf:/alertrules.conf
+
+influxdb:
+  image: tutum/influxdb:0.10
+  tty: true
+  stdin_open: true
+  ports:
+    - 8083:8083
+    - 8086:8086
+    - 8090:8090
+    - 2003:2003
+  environment:
+    - PRE_CREATE_DB=grafana;prometheus;rancher
+    - GRAPHITE_DB=rancher
+    - GRAPHITE_BINDING=:2003
+
+grafana:
+  ports:
+  - 3555:3000/tcp
+  tty: true
+  image: grafana/grafana:latest
+  stdin_open: true
+
+alertmanager:
+  command:
+  - -config.file=/alertmanager.conf
+  stdin_open: true
+  tty: true
+  image: prom/alertmanager:latest
+  volumes:
+  - /home/rancher/env_config/infrastructure/prometheus/alertmanager.conf:/alertmanager.conf
+  ports:
+  - 9093:9093/tcp
+
+elasticsearch:
+  labels:
+    io.rancher.scheduler.affinity:host_label: elastic=true
+  tty: true
+  image: elasticsearch:latest
+  ports:
+  - 9200:9200/tcp
+  - 9300:9300/tcp
+
+kibana:
+  ports:
+  - 5601:5601/tcp
+  environment:
+    ELASTICSEARCH_URL: http://elasticsearch:9200
+  tty: true
+  stdin_open: true
+  image: kibana
+
+elasticsearch-auto-cleanup:
+  environment:
+    ELASTICSEARCH_ENDPOINT: http://elasticsearch:9200
+  tty: true
+  image: rucknar/es-indices
+  stdin_open: true
+
+jenkins:
+  labels:
+    io.rancher.scheduler.affinity:host_label: jenkins=true
+    io.rancher.sidekicks: buildData
+    io.rancher.container.hostname_override: container_name
+    project.service.name: ddc-jenkins
+    project.name: ddc-build
+    project.stack: jenkins
+  ports:
+    - 8000:8080
+  image: ${registry_url}/ddc-bld-jenkins:latest
+  tty: true
+  stdin_open: true
+  volumes_from:
+    - buildData
+  volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
+
+buildData:
+  tty: true
+  labels:
+    io.rancher.scheduler.affinity:host_label: jenkins=true
+    #io.rancher.container.pull_image: always
+    project.service.name: ddc-jenkins-data
+    project.name: ddc-build
+    project.stack: jenkins
+  image: ${registry_url}/ddc-bld-data:latest
+  command: cat 
+  volumes:
+    - /mnt/gluster
+    - /mnt/git
+
+mgmt-sgw:
+  net: "host"
+  tty: true
+  stdin_open: true
+  privileged: true
+  labels: 
+    io.rancher.container.dns: true
+    io.rancher.scheduler.affinity:host_label: mgmt-sgw=true
+  image: ${registry_url}/mgmt-sgw-rancher:2
+  volumes:
+    - /home/rancher/certs:/etc/ssl/private
+  environment:
+    - vip=$MSGW_IP
+    - vportgw=$MSGW_PORT_GW
+    - vportreg=$MSGW_PORT_REG
+    - mss=$MSGW_MSS
+    - certpath=/etc/ssl/private
+    - certfile=$MSGW_CRT_FILE
+    - cafile=$MSGW_CA_FILE
+    - crlfile=$MSGW_CRL_FILE
+    - ranchertcp=$MSGW_RANCHER_TCP
+    - prometheustcp=$MSGW_PROM_TCP
+    - alertmgrtcp=$MSGW_ALERT_TCP
+    - grafanatcp=$MSGW_GRAFANA_TCP
+    - kibanatcp=$MSGW_KIBANA_TCP
+    - jenkinstcp=$MSGW_JENKINS_TCP
+    - registrytcp=$MSGW_REGISTRY_TCP
+    - envcode=$ENV_SHORTCODE
