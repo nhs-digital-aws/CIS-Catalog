@@ -15,7 +15,7 @@
       description: "Which version of the PKI Services do you want to deploy?"
       label: "PKI Image Version"
       required: true
-      default: 2
+      default: 3
       type: "string"
     - variable: "registry_url"
       description: "Please enter the url of your registry"
