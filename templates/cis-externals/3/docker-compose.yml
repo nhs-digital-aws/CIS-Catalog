@@ -1,9 +1,5 @@
 IAM-Database:
   restart: always
-  expose:
-  - 5432:5432
-  ports:
-  - 5432:5432/tcp
   labels:
     environment_name: lh
     service_name: Database
@@ -17,8 +13,6 @@ IAM-Database:
 
 Dir:
   restart: always
-  ports:
-  - 389:10389/tcp
   labels:
     environment_name: lh
     service_name: Dir
@@ -32,10 +26,6 @@ Dir:
 
 Redis:
   restart: always
-  expose:
-  - 6379:6379
-  ports:
-  - 6379:6379/tcp
   labels:
     environment_name: lh
     service_name: redis
@@ -49,9 +39,6 @@ Redis:
 
 Nfs:
   restart: always
-  expose:
-  - 111
-  - 2049
   labels:
     environment_name: lh
     service_name: nfs
@@ -87,11 +74,6 @@ RootCA:
 
 SubCA:
   restart: always
-  ports:
-  - 1443:1443/tcp
-  - 1709:1709/tcp
-  - 1710:1710/tcp
-  - 1829:1829/tcp
   labels:
     environment_name: lh
     service_name: subca
@@ -110,11 +92,6 @@ SubCA:
 
 SubCC:
   restart: always
-  ports:
-  - 2443:2443/tcp
-  - 2709:2709/tcp
-  - 2710:2710/tcp
-  - 2829:2829/tcp
   labels:
     environment_name: lh
     service_name: subcc
