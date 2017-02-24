@@ -70,7 +70,7 @@ Audit:
   volumes:
   - /var/log/iam:/var/log/iam
   - /home/rancher/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
-  image: ${registry_url}/cis-audit:${auth_version}
+  image: ${registry_url}/cis-audit:${urs_version}
   environment:
     JAVA_OPTS: -server -Xms60m -Xms150m -XX:NewSize=128m -XX:MaxNewSize=256m -XX:PermSize=64m -XX:MaxPermSize=128m -XX:+UseConcMarkSweepGC  -XX:+UseParNewGC   -XX:ParallelGCThreads=2 -Djava.security.egd=file:/dev/./urandom
   tty: true
@@ -90,7 +90,7 @@ GuvnorService:
   volumes:
   - /var/log/iam:/var/log/iam
   - /home/rancher/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
-  image: ${registry_url}/cis-guvnor:${auth_version}
+  image: ${registry_url}/cis-guvnor:${urs_version}
   tty: true
   stdin_open: true
   links:
@@ -123,7 +123,7 @@ CMS-BusinessService:
     ENTRUST_CCCA_XAP_PORT: 2443
     ENTRUST_CCCA_SEARCH_BASE: DOCKER_SUBCC,ou=CA,o=nhs
     JAVA_OPTS: -server -Xms128m -Xms256m -XX:NewSize=128m -XX:MaxNewSize=256m -XX:PermSize=64m -XX:MaxPermSize=128m -XX:+UseConcMarkSweepGC  -XX:+UseParNewGC   -XX:ParallelGCThreads=2 -Djava.security.egd=file:/dev/./urandom
-  image: ${registry_url}/cis-cms-business:${auth_version}
+  image: ${registry_url}/cis-cms-business:${urs_version}
   tty: true
   stdin_open: true
   links:
@@ -145,7 +145,7 @@ EPR-BusinessService:
   volumes:
   - /var/log/iam:/var/log/iam
   - /home/rancher/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
-  image: ${registry_url}/cis-epr-business:${auth_version}
+  image: ${registry_url}/cis-epr-business:${urs_version}
   environment:
     JAVA_OPTS: -server -Xms128m -Xms256m -XX:NewSize=128m -XX:MaxNewSize=256m -XX:PermSize=64m -XX:MaxPermSize=128m -XX:+UseConcMarkSweepGC  -XX:+UseParNewGC   -XX:ParallelGCThreads=2 -Djava.security.egd=file:/dev/./urandom
   tty: true
@@ -154,7 +154,7 @@ EPR-BusinessService:
   - IAM-Database:IAM-Database
 
 UID-Service:
-  image: ${registry_url}/cis-urs-uid:${auth_version}
+  image: ${registry_url}/cis-urs-uid:${urs_version}
   tty: true
   stdin_open: true
   labels:
@@ -174,7 +174,7 @@ UID-Service:
   - IAM-Database:IAM-Database
 
 URS-BusinessService:
-  image: ${registry_url}/cis-urs-business:${auth_version}
+  image: ${registry_url}/cis-urs-business:${urs_version}
   tty: true
   stdin_open: true
   labels:
@@ -211,7 +211,7 @@ Integration:
   volumes:
   - /var/log/iam:/var/log/iam
   - /home/rancher/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
-  image: ${registry_url}/cis-integration:${auth_version}
+  image: ${registry_url}/cis-integration:${urs_version}
   environment:
     JAVA_OPTS: -server -Xms128m -Xms256m -XX:NewSize=128m -XX:MaxNewSize=256m -XX:PermSize=64m -XX:MaxPermSize=128m -XX:+UseConcMarkSweepGC  -XX:+UseParNewGC   -XX:ParallelGCThreads=2 -Djava.security.egd=file:/dev/./urandom
   tty: true
@@ -231,7 +231,7 @@ OMS-BusinessService:
   volumes:
   - /var/log/iam:/var/log/iam
   - /home/rancher/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
-  image: ${registry_url}/cis-oms-business:${auth_version}
+  image: ${registry_url}/cis-oms-business:${urs_version}
   environment:
     JAVA_OPTS: -server -Xms128m -Xms256m -XX:NewSize=128m -XX:MaxNewSize=256m -XX:PermSize=64m -XX:MaxPermSize=128m -XX:+UseConcMarkSweepGC  -XX:+UseParNewGC   -XX:ParallelGCThreads=2 -Djava.security.egd=file:/dev/./urandom
   tty: true
@@ -252,7 +252,7 @@ OSCAR-BusinessService:
   volumes:
   - /var/log/iam:/var/log/iam
   - /home/rancher/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
-  image: ${registry_url}/cis-oscar-business:${auth_version}
+  image: ${registry_url}/cis-oscar-business:${urs_version}
   environment:
     JAVA_OPTS: -server -Xms128m -Xms256m -XX:NewSize=128m -XX:MaxNewSize=256m -XX:PermSize=64m -XX:MaxPermSize=128m -XX:+UseConcMarkSweepGC  -XX:+UseParNewGC   -XX:ParallelGCThreads=2 -Djava.security.egd=file:/dev/./urandom
   tty: true
@@ -272,7 +272,7 @@ RulesService:
   volumes:
   - /var/log/iam:/var/log/iam
   - /home/rancher/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
-  image: ${registry_url}/cis-rules:${auth_version}
+  image: ${registry_url}/cis-rules:${urs_version}
   environment:
     JAVA_OPTS: -server -Xms128m -Xms256m -XX:NewSize=128m -XX:MaxNewSize=256m -XX:PermSize=64m -XX:MaxPermSize=128m -XX:+UseConcMarkSweepGC  -XX:+UseParNewGC   -XX:ParallelGCThreads=2 -Djava.security.egd=file:/dev/./urandom
   tty: true
@@ -293,7 +293,7 @@ SecureAudit:
   - /var/log/iam:/var/log/iam
   - /home/rancher/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
   - /home/rancher/env_config/${env_shortcode}/secaudit/server:/home/iam_user/secaudcertificates/server
-  image: ${registry_url}/cis-secureaudit:${auth_version}
+  image: ${registry_url}/cis-secureaudit:${urs_version}
   environment:
     JAVA_OPTS: -server -Xms128m -Xms256m -XX:NewSize=128m -XX:MaxNewSize=256m -XX:PermSize=64m -XX:MaxPermSize=128m -XX:+UseConcMarkSweepGC  -XX:+UseParNewGC   -XX:ParallelGCThreads=2 -Djava.security.egd=file:/dev/./urandom
   tty: true
@@ -314,7 +314,7 @@ Scheduler:
   - /var/log/iam:/var/log/iam
   - /home/rancher/env_config/${env_shortcode}/quartz.properties:/home/iam_user/careidconfig/quartz.properties
   - /home/rancher/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
-  image: ${registry_url}/cis-scheduler:${auth_version}
+  image: ${registry_url}/cis-scheduler:${urs_version}
   environment:
     JAVA_OPTS: -server -Xms128m -Xms256m -XX:NewSize=128m -XX:MaxNewSize=256m -XX:PermSize=64m -XX:MaxPermSize=128m -XX:+UseConcMarkSweepGC  -XX:+UseParNewGC   -XX:ParallelGCThreads=2 -Djava.security.egd=file:/dev/./urandom
   tty: true
@@ -334,7 +334,7 @@ ID-StoreSyncService:
   volumes:
   - /var/log/iam:/var/log/iam
   - /home/rancher/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
-  image: ${registry_url}/cis-id-storesync:${auth_version}
+  image: ${registry_url}/cis-id-storesync:${urs_version}
   tty: true
   stdin_open: true
   environment:
@@ -358,7 +358,7 @@ CC-CheckerService:
   - /home/rancher/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
   environment:
     JAVA_OPTS: -server -Xms128m -Xms256m -XX:NewSize=128m -XX:MaxNewSize=256m -XX:PermSize=64m -XX:MaxPermSize=128m -XX:+UseConcMarkSweepGC  -XX:+UseParNewGC   -XX:ParallelGCThreads=2 -Djava.security.egd=file:/dev/./urandom
-  image: ${registry_url}/cis-ccc:${auth_version}
+  image: ${registry_url}/cis-ccc:${urs_version}
   tty: true
   stdin_open: true
   links:
@@ -377,7 +377,7 @@ ReportingService:
   volumes:
   - /var/log/iam:/var/log/iam
   - /home/rancher/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
-  image: ${registry_url}/cis-reporting:${auth_version}
+  image: ${registry_url}/cis-reporting:${urs_version}
   tty: true
   stdin_open: true
   privileged: true
@@ -403,7 +403,7 @@ SCEP:
     PKI_URL: https://wfe.${env_shortcode}.iam.spine2.ncrs.nhs.uk/scep/pkiclient.exe
     RETURN_URL: https://wfe.${env_shortcode}.iam.spine2.ncrs.nhs.uk/scep/
   tty: true
-  image: ${registry_url}/cis-scep:${auth_version}
+  image: ${registry_url}/cis-scep:${urs_version}
   stdin_open: true
   links:
   - IAM-Database:IAM-Database
@@ -421,7 +421,7 @@ EPR-WebFrontEnd:
   volumes:
   - /var/log/iam:/var/log/iam
   - /home/rancher/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
-  image: ${registry_url}/cis-epr-webfrontend:${auth_version}
+  image: ${registry_url}/cis-epr-webfrontend:${urs_version}
   environment:
     JAVA_OPTS: -server -Xms128m -Xms256m -XX:NewSize=128m -XX:MaxNewSize=256m -XX:PermSize=64m -XX:MaxPermSize=128m -XX:+UseConcMarkSweepGC  -XX:+UseParNewGC   -XX:ParallelGCThreads=2 -Djava.security.egd=file:/dev/./urandom
   tty: true
@@ -443,7 +443,7 @@ URS-WebFrontEnd:
   volumes:
   - /var/log/iam:/var/log/iam
   - /home/rancher/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
-  image: ${registry_url}/cis-urs-webfrontend:${auth_version}
+  image: ${registry_url}/cis-urs-webfrontend:${urs_version}
   tty: true
   stdin_open: true
   privileged: true
@@ -470,7 +470,7 @@ Portal:
   volumes:
   - /var/log/iam:/var/log/iam
   - /home/rancher/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
-  image: ${registry_url}/cis-portal:${auth_version}
+  image: ${registry_url}/cis-portal:${urs_version}
   tty: true
   stdin_open: true
   privileged: true
@@ -583,7 +583,7 @@ SelfService-WebFrontEnd:
   - /home/rancher/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
   stdin_open: true
 EmailService:
-  image: ${registry_url}/cis-emailservice:${auth_version}
+  image: ${registry_url}/cis-emailservice:${urs_version}
   tty: true
   stdin_open: true
   labels:
