@@ -54,7 +54,7 @@ AuditService:
   volumes:
   - /var/log/iam:/var/log/iam
   - /home/rancher/env_config/${env_shortcode}/authServices.properties:/home/iam_user/careidconfig/authServices.properties
-  image: ${registry_url}/auth-audit:${urs_version}
+  image: ${registry_url}/auth-audit:${auth_version}
   environment:
     JAVA_OPTS: -server -Xms256m -Xmx512m  -XX:NewSize=128m   -XX:MaxNewSize=256m   -XX:PermSize=64m  -XX:MaxPermSize=128m  -XX:+UseConcMarkSweepGC  -XX:+UseParNewGC   -XX:ParallelGCThreads=2 -Djava.security.egd=file:/dev/./urandom
   tty: true
@@ -76,7 +76,7 @@ AuthenticatorService:
   - /home/rancher/env_config/${env_shortcode}/LegacyAuth_Files:/home/iam_user/LegacyAuth_Files 
   - /var/log/iam:/var/log/iam
   - /home/rancher/env_config/${env_shortcode}/authServices.properties:/home/iam_user/careidconfig/authServices.properties
-  image: ${registry_url}/auth-authenticator:${urs_version}
+  image: ${registry_url}/auth-authenticator:${auth_version}
   tty: true
   stdin_open: true
   links:
@@ -98,7 +98,7 @@ SessionManager:
   environment:
     GLUSTER_URL: ${gluster_url}
     GLUSTER_FOLDER: ${env_shortcode}
-  image: ${registry_url}/auth-sessionmanager:${urs_version}
+  image: ${registry_url}/auth-sessionmanager:${auth_version}
   environment:
     JAVA_OPTS: -server -Xms256m -Xmx512m  -XX:NewSize=128m   -XX:MaxNewSize=256m   -XX:PermSize=64m  -XX:MaxPermSize=128m  -XX:+UseConcMarkSweepGC  -XX:+UseParNewGC   -XX:ParallelGCThreads=2 -Djava.security.egd=file:/dev/./urandom
   tty: true
@@ -117,7 +117,7 @@ SAMLService:
   volumes:
   - /var/log/iam:/var/log/iam
   - /home/rancher/env_config/${env_shortcode}/authServices.properties:/home/iam_user/careidconfig/authServices.properties
-  image: ${registry_url}/auth-saml:${urs_version}
+  image: ${registry_url}/auth-saml:${auth_version}
   environment:
     JAVA_OPTS: -server -Xms256m -Xmx256m  -XX:NewSize=128m   -XX:MaxNewSize=256m   -XX:PermSize=64m  -XX:MaxPermSize=128m  -XX:+UseConcMarkSweepGC  -XX:+UseParNewGC   -XX:ParallelGCThreads=2 -Djava.security.egd=file:/dev/./urandom
   tty: true
@@ -127,7 +127,7 @@ SAMLService:
   - Directory:Directory
 
 TokenValidationService:
-  image: ${registry_url}/auth-tokenvalidation:${urs_version}
+  image: ${registry_url}/auth-tokenvalidation:${auth_version}
   tty: true
   stdin_open: true
   labels:
