@@ -1,5 +1,5 @@
 name: NHS Digital - CIS URS Service
 description: |
   Stands up CIS URS Service, requires CIS-Externals stack for access to PKI, Directory and Database.
-version: 0.9
+version: 0.10
 category: NHS-Digital
