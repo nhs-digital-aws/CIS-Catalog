@@ -164,7 +164,7 @@ SessionManager:
     rCRL_FILENAME2: ${auth_crl_file2}
     rENV_SHORTCODE: ${env_shortcode}
     GLUSTER_URL: ${gluster_url}
-    GLUSTER_FOLDER: ${$env_shortcode}
+    GLUSTER_FOLDER: ${env_shortcode}
   image: ${registry_url}/auth-sessionmanager:${auth_version}
   environment:
     JAVA_OPTS: -server -XX:+UseConcMarkSweepGC -XX:+UseParNewGC -XX:ParallelGCThreads=2 -Xms1024m -Xmx6144m
