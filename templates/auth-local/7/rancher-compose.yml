@@ -29,6 +29,12 @@
       required: true
       type: "string"
       default: "nfs.cis-externals.rancher.internal"
+    - variable: "fqdn"
+      description: "Please enter your FQDN"
+      label: "Service FQDN"
+      required: true
+      type: "string"
+      default: "demo.aws.cishackday.com"
     - variable: "auth_service_subject"
       description: "Please enter your auth_service_subject"
       label: "auth_service_subject"
