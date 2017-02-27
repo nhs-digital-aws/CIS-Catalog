@@ -1,14 +1,14 @@
 Audit-Database:
   image: rancher/external-service
   labels:
-    io.rancher.scheduler.affinity:host_label: ranchergroup_main=true
+    io.rancher.scheduler.affinity:host_label: stackType=auth
     project.service.name: auth-database
     project.name: cis-auth
     project.stack: auth
 
 TLS-Service:
   labels:
-    io.rancher.scheduler.affinity:host_label: ranchergroup_main=true
+    io.rancher.scheduler.affinity:host_label: stackType=auth
     service_name: TlsService
     project.service.name: tls-service
     project.name: cis-auth
@@ -21,7 +21,7 @@ TLS-Service:
 #    service: cis-auth-tc-base
 #  image: ${registry_url}/library/redis:3.2.4
 #  labels:
-#    io.rancher.scheduler.affinity:host_label: ranchergroup_main=true
+#    io.rancher.scheduler.affinity:host_label: stackType=auth
 #    project.service.name: redis-session-store
 #    project.name: cis-auth
 #    project.stack: auth
@@ -38,7 +38,7 @@ LB-AuthBusinessService:
   expose:
   - 8080
   labels:
-    io.rancher.scheduler.affinity:host_label: ranchergroup_main=true
+    io.rancher.scheduler.affinity:host_label: stackType=auth
     io.rancher.loadbalancer.target.AuthenticatorService: /authenticator=8080
     io.rancher.loadbalancer.target.TokenValidationService: /amserver=8080
     io.rancher.loadbalancer.target.SAMLService: /saml=8080
@@ -69,7 +69,7 @@ AuditService:
     io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
     environment_name: ${env_shortcode}
     service_name: $${service_name}
-    io.rancher.scheduler.affinity:host_label: ranchergroup_main=true
+    io.rancher.scheduler.affinity:host_label: stackType=auth
   mem_limit: 1572864000
   volumes:
   - /var/log/iam:/var/log/iam
@@ -98,7 +98,7 @@ AuditService:
 
 AuthenticatorService:
   labels:
-    io.rancher.scheduler.affinity:host_label: ranchergroup_main=true
+    io.rancher.scheduler.affinity:host_label: stackType=auth
     io.rancher.container.pull_image: always
     io.rancher.container.hostname_override: container_name
     environment_name: ${env_shortcode}
@@ -110,7 +110,7 @@ AuthenticatorService:
     io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
     environment_name: ${env_shortcode}
     service_name: $${service_name}
-    io.rancher.scheduler.affinity:host_label: ranchergroup_main=true
+    io.rancher.scheduler.affinity:host_label: stackType=auth
   mem_limit: 1572864000
   volumes:
   - /var/log/iam:/var/log/iam
@@ -142,7 +142,7 @@ AuthenticatorService:
 
 SessionManager:
   labels:
-    io.rancher.scheduler.affinity:host_label: ranchergroup_main=true
+    io.rancher.scheduler.affinity:host_label: stackType=auth
     io.rancher.container.hostname_override: container_name
     environment_name: ${env_shortcode}
     service_name: SessionManager
@@ -153,7 +153,7 @@ SessionManager:
     io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
     environment_name: ${env_shortcode}
     service_name: $${service_name}
-    io.rancher.scheduler.affinity:host_label: ranchergroup_main=true
+    io.rancher.scheduler.affinity:host_label: stackType=auth
   mem_limit: 1572864000
   volumes:
   - /var/log/iam:/var/log/iam
@@ -188,7 +188,7 @@ SessionManager:
 
 SAMLService:
   labels:
-    io.rancher.scheduler.affinity:host_label: ranchergroup_main=true
+    io.rancher.scheduler.affinity:host_label: stackType=auth
     io.rancher.container.hostname_override: container_name
     environment_name: ${env_shortcode}
     service_name: SAMLService
@@ -199,7 +199,7 @@ SAMLService:
     io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
     environment_name: ${env_shortcode}
     service_name: $${service_name}
-    io.rancher.scheduler.affinity:host_label: ranchergroup_main=true
+    io.rancher.scheduler.affinity:host_label: stackType=auth
   mem_limit: 1572864000
   volumes:
   - /var/log/iam:/var/log/iam
@@ -233,7 +233,7 @@ TokenValidationService:
   tty: true
   stdin_open: true
   labels:
-    io.rancher.scheduler.affinity:host_label: ranchergroup_main=true
+    io.rancher.scheduler.affinity:host_label: stackType=auth
     io.rancher.container.hostname_override: container_name
     environment_name: ${env_shortcode}
     service_name: TokenValidationService
@@ -244,7 +244,7 @@ TokenValidationService:
     io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
     environment_name: ${env_shortcode}
     service_name: $${service_name}
-    io.rancher.scheduler.affinity:host_label: ranchergroup_main=true
+    io.rancher.scheduler.affinity:host_label: stackType=auth
   mem_limit: 1572864000
   volumes:
   - /var/log/iam:/var/log/iam
@@ -274,7 +274,7 @@ TokenValidationService:
 
 haproxy-internal:
   labels:
-    io.rancher.scheduler.affinity:host_label: ranchergroup_main=true
+    io.rancher.scheduler.affinity:host_label: stackType=auth
     io.rancher.container.pull_image: always
     io.rancher.scheduler.global: 'true'
     io.rancher.container.hostname_override: container_name
@@ -300,7 +300,7 @@ haproxy-internal:
 #haproxy-fe:
 #  net: "host"
 #  labels:
-#    io.rancher.scheduler.affinity:host_label: ranchergroup_main=true
+#    io.rancher.scheduler.affinity:host_label: stackType=auth
 #    io.rancher.container.pull_image: always
 #    io.rancher.scheduler.global: 'true'
 #    io.rancher.container.hostname_override: container_name
@@ -330,7 +330,7 @@ haproxy-internal:
 #keepalived-fe:
 #  net: "host"
 #  labels:
-#    io.rancher.scheduler.affinity:host_label: ranchergroup_main=true
+#    io.rancher.scheduler.affinity:host_label: stackType=auth
 #    io.rancher.container.pull_image: always
 #    io.rancher.scheduler.global: 'true'
 #    io.rancher.container.hostname_override: container_name
