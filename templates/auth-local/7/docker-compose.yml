@@ -75,9 +75,9 @@ AuditService:
     rAUDIT_DB: iam-database.cis-externals.rancher.internal
     rOUT_HOST: 127.0.0.1
     rCRL_FILE: IAM_crlfile.crl
-    rAUTH_SERVICE_SUBJECT: "AQICfgotdkem4LXqFsArpykBM0dT2bX9waHFf7P6CQU059LXiERCBWiObgIv0cieTGs9engEquToAF5xJZ+iibyZAbM78ZGysqKFfQ8+plljUUvY3eG4pDCpDcJKZQUOVhH2KupNgtIFSGOTA3cp+BPm2CHnzhB1aRubkSM+IX1hTN26Q7cX8+sVVrOMJckEPgTjUI1BwFJLq2Qyh/aJyUdexMr072A4o/eLKRo1A4Bsla$"
-    rCRL_FILENAME: fa8d522408ae23f60068fc9e71fada376c8ba42f
-    rCRL_FILENAME2: 124a88b782c09809c3dca6c6697b09e52ef0f605
+    rAUTH_SERVICE_SUBJECT: ${auth_service_subject}
+    rCRL_FILENAME: ${auth_crl_file1}
+    rCRL_FILENAME2: ${auth_crl_file2}
     rENV_SHORTCODE: ${env_shortcode}
     JAVA_OPTS: -server -XX:+UseConcMarkSweepGC -XX:+UseParNewGC -XX:ParallelGCThreads=2 -Xms1024m -Xmx6144m
 
@@ -116,9 +116,9 @@ AuthenticatorService:
     rAUDIT_DB: iam-database.cis-externals.rancher.internal
     rOUT_HOST: 127.0.0.1
     rCRL_FILE: IAM_crlfile.crl
-    rAUTH_SERVICE_SUBJECT: "AQICfgotdkem4LXqFsArpykBM0dT2bX9waHFf7P6CQU059LXiERCBWiObgIv0cieTGs9engEquToAF5xJZ+iibyZAbM78ZGysqKFfQ8+plljUUvY3eG4pDCpDcJKZQUOVhH2KupNgtIFSGOTA3cp+BPm2CHnzhB1aRubkSM+IX1hTN26Q7cX8+sVVrOMJckEPgTjUI1BwFJLq2Qyh/aJyUdexMr072A4o/eLKRo1A4Bsla$"
-    rCRL_FILENAME: fa8d522408ae23f60068fc9e71fada376c8ba42f
-    rCRL_FILENAME2: 124a88b782c09809c3dca6c6697b09e52ef0f605
+    rAUTH_SERVICE_SUBJECT: ${auth_service_subject}
+    rCRL_FILENAME: ${auth_crl_file1}
+    rCRL_FILENAME2: ${auth_crl_file2}
     rENV_SHORTCODE: ${env_shortcode}
     JAVA_OPTS: -server -XX:+UseConcMarkSweepGC -XX:+UseParNewGC -XX:ParallelGCThreads=2 -Xms1024m -Xmx6144m
   image: ${registry_url}/auth-authenticator:${auth_version}
@@ -159,9 +159,9 @@ SessionManager:
     rAUDIT_DB: iam-database.cis-externals.rancher.internal
     rOUT_HOST: 127.0.0.1
     rCRL_FILE: IAM_crlfile.crl
-    rAUTH_SERVICE_SUBJECT: "AQICfgotdkem4LXqFsArpykBM0dT2bX9waHFf7P6CQU059LXiERCBWiObgIv0cieTGs9engEquToAF5xJZ+iibyZAbM78ZGysqKFfQ8+plljUUvY3eG4pDCpDcJKZQUOVhH2KupNgtIFSGOTA3cp+BPm2CHnzhB1aRubkSM+IX1hTN26Q7cX8+sVVrOMJckEPgTjUI1BwFJLq2Qyh/aJyUdexMr072A4o/eLKRo1A4Bsla$"
-    rCRL_FILENAME: fa8d522408ae23f60068fc9e71fada376c8ba42f
-    rCRL_FILENAME2: 124a88b782c09809c3dca6c6697b09e52ef0f605
+    rAUTH_SERVICE_SUBJECT: ${auth_service_subject}
+    rCRL_FILENAME: ${auth_crl_file1}
+    rCRL_FILENAME2: ${auth_crl_file2}
     rENV_SHORTCODE: ${env_shortcode}
     GLUSTER_URL: ${gluster_url}
     GLUSTER_FOLDER: ${$env_shortcode}
@@ -205,9 +205,9 @@ SAMLService:
     rAUDIT_DB: iam-database.cis-externals.rancher.internal
     rOUT_HOST: 127.0.0.1
     rCRL_FILE: IAM_crlfile.crl
-    rAUTH_SERVICE_SUBJECT: "AQICfgotdkem4LXqFsArpykBM0dT2bX9waHFf7P6CQU059LXiERCBWiObgIv0cieTGs9engEquToAF5xJZ+iibyZAbM78ZGysqKFfQ8+plljUUvY3eG4pDCpDcJKZQUOVhH2KupNgtIFSGOTA3cp+BPm2CHnzhB1aRubkSM+IX1hTN26Q7cX8+sVVrOMJckEPgTjUI1BwFJLq2Qyh/aJyUdexMr072A4o/eLKRo1A4Bsla$"
-    rCRL_FILENAME: fa8d522408ae23f60068fc9e71fada376c8ba42f
-    rCRL_FILENAME2: 124a88b782c09809c3dca6c6697b09e52ef0f605
+    rAUTH_SERVICE_SUBJECT: ${auth_service_subject}
+    rCRL_FILENAME: ${auth_crl_file1}
+    rCRL_FILENAME2: ${auth_crl_file2}
     rENV_SHORTCODE: ${env_shortcode}
     JAVA_OPTS: -server -Xms256m -Xmx256m  -XX:NewSize=128m   -XX:MaxNewSize=256m   -XX:PermSize=64m  -XX:MaxPermSize=128m  -XX:+UseConcMarkSweepGC  -XX:+UseParNewGC   -XX:ParallelGCThreads=2 -Djava.security.egd=file:/dev/./urandom
   tty: true
@@ -247,9 +247,9 @@ TokenValidationService:
     rAUDIT_DB: iam-database.cis-externals.rancher.internal
     rOUT_HOST: 127.0.0.1
     rCRL_FILE: IAM_crlfile.crl
-    rAUTH_SERVICE_SUBJECT: "AQICfgotdkem4LXqFsArpykBM0dT2bX9waHFf7P6CQU059LXiERCBWiObgIv0cieTGs9engEquToAF5xJZ+iibyZAbM78ZGysqKFfQ8+plljUUvY3eG4pDCpDcJKZQUOVhH2KupNgtIFSGOTA3cp+BPm2CHnzhB1aRubkSM+IX1hTN26Q7cX8+sVVrOMJckEPgTjUI1BwFJLq2Qyh/aJyUdexMr072A4o/eLKRo1A4Bsla$"
-    rCRL_FILENAME: fa8d522408ae23f60068fc9e71fada376c8ba42f
-    rCRL_FILENAME2: 124a88b782c09809c3dca6c6697b09e52ef0f605
+    rAUTH_SERVICE_SUBJECT: ${auth_service_subject}
+    rCRL_FILENAME: ${auth_crl_file1}
+    rCRL_FILENAME2: ${auth_crl_file2}
     rENV_SHORTCODE: ${env_shortcode}
     JAVA_OPTS: -server -Xms256m -Xmx512m  -XX:NewSize=128m   -XX:MaxNewSize=256m   -XX:PermSize=64m  -XX:MaxPermSize=128m  -XX:+UseConcMarkSweepGC  -XX:+UseParNewGC   -XX:ParallelGCThreads=2 -Djava.security.egd=file:/dev/./urandom
 

@@ -29,7 +29,24 @@
       required: true
       type: "string"
       default: "nfs.cis-externals.rancher.internal"
-
+    - variable: "auth_service_subject"
+      description: "Please enter your auth_service_subject"
+      label: "auth_service_subject"
+      required: true
+      type: "string"
+      default: "AQICfgotdkem4LXqFsArpykBM0dT2bX9waHFf7P6CQU059LXiERCBWiObgIv0cieTGs9engEquToAF5xJZ+iibyZAbM78ZGysqKFfQ8+plljUUvY3eG4pDCpDcJKZQUOVhH2KupNgtIFSGOTA3cp+BPm2CHnzhB1aRubkSM+IX1hTN26Q7cX8+sVVrOMJckEPgTjUI1BwFJLq2Qyh/aJyUdexMr072A4o/eLKRo1A4Bsla$"
+    - variable: "auth_crl_file1"
+      description: "Please enter your auth_crl_file1"
+      label: "auth_crl_file1"
+      required: true
+      type: "string"
+      default: "fa8d522408ae23f60068fc9e71fada376c8ba42f"
+    - variable: "auth_crl_file2"
+      description: "Please enter your auth_crl_file2"
+      label: "auth_crl_file2"
+      required: true
+      type: "string"
+      default: "124a88b782c09809c3dca6c6697b09e52ef0f605"
 
 TlsService:
   upgrade_strategy:
