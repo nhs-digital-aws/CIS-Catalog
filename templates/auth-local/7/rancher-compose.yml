@@ -35,6 +35,12 @@
       required: true
       type: "string"
       default: "demo.aws.cishackday.com"
+    - variable: "auth_service_subject"
+      description: "Please enter your auth_service_subject"
+      label: "auth_service_subject"
+      required: true
+      type: "string"
+      default: "abc123"
     - variable: "auth_crl_file1"
       description: "Please enter your auth_crl_file1"
       label: "auth_crl_file1"
