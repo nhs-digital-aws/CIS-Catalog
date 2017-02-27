@@ -139,8 +139,6 @@ AuthenticatorService:
   image: ${registry_url}/auth-authenticator:${auth_version}
   tty: true
   stdin_open: true
-  links:
-  - Directory:Directory
 
 SessionManager:
   labels:
@@ -229,8 +227,6 @@ SAMLService:
     JAVA_OPTS: -server -Xms256m -Xmx256m  -XX:NewSize=128m   -XX:MaxNewSize=256m   -XX:PermSize=64m  -XX:MaxPermSize=128m  -XX:+UseConcMarkSweepGC  -XX:+UseParNewGC   -XX:ParallelGCThreads=2 -Djava.security.egd=file:/dev/./urandom
   tty: true
   stdin_open: true
-  links:
-  - Directory:Directory
 
 TokenValidationService:
   image: ${registry_url}/auth-tokenvalidation:${auth_version}
@@ -275,7 +271,6 @@ TokenValidationService:
     JAVA_OPTS: -server -Xms256m -Xmx512m  -XX:NewSize=128m   -XX:MaxNewSize=256m   -XX:PermSize=64m  -XX:MaxPermSize=128m  -XX:+UseConcMarkSweepGC  -XX:+UseParNewGC   -XX:ParallelGCThreads=2 -Djava.security.egd=file:/dev/./urandom
   links:
   - LB-AuthBusinessService:LB-AuthBusinessService
-  - Directory:Directory
 
 haproxy-internal:
   labels:
