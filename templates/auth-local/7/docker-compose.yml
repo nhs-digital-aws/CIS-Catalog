@@ -74,7 +74,7 @@ AuditService:
     rPORTAL_FQDN: portal.${fqdn}
     rAUDIT_DB: iam-database.cis-externals.rancher.internal
     rOUT_HOST: 127.0.0.1
-    rCRL_FILE: IAM_crlfile.crl
+    rCRL_FILE: IAMcrlfile.crl
     rAUTH_SERVICE_SUBJECT: ${auth_service_subject}
     rCRL_FILENAME: ${auth_crl_file1}
     rCRL_FILENAME2: ${auth_crl_file2}
@@ -115,7 +115,7 @@ AuthenticatorService:
     rPORTAL_FQDN: portal.${fqdn}
     rAUDIT_DB: iam-database.cis-externals.rancher.internal
     rOUT_HOST: 127.0.0.1
-    rCRL_FILE: IAM_crlfile.crl
+    rCRL_FILE: IAMcrlfile.crl
     rAUTH_SERVICE_SUBJECT: ${auth_service_subject}
     rCRL_FILENAME: ${auth_crl_file1}
     rCRL_FILENAME2: ${auth_crl_file2}
@@ -158,7 +158,7 @@ SessionManager:
     rPORTAL_FQDN: portal.${fqdn}
     rAUDIT_DB: iam-database.cis-externals.rancher.internal
     rOUT_HOST: 127.0.0.1
-    rCRL_FILE: IAM_crlfile.crl
+    rCRL_FILE: IAMcrlfile.crl
     rAUTH_SERVICE_SUBJECT: ${auth_service_subject}
     rCRL_FILENAME: ${auth_crl_file1}
     rCRL_FILENAME2: ${auth_crl_file2}
@@ -204,7 +204,7 @@ SAMLService:
     rPORTAL_FQDN: portal.${fqdn}
     rAUDIT_DB: iam-database.cis-externals.rancher.internal
     rOUT_HOST: 127.0.0.1
-    rCRL_FILE: IAM_crlfile.crl
+    rCRL_FILE: IAMcrlfile.crl
     rAUTH_SERVICE_SUBJECT: ${auth_service_subject}
     rCRL_FILENAME: ${auth_crl_file1}
     rCRL_FILENAME2: ${auth_crl_file2}
@@ -246,7 +246,7 @@ TokenValidationService:
     rPORTAL_FQDN: portal.${fqdn}
     rAUDIT_DB: iam-database.cis-externals.rancher.internal
     rOUT_HOST: 127.0.0.1
-    rCRL_FILE: IAM_crlfile.crl
+    rCRL_FILE: IAMcrlfile.crl
     rAUTH_SERVICE_SUBJECT: ${auth_service_subject}
     rCRL_FILENAME: ${auth_crl_file1}
     rCRL_FILENAME2: ${auth_crl_file2}
