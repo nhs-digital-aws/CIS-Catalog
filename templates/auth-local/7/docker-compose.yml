@@ -215,8 +215,6 @@ SAMLService:
 
 TokenValidationService:
   image: ${registry_url}/auth-tokenvalidation:${auth_version}
-  tty: true
-  stdin_open: true
   labels:
     io.rancher.scheduler.affinity:host_label: stackType=auth
     io.rancher.container.hostname_override: container_name
@@ -254,8 +252,6 @@ TokenValidationService:
     rCRL_FILENAME2: $CRL_FILENAME2
     rENV_SHORTCODE: ${env_shortcode}
     JAVA_OPTS: -server -Xms256m -Xmx512m  -XX:NewSize=128m   -XX:MaxNewSize=256m   -XX:PermSize=64m  -XX:MaxPermSize=128m  -XX:+UseConcMarkSweepGC  -XX:+UseParNewGC   -XX:ParallelGCThreads=2 -Djava.security.egd=file:/dev/./urandom
-  links:
-  - LB-AuthBusinessService:LB-AuthBusinessService
 
 haproxy-internal:
   labels:
