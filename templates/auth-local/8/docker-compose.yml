@@ -8,22 +8,22 @@ TLS-Service:
     project.stack: auth
     io.rancher.container.hostname_override: container_name
     io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
-    environment_name: $ENV_SHORTCODE
+    environment_name: ${env_shortcode}
     service_name: $${service_name}
   image: ${registry_url}/auth-httpd:latest
   tty: true
   stdin_open: true
   environment:
     rINTERNAL_LB: LB-AuthBusinessService:8080
-    rREDIS_INSTANCE: RedisSessionStore.cis-externals.rancher.internal:6379
-    rLDAP_LOCATION_ROLE: dir.cis-externals.rancher.internal:389
-    rLDAP_LOCATION_AUTH: dir.cis-externals.rancher.internal:389
+    rREDIS_INSTANCE: ${redisSessionStore}
+    rLDAP_LOCATION_ROLE: ${directoryServer}
+    rLDAP_LOCATION_AUTH: ${directoryServer}
     rCRL_LOCATION: 10.196.94.238
     rATN_FQDN: gas.${fqdn}
     rAUTH_SERVERID: 192.168.118.105
     rWFE_FQDN: wfe.${fqdn}
     rPORTAL_FQDN: portal.${fqdn}
-    rAUDIT_DB: iam-database.cis-externals.rancher.internal
+    rAUDIT_DB: ${auditDatabaseServer}
     rOUT_HOST: 127.0.0.1
     rCRL_FILE: IAM_crlfile.crl
     rAUTH_SERVICE_SUBJECT: ${auth_service_subject}
@@ -206,9 +206,9 @@ haproxy-internal:
     project.stack: auth
   environment:
     - vip=0.0.0.0
-    - be_atn=authenticatorservice
-    - be_sml=samlservice
-    - be_tvs=tokenvalidationservice
+    - be_atn=authenticatorservice.$${stack_name}.rancher.internal
+    - be_sml=samlservice.$${stack_name}.rancher.internal
+    - be_tvs=tokenvalidationservice.$${stack_name}.rancher.internal
     - envcode=${env_shortcode}
   image: ${registry_url}/auth-haproxy-int:1
   tty: true
