@@ -6,7 +6,30 @@ TLS-Service:
     project.service.name: tls-service
     project.name: cis-auth
     project.stack: auth
+    io.rancher.container.hostname_override: container_name
+    io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
+    environment_name: $ENV_SHORTCODE
+    service_name: $${service_name}
   image: ${registry_url}/auth-httpd:latest
+  tty: true
+  stdin_open: true
+  environment:
+    rINTERNAL_LB: LB-AuthBusinessService:8080
+    rREDIS_INSTANCE: RedisSessionStore.cis-externals.rancher.internal:6379
+    rLDAP_LOCATION_ROLE: dir.cis-externals.rancher.internal:389
+    rLDAP_LOCATION_AUTH: dir.cis-externals.rancher.internal:389
+    rCRL_LOCATION: 10.196.94.238
+    rATN_FQDN: gas.${fqdn}
+    rAUTH_SERVERID: 192.168.118.105
+    rWFE_FQDN: wfe.${fqdn}
+    rPORTAL_FQDN: portal.${fqdn}
+    rAUDIT_DB: iam-database.cis-externals.rancher.internal
+    rOUT_HOST: 127.0.0.1
+    rCRL_FILE: IAM_crlfile.crl
+    rAUTH_SERVICE_SUBJECT: ${auth_service_subject}
+    rCRL_FILENAME: ${auth_crl_file1}
+    rCRL_FILENAME2: ${auth_crl_file2}
+    rENV_SHORTCODE: ${env_shortcode}
 
 LB-AuthBusinessService:
   expose:
@@ -52,21 +75,6 @@ AuditService:
   stdin_open: true
   image: ${registry_url}/auth-audit:${auth_version}
   environment:
-    rINTERNAL_LB: LB-AuthBusinessService:8080
-    rREDIS_INSTANCE: RedisSessionStore.cis-externals.rancher.internal:6379
-    rLDAP_LOCATION_ROLE: dir.cis-externals.rancher.internal:389
-    rLDAP_LOCATION_AUTH: dir.cis-externals.rancher.internal:389
-    rCRL_LOCATION: 10.196.94.238
-    rATN_FQDN: gas.${fqdn}
-    rAUTH_SERVERID: 192.168.118.105
-    rWFE_FQDN: wfe.${fqdn}
-    rPORTAL_FQDN: portal.${fqdn}
-    rAUDIT_DB: iam-database.cis-externals.rancher.internal
-    rOUT_HOST: 127.0.0.1
-    rCRL_FILE: IAM_crlfile.crl
-    rAUTH_SERVICE_SUBJECT: ${auth_service_subject}
-    rCRL_FILENAME: ${auth_crl_file1}
-    rCRL_FILENAME2: ${auth_crl_file2}
     rENV_SHORTCODE: ${env_shortcode}
     JAVA_OPTS: -server -XX:+UseConcMarkSweepGC -XX:+UseParNewGC -XX:ParallelGCThreads=2 -Xms1024m -Xmx6144m
 
@@ -93,19 +101,6 @@ AuthenticatorService:
   stdin_open: true
   privileged: true
   environment:
-    rINTERNAL_LB: LB-AuthBusinessService:8080
-    rREDIS_INSTANCE: RedisSessionStore.cis-externals.rancher.internal:6379
-    rLDAP_LOCATION_ROLE: dir.cis-externals.rancher.internal:389
-    rLDAP_LOCATION_AUTH: dir.cis-externals.rancher.internal:389
-    rCRL_LOCATION: 10.196.94.238
-    rATN_FQDN: gas.${fqdn}
-    rAUTH_SERVERID: 192.168.118.105
-    rWFE_FQDN: wfe.${fqdn}
-    rPORTAL_FQDN: portal.${fqdn}
-    rAUDIT_DB: iam-database.cis-externals.rancher.internal
-    rOUT_HOST: 127.0.0.1
-    rCRL_FILE: IAM_crlfile.crl
-    rAUTH_SERVICE_SUBJECT: ${auth_service_subject}
     rCRL_FILENAME: ${auth_crl_file1}
     rCRL_FILENAME2: ${auth_crl_file2}
     rENV_SHORTCODE: ${env_shortcode}
@@ -136,27 +131,11 @@ SessionManager:
   stdin_open: true
   privileged: true
   environment:
-    rINTERNAL_LB: LB-AuthBusinessService:8080
-    rREDIS_INSTANCE: RedisSessionStore.cis-externals.rancher.internal:6379
-    rLDAP_LOCATION_ROLE: dir.cis-externals.rancher.internal:389
-    rLDAP_LOCATION_AUTH: dir.cis-externals.rancher.internal:389
-    rCRL_LOCATION: 10.196.94.238
-    rATN_FQDN: gas.${fqdn}
-    rAUTH_SERVERID: 192.168.118.105
-    rWFE_FQDN: wfe.${fqdn}
-    rPORTAL_FQDN: portal.${fqdn}
-    rAUDIT_DB: iam-database.cis-externals.rancher.internal
-    rOUT_HOST: 127.0.0.1
-    rCRL_FILE: IAM_crlfile.crl
-    rAUTH_SERVICE_SUBJECT: ${auth_service_subject}
-    rCRL_FILENAME: ${auth_crl_file1}
-    rCRL_FILENAME2: ${auth_crl_file2}
+    JAVA_OPTS: -server -XX:+UseConcMarkSweepGC -XX:+UseParNewGC -XX:ParallelGCThreads=2 -Xms1024m -Xmx6144m
     rENV_SHORTCODE: ${env_shortcode}
     GLUSTER_URL: ${gluster_url}
     GLUSTER_FOLDER: ${env_shortcode}
   image: ${registry_url}/auth-sessionmanager:${auth_version}
-  environment:
-    JAVA_OPTS: -server -XX:+UseConcMarkSweepGC -XX:+UseParNewGC -XX:ParallelGCThreads=2 -Xms1024m -Xmx6144m
   tty: true
   stdin_open: true
 
@@ -182,21 +161,6 @@ SAMLService:
   stdin_open: true
   image: ${registry_url}/auth-saml:${auth_version}
   environment:
-    rINTERNAL_LB: LB-AuthBusinessService:8080
-    rREDIS_INSTANCE: RedisSessionStore.cis-externals.rancher.internal:6379
-    rLDAP_LOCATION_ROLE: dir.cis-externals.rancher.internal:389
-    rLDAP_LOCATION_AUTH: dir.cis-externals.rancher.internal:389
-    rCRL_LOCATION: 10.196.94.238
-    rATN_FQDN: gas.${fqdn}
-    rAUTH_SERVERID: 192.168.118.105
-    rWFE_FQDN: wfe.${fqdn}
-    rPORTAL_FQDN: portal.${fqdn}
-    rAUDIT_DB: iam-database.cis-externals.rancher.internal
-    rOUT_HOST: 127.0.0.1
-    rCRL_FILE: IAM_crlfile.crl
-    rAUTH_SERVICE_SUBJECT: ${auth_service_subject}
-    rCRL_FILENAME: ${auth_crl_file1}
-    rCRL_FILENAME2: ${auth_crl_file2}
     rENV_SHORTCODE: ${env_shortcode}
     JAVA_OPTS: -server -Xms256m -Xmx256m  -XX:NewSize=128m   -XX:MaxNewSize=256m   -XX:PermSize=64m  -XX:MaxPermSize=128m  -XX:+UseConcMarkSweepGC  -XX:+UseParNewGC   -XX:ParallelGCThreads=2 -Djava.security.egd=file:/dev/./urandom
   tty: true
@@ -224,21 +188,6 @@ TokenValidationService:
   tty: true
   stdin_open: true
   environment:
-    rINTERNAL_LB: LB-AuthBusinessService:8080
-    rREDIS_INSTANCE: RedisSessionStore.cis-externals.rancher.internal:6379
-    rLDAP_LOCATION_ROLE: dir.cis-externals.rancher.internal:389
-    rLDAP_LOCATION_AUTH: dir.cis-externals.rancher.internal:389
-    rCRL_LOCATION: 10.196.94.238
-    rATN_FQDN: gas.${fqdn}
-    rAUTH_SERVERID: 192.168.118.105
-    rWFE_FQDN: wfe.${fqdn}
-    rPORTAL_FQDN: portal.${fqdn}
-    rAUDIT_DB: iam-database.cis-externals.rancher.internal
-    rOUT_HOST: 127.0.0.1
-    rCRL_FILE: IAM_crlfile.crl
-    rAUTH_SERVICE_SUBJECT: ${auth_service_subject}
-    rCRL_FILENAME: ${auth_crl_file1}
-    rCRL_FILENAME2: ${auth_crl_file2}
     rENV_SHORTCODE: ${env_shortcode}
     JAVA_OPTS: -server -Xms256m -Xmx512m  -XX:NewSize=128m   -XX:MaxNewSize=256m   -XX:PermSize=64m  -XX:MaxPermSize=128m  -XX:+UseConcMarkSweepGC  -XX:+UseParNewGC   -XX:ParallelGCThreads=2 -Djava.security.egd=file:/dev/./urandom
 
@@ -268,4 +217,3 @@ haproxy-internal:
   - SYS_ADMIN
   security_opt:
   - seccomp:unconfined
-
