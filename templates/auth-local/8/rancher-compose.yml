@@ -65,12 +65,30 @@
       required: true
       type: "string"
       default: "dir.cis-externals.rancher.internal:10389"
-    - variable: "auditDatabaseServer"
-      description: "Please enter your Audit Database Server including port"
-      label: "Audit Database"
+    - variable: "ldap_auth_username"
+      description: "Please enter your LDAP Username for Auth queries"
+      label: "LDAP Auth Username"
       required: true
       type: "string"
-      default: "iam-database.cis-externals.rancher.internal:5432"
+      default: "cn=admin"
+    - variable: "ldap_auth_password"
+      description: "Please enter your LDAP Password for Auth queries"
+      label: "LDAP Auth Passowrd"
+      required: true
+      type: "string"
+      default: "Password1"
+    - variable: "ldap_role_username"
+      description: "Please enter your LDAP Username for Role queries"
+      label: "LDAP Role Username"
+      required: true
+      type: "string"
+      default: "cn=admin"
+    - variable: "ldap_role_password"
+      description: "Please enter your LDAP Password for Role queries"
+      label: "LDAP Role Passowrd"
+      required: true
+      type: "string"
+      default: "Password1"
 
 TlsService:
   upgrade_strategy:
