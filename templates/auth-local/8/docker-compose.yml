@@ -29,7 +29,10 @@ TLS-Service:
     rAUTH_SERVICE_SUBJECT: ${auth_service_subject}
     rCRL_FILENAME: ${auth_crl_file1}
     rCRL_FILENAME2: ${auth_crl_file2}
-    rENV_SHORTCODE: ${env_shortcode}
+    rLDAP_USERNAME_AUTH: ${ldap_auth_username}
+    rLDAP_PASSWORD_AUTH: ${ldap_auth_password}
+    rLDAP_USERNAME_ROLE: ${ldap_role_username}
+    rLDAP_PASSWORD_ROLE: ${ldap_role_password}
 
 LB-AuthBusinessService:
   expose:
