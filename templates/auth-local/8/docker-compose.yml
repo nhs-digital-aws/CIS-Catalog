@@ -209,9 +209,9 @@ haproxy-internal:
     project.stack: auth
   environment:
     - vip=0.0.0.0
-    - be_atn=authenticatorservice.$${stack_name}.rancher.internal
-    - be_sml=samlservice.$${stack_name}.rancher.internal
-    - be_tvs=tokenvalidationservice.$${stack_name}.rancher.internal
+    - be_atn=authenticatorservice.auth-local.rancher.internal
+    - be_sml=samlservice.auth-local.rancher.internal
+    - be_tvs=tokenvalidationservice.auth-local.rancher.internal
     - envcode=${env_shortcode}
   image: ${registry_url}/auth-haproxy-int:1
   tty: true
