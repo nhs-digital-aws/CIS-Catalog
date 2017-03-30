@@ -27,11 +27,11 @@ Redis:
 PGHelper:
   image: livehybrid/authauditdb_helper
   environment:
-    PG_HOST: rancher-ha-authauditdb-0.ceayqqx7g1ca.eu-west-2.rds.amazonaws.com
-    PG_USER: postgres
-    PG_PASS: postgres
+    PG_HOST: authaudit.db.${fqdn}
+    PG_USER: ${aad_username}
+    PG_PASS: ${aad_password}
     PG_PORT: '5432'
-    PG_DBNAME: postgres
+    PG_DBNAME: AUTH_AUDLOG
   stdin_open: true
   tty: true
   labels:

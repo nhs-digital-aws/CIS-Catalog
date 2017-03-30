@@ -23,6 +23,24 @@
       required: true
       default: lh
       type: "string"
+    - variable: "fqdn"
+      description: "Please enter your FQDN"
+      label: "Service FQDN"
+      required: true
+      type: "string"
+      default: "demo.aws.cishackday.com"
+    - variable: "aad_username"
+      description: "AuthAuditDB Username"
+      label: "Username"
+      required: true
+      type: "postgres"
+      default: "demo.aws.cishackday.com"
+    - variable: "aad_password"
+      description: "Please enter your Postgres AAD Password"
+      label: "Password"
+      required: true
+      type: "password"
+      default: ""
 PGHelper:
   scale: 1
   start_on_create: true
