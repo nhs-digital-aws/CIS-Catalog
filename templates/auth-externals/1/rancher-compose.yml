@@ -23,23 +23,22 @@
       required: true
       default: lh
       type: "string"
-
 PGHelper:
   scale: 1
   start_on_create: true
 
- AuthAuditDB:
-    hostname: rancher-ha-authauditdb-0.ceayqqx7g1ca.eu-west-2.rds.amazonaws.com
-    start_on_create: true
-    health_check:
-      response_timeout: 2000
-      healthy_threshold: 2
-      port: 5432
-      unhealthy_threshold: 3
-      initializing_timeout: 60000
-      interval: 2000
-      strategy: recreate
-      reinitializing_timeout: 60000
+AuthAuditDB:
+  hostname: rancher-ha-authauditdb-0.ceayqqx7g1ca.eu-west-2.rds.amazonaws.com
+  start_on_create: true
+  health_check:
+    response_timeout: 2000
+    healthy_threshold: 2
+    port: 5432
+    unhealthy_threshold: 3
+    initializing_timeout: 60000
+    interval: 2000
+    strategy: recreate
+    reinitializing_timeout: 60000
 
 Redis:
   scale: 1
