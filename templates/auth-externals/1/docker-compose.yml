@@ -37,3 +37,7 @@ PGHelper:
   labels:
     io.rancher.container.pull_image: always
     io.rancher.container.start_once: 'true'
+
+AuthAuditDB:
+  image: rancher/external-service
+ 
