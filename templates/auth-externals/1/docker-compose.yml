@@ -1,0 +1,39 @@
+Dir:
+  restart: always
+  labels:
+    environment_name: lh
+    service_name: Dir
+    io.rancher.container.dns: true
+    project.service.name: dir
+    project.name: cis
+    project.stack: cis-externals
+  tty: true
+  image: ${registry_url}/dir:${externals_version}
+  stdin_open: true
+
+Redis:
+  restart: always
+  labels:
+    environment_name: lh
+    service_name: redis
+    io.rancher.container.dns: true
+    project.service.name: redis
+    project.name: cis
+    project.stack: cis-externals
+  tty: true
+  image: ${registry_url}/redis:3.2.4
+  stdin_open: true
+
+PGHelper:
+  image: livehybrid/authauditdb_helper
+  environment:
+    PG_HOST: rancher-ha-authauditdb-0.ceayqqx7g1ca.eu-west-2.rds.amazonaws.com
+    PG_USER: postgres
+    PG_PASS: postgres
+    PG_PORT: '5432'
+    PG_DBNAME: postgres
+   stdin_open: true
+   tty: true
+   labels:
+    io.rancher.container.pull_image: always
+    io.rancher.container.start_once: 'true'

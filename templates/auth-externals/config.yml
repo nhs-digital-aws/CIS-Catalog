@@ -1,0 +1,5 @@
+name: NHS Digital - Auth Externals
+description: |
+  Creates external dependencies needed by just for Auth stack. Contains Directory and AuthDB
+version: 0.1
+category: NHS-Digital
