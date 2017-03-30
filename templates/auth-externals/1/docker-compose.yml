@@ -32,8 +32,8 @@ PGHelper:
     PG_PASS: postgres
     PG_PORT: '5432'
     PG_DBNAME: postgres
-   stdin_open: true
-   tty: true
-   labels:
+  stdin_open: true
+  tty: true
+  labels:
     io.rancher.container.pull_image: always
     io.rancher.container.start_once: 'true'
