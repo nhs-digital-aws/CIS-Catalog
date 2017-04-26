@@ -90,6 +90,63 @@
       type: "string"
       default: "Password1"
 
+
+
+    - variable: "gatling_uid"
+      description: "Gating UID"
+      label: "Gatling UID"
+      required: true
+      type: "int"
+      default: "644153602037"
+    - variable: "gatling_authhost_service"
+      description: "Auth Host service"
+      label: "Auth Host service"
+      required: true
+      type: "string"
+      default: "atn"
+    - variable: "gatling_urshost_service"
+      description: "URS Host service"
+      label: "URS Host service"
+      required: true
+      type: "string"
+      default: "wfe"
+    - variable: "gatling_authhost_subdomain"
+      description: "Auth Host subdomain"
+      label: "Auth Host subdomain"
+      required: true
+      type: "string"
+      default: "rt.iam.spine2"
+    - variable: "gatling_urshost_subdomain"
+      description: "URS Host subdomain"
+      label: "URS Host subdomain"
+      required: true
+      type: "string"
+      default: "rt.iam.spine2"
+    - variable: "gatling_concurrent_users"
+      description: "Number of concurrent Users"
+      label: "Number of concurrent Users"
+      required: true
+      type: "int"
+      default: "1"
+    - variable: "gatling_ramp_up_period"
+      description: "Ramp up period"
+      label: "Ramp up period"
+      required: true
+      type: "int"
+      default: "1"
+    - variable: "gatling_simulation_duration"
+      description: "Simulation duration"
+      label: "Simulation duration"
+      required: true
+      type: "int"
+      default: "60"
+    - variable: "vip_ext_auth"
+      description: "VIP Auth Host"
+      label: "VIP Auth Host"
+      required: true
+      type: "string"
+      default: "10.196.94.199"
+
 TlsService:
   upgrade_strategy:
     start_first: true

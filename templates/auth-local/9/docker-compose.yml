@@ -227,7 +227,7 @@ AutomatedTesting:
     io.rancher.container.hostname_override: container_name
     io.rancher.container.start_once: true
     service_name: $${service_name}
-    environment_name: $ENV_SHORTCODE
+    environment_name: ${env_shortcode}
     service_name: Automated_Testing
     project.service.name: automated_testing
   volumes:
@@ -236,12 +236,12 @@ AutomatedTesting:
   tty: true
   stdin_open: true
   environment:
-    rUID: $GATLING_UID
-    rGATLING_AUTHHOST_SERVICE: $GATLING_AUTHHOST_SERVICE
-    rGATLING_URSHOST_SERVICE: $GATLING_URSHOST_SERVICE
-    rGATLING_AUTHHOST_SUBDOMAIN: $GATLING_AUTHHOST_SUBDOMAIN
-    rGATLING_URSHOST_SUBDOMAIN: $GATLING_URSHOST_SUBDOMAIN
-    rGATLING_CONCURRENT_USERS: $GATLING_CONCURRENT_USERS
-    rGATLING_RAMP_UP_PERIOD: $GATLING_RAMP_UP_PERIOD
-    rGATLING_SIMULATION_DURATION: $GATLING_SIMULATION_DURATION
-    rVIP_EXT_AUTH: $VIP_EXT_AUTH
+    rUID: ${gatling_uid}
+    rGATLING_AUTHHOST_SERVICE: ${gatling_authhost_service}
+    rGATLING_URSHOST_SERVICE: ${gatling_urshost_service}
+    rGATLING_AUTHHOST_SUBDOMAIN: ${gatling_authhost_subdomain}
+    rGATLING_URSHOST_SUBDOMAIN: ${gatling_urshost_subdomain}
+    rGATLING_CONCURRENT_USERS: ${gatling_concurrent_users}
+    rGATLING_RAMP_UP_PERIOD: ${gatling_ramp_up_period}
+    rGATLING_SIMULATION_DURATION: ${gatling_simulation_duration}
+    rVIP_EXT_AUTH: ${vip_ext_auth}
