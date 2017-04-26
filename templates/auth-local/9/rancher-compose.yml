@@ -89,9 +89,6 @@
       required: true
       type: "string"
       default: "Password1"
-
-
-
     - variable: "gatling_uid"
       description: "Gating UID"
       label: "Gatling UID"
