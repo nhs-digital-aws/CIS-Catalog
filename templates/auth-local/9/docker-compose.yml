@@ -223,7 +223,6 @@ haproxy-internal:
 AutomatedTesting:
   labels:
     io.rancher.container.pull_image: always
-    io.rancher.scheduler.affinity:host_label: ranchergroup_main=true
     io.rancher.container.hostname_override: container_name
     io.rancher.container.start_once: true
     service_name: $${service_name}
