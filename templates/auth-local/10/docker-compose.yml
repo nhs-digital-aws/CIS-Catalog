@@ -213,7 +213,7 @@ haproxy-internal:
     - be_sml=samlservice.auth-local.rancher.internal
     - be_tvs=tokenvalidationservice.auth-local.rancher.internal
     - envcode=${env_shortcode}
-  image: ${registry_url}/auth-haproxy-int:1
+  image: ${registry_url}/auth-haproxy-int:${auth_version}
   tty: true
   stdin_open: true
   cap_add:
