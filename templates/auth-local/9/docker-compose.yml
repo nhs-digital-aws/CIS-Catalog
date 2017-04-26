@@ -232,7 +232,7 @@ AutomatedTesting:
     project.service.name: automated_testing
   volumes:
   - /var/log/iam:/home/iam_user/gatling_outputs
-  image: $REGISTRY/automated-testing:latest
+  image: ${registry_url}/automated-testing:latest
   tty: true
   stdin_open: true
   environment:
