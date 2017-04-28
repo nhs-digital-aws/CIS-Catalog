@@ -212,6 +212,7 @@ haproxy-internal:
     - be_atn=authenticatorservice.auth-local.rancher.internal
     - be_sml=samlservice.auth-local.rancher.internal
     - be_tvs=tokenvalidationservice.auth-local.rancher.internal
+    - be_pot=portal.auth-local.rancher.internal
     - envcode=${env_shortcode}
   image: ${registry_url}/auth-haproxy-int:${auth_version}
   tty: true
