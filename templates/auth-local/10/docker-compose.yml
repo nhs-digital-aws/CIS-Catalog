@@ -14,25 +14,27 @@ TLS-Service:
   tty: true
   stdin_open: true
   environment:
-    rINTERNAL_LB: LB-AuthBusinessService:8080
-    rREDIS_INSTANCE: ${redisSessionStore}
-    rLDAP_LOCATION_ROLE: ${directoryServer}
-    rLDAP_LOCATION_AUTH: ${directoryServer}
-    rCRL_LOCATION: 10.196.94.238
-    rATN_FQDN: gas.${fqdn}
-    rAUTH_SERVERID: 192.168.118.105
-    rWFE_FQDN: wfe.${fqdn}
-    rPORTAL_FQDN: portal.${fqdn}
-    rAUDIT_DB: ${auditDatabaseServer}
-    rOUT_HOST: 127.0.0.1
-    rCRL_FILE: IAM_crlfile.crl
-    rAUTH_SERVICE_SUBJECT: ${auth_service_subject}
-    rCRL_FILENAME: ${auth_crl_file1}
-    rCRL_FILENAME2: ${auth_crl_file2}
-    rLDAP_USERNAME_AUTH: ${ldap_auth_username}
-    rLDAP_PASSWORD_AUTH: ${ldap_auth_password}
-    rLDAP_USERNAME_ROLE: ${ldap_role_username}
-    rLDAP_PASSWORD_ROLE: ${ldap_role_password}
+    INTERNAL_LB: LB-AuthBusinessService:8080
+    REDIS_INSTANCE: ${redisSessionStore}
+    LDAP_ROLE_LOCATION: ${directoryServer}
+    LDAP_ROLE_USERNAME: ${ldap_role_username}
+    LDAP_ROLE_PASSWORD: ${ldap_role_password}
+    LDAP_AUTH_LOCATION: ${directoryServer}
+    LDAP_AUTH_USERNAME: ${ldap_auth_username}
+    LDAP_AUTH_PASSWORD: ${ldap_auth_password}
+    CRL_LOCATION: 10.196.94.238
+    ATN_FQDN: gas.${fqdn}
+    AUTH_SERVERID: 192.168.118.105
+    WFE_FQDN: wfe.${fqdn}
+    PORTAL_FQDN: portal.${fqdn}
+    AUDIT_DB: ${auditDatabaseServer}
+    OUT_HOST:
+    OUT_HOST_ENABLED: false
+    CRL_FILE: IAM_crlfile.crl
+    AUTH_SERVICE_SUBJECT: ${auth_service_subject}
+    CRL_FILENAME: ${auth_crl_file1}
+    CRL_FILENAME2: ${auth_crl_file2}
+    ENV_SHORTCODE: ${env_shortcode}
 
 LB-AuthBusinessService:
   expose:
