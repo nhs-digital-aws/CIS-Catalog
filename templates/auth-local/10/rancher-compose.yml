@@ -53,12 +53,6 @@
       required: true
       type: "string"
       default: "124a88b782c09809c3dca6c6697b09e52ef0f605"
-    - variable: "redisSessionStore"
-      description: "Please enter your Redis session store including port"
-      label: "Redis Store"
-      required: true
-      type: "string"
-      default: "Redis.cis-externals.rancher.internal:6379"
     - variable: "directoryServer"
       description: "Please enter your Directory server including port"
       label: "Directory Server"

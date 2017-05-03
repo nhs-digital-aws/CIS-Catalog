@@ -15,7 +15,7 @@ TLS-Service:
   stdin_open: true
   environment:
     INTERNAL_LB: LB-AuthBusinessService:8080
-    REDIS_INSTANCE: ${redisSessionStore}
+    REDIS_INSTANCE: RedisSessionStore:6379
     LDAP_ROLE_LOCATION: ${directoryServer}
     LDAP_ROLE_USERNAME: ${ldap_role_username}
     LDAP_ROLE_PASSWORD: ${ldap_role_password}
@@ -275,7 +275,5 @@ Portal:
   - SYS_ADMIN
   security_opt:
   - seccomp:unconfined
-#  links:
-#  - WebSessionStore:RedisSessionStore
   external_links:
-  - ${env_shortcode}-auth-redis/RedisSessionStore:RedisSessionStore
+  - cis-externals/Redis:RedisSessionStore
