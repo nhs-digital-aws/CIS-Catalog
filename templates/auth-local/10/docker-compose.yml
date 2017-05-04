@@ -198,7 +198,7 @@ TokenValidationService:
 
 haproxy-internal:
   ports:
-    - 80:443/tcp
+    - 80:80
   labels:
     io.rancher.scheduler.affinity:host_label: stackType=auth
     io.rancher.container.pull_image: always
