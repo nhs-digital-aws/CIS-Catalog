@@ -143,6 +143,8 @@ SessionManager:
   image: ${registry_url}/auth-sessionmanager:${auth_version}
   tty: true
   stdin_open: true
+  external_links:
+  - cis-externals/Redis:RedisSessionStore
 
 SAMLService:
   labels:
