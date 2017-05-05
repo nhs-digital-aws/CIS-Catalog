@@ -27,6 +27,7 @@ TLS-Service:
     AUTH_SERVERID: 192.168.118.105
     WFE_FQDN: wfe.${fqdn}
     PORTAL_FQDN: portal.${fqdn}
+    PORTAL_COOKIE_DOMAIN: ${portal_cookie_domain}
     AUDIT_DB: ${auditDatabaseServer}
     OUT_HOST:
     OUT_HOST_ENABLED: false
