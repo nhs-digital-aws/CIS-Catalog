@@ -2,6 +2,7 @@
 TLS-Service:
   labels:
     io.rancher.scheduler.affinity:host_label: stackType=auth
+    io.rancher.container.pull_image: always
     service_name: TlsService
     project.service.name: tls-service
     project.name: cis-auth
@@ -10,7 +11,7 @@ TLS-Service:
     io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
     environment_name: ${env_shortcode}
     service_name: $${service_name}
-  image: ${registry_url}/auth-httpd:latest
+  image: ${registry_url}/auth-httpd:${auth_version}
   tty: true
   stdin_open: true
   environment:
@@ -239,7 +240,7 @@ AutomatedTesting:
     project.service.name: automated_testing
   volumes:
   - /var/log/iam:/home/iam_user/gatling_outputs
-  image: ${registry_url}/automated-testing:latest
+  image: ${registry_url}/automated-testing:${auth_version}
   tty: true
   stdin_open: true
   environment:
