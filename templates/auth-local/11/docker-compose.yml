@@ -306,7 +306,7 @@ djm-01:
   tty: true
   stdin_open: true
   environment:
-    REFERENCESERVER: dir.cis-externals.internal.rancher
+    REFERENCESERVER: dir.cis-externals.rancher.internal
     OPENDJ_BIND_USERNAME: cn=Spine2DirMgr
     OPENDJ_BIND_PASSWORD: Password1
     OPENDJ_BACKUP_SOURCE: 
