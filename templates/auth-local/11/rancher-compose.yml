@@ -15,7 +15,7 @@
       description: "Please enter the url of your registry"
       label: "e.g. registry.nhs.uk:5000"
       required: true
-      default: registry.ptl.cis.ncrs.nhs.uk:5000
+      default: 446537062602.dkr.ecr.eu-west-2.amazonaws.com/cishackday
       type: "string"
     - variable: "env_shortcode"
       description: "Please enter the shortcode of your environment"
