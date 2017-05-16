@@ -9,7 +9,7 @@
       description: "Which version of the app do you want to deploy?"
       label: "Version"
       required: true
-      default: latest
+      default: portable
       type: "string"
     - variable: "registry_url"
       description: "Please enter the url of your registry"
@@ -64,7 +64,7 @@
       label: "Directory Server"
       required: true
       type: "string"
-      default: "dir.cis-externals.rancher.internal:10389"
+      default: "djm-01.auth-local.rancher.internal:10389"
     - variable: "ldap_auth_username"
       description: "Please enter your LDAP Username for Auth queries"
       label: "LDAP Auth Username"
