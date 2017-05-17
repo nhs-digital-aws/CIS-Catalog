@@ -286,7 +286,7 @@ Portal:
   external_links:
   - cis-externals/Redis:RedisSessionStore
 
-djm-01:
+djm:
 #  ports:
 #   - 4444:4444
 #   - 8989:8989
@@ -309,11 +309,12 @@ djm-01:
     REFERENCESERVER: dir.cis-externals.rancher.internal
     OPENDJ_BIND_USERNAME: cn=Spine2DirMgr
     OPENDJ_BIND_PASSWORD: Password1
-    OPENDJ_BACKUP_SOURCE: 
-    OPENDJ_BACKUP_FILE: 
+    OPENDJ_BACKUP_SOURCE:
+    OPENDJ_BACKUP_FILE:
     OPENDJ_ENABLE_CHLOG: YES
+    HOSTNAME: djm.auth-local.rancher.internal
 
-dfa-01:
+dfa:
 #  ports:
 #   - 4444:4444
 #   - 8989:8989
@@ -339,4 +340,4 @@ dfa-01:
     OPENDJ_BACKUP_SOURCE:
     OPENDJ_BACKUP_FILE:
     OPENDJ_ROLE: DFA
-
+    HOSTNAME: dfa.auth-local.rancher.internal
