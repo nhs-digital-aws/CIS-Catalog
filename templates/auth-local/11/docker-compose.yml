@@ -314,35 +314,35 @@ djm:
     OPENDJ_ENABLE_CHLOG: YES
     HOSTNAME: djm.auth-local.rancher.internal
 
-dfa:
+#dfa:
 #  ports:
 #   - 4444:4444
 #   - 8989:8989
-  labels:
-    io.rancher.scheduler.affinity:host_label: stackType=auth
-    io.rancher.container.pull_image: always
-    io.rancher.container.hostname_override: container_name
-    io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
-    service_name: $${service_name}
-    environment_name: ${env_shortcode}
-    project.service.name: dfa
-    project.name: cis-auth
-    project.stack: auth
-  volumes:
-  - /var/log/iam:/var/log/iam
-  image: ${registry_url}/opendj-djm:${auth_version}
-  tty: true
-  stdin_open: true
-  environment:
-    REFERENCESERVER: djm.auth-local.rancher.internal
-    OPENDJ_BIND_USERNAME: cn=Spine2DirMgr
-    OPENDJ_BIND_PASSWORD: Password1
-    OPENDJ_BACKUP_SOURCE:
-    OPENDJ_BACKUP_FILE:
-    OPENDJ_ROLE: DFA
-    OPENDJ_ENABLE_CHLOG: YES
-    OPENDJ_READONLY: YES
-    HOSTNAME: dfa.auth-local.rancher.internal
+#  labels:
+#    io.rancher.scheduler.affinity:host_label: stackType=auth
+#    io.rancher.container.pull_image: always
+#    io.rancher.container.hostname_override: container_name
+#    io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
+#    service_name: $${service_name}
+#    environment_name: ${env_shortcode}
+#    project.service.name: dfa
+#    project.name: cis-auth
+#    project.stack: auth
+#  volumes:
+#  - /var/log/iam:/var/log/iam
+#  image: ${registry_url}/opendj-djm:${auth_version}
+#  tty: true
+#  stdin_open: true
+#  environment:
+#    REFERENCESERVER: djm.auth-local.rancher.internal
+#    OPENDJ_BIND_USERNAME: cn=Spine2DirMgr
+#    OPENDJ_BIND_PASSWORD: Password1
+#    OPENDJ_BACKUP_SOURCE:
+#    OPENDJ_BACKUP_FILE:
+#    OPENDJ_ROLE: DFA
+#    OPENDJ_ENABLE_CHLOG: YES
+#    OPENDJ_READONLY: YES
+#    HOSTNAME: dfa.auth-local.rancher.internal
 
 dex:
 #  ports:
