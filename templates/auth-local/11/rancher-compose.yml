@@ -46,7 +46,7 @@
       label: "auth_service_subject"
       required: true
       type: "string"
-      default: "abc123"
+#      default: "abc123"
     - variable: "auth_crl_file1"
       description: "Please enter your auth_crl_file1"
       label: "auth_crl_file1"
@@ -64,13 +64,13 @@
       label: "Directory Server"
       required: true
       type: "string"
-      default: "dfa.auth-local.rancher.internal:10389"
+      default: "djm.auth-local.rancher.internal:10389"
     - variable: "ldap_auth_username"
       description: "Please enter your LDAP Username for Auth queries"
       label: "LDAP Auth Username"
       required: true
       type: "string"
-      default: "cn=admin"
+#      default: "cn=admin"
     - variable: "ldap_auth_password"
       description: "Please enter your LDAP Password for Auth queries"
       label: "LDAP Auth Passowrd"
@@ -82,7 +82,7 @@
       label: "LDAP Role Username"
       required: true
       type: "string"
-      default: "cn=admin"
+#      default: "cn=admin"
     - variable: "ldap_role_password"
       description: "Please enter your LDAP Password for Role queries"
       label: "LDAP Role Passowrd"
