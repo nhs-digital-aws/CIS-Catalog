@@ -243,7 +243,7 @@ URS-BusinessService:
     io.rancher.scheduler.affinity:host_label_soft: stacktype=urs
   volumes:
   - /var/log/iam:/var/log/iam
-  - /home/rancher/env_config/${env_shortcode}/secaudit/client:/home/iam_user/secaudcertificates/client
+#  - /home/rancher/env_config/${env_shortcode}/secaudit/client:/home/iam_user/secaudcertificates/client
   privileged: true
   environment:
     GLUSTER_URL: ${gluster_url}
@@ -342,7 +342,7 @@ SecureAudit:
     io.rancher.scheduler.affinity:host_label_soft: stacktype=urs
   volumes:
   - /var/log/iam:/var/log/iam
-  - /home/rancher/env_config/${env_shortcode}/secaudit/server:/home/iam_user/secaudcertificates/server
+#  - /home/rancher/env_config/${env_shortcode}/secaudit/server:/home/iam_user/secaudcertificates/server
   image: ${registry_url}/cis-secureaudit:${urs_version}
   environment:
     JAVA_OPTS: -server -Xms128m -Xms256m -XX:NewSize=128m -XX:MaxNewSize=256m -XX:PermSize=64m -XX:MaxPermSize=128m -XX:+UseConcMarkSweepGC  -XX:+UseParNewGC   -XX:ParallelGCThreads=2 -Djava.security.egd=file:/dev/./urandom
@@ -362,7 +362,7 @@ Scheduler:
     io.rancher.scheduler.affinity:host_label_soft: stacktype=urs
   volumes:
   - /var/log/iam:/var/log/iam
-  - /home/rancher/env_config/${env_shortcode}/quartz.properties:/home/iam_user/careidconfig/quartz.properties
+#  - /home/rancher/env_config/${env_shortcode}/quartz.properties:/home/iam_user/careidconfig/quartz.properties
   image: ${registry_url}/cis-scheduler:${urs_version}
   environment:
     JAVA_OPTS: -server -Xms128m -Xms256m -XX:NewSize=128m -XX:MaxNewSize=256m -XX:PermSize=64m -XX:MaxPermSize=128m -XX:+UseConcMarkSweepGC  -XX:+UseParNewGC   -XX:ParallelGCThreads=2 -Djava.security.egd=file:/dev/./urandom
