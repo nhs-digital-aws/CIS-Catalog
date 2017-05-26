@@ -454,7 +454,6 @@ SCEP:
   links:
   - IAM-Database:IAM-Database
 
-
 EPR-WebFrontEnd:
   labels:
     io.rancher.container.hostname_override: container_name
@@ -538,7 +537,6 @@ haproxy-fe:
     project.name: cis-urs
     project.stack: urs
     io.rancher.scheduler.affinity:host_label: stacktype=urs
-
   volumes:
   - /home/rancher:/mnt/gluster
   links:
