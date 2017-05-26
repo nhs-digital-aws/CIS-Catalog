@@ -130,7 +130,6 @@ Audit:
     io.rancher.scheduler.affinity:host_label_soft: stacktype=urs
   volumes:
   - /var/log/iam:/var/log/iam
-  - /home/rancher/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
   image: ${registry_url}/cis-audit:${urs_version}
   environment:
     JAVA_OPTS: -server -Xms60m -Xms150m -XX:NewSize=128m -XX:MaxNewSize=256m -XX:PermSize=64m -XX:MaxPermSize=128m -XX:+UseConcMarkSweepGC  -XX:+UseParNewGC   -XX:ParallelGCThreads=2 -Djava.security.egd=file:/dev/./urandom
@@ -150,7 +149,6 @@ GuvnorService:
     io.rancher.scheduler.affinity:host_label_soft: stacktype=urs
   volumes:
   - /var/log/iam:/var/log/iam
-  - /home/rancher/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
   image: ${registry_url}/cis-guvnor:${urs_version}
   tty: true
   stdin_open: true
@@ -168,7 +166,6 @@ CMS-BusinessService:
     io.rancher.scheduler.affinity:host_label_soft: stacktype=urs
   volumes:
   - /var/log/iam:/var/log/iam
-  - /home/rancher/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
   privileged: true
   environment:
     GLUSTER_URL: ${gluster_url}
@@ -205,7 +202,6 @@ EPR-BusinessService:
     io.rancher.scheduler.affinity:host_label_soft: stacktype=urs
   volumes:
   - /var/log/iam:/var/log/iam
-  - /home/rancher/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
   image: ${registry_url}/cis-epr-business:${urs_version}
   environment:
     JAVA_OPTS: -server -Xms128m -Xms256m -XX:NewSize=128m -XX:MaxNewSize=256m -XX:PermSize=64m -XX:MaxPermSize=128m -XX:+UseConcMarkSweepGC  -XX:+UseParNewGC   -XX:ParallelGCThreads=2 -Djava.security.egd=file:/dev/./urandom
@@ -230,7 +226,6 @@ UID-Service:
     JAVA_OPTS: -server -Xms128m -Xms256m -XX:NewSize=128m -XX:MaxNewSize=256m -XX:PermSize=64m -XX:MaxPermSize=128m -XX:+UseConcMarkSweepGC  -XX:+UseParNewGC   -XX:ParallelGCThreads=2 -Djava.security.egd=file:/dev/./urandom
   volumes:
   - /var/log/iam:/var/log/iam
-  - /home/rancher/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
   links:
   - IAM-Database:IAM-Database
 
@@ -248,7 +243,6 @@ URS-BusinessService:
     io.rancher.scheduler.affinity:host_label_soft: stacktype=urs
   volumes:
   - /var/log/iam:/var/log/iam
-  - /home/rancher/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
   - /home/rancher/env_config/${env_shortcode}/secaudit/client:/home/iam_user/secaudcertificates/client
   privileged: true
   environment:
@@ -271,7 +265,6 @@ Integration:
     io.rancher.scheduler.affinity:host_label_soft: stacktype=urs
   volumes:
   - /var/log/iam:/var/log/iam
-  - /home/rancher/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
   image: ${registry_url}/cis-integration:${urs_version}
   environment:
     JAVA_OPTS: -server -Xms128m -Xms256m -XX:NewSize=128m -XX:MaxNewSize=256m -XX:PermSize=64m -XX:MaxPermSize=128m -XX:+UseConcMarkSweepGC  -XX:+UseParNewGC   -XX:ParallelGCThreads=2 -Djava.security.egd=file:/dev/./urandom
@@ -291,7 +284,6 @@ OMS-BusinessService:
     io.rancher.scheduler.affinity:host_label_soft: stacktype=urs
   volumes:
   - /var/log/iam:/var/log/iam
-  - /home/rancher/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
   image: ${registry_url}/cis-oms-business:${urs_version}
   environment:
     JAVA_OPTS: -server -Xms128m -Xms256m -XX:NewSize=128m -XX:MaxNewSize=256m -XX:PermSize=64m -XX:MaxPermSize=128m -XX:+UseConcMarkSweepGC  -XX:+UseParNewGC   -XX:ParallelGCThreads=2 -Djava.security.egd=file:/dev/./urandom
@@ -312,7 +304,6 @@ OSCAR-BusinessService:
     io.rancher.scheduler.affinity:host_label_soft: stacktype=urs
   volumes:
   - /var/log/iam:/var/log/iam
-  - /home/rancher/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
   image: ${registry_url}/cis-oscar-business:${urs_version}
   environment:
     JAVA_OPTS: -server -Xms128m -Xms256m -XX:NewSize=128m -XX:MaxNewSize=256m -XX:PermSize=64m -XX:MaxPermSize=128m -XX:+UseConcMarkSweepGC  -XX:+UseParNewGC   -XX:ParallelGCThreads=2 -Djava.security.egd=file:/dev/./urandom
@@ -332,7 +323,6 @@ RulesService:
     io.rancher.scheduler.affinity:host_label_soft: stacktype=urs
   volumes:
   - /var/log/iam:/var/log/iam
-  - /home/rancher/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
   image: ${registry_url}/cis-rules:${urs_version}
   environment:
     JAVA_OPTS: -server -Xms128m -Xms256m -XX:NewSize=128m -XX:MaxNewSize=256m -XX:PermSize=64m -XX:MaxPermSize=128m -XX:+UseConcMarkSweepGC  -XX:+UseParNewGC   -XX:ParallelGCThreads=2 -Djava.security.egd=file:/dev/./urandom
@@ -352,7 +342,6 @@ SecureAudit:
     io.rancher.scheduler.affinity:host_label_soft: stacktype=urs
   volumes:
   - /var/log/iam:/var/log/iam
-  - /home/rancher/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
   - /home/rancher/env_config/${env_shortcode}/secaudit/server:/home/iam_user/secaudcertificates/server
   image: ${registry_url}/cis-secureaudit:${urs_version}
   environment:
@@ -374,7 +363,6 @@ Scheduler:
   volumes:
   - /var/log/iam:/var/log/iam
   - /home/rancher/env_config/${env_shortcode}/quartz.properties:/home/iam_user/careidconfig/quartz.properties
-  - /home/rancher/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
   image: ${registry_url}/cis-scheduler:${urs_version}
   environment:
     JAVA_OPTS: -server -Xms128m -Xms256m -XX:NewSize=128m -XX:MaxNewSize=256m -XX:PermSize=64m -XX:MaxPermSize=128m -XX:+UseConcMarkSweepGC  -XX:+UseParNewGC   -XX:ParallelGCThreads=2 -Djava.security.egd=file:/dev/./urandom
@@ -394,7 +382,6 @@ ID-StoreSyncService:
     io.rancher.scheduler.affinity:host_label_soft: stacktype=urs
   volumes:
   - /var/log/iam:/var/log/iam
-  - /home/rancher/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
   image: ${registry_url}/cis-id-storesync:${urs_version}
   tty: true
   stdin_open: true
@@ -416,7 +403,6 @@ CC-CheckerService:
     io.rancher.scheduler.affinity:host_label_soft: stacktype=urs
   volumes:
   - /var/log/iam:/var/log/iam
-  - /home/rancher/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
   environment:
     JAVA_OPTS: -server -Xms128m -Xms256m -XX:NewSize=128m -XX:MaxNewSize=256m -XX:PermSize=64m -XX:MaxPermSize=128m -XX:+UseConcMarkSweepGC  -XX:+UseParNewGC   -XX:ParallelGCThreads=2 -Djava.security.egd=file:/dev/./urandom
   image: ${registry_url}/cis-ccc:${urs_version}
@@ -437,7 +423,6 @@ ReportingService:
     io.rancher.scheduler.affinity:host_label_soft: stacktype=urs
   volumes:
   - /var/log/iam:/var/log/iam
-  - /home/rancher/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
   image: ${registry_url}/cis-reporting:${urs_version}
   tty: true
   stdin_open: true
@@ -481,7 +466,6 @@ EPR-WebFrontEnd:
     io.rancher.scheduler.affinity:host_label_soft: stacktype=urs
   volumes:
   - /var/log/iam:/var/log/iam
-  - /home/rancher/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
   image: ${registry_url}/cis-epr-webfrontend:${urs_version}
   environment:
     JAVA_OPTS: -server -Xms128m -Xms256m -XX:NewSize=128m -XX:MaxNewSize=256m -XX:PermSize=64m -XX:MaxPermSize=128m -XX:+UseConcMarkSweepGC  -XX:+UseParNewGC   -XX:ParallelGCThreads=2 -Djava.security.egd=file:/dev/./urandom
@@ -503,7 +487,6 @@ URS-WebFrontEnd:
     io.rancher.scheduler.affinity:host_label_soft: stacktype=urs
   volumes:
   - /var/log/iam:/var/log/iam
-  - /home/rancher/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
   image: ${registry_url}/cis-urs-webfrontend:${urs_version}
   tty: true
   stdin_open: true
@@ -530,7 +513,6 @@ Portal:
     io.rancher.scheduler.affinity:host_label_soft: stacktype=urs
   volumes:
   - /var/log/iam:/var/log/iam
-  - /home/rancher/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
   image: ${registry_url}/cis-portal:${urs_version}
   tty: true
   stdin_open: true
@@ -613,7 +595,6 @@ SelfService-WebFrontEnd:
   privileged: true
   volumes:
   - /var/log/iam:/var/log/iam
-  - /home/rancher/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
   stdin_open: true
 
 EmailService:
@@ -630,7 +611,6 @@ EmailService:
     io.rancher.scheduler.affinity:host_label_soft: stacktype=urs
   volumes:
   - /var/log/iam:/var/log/iam
-  - /home/rancher/env_config/${env_shortcode}/services.properties:/home/iam_user/careidconfig/services.properties
   privileged: true
 
 LB-BusinessServices:
