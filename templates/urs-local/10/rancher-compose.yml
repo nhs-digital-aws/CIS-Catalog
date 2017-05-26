@@ -1,0 +1,401 @@
+.catalog:
+  name: "NHS Digital - CIS - URS App"
+  version: "0.10"
+  description: |
+    Enter Description Here
+  minimum_rancher_version: "v1.1.4"
+  questions:
+    - variable: "urs_version"
+      description: "Which version of the app do you want to deploy?"
+      label: "Version"
+      required: true
+      default: latest
+      type: "string"
+    - variable: "registry_url"
+      description: "Please enter the url of your registry"
+      label: "e.g. registry.nhs.uk:5000"
+      required: true
+      default: 446537062602.dkr.ecr.eu-west-2.amazonaws.com/cishackday
+      type: "string"
+    - variable: "env_shortcode"
+      description: "Please enter the shortcode of your environment"
+      label: "Environment Shortcode"
+      required: true
+      default: lh
+      type: "string"
+    - variable: "gluster_url"
+      description: "Please enter your Gluster URL"
+      label: "GlusterURL"
+      required: true
+      default: nfs.cis-externals.rancher.internal
+      type: "string"
+    - variable: "spine_external_shortcode"
+      description: "Please enter Spine external shortcode"
+      label: "SpineExternalShortcode"
+      required: true
+      default: "int"
+      type: "string"
+    - variable: "cms_sopinrandomvalue"
+      description: "Please enter CMS sopinrandomvalue"
+      label: "CMSSopinrandomvalue"
+      required: true
+      default: "False"
+      type: "string"
+    - variable: "cms_clientdll_updatedate"
+      description: "Please enter CMS clientdll update date"
+      label: "CMSClientdllUpdatedate"
+      required: true
+      default: "20170111"
+      type: "string"
+    - variable: "cms_ot_smartcard_dll_min_version"
+      description: "Please enter CMS OT smartcard DLL min version"
+      label: "CMSOTSmartcardDLLMinVersion"
+      required: true
+      default: "3.0"
+      type: "string"
+    - variable: "cms_ot_smartcard_dll_current_version"
+      description: "Please enter CMS OT smartcard DLL current version"
+      label: "CMSOTSmartcardDLLCurrentVersion"
+      required: true
+      default: "3.0"
+      type: "string"
+    - variable: "mobile_authentication"
+      description: "Please enter mobile authentication"
+      label: "MobileAuthentication"
+      required: true
+      default: "atn.lh.iam.spine2.ncrs.nhs.uk"
+      type: "string"
+    - variable: "mobile_roleselection"
+      description: "Please enter mobile role selection"
+      label: "MobileRoleselection"
+      required: true
+      default: "atn.lh.iam.spine2.ncrs.nhs.uk"
+      type: "string"
+    - variable: "feature_iam_epr_xml_api_enabled"
+      description: "Please enter feature IAM EPR XML API enabled"
+      label: "FeatureIAMEPRXMLAPIEnabled"
+      required: true
+      default: "False"
+      type: "string"
+
+ServiceProperties:
+  upgrade_strategy:
+    start_first: true
+  scale: 1
+  health_check:
+    port: 80
+    unhealthy_threshold: 3
+    healthy_threshold: 2
+
+IAM-Database:
+  hostname: iam-database.cis-externals.rancher.internal
+
+Directory:
+    scale: 1
+    start_on_create: true
+    lb_config:
+      certs: []
+      port_rules:
+      - priority: 1
+        protocol: tcp
+        service: cis-externals/Dir
+        source_port: 389
+        target_port: 10389
+    health_check:
+      response_timeout: 2000
+      healthy_threshold: 2
+      port: 42
+      unhealthy_threshold: 3
+      interval: 2000
+
+Entrust-CA1-Manager:
+  hostname: subca.cis-externals.rancher.internal
+
+Entrust-CA2-Manager:
+  hostname: subcc.cis-externals.rancher.internal
+
+Entrust-CA3-Manager:
+  hostname: subca.cis-externals.rancher.internal
+
+Outbound-Messaging-Service:
+  external_ips:
+    - 127.0.0.1
+
+WebSessionStore:
+  hostname: redis.cis-externals.rancher.internal
+
+RedisSessionStore:
+  hostname: redis.cis-externals.rancher.internal
+
+pacemaker-fe:
+  upgrade_strategy:
+    start_first: true
+
+haproxy-fe:
+  upgrade_strategy:
+    start_first: true
+
+LB-BusinessServices:
+  upgrade_strategy:
+    start_first: true
+  scale: 1
+  load_balancer_config:
+    name: lb-bus config
+
+LB-Secure:
+  upgrade_strategy:
+    start_first: true
+  load_balancer_config: {}
+  scale: 1
+
+Audit:
+  upgrade_strategy:
+    start_first: true
+  scale: 1
+  health_check:
+    port: 8080
+    interval: 2000
+    unhealthy_threshold: 3
+    request_line: 'GET /auditloggerws/?lbchk=1 HTTP/1.0'
+    healthy_threshold: 2
+    response_timeout: 2000
+
+GuvnorService:
+  upgrade_strategy:
+    start_first: true
+  scale: 1
+  health_check:
+    port: 8080
+    interval: 2000
+    unhealthy_threshold: 3
+    request_line: 'GET /guvnor-5.5.0.Final-tomcat-6.0/org.drools.guvnor.Guvnor/Guvnor.jsp?lbchk=1 HTTP/1.0'
+    healthy_threshold: 2
+    response_timeout: 2000
+
+CMS-BusinessService:
+  upgrade_strategy:
+    start_first: true
+  scale: 1
+  health_check:
+    port: 8080
+    interval: 2000
+    unhealthy_threshold: 3
+    request_line: 'GET /cmsbusservice/?lbchk=1 HTTP/1.0'
+    healthy_threshold: 2
+    response_timeout: 2000
+
+EPR-BusinessService:
+  upgrade_strategy:
+    start_first: true
+  scale: 1
+  health_check:
+    port: 8080
+    interval: 2000
+    unhealthy_threshold: 3
+    request_line: 'GET /eprbusservice/?lbchk=1 HTTP/1.0'
+    healthy_threshold: 2
+    response_timeout: 2000
+
+UID-Service:
+  upgrade_strategy:
+    start_first: true
+  scale: 1
+  health_check:
+    port: 8080
+    interval: 2000
+    unhealthy_threshold: 3
+    request_line: 'GET /uidservice/?lbchk=1 HTTP/1.0'
+    healthy_threshold: 2
+    response_timeout: 2000
+
+URS-BusinessService:
+  upgrade_strategy:
+    start_first: true
+  scale: 1
+  health_check:
+    port: 8080
+    interval: 2000
+    unhealthy_threshold: 3
+    request_line: 'GET /ursbusservice/?lbchk=1 HTTP/1.0'
+    healthy_threshold: 2
+    response_timeout: 2000
+
+Integration:
+  upgrade_strategy:
+    start_first: true
+  scale: 1
+  health_check:
+    port: 8181
+    interval: 2000
+    unhealthy_threshold: 3
+    request_line: 'GET /cxf/esrNotificationService?_wadl HTTP/1.0'
+    healthy_threshold: 2
+    response_timeout: 2000
+
+OMS-BusinessService:
+  upgrade_strategy:
+    start_first: true
+  scale: 1
+  health_check:
+    port: 8080
+    interval: 2000
+    unhealthy_threshold: 3
+    request_line: 'GET /omsbusservice/?lbchk=1 HTTP/1.0'
+    healthy_threshold: 2
+    response_timeout: 2000
+
+OSCAR-BusinessService:
+  upgrade_strategy:
+    start_first: true
+  scale: 1
+  health_check:
+    port: 8080
+    interval: 2000
+    unhealthy_threshold: 3
+    request_line: ''
+    healthy_threshold: 2
+    response_timeout: 2000
+
+RulesService:
+  upgrade_strategy:
+    start_first: true
+  scale: 1
+  health_check:
+    port: 8080
+    interval: 2000
+    unhealthy_threshold: 3
+    request_line: ''
+    healthy_threshold: 2
+    response_timeout: 2000
+
+SecureAudit:
+  upgrade_strategy:
+    start_first: true
+  scale: 1
+  health_check:
+    port: 8080
+    interval: 2000
+    unhealthy_threshold: 3
+    request_line: ''
+    healthy_threshold: 2
+    response_timeout: 2000
+
+Scheduler:
+  upgrade_strategy:
+    start_first: true
+  scale: 1
+  health_check:
+    port: 8080
+    interval: 2000
+    unhealthy_threshold: 3
+    request_line: ''
+    healthy_threshold: 2
+    response_timeout: 2000
+
+ID-StoreSyncService:
+  upgrade_strategy:
+    start_first: true
+  scale: 1
+  health_check:
+    port: 8080
+    interval: 2000
+    unhealthy_threshold: 3
+    request_line: 'GET /idstoresyncmanager/?lbchk=1 HTTP/1.0'
+    healthy_threshold: 2
+    response_timeout: 2000
+
+CC-CheckerService:
+  upgrade_strategy:
+    start_first: true
+  scale: 1
+  health_check:
+    port: 8080
+    interval: 2000
+    unhealthy_threshold: 3
+    request_line: 'GET /cccheckerservice/?lbchk=1 HTTP/1.0'
+    healthy_threshold: 2
+    response_timeout: 2000
+
+ReportingService:
+  upgrade_strategy:
+    start_first: true
+  scale: 1
+  health_check:
+    port: 8080
+    interval: 2000
+    unhealthy_threshold: 3
+    request_line: 'GET /iamrepservice/?lbchk=1 HTTP/1.0'
+    healthy_threshold: 2
+    response_timeout: 2000
+
+SCEP:
+  upgrade_strategy:
+    start_first: true
+  scale: 1
+  health_check:
+    port: 9098
+    interval: 2000
+    unhealthy_threshold: 3
+    request_line: 'GET /healthcheck HTTP/1.0'
+    healthy_threshold: 2
+    response_timeout: 2000
+
+EPR-WebFrontEnd:
+  upgrade_strategy:
+    start_first: true
+  scale: 1
+  health_check:
+    port: 8080
+    interval: 2000
+    unhealthy_threshold: 3
+    response_timeout: 2000
+    request_line: 'GET /eprwebapp/img/common/loader.GIF?lbchk=1 HTTP/1.0'
+    healthy_threshold: 2
+
+URS-WebFrontEnd:
+  upgrade_strategy:
+    start_first: true
+  scale: 1
+  health_check:
+    port: 8080
+    interval: 2000
+    unhealthy_threshold: 3
+    request_line: 'GET /urswebapp/img/loader.GIF?lbchk=1 HTTP/1.0'
+    healthy_threshold: 2
+    response_timeout: 2000
+
+Portal:
+  upgrade_strategy:
+    start_first: true
+  scale: 1
+  health_check:
+    port: 8080
+    interval: 2000
+    unhealthy_threshold: 3
+    request_line: 'GET /portal/img/spacer.gif?lbchk=1 HTTP/1.0'
+    healthy_threshold: 2
+    response_timeout: 2000
+
+SelfService-WebFrontEnd:
+  scale: 1
+  health_check:
+    port: 8080
+    interval: 2000
+    initializing_timeout: 60000
+    unhealthy_threshold: 3
+    strategy: recreate
+    response_timeout: 2000
+    request_line: GET "/selfservicewebapp/img/self-service.jpg?lbchk=1" "HTTP/1.0"
+    healthy_threshold: 2
+
+EmailService:
+  upgrade_strategy:
+    start_first: true
+  scale: 1
+  health_check:
+    port: 8080
+    interval: 2000
+    unhealthy_threshold: 3
+    request_line: 'GET /emailservice/?lbchk=1 HTTP/1.0'
+    healthy_threshold: 2
+    response_timeout: 2000
