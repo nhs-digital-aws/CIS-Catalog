@@ -78,7 +78,7 @@
       default: "False"
       type: "string"
 
-ServiceProperties:
+ServicesProperties:
   upgrade_strategy:
     start_first: true
   scale: 1

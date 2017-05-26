@@ -1,9 +1,9 @@
-Service-Properties:
+Services-Properties:
   labels:
     io.rancher.scheduler.affinity:host_label: stackType=urs
     io.rancher.container.pull_image: always
-    service_name: ServiceProperties
-    project.service.name: service-properties
+    service_name: ServicesProperties
+    project.service.name: services-properties
     project.name: cis-urs
     project.stack: urs
     io.rancher.container.hostname_override: container_name
