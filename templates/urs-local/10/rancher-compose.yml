@@ -9,7 +9,7 @@
       description: "Which version of the app do you want to deploy?"
       label: "Version"
       required: true
-      default: latest
+      default: portable
       type: "string"
     - variable: "registry_url"
       description: "Please enter the url of your registry"
