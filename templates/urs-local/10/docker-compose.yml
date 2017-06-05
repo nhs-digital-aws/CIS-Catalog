@@ -564,7 +564,7 @@ haproxy-fe:
     - be4fqdn=$VIP_FOUR_BE
     - GLUSTER_URL=${gluster_url}
     - envcode=${env_shortcode}
-  image: ${registry_url}/cis-fe-haproxy
+  image: ${registry_url}/cis-fe-haproxy:${urs_version}
   tty: true
   stdin_open: true
   privileged: true
@@ -589,7 +589,7 @@ SelfService-WebFrontEnd:
     - WebSessionStore:RedisSessionStore
   tty: true
   log_opt: {}
-  image: ${registry_url}/cis-selfservice-webfrontend:latest
+  image: ${registry_url}/cis-selfservice-webfrontend:${urs_version}
   privileged: true
   volumes:
   - /var/log/iam:/var/log/iam
@@ -675,7 +675,7 @@ LB-Secure:
     project.name: cis-urs
     project.stack: urs
     io.rancher.scheduler.affinity:host_label_soft: stacktype=urs
-  image: rancher/load-balancer-service
+  image: rancher/load-balancer-service:${urs_version}
   tty: true
   stdin_open: true
   links:
