@@ -528,7 +528,7 @@ services:
     - WebSessionStore:RedisSessionStore
 
   haproxy-fe:
-    net: "host"
+    network_mode: "host"
     labels:
       io.rancher.scheduler.global: 'true'
       io.rancher.container.hostname_override: container_name
@@ -573,10 +573,10 @@ services:
 
   SelfService-WebFrontEnd:
     environment:
-      GLUSTER_URL: ${gluster_url}
-      GLUSTER_FOLDER: ${env_shortcode}
-      GLUSTER_PHOTOS: true
-      GLUSTER_REPORTS: true
+#      GLUSTER_URL: ${gluster_url}
+#      GLUSTER_FOLDER: ${env_shortcode}
+#      GLUSTER_PHOTOS: true
+#      GLUSTER_REPORTS: true
       JAVA_OPTS: -server -XX:+UseConcMarkSweepGC -XX:+UseParNewGC -XX:ParallelGCThreads=2 -Xms512m -Xmx1500m
     labels:
       environment_name: lh
@@ -590,7 +590,6 @@ services:
     links:
       - WebSessionStore:RedisSessionStore
     tty: true
-    log_opt: {}
     image: ${registry_url}/cis-selfservice-webfrontend:${urs_version}
     privileged: true
     volumes:
