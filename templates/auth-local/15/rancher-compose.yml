@@ -161,85 +161,85 @@ catalog:
       required: true
       type: "string"
       default: "10.196.94.199"
-
-TlsService:
-  upgrade_strategy:
-    start_first: true
-  scale: 1
-  health_check:
-    port: 80
-    unhealthy_threshold: 3
-    healthy_threshold: 2
-
-AuditService:
-  upgrade_strategy:
-    start_first: true
-  scale: 1
-  health_check:
-    port: 8080
-    interval: 2000
-    unhealthy_threshold: 3
-    request_line: 'GET /authauditlogger/?lbchk=1 HTTP/1.0'
-    healthy_threshold: 2
-    response_timeout: 2000
-
-AuthenticatorService:
-  upgrade_strategy:
-    start_first: true
-  scale: 1
-  health_check:
-    port: 8080
-    interval: 2000
-    unhealthy_threshold: 3
-    request_line: 'GET /authenticator/?lbchk=1 HTTP/1.0'
-    healthy_threshold: 2
-    response_timeout: 2000
-
-SessionManager:
-  upgrade_strategy:
-    start_first: true
-  scale: 1
-
-  health_check:
-    port: 8080
-    interval: 2000
-    unhealthy_threshold: 3
-    request_line: 'GET /sessionmanager/?lbchk=1 HTTP/1.0'
-    healthy_threshold: 2
-    response_timeout: 2000
-
-SAMLService:
-  upgrade_strategy:
-    start_first: true
-  scale: 1
-  health_check:
-    port: 8080
-    interval: 2000
-    unhealthy_threshold: 3
-    request_line: 'GET /saml/?lbchk=1 HTTP/1.0'
-    healthy_threshold: 2
-    response_timeout: 2000
-
-TokenValidationService:
-  upgrade_strategy:
-    start_first: true
-  scale: 1
-  health_check:
-    port: 8080
-    interval: 2000
-    unhealthy_threshold: 3
-    request_line: 'GET /amserver/?lbchk=1 HTTP/1.0'
-    healthy_threshold: 2
-    response_timeout: 2000
-
-Portal:
-  upgrade_strategy:
-    start_first: true
-  scale: 1
-  health_check:
-    port: 8080
-    interval: 2000
-    unhealthy_threshold: 3
-    request_line: 'GET /portal/ HTTP/1.0'
-    healthy_threshold: 2
-    response_timeout: 2000
+services:
+  TlsService:
+    upgrade_strategy:
+      start_first: true
+    scale: 1
+    health_check:
+      port: 80
+      unhealthy_threshold: 3
+      healthy_threshold: 2
+  
+  AuditService:
+    upgrade_strategy:
+      start_first: true
+    scale: 1
+    health_check:
+      port: 8080
+      interval: 2000
+      unhealthy_threshold: 3
+      request_line: 'GET /authauditlogger/?lbchk=1 HTTP/1.0'
+      healthy_threshold: 2
+      response_timeout: 2000
+  
+  AuthenticatorService:
+    upgrade_strategy:
+      start_first: true
+    scale: 1
+    health_check:
+      port: 8080
+      interval: 2000
+      unhealthy_threshold: 3
+      request_line: 'GET /authenticator/?lbchk=1 HTTP/1.0'
+      healthy_threshold: 2
+      response_timeout: 2000
+  
+  SessionManager:
+    upgrade_strategy:
+      start_first: true
+    scale: 1
+  
+    health_check:
+      port: 8080
+      interval: 2000
+      unhealthy_threshold: 3
+      request_line: 'GET /sessionmanager/?lbchk=1 HTTP/1.0'
+      healthy_threshold: 2
+      response_timeout: 2000
+  
+  SAMLService:
+    upgrade_strategy:
+      start_first: true
+    scale: 1
+    health_check:
+      port: 8080
+      interval: 2000
+      unhealthy_threshold: 3
+      request_line: 'GET /saml/?lbchk=1 HTTP/1.0'
+      healthy_threshold: 2
+      response_timeout: 2000
+  
+  TokenValidationService:
+    upgrade_strategy:
+      start_first: true
+    scale: 1
+    health_check:
+      port: 8080
+      interval: 2000
+      unhealthy_threshold: 3
+      request_line: 'GET /amserver/?lbchk=1 HTTP/1.0'
+      healthy_threshold: 2
+      response_timeout: 2000
+  
+  Portal:
+    upgrade_strategy:
+      start_first: true
+    scale: 1
+    health_check:
+      port: 8080
+      interval: 2000
+      unhealthy_threshold: 3
+      request_line: 'GET /portal/ HTTP/1.0'
+      healthy_threshold: 2
+      response_timeout: 2000

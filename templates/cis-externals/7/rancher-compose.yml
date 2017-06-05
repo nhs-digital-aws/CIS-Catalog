@@ -29,15 +29,15 @@ catalog:
       required: true
       default: lh
       type: "string"
-
-IAM-Database:
-  scale: 1
-
-Directory:
-  scale: 1
-
-Redis:
-  scale: 1
-
-Nfs:
-  scale: 1
+services:
+  IAM-Database:
+    scale: 1
+  
+  Directory:
+    scale: 1
+  
+  Redis:
+    scale: 1
+  
+  Nfs:
+    scale: 1
