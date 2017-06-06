@@ -541,29 +541,14 @@ services:
       io.rancher.scheduler.affinity:host_label: stackType=urs
     volumes:
     - /home/rancher:/mnt/gluster
-    links:
-    - URS-WebFrontEnd:URS-WebFrontEnd
-    - EPR-WebFrontEnd:EPR-WebFrontEnd
-    - Integration:Integration
-    - Portal:Portal
-    - SelfService-WebFrontEnd:SelfService-WebFrontEnd
     environment:
-      - fe1ip=0.0.0.0
-      - fe2ip=$VIP_TWO
-      - fe3ip=$VIP_THREE
-      - fe4ip=$VIP_FOUR
-      - fe1pemfile=wfe.lh.iam.spine2.ncrs.nhs.uk
-      - fe2pemfile=$VIP_TWO_PEM
-      - fe3pemfile=$VIP_THREE_PEM
-      - fe4pemfile=$VIP_FOUR_PEM
-      - be1-1fqdn=urs-webfrontend.urs-local.rancher.internal
-      - be1-2fqdn=epr-webfrontend.urs-local.rancher.internal
-      - be1-3fqdn=portal.urs-local.rancher.internal
-      - be1-4fqdn=integration.urs-local.rancher.internal
-      - be1-5fqdn=
-      - be2fqdn=$VIP_TWO_BE
-      - be3fqdn=$VIP_THREE_BE
-      - be4fqdn=$VIP_FOUR_BE
+      - vip=0.0.0.0
+      - pemfile=wfe.lh.iam.spine2.ncrs.nhs.uk
+      - befqdn1=urs-webfrontend.urs-local.rancher.internal
+      - befqdn2=epr-webfrontend.urs-local.rancher.internal
+      - befqdn3=portal.urs-local.rancher.internal
+      - befqdn4=integration.urs-local.rancher.internal
+      - befqdn5=SelfService-WebFrontEnd.urs-local.rancher.internal
       - GLUSTER_URL=${gluster_url}
       - envcode=${env_shortcode}
     image: ${registry_url}/cis-fe-haproxy:${urs_version}
@@ -640,4 +625,4 @@ services:
       io.rancher.scheduler.affinity:host_label_soft: stackType=urs
     tty: true
     stdin_open: true
-    image: lb-service-haproxy:v0.6.4
+    image: rancher/lb-service-haproxy:v0.6.4
