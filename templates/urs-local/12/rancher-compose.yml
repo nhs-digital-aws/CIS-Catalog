@@ -165,7 +165,7 @@ services:
       - source_port: 8080
         target_port: 8181
         protocol: http
-        path: /cxf
+        path: /cxf/
         service: Integration
       - source_port: 8080
         target_port: 8080
@@ -223,7 +223,8 @@ services:
         path: /eprNotification
         service: Outbound-Messaging-Service
       - source_port: 8080
-        target_port: 8104
+        target_port: 8080
+#        target_port: 8104
         protocol: http
         path: /AckRecord
         service: Outbound-Messaging-Service
@@ -264,8 +265,22 @@ services:
   LB-Secure:
     upgrade_strategy:
       start_first: true
-    load_balancer_config: {}
     scale: 1
+    lb_config:
+      certs: []
+      port_rules:
+      - protocol: tcp
+        service: SecureAudit
+        source_port: 8443
+        target_port: 8443
+    health_check:
+      response_timeout: 2000
+      healthy_threshold: 2
+      port: 42
+      unhealthy_threshold: 3
+      initializing_timeout: 60000
+      interval: 2000
+      reinitializing_timeout: 60000
 
   Audit:
     upgrade_strategy:

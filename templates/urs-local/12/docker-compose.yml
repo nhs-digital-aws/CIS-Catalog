@@ -629,17 +629,15 @@ services:
     image: rancher/lb-service-haproxy:v0.6.4
 
   LB-Secure:
-    expose:
-    - 8443:8443/tcp
     labels:
+      io.rancher.container.agent.role: environmentAdmin
+      io.rancher.container.create_agent: 'true'
       environment_name: ${env_shortcode}
       service_name: LB-Secure
       project.service.name: lb-secure
       project.name: cis-urs
       project.stack: urs
       io.rancher.scheduler.affinity:host_label_soft: stackType=urs
-    image: rancher/load-balancer-service
     tty: true
     stdin_open: true
-    links:
-    - SecureAudit:SecureAudit
+    image: lb-service-haproxy:v0.6.4
