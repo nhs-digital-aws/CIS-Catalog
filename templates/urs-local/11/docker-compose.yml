@@ -630,7 +630,7 @@ services:
       io.rancher.loadbalancer.target.GuvnorService: 8080/guvnor-5.5.0.Final-tomcat-6.0=8080
       io.rancher.loadbalancer.target.OMS-BusinessService: 8080/omsbusservice=8080
       io.rancher.loadbalancer.target.ID-StoreSyncService: 8080/idstoresyncmanager=8080,8080/openidm=8081
-      io.rancher.loadbalancer.target.CC-CheckerService: 8080/cccheckerservice/8080
+      io.rancher.loadbalancer.target.CC-CheckerService: 8080/cccheckerservice=8080
       io.rancher.loadbalancer.target.Outbound-Messaging-Service: 8080/esrNotification=8080,8080/eprNotification=8080,8080/AckRecord=8104
       io.rancher.loadbalancer.target.URS-WebFrontEnd: 8080/urswebapp=8080
       io.rancher.loadbalancer.target.EPR-BusinessService: 8080/eprbusservice=8080
