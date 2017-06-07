@@ -77,7 +77,7 @@
       default: "False"
       type: "string"
 
-ServicesProperties:
+Services-Properties:
   upgrade_strategy:
     start_first: true
   scale: 1
@@ -125,10 +125,6 @@ WebSessionStore:
 
 RedisSessionStore:
   hostname: redis.cis-externals.rancher.internal
-
-pacemaker-fe:
-  upgrade_strategy:
-    start_first: true
 
 haproxy-fe:
   upgrade_strategy:
