@@ -1,5 +1,4 @@
-version: '2'
-catalog:
+.catalog:
   name: "NHS Digital - CIS - Monitoring Stack"
   version: "0.2"
   description: "NHS Digital - CIS - Monitoring Stack"
@@ -17,10 +16,10 @@ catalog:
       required: true
       default: registry.ptl.cis.ncrs.nhs.uk:5000
       type: "string"
-services:
-  registry:
-    scale: 1
-  jenkins:
-    scale: 1
-  sgw:
-    scale: 1
+
+registry:
+  scale: 1
+jenkins:
+  scale: 1
+sgw:
+  scale: 1

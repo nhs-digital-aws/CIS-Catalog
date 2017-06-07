@@ -1,5 +1,4 @@
-version: '2'
-catalog:
+.catalog:
   name: "NHS Digital - CIS - URS App"
   version: "0.12"
   description: "NHS Digital - CIS - URS App"
@@ -77,459 +76,459 @@ catalog:
       required: true
       default: "False"
       type: "string"
-services:
-  ServicesProperties:
-    upgrade_strategy:
-      start_first: true
+
+ServicesProperties:
+  upgrade_strategy:
+    start_first: true
+  scale: 1
+  health_check:
+    port: 80
+    unhealthy_threshold: 3
+    healthy_threshold: 2
+
+IAM-Database:
+  hostname: iam-database.cis-externals.rancher.internal
+
+Directory:
     scale: 1
-    health_check:
-      port: 80
-      unhealthy_threshold: 3
-      healthy_threshold: 2
-
-  IAM-Database:
-    hostname: iam-database.cis-externals.rancher.internal
-
-  Directory:
-      scale: 1
-      start_on_create: true
-      lb_config:
-        certs: []
-        port_rules:
-        - priority: 1
-          protocol: tcp
-          service: cis-externals/Dir
-          source_port: 389
-          target_port: 10389
-      health_check:
-        response_timeout: 2000
-        healthy_threshold: 2
-        port: 42
-        unhealthy_threshold: 3
-        interval: 2000
-
-  Entrust-CA1-Manager:
-    hostname: subca.cis-externals.rancher.internal
-
-  Entrust-CA2-Manager:
-    hostname: subcc.cis-externals.rancher.internal
-
-  Entrust-CA3-Manager:
-    hostname: subca.cis-externals.rancher.internal
-
-  Outbound-Messaging-Service:
-    external_ips:
-      - 127.0.0.1
-
-  WebSessionStore:
-    hostname: redis.cis-externals.rancher.internal
-
-  RedisSessionStore:
-    hostname: redis.cis-externals.rancher.internal
-
-  pacemaker-fe:
-    upgrade_strategy:
-      start_first: true
-
-  haproxy-fe:
-    upgrade_strategy:
-      start_first: true
-
-  LB-BusinessServices:
-    upgrade_strategy:
-      start_first: true
-    scale: 1
+    start_on_create: true
     lb_config:
       certs: []
       port_rules:
-      - source_port: 8080
-        target_port: 8080
-        protocol: http
-        path: /ursbusservice
-        service: URS-BusinessService
-      - source_port: 8080
-        target_port: 8080
-        protocol: http
-        path: /eprwebapp
-        service: EPR-WebFrontEnd
-      - source_port: 8080
-        target_port: 8080
-        protocol: http
-        path: /portal
-        service: Portal
-      - source_port: 8080
-        target_port: 8080
-        protocol: http
-        path: /orsservice
-        service: OSCAR-BusinessService
-      - source_port: 8080
-        target_port: 8181
-        protocol: http
-        path: /cxf/
-        service: Integration
-      - source_port: 8080
-        target_port: 8080
-        protocol: http
-        path: /iamrepservice
-        service: ReportingService
-      - source_port: 8080
-        target_port: 8080
-        protocol: http
-        path: /auditloggerws
-        service: Audit
-      - source_port: 8080
-        target_port: 9098
-        protocol: http
-        path: /mobileconfig
-        service: SCEP
-      - source_port: 8080
-        target_port: 8080
-        protocol: http
-        path: /uidservice
-        service: UID-Service
-      - source_port: 8080
-        target_port: 8080
-        protocol: http
-        path: /guvnor-5.5.0.Final-tomcat-6.0
-        service: GuvnorService
-      - source_port: 8080
-        target_port: 8080
-        protocol: http
-        path: /omsbusservice
-        service: OMS-BusinessService
-      - source_port: 8080
-        target_port: 8080
-        protocol: http
-        path: /idstoresyncmanager
-        service: ID-StoreSyncService
-      - source_port: 8080
-        target_port: 8081
-        protocol: http
-        path: /openidm
-        service: ID-StoreSyncService
-      - source_port: 8080
-        target_port: 8080
-        protocol: http
-        path: /cccheckerservice
-        service: CC-CheckerService
-      - source_port: 8080
-        target_port: 8080
-        protocol: http
-        path: /esrNotification
-        service: Outbound-Messaging-Service
-      - source_port: 8080
-        target_port: 8080
-        protocol: http
-        path: /eprNotification
-        service: Outbound-Messaging-Service
-      - source_port: 8080
-        target_port: 8080
+      - priority: 1
+        protocol: tcp
+        service: cis-externals/Dir
+        source_port: 389
+        target_port: 10389
+    health_check:
+      response_timeout: 2000
+      healthy_threshold: 2
+      port: 42
+      unhealthy_threshold: 3
+      interval: 2000
+
+Entrust-CA1-Manager:
+  hostname: subca.cis-externals.rancher.internal
+
+Entrust-CA2-Manager:
+  hostname: subcc.cis-externals.rancher.internal
+
+Entrust-CA3-Manager:
+  hostname: subca.cis-externals.rancher.internal
+
+Outbound-Messaging-Service:
+  external_ips:
+    - 127.0.0.1
+
+WebSessionStore:
+  hostname: redis.cis-externals.rancher.internal
+
+RedisSessionStore:
+  hostname: redis.cis-externals.rancher.internal
+
+pacemaker-fe:
+  upgrade_strategy:
+    start_first: true
+
+haproxy-fe:
+  upgrade_strategy:
+    start_first: true
+
+LB-BusinessServices:
+  upgrade_strategy:
+    start_first: true
+  scale: 1
+  lb_config:
+    certs: []
+    port_rules:
+    - source_port: 8080
+      target_port: 8080
+      protocol: http
+      path: /ursbusservice
+      service: URS-BusinessService
+    - source_port: 8080
+      target_port: 8080
+      protocol: http
+      path: /eprwebapp
+      service: EPR-WebFrontEnd
+    - source_port: 8080
+      target_port: 8080
+      protocol: http
+      path: /portal
+      service: Portal
+    - source_port: 8080
+      target_port: 8080
+      protocol: http
+      path: /orsservice
+      service: OSCAR-BusinessService
+    - source_port: 8080
+      target_port: 8181
+      protocol: http
+      path: /cxf/
+      service: Integration
+    - source_port: 8080
+      target_port: 8080
+      protocol: http
+      path: /iamrepservice
+      service: ReportingService
+    - source_port: 8080
+      target_port: 8080
+      protocol: http
+      path: /auditloggerws
+      service: Audit
+    - source_port: 8080
+      target_port: 9098
+      protocol: http
+      path: /mobileconfig
+      service: SCEP
+    - source_port: 8080
+      target_port: 8080
+      protocol: http
+      path: /uidservice
+      service: UID-Service
+    - source_port: 8080
+      target_port: 8080
+      protocol: http
+      path: /guvnor-5.5.0.Final-tomcat-6.0
+      service: GuvnorService
+    - source_port: 8080
+      target_port: 8080
+      protocol: http
+      path: /omsbusservice
+      service: OMS-BusinessService
+    - source_port: 8080
+      target_port: 8080
+      protocol: http
+      path: /idstoresyncmanager
+      service: ID-StoreSyncService
+    - source_port: 8080
+      target_port: 8081
+      protocol: http
+      path: /openidm
+      service: ID-StoreSyncService
+    - source_port: 8080
+      target_port: 8080
+      protocol: http
+      path: /cccheckerservice
+      service: CC-CheckerService
+    - source_port: 8080
+      target_port: 8080
+      protocol: http
+      path: /esrNotification
+      service: Outbound-Messaging-Service
+    - source_port: 8080
+      target_port: 8080
+      protocol: http
+      path: /eprNotification
+      service: Outbound-Messaging-Service
+    - source_port: 8080
+      target_port: 8080
 #        target_port: 8104
-        protocol: http
-        path: /AckRecord
-        service: Outbound-Messaging-Service
-      - source_port: 8080
-        target_port: 8080
-        protocol: http
-        path: /urswebapp
-        service: URS-WebFrontEnd
-      - source_port: 8080
-        target_port: 8080
-        protocol: http
-        path: /eprbusservice
-        service: EPR-BusinessService
-      - source_port: 8080
-        target_port: 8080
-        protocol: http
-        path: /rulesservice
-        service: RulesService
-      - source_port: 8080
-        target_port: 8080
-        protocol: http
-        path: /cmsbusservice
-        service: CMS-BusinessService
-      - source_port: 8080
-        target_port: 8080
-        protocol: http
-        path: /emailservice
-        service: EmailService
-    health_check:
-      response_timeout: 2000
-      healthy_threshold: 2
-      port: 42
-      unhealthy_threshold: 3
-      initializing_timeout: 60000
-      interval: 2000
-      reinitializing_timeout: 60000
+      protocol: http
+      path: /AckRecord
+      service: Outbound-Messaging-Service
+    - source_port: 8080
+      target_port: 8080
+      protocol: http
+      path: /urswebapp
+      service: URS-WebFrontEnd
+    - source_port: 8080
+      target_port: 8080
+      protocol: http
+      path: /eprbusservice
+      service: EPR-BusinessService
+    - source_port: 8080
+      target_port: 8080
+      protocol: http
+      path: /rulesservice
+      service: RulesService
+    - source_port: 8080
+      target_port: 8080
+      protocol: http
+      path: /cmsbusservice
+      service: CMS-BusinessService
+    - source_port: 8080
+      target_port: 8080
+      protocol: http
+      path: /emailservice
+      service: EmailService
+  health_check:
+    response_timeout: 2000
+    healthy_threshold: 2
+    port: 42
+    unhealthy_threshold: 3
+    initializing_timeout: 60000
+    interval: 2000
+    reinitializing_timeout: 60000
 
-  LB-Secure:
-    upgrade_strategy:
-      start_first: true
-    scale: 1
-    lb_config:
-      certs: []
-      port_rules:
-      - protocol: tcp
-        service: SecureAudit
-        source_port: 8443
-        target_port: 8443
-    health_check:
-      response_timeout: 2000
-      healthy_threshold: 2
-      port: 42
-      unhealthy_threshold: 3
-      initializing_timeout: 60000
-      interval: 2000
-      reinitializing_timeout: 60000
+LB-Secure:
+  upgrade_strategy:
+    start_first: true
+  scale: 1
+  lb_config:
+    certs: []
+    port_rules:
+    - protocol: tcp
+      service: SecureAudit
+      source_port: 8443
+      target_port: 8443
+  health_check:
+    response_timeout: 2000
+    healthy_threshold: 2
+    port: 42
+    unhealthy_threshold: 3
+    initializing_timeout: 60000
+    interval: 2000
+    reinitializing_timeout: 60000
 
-  Audit:
-    upgrade_strategy:
-      start_first: true
-    scale: 1
-    health_check:
-      port: 8080
-      interval: 2000
-      unhealthy_threshold: 3
-      request_line: 'GET /auditloggerws/?lbchk=1 HTTP/1.0'
-      healthy_threshold: 2
-      response_timeout: 2000
+Audit:
+  upgrade_strategy:
+    start_first: true
+  scale: 1
+  health_check:
+    port: 8080
+    interval: 2000
+    unhealthy_threshold: 3
+    request_line: 'GET /auditloggerws/?lbchk=1 HTTP/1.0'
+    healthy_threshold: 2
+    response_timeout: 2000
 
-  GuvnorService:
-    upgrade_strategy:
-      start_first: true
-    scale: 1
-    health_check:
-      port: 8080
-      interval: 2000
-      unhealthy_threshold: 3
-      request_line: 'GET /guvnor-5.5.0.Final-tomcat-6.0/org.drools.guvnor.Guvnor/Guvnor.jsp?lbchk=1 HTTP/1.0'
-      healthy_threshold: 2
-      response_timeout: 2000
+GuvnorService:
+  upgrade_strategy:
+    start_first: true
+  scale: 1
+  health_check:
+    port: 8080
+    interval: 2000
+    unhealthy_threshold: 3
+    request_line: 'GET /guvnor-5.5.0.Final-tomcat-6.0/org.drools.guvnor.Guvnor/Guvnor.jsp?lbchk=1 HTTP/1.0'
+    healthy_threshold: 2
+    response_timeout: 2000
 
-  CMS-BusinessService:
-    upgrade_strategy:
-      start_first: true
-    scale: 1
-    health_check:
-      port: 8080
-      interval: 2000
-      unhealthy_threshold: 3
-      request_line: 'GET /cmsbusservice/?lbchk=1 HTTP/1.0'
-      healthy_threshold: 2
-      response_timeout: 2000
+CMS-BusinessService:
+  upgrade_strategy:
+    start_first: true
+  scale: 1
+  health_check:
+    port: 8080
+    interval: 2000
+    unhealthy_threshold: 3
+    request_line: 'GET /cmsbusservice/?lbchk=1 HTTP/1.0'
+    healthy_threshold: 2
+    response_timeout: 2000
 
-  EPR-BusinessService:
-    upgrade_strategy:
-      start_first: true
-    scale: 1
-    health_check:
-      port: 8080
-      interval: 2000
-      unhealthy_threshold: 3
-      request_line: 'GET /eprbusservice/?lbchk=1 HTTP/1.0'
-      healthy_threshold: 2
-      response_timeout: 2000
+EPR-BusinessService:
+  upgrade_strategy:
+    start_first: true
+  scale: 1
+  health_check:
+    port: 8080
+    interval: 2000
+    unhealthy_threshold: 3
+    request_line: 'GET /eprbusservice/?lbchk=1 HTTP/1.0'
+    healthy_threshold: 2
+    response_timeout: 2000
 
-  UID-Service:
-    upgrade_strategy:
-      start_first: true
-    scale: 1
-    health_check:
-      port: 8080
-      interval: 2000
-      unhealthy_threshold: 3
-      request_line: 'GET /uidservice/?lbchk=1 HTTP/1.0'
-      healthy_threshold: 2
-      response_timeout: 2000
+UID-Service:
+  upgrade_strategy:
+    start_first: true
+  scale: 1
+  health_check:
+    port: 8080
+    interval: 2000
+    unhealthy_threshold: 3
+    request_line: 'GET /uidservice/?lbchk=1 HTTP/1.0'
+    healthy_threshold: 2
+    response_timeout: 2000
 
-  URS-BusinessService:
-    upgrade_strategy:
-      start_first: true
-    scale: 1
-    health_check:
-      port: 8080
-      interval: 2000
-      unhealthy_threshold: 3
-      request_line: 'GET /ursbusservice/?lbchk=1 HTTP/1.0'
-      healthy_threshold: 2
-      response_timeout: 2000
+URS-BusinessService:
+  upgrade_strategy:
+    start_first: true
+  scale: 1
+  health_check:
+    port: 8080
+    interval: 2000
+    unhealthy_threshold: 3
+    request_line: 'GET /ursbusservice/?lbchk=1 HTTP/1.0'
+    healthy_threshold: 2
+    response_timeout: 2000
 
-  Integration:
-    upgrade_strategy:
-      start_first: true
-    scale: 1
-    health_check:
-      port: 8181
-      interval: 2000
-      unhealthy_threshold: 3
-      request_line: 'GET /cxf/esrNotificationService?_wadl HTTP/1.0'
-      healthy_threshold: 2
-      response_timeout: 2000
+Integration:
+  upgrade_strategy:
+    start_first: true
+  scale: 1
+  health_check:
+    port: 8181
+    interval: 2000
+    unhealthy_threshold: 3
+    request_line: 'GET /cxf/esrNotificationService?_wadl HTTP/1.0'
+    healthy_threshold: 2
+    response_timeout: 2000
 
-  OMS-BusinessService:
-    upgrade_strategy:
-      start_first: true
-    scale: 1
-    health_check:
-      port: 8080
-      interval: 2000
-      unhealthy_threshold: 3
-      request_line: 'GET /omsbusservice/?lbchk=1 HTTP/1.0'
-      healthy_threshold: 2
-      response_timeout: 2000
+OMS-BusinessService:
+  upgrade_strategy:
+    start_first: true
+  scale: 1
+  health_check:
+    port: 8080
+    interval: 2000
+    unhealthy_threshold: 3
+    request_line: 'GET /omsbusservice/?lbchk=1 HTTP/1.0'
+    healthy_threshold: 2
+    response_timeout: 2000
 
-  OSCAR-BusinessService:
-    upgrade_strategy:
-      start_first: true
-    scale: 1
-    health_check:
-      port: 8080
-      interval: 2000
-      unhealthy_threshold: 3
-      request_line: ''
-      healthy_threshold: 2
-      response_timeout: 2000
+OSCAR-BusinessService:
+  upgrade_strategy:
+    start_first: true
+  scale: 1
+  health_check:
+    port: 8080
+    interval: 2000
+    unhealthy_threshold: 3
+    request_line: ''
+    healthy_threshold: 2
+    response_timeout: 2000
 
-  RulesService:
-    upgrade_strategy:
-      start_first: true
-    scale: 1
-    health_check:
-      port: 8080
-      interval: 2000
-      unhealthy_threshold: 3
-      request_line: ''
-      healthy_threshold: 2
-      response_timeout: 2000
+RulesService:
+  upgrade_strategy:
+    start_first: true
+  scale: 1
+  health_check:
+    port: 8080
+    interval: 2000
+    unhealthy_threshold: 3
+    request_line: ''
+    healthy_threshold: 2
+    response_timeout: 2000
 
-  SecureAudit:
-    upgrade_strategy:
-      start_first: true
-    scale: 1
-    health_check:
-      port: 8080
-      interval: 2000
-      unhealthy_threshold: 3
-      request_line: ''
-      healthy_threshold: 2
-      response_timeout: 2000
+SecureAudit:
+  upgrade_strategy:
+    start_first: true
+  scale: 1
+  health_check:
+    port: 8080
+    interval: 2000
+    unhealthy_threshold: 3
+    request_line: ''
+    healthy_threshold: 2
+    response_timeout: 2000
 
-  Scheduler:
-    upgrade_strategy:
-      start_first: true
-    scale: 1
-    health_check:
-      port: 8080
-      interval: 2000
-      unhealthy_threshold: 3
-      request_line: ''
-      healthy_threshold: 2
-      response_timeout: 2000
+Scheduler:
+  upgrade_strategy:
+    start_first: true
+  scale: 1
+  health_check:
+    port: 8080
+    interval: 2000
+    unhealthy_threshold: 3
+    request_line: ''
+    healthy_threshold: 2
+    response_timeout: 2000
 
-  ID-StoreSyncService:
-    upgrade_strategy:
-      start_first: true
-    scale: 1
-    health_check:
-      port: 8080
-      interval: 2000
-      unhealthy_threshold: 3
-      request_line: 'GET /idstoresyncmanager/?lbchk=1 HTTP/1.0'
-      healthy_threshold: 2
-      response_timeout: 2000
+ID-StoreSyncService:
+  upgrade_strategy:
+    start_first: true
+  scale: 1
+  health_check:
+    port: 8080
+    interval: 2000
+    unhealthy_threshold: 3
+    request_line: 'GET /idstoresyncmanager/?lbchk=1 HTTP/1.0'
+    healthy_threshold: 2
+    response_timeout: 2000
 
-  CC-CheckerService:
-    upgrade_strategy:
-      start_first: true
-    scale: 1
-    health_check:
-      port: 8080
-      interval: 2000
-      unhealthy_threshold: 3
-      request_line: 'GET /cccheckerservice/?lbchk=1 HTTP/1.0'
-      healthy_threshold: 2
-      response_timeout: 2000
+CC-CheckerService:
+  upgrade_strategy:
+    start_first: true
+  scale: 1
+  health_check:
+    port: 8080
+    interval: 2000
+    unhealthy_threshold: 3
+    request_line: 'GET /cccheckerservice/?lbchk=1 HTTP/1.0'
+    healthy_threshold: 2
+    response_timeout: 2000
 
-  ReportingService:
-    upgrade_strategy:
-      start_first: true
-    scale: 1
-    health_check:
-      port: 8080
-      interval: 2000
-      unhealthy_threshold: 3
-      request_line: 'GET /iamrepservice/?lbchk=1 HTTP/1.0'
-      healthy_threshold: 2
-      response_timeout: 2000
+ReportingService:
+  upgrade_strategy:
+    start_first: true
+  scale: 1
+  health_check:
+    port: 8080
+    interval: 2000
+    unhealthy_threshold: 3
+    request_line: 'GET /iamrepservice/?lbchk=1 HTTP/1.0'
+    healthy_threshold: 2
+    response_timeout: 2000
 
-  SCEP:
-    upgrade_strategy:
-      start_first: true
-    scale: 1
-    health_check:
-      port: 9098
-      interval: 2000
-      unhealthy_threshold: 3
-      request_line: 'GET /healthcheck HTTP/1.0'
-      healthy_threshold: 2
-      response_timeout: 2000
+SCEP:
+  upgrade_strategy:
+    start_first: true
+  scale: 1
+  health_check:
+    port: 9098
+    interval: 2000
+    unhealthy_threshold: 3
+    request_line: 'GET /healthcheck HTTP/1.0'
+    healthy_threshold: 2
+    response_timeout: 2000
 
-  EPR-WebFrontEnd:
-    upgrade_strategy:
-      start_first: true
-    scale: 1
-    health_check:
-      port: 8080
-      interval: 2000
-      unhealthy_threshold: 3
-      response_timeout: 2000
-      request_line: 'GET /eprwebapp/img/common/loader.GIF?lbchk=1 HTTP/1.0'
-      healthy_threshold: 2
+EPR-WebFrontEnd:
+  upgrade_strategy:
+    start_first: true
+  scale: 1
+  health_check:
+    port: 8080
+    interval: 2000
+    unhealthy_threshold: 3
+    response_timeout: 2000
+    request_line: 'GET /eprwebapp/img/common/loader.GIF?lbchk=1 HTTP/1.0'
+    healthy_threshold: 2
 
-  URS-WebFrontEnd:
-    upgrade_strategy:
-      start_first: true
-    scale: 1
-    health_check:
-      port: 8080
-      interval: 2000
-      unhealthy_threshold: 3
-      request_line: 'GET /urswebapp/img/loader.GIF?lbchk=1 HTTP/1.0'
-      healthy_threshold: 2
-      response_timeout: 2000
+URS-WebFrontEnd:
+  upgrade_strategy:
+    start_first: true
+  scale: 1
+  health_check:
+    port: 8080
+    interval: 2000
+    unhealthy_threshold: 3
+    request_line: 'GET /urswebapp/img/loader.GIF?lbchk=1 HTTP/1.0'
+    healthy_threshold: 2
+    response_timeout: 2000
 
-  Portal:
-    upgrade_strategy:
-      start_first: true
-    scale: 1
-    health_check:
-      port: 8080
-      interval: 2000
-      unhealthy_threshold: 3
-      request_line: 'GET /portal/img/spacer.gif?lbchk=1 HTTP/1.0'
-      healthy_threshold: 2
-      response_timeout: 2000
+Portal:
+  upgrade_strategy:
+    start_first: true
+  scale: 1
+  health_check:
+    port: 8080
+    interval: 2000
+    unhealthy_threshold: 3
+    request_line: 'GET /portal/img/spacer.gif?lbchk=1 HTTP/1.0'
+    healthy_threshold: 2
+    response_timeout: 2000
 
-  SelfService-WebFrontEnd:
-    scale: 1
-    health_check:
-      port: 8080
-      interval: 2000
-      initializing_timeout: 60000
-      unhealthy_threshold: 3
-      strategy: recreate
-      response_timeout: 2000
-      request_line: GET "/selfservicewebapp/img/self-service.jpg?lbchk=1" "HTTP/1.0"
-      healthy_threshold: 2
+SelfService-WebFrontEnd:
+  scale: 1
+  health_check:
+    port: 8080
+    interval: 2000
+    initializing_timeout: 60000
+    unhealthy_threshold: 3
+    strategy: recreate
+    response_timeout: 2000
+    request_line: GET "/selfservicewebapp/img/self-service.jpg?lbchk=1" "HTTP/1.0"
+    healthy_threshold: 2
 
-  EmailService:
-    upgrade_strategy:
-      start_first: true
-    scale: 1
-    health_check:
-      port: 8080
-      interval: 2000
-      unhealthy_threshold: 3
-      request_line: 'GET /emailservice/?lbchk=1 HTTP/1.0'
-      healthy_threshold: 2
-      response_timeout: 2000
+EmailService:
+  upgrade_strategy:
+    start_first: true
+  scale: 1
+  health_check:
+    port: 8080
+    interval: 2000
+    unhealthy_threshold: 3
+    request_line: 'GET /emailservice/?lbchk=1 HTTP/1.0'
+    healthy_threshold: 2
+    response_timeout: 2000
