@@ -62,7 +62,7 @@ services:
       io.rancher.scheduler.affinity:host_label_soft: stackType=urs
 
   Directory:
-      image: rancher/lb-service-haproxy:v0.6.4
+      image: rancher/lb-service-haproxy:v0.7.1
       expose:
       - 389:389/tcp
       labels:
@@ -611,7 +611,7 @@ services:
       io.rancher.scheduler.affinity:host_label_soft: stackType=urs
     tty: true
     stdin_open: true
-    image: rancher/lb-service-haproxy:v0.6.4
+    image: rancher/lb-service-haproxy:v0.7.1
 
   LB-Secure:
     labels:
@@ -625,4 +625,4 @@ services:
       io.rancher.scheduler.affinity:host_label_soft: stackType=urs
     tty: true
     stdin_open: true
-    image: rancher/lb-service-haproxy:v0.6.4
+    image: rancher/lb-service-haproxy:v0.7.1
