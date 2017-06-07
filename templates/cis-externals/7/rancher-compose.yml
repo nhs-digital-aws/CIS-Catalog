@@ -1,8 +1,8 @@
-version: '2'
-catalog:
+.catalog:
   name: "NHS Digital - CIS - Externals"
   version: "0.7"
-  description: "NHS Digital - CIS - Externals"
+  description: |
+    NHS Digital - CIS - Externals
   minimum_rancher_version: "v1.1.4"
   questions:
     - variable: "externals_version"
@@ -29,15 +29,15 @@ catalog:
       required: true
       default: lh
       type: "string"
-services:
-  IAM-Database:
-    scale: 1
-  
-  Directory:
-    scale: 1
-  
-  Redis:
-    scale: 1
-  
-  Nfs:
-    scale: 1
+
+IAM-Database:
+  scale: 1
+
+Directory:
+  scale: 1
+
+Redis:
+  scale: 1
+
+Nfs:
+  scale: 1
