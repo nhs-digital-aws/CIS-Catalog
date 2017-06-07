@@ -10,7 +10,7 @@ services:
       project.name: cis
       project.stack: cis-externals
     tty: true
-    image: '${registry_url}/cis-dbs:${externals_version}'
+    image: ${registry_url}/cis-dbs:${externals_version}
     stdin_open: true
 
   Dir:
@@ -23,7 +23,7 @@ services:
       project.name: cis
       project.stack: cis-externals
     tty: true
-    image: '${registry_url}/dir:${externals_version}'
+    image: ${registry_url}/dir:${externals_version}
     stdin_open: true
 
   Redis:
@@ -36,7 +36,7 @@ services:
       project.name: cis
       project.stack: cis-externals
     tty: true
-    image: '${registry_url}/redis:3.2.4'
+    image: ${registry_url}/redis:3.2.4
     stdin_open: true
 
   Nfs:
@@ -48,7 +48,7 @@ services:
       project.name: cis
       project.stack: cis-externals
     tty: true
-    image: '${registry_url}/nfs-server-ubuntu:${externals_version}'
+    image: ${registry_url}/nfs-server-ubuntu:${externals_version}
     stdin_open: true
     volumes:
     - /home/rancher/gluster:/gv0
@@ -68,7 +68,7 @@ services:
     container_name: rootca
     privileged: true
     tty: true
-    image: "${registry_url}/rootca:${pki_version}"
+    image: ${registry_url}/rootca:${pki_version}
     stdin_open: true
     links:
     - RootCA:rootca
@@ -86,7 +86,7 @@ services:
       project.stack: cis-externals
     privileged: true
     tty: true
-    image: "${registry_url}/subca:${pki_version}"
+    image: ${registry_url}/subca:${pki_version}
     stdin_open: true
     links:
     - RootCA:rootca
@@ -103,7 +103,7 @@ services:
       project.stack: cis-externals
     privileged: true
     tty: true
-    image: "${registry_url}/subcc:${pki_version}"
+    image: ${registry_url}/subcc:${pki_version}
     stdin_open: true
     links:
     - RootCA:rootca

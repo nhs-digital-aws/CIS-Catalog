@@ -33,7 +33,7 @@
 IAM-Database:
   scale: 1
 
-Directory:
+Dir:
   scale: 1
 
 Redis:
