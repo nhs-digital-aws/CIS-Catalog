@@ -4,7 +4,7 @@ services:
     labels:
       io.rancher.scheduler.affinity:host_label: stackType=auth
       io.rancher.container.pull_image: always
-      service_name: TlsService
+      service_name: Tls-Service
       project.service.name: tls-service
       project.name: cis-auth
       project.stack: auth
@@ -30,7 +30,7 @@ services:
       WFE_FQDN: wfe.${fqdn}
       PORTAL_FQDN: portal.${fqdn}
       PORTAL_COOKIE_DOMAIN: ${portal_cookie_domain}
-      AUDIT_DB: ${auditDatabaseServer}
+#      AUDIT_DB: ${auditDatabaseServer}
       OUT_HOST:
       OUT_HOST_ENABLED: false
       CRL_FILE: IAM_crlfile.crl
