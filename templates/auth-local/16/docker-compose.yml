@@ -372,8 +372,9 @@ services:
       REFERENCESERVER: djm.auth-local.rancher.internal
       OPENDJ_BIND_USERNAME: cn=Spine2DirMgr
       OPENDJ_BIND_PASSWORD: Password1
-      OPENDJ_BACKUP_SOURCE:
-      OPENDJ_BACKUP_FILE:
+      OPENDJ_BACKUP_SOURCE: cis-djm-backups
+      OPENDJ_BACKUP_FILE: lh-backup.tar.gz
+      USE_AWS_S3: ${use_aws_s3}
       OPENDJ_ROLE: DEX
       OPENDJ_READONLY: YES
       OPENDJ_ENABLE_CHLOG: YES
