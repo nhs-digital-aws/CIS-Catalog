@@ -33,13 +33,13 @@
       label: "Service FQDN"
       required: true
       type: "string"
-      default: "demo.aws.cishackday.com"
+      default: "demo.cis.spine2.ncrs.nhs.uk"
     - variable: "portal_cookie_domain"
       description: "Please enter your cookie domain"
       label: "Cookie Domain"
       required: true
       type: "string"
-      default: ".cishackday.com"
+      default: ".cis.spine2.ncrs.nhs.uk.com"
     - variable: "auth_service_subject"
       description: "Please enter your auth_service_subject"
       label: "auth_service_subject"

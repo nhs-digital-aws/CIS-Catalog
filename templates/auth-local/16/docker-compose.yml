@@ -313,7 +313,7 @@ services:
       OPENDJ_BIND_PASSWORD: Password1
       OPENDJ_BACKUP_SOURCE: cis-djm-backups
       OPENDJ_BACKUP_FILE: lh-backup.tar.gz
-      USEAWS: ${use_aws_s3}
+      USE_AWS_S3: ${use_aws_s3}
       OPENDJ_ENABLE_CHLOG: YES
       HOSTNAME: djm.auth-local.rancher.internal
 
@@ -342,7 +342,7 @@ services:
       OPENDJ_BIND_PASSWORD: Password1
       OPENDJ_BACKUP_SOURCE: cis-djm-backups
       OPENDJ_BACKUP_FILE: lh-backup.tar.gz
-      USEAWS: ${use_aws_s3}
+      USE_AWS_S3: ${use_aws_s3}
       OPENDJ_ROLE: DFA
       OPENDJ_ENABLE_CHLOG: YES
       OPENDJ_READONLY: YES
