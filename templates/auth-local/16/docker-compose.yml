@@ -109,9 +109,9 @@ services:
     stdin_open: true
     privileged: true
     environment:
-      rCRL_FILENAME: ${auth_crl_file1}
-      rCRL_FILENAME2: ${auth_crl_file2}
-      rENV_SHORTCODE: ${env_shortcode}
+      CRL_FILENAME: ${auth_crl_file1}
+      CRL_FILENAME2: ${auth_crl_file2}
+      ENV_SHORTCODE: ${env_shortcode}
       JAVA_OPTS: -server -XX:+UseConcMarkSweepGC -XX:+UseParNewGC -XX:ParallelGCThreads=2 -Xms1024m -Xmx6144m
     image: ${registry_url}/auth-authenticator:${auth_version}
     tty: true
@@ -140,7 +140,7 @@ services:
     privileged: true
     environment:
       JAVA_OPTS: -server -XX:+UseConcMarkSweepGC -XX:+UseParNewGC -XX:ParallelGCThreads=2 -Xms1024m -Xmx6144m
-      rENV_SHORTCODE: ${env_shortcode}
+      ENV_SHORTCODE: ${env_shortcode}
       GLUSTER_URL: ${gluster_url}
       GLUSTER_FOLDER: ${env_shortcode}
     image: ${registry_url}/auth-sessionmanager:${auth_version}
@@ -171,7 +171,7 @@ services:
     stdin_open: true
     image: ${registry_url}/auth-saml:${auth_version}
     environment:
-      rENV_SHORTCODE: ${env_shortcode}
+      ENV_SHORTCODE: ${env_shortcode}
       JAVA_OPTS: -server -Xms256m -Xmx256m  -XX:NewSize=128m   -XX:MaxNewSize=256m   -XX:PermSize=64m  -XX:MaxPermSize=128m  -XX:+UseConcMarkSweepGC  -XX:+UseParNewGC   -XX:ParallelGCThreads=2 -Djava.security.egd=file:/dev/./urandom
     tty: true
     stdin_open: true
@@ -198,7 +198,7 @@ services:
     tty: true
     stdin_open: true
     environment:
-      rENV_SHORTCODE: ${env_shortcode}
+      ENV_SHORTCODE: ${env_shortcode}
       JAVA_OPTS: -server -Xms256m -Xmx512m  -XX:NewSize=128m   -XX:MaxNewSize=256m   -XX:PermSize=64m  -XX:MaxPermSize=128m  -XX:+UseConcMarkSweepGC  -XX:+UseParNewGC   -XX:ParallelGCThreads=2 -Djava.security.egd=file:/dev/./urandom
 
   haproxy-internal:
