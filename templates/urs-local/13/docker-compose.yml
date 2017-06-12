@@ -189,7 +189,7 @@ services:
     stdin_open: true
     links:
     - IAM-Database:IAM-Database
-    - Directory:Directory
+    - cis-externals/PKI-LDAP:Directory
     - Entrust-CA1-Manager:Entrust-CA1-Manager
     - Entrust-CA2-Manager:Entrust-CA2-Manager
     - Entrust-CA3-Manager:Entrust-CA3-Manager
@@ -295,7 +295,6 @@ services:
     links:
     - IAM-Database:IAM-Database
     - LB-Secure:LB-Secure
-    - PKI-LDAP:Directory
 
   OSCAR-BusinessService:
     labels:
