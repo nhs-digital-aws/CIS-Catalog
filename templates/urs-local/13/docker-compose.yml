@@ -295,6 +295,7 @@ services:
     links:
     - IAM-Database:IAM-Database
     - LB-Secure:LB-Secure
+    - PKI-LDAP:Directory
 
   OSCAR-BusinessService:
     labels:
