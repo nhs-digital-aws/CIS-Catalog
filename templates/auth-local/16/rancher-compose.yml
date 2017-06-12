@@ -163,7 +163,7 @@
     - variable: "use_asw_s3"
       description: "Use AWS S3 as backup file source"
       label: "Enter YES to use AWS S3 as OpenDJ backup file source"
-      required: true
+      required: false
       type: "string"
       default: ""
 
