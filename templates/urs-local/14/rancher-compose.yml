@@ -95,7 +95,7 @@ Services-Properties:
 IAM-Database:
   hostname: iam-database.cis-externals.rancher.internal
 
-Directory:
+URS-Directory:
     scale: 1
     start_on_create: true
     lb_config:

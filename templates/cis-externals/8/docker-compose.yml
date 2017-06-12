@@ -121,3 +121,12 @@ services:
     links:
     - RootCA:rootca
     - PKI-LDAP:dir
+
+PKI-LDAP-LB:
+  image: rancher/lb-service-haproxy:v0.4.9
+  expose:
+  - 389:389/tcp
+  labels:
+    io.rancher.container.agent.role: environmentAdmin
+    io.rancher.container.create_agent: 'true'
+
