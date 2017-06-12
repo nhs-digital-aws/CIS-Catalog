@@ -347,6 +347,8 @@ services:
       OPENDJ_ENABLE_CHLOG: YES
       OPENDJ_READONLY: YES
       HOSTNAME: dfa.auth-local.rancher.internal
+    links:
+    - djm:djm
 
   dex:
     ports:
@@ -380,3 +382,5 @@ services:
       OPENDJ_ENABLE_CHLOG: YES
       OPENDJ_EXTERNAL: YES
       HOSTNAME: dex.auth-local.rancher.internal
+    links:
+    - dfa:dfa
