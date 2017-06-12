@@ -189,10 +189,11 @@ services:
     stdin_open: true
     links:
     - IAM-Database:IAM-Database
-    - cis-externals/PKI-LDAP:Directory
     - Entrust-CA1-Manager:Entrust-CA1-Manager
     - Entrust-CA2-Manager:Entrust-CA2-Manager
     - Entrust-CA3-Manager:Entrust-CA3-Manager
+    external_links:
+    - cis-externals/PKI-LDAP:Directory
 
   EPR-BusinessService:
     labels:
