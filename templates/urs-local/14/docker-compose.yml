@@ -62,14 +62,14 @@ services:
       project.stack: urs
       io.rancher.scheduler.affinity:host_label_soft: stackType=urs
 
-  Directory:
+  URS-Directory:
       image: rancher/lb-service-haproxy:v0.7.1
       expose:
       - 389:389/tcp
       labels:
         io.rancher.container.agent.role: environmentAdmin
         io.rancher.container.create_agent: 'true'
-        project.service.name: directory
+        project.service.name: urs-directory
         project.name: cis-urs
         project.stack: urs
         io.rancher.scheduler.affinity:host_label_soft: stackType=urs
@@ -193,7 +193,7 @@ services:
     - Entrust-CA2-Manager:Entrust-CA2-Manager
     - Entrust-CA3-Manager:Entrust-CA3-Manager
     external_links:
-    - cis-externals/PKI-LDAP:Directory
+    - cis-externals/PKI-LDAP-LB:Directory
 
   EPR-BusinessService:
     labels:
@@ -394,7 +394,7 @@ services:
       OPENIDM_PORT: '389'
     links:
     - IAM-Database:IAM-Database
-    - Directory:Directory
+    - URS-Directory:Directory
 
   CC-CheckerService:
     labels:
@@ -414,7 +414,7 @@ services:
     stdin_open: true
     links:
     - IAM-Database:IAM-Database
-    - Directory:Directory
+    - URS-Directory:Directory
 
   ReportingService:
     labels:
