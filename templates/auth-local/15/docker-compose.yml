@@ -111,6 +111,7 @@ services:
     environment:
       rCRL_FILENAME: ${auth_crl_file1}
       rCRL_FILENAME2: ${auth_crl_file2}
+      KEY_MATERIAL: YES
       rENV_SHORTCODE: ${env_shortcode}
       JAVA_OPTS: -server -XX:+UseConcMarkSweepGC -XX:+UseParNewGC -XX:ParallelGCThreads=2 -Xms1024m -Xmx6144m
     image: ${registry_url}/auth-authenticator:${auth_version}
