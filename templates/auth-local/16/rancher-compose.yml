@@ -165,7 +165,7 @@
       label: "Enter YES to use AWS S3 as OpenDJ backup file source"
       required: false
       type: "string"
-      default: ""
+      default: "PLEASE"
 
 TLS-Service:
   upgrade_strategy:
