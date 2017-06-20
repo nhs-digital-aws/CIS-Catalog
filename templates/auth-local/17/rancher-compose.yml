@@ -63,7 +63,7 @@
       label: "Directory Server"
       required: true
       type: "string"
-      default: "djm.auth-local.rancher.internal:10389"
+      default: "dfa.auth-local.rancher.internal:10389"
     - variable: "ldap_auth_username"
       description: "Please enter your LDAP Username for Auth queries"
       label: "LDAP Auth Username"
