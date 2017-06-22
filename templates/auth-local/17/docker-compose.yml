@@ -309,6 +309,7 @@ services:
     tty: true
     stdin_open: true
     environment:
+      ENV_SHORTCODE: ${env_shortcode}
       REFERENCESERVER: dir.cis-externals.rancher.internal
       OPENDJ_BIND_USERNAME: cn=Spine2DirMgr
       OPENDJ_BIND_PASSWORD: Password1
@@ -338,6 +339,7 @@ services:
     tty: true
     stdin_open: true
     environment:
+      ENV_SHORTCODE: ${env_shortcode}
       REFERENCESERVER: djm.auth-local.rancher.internal
       OPENDJ_BIND_USERNAME: cn=Spine2DirMgr
       OPENDJ_BIND_PASSWORD: Password1
@@ -372,6 +374,7 @@ services:
     tty: true
     stdin_open: true
     environment:
+      ENV_SHORTCODE: ${env_shortcode}
       REFERENCESERVER: djm.auth-local.rancher.internal
       OPENDJ_BIND_USERNAME: cn=Spine2DirMgr
       OPENDJ_BIND_PASSWORD: Password1
