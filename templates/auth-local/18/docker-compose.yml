@@ -321,7 +321,28 @@ services:
     security_opt:
     - seccomp:unconfined
 
-bapi_subdomain}
+  AutomatedTesting:
+    labels:
+      io.rancher.scheduler.affinity:host_label: stackType=auth
+      io.rancher.container.pull_image: always
+      io.rancher.container.hostname_override: container_name
+      io.rancher.container.start_once: true
+      service_name: $${service_name}
+      environment_name: ${env_shortcode}
+      service_name: Automated_Testing
+      project.service.name: automated_testing
+    volumes:
+    - /var/log/iam:/home/iam_user/gatling_outputs
+    image: ${registry_url}/automated-testing:${auth_version}
+    tty: true
+    stdin_open: true
+    environment:
+      UID: ${gatling_uid}
+      GATLING_AUTH_SERVICE: ${gatling_auth_service}
+      GATLING_AUTH_SUBDOMAIN: ${gatling_auth_subdomain}
+      GATLING_DOMAIN: ${gatling_domain}
+      GATLING_SBAPI_SERVICE: ${gatling_sbapi_service}
+      GATLING_SBAPI_SUBDOMAIN: ${gatling_sbapi_subdomain}
       GATLING_URS_SERVICE: ${gatling_urs_service}
       GATLING_URS_SUBDOMAIN: ${gatling_urs_subdomain}
       GATLING_CONCURRENT_USERS: ${gatling_concurrent_users}
