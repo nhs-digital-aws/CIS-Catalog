@@ -472,7 +472,7 @@ services:
     - seccomp:unconfined
 
   dex:
-    ports:
+  #  ports:
   #   - 4444:4444
   #   - 8989:8989
   #   - 10389:10389
