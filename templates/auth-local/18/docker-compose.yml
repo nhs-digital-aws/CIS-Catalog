@@ -442,7 +442,7 @@ bapi_subdomain}
       - pemfile=dir.lh.iam.spine2.ncrs.nhs.uk
       - cafile=root.pem
       - envcode=${env_shortcode}
-    image: ${registry_url}/auth-haproxy-int:${auth_version}
+    image: ${registry_url}/auth-haproxy-dex:${auth_version}
     tty: true
     stdin_open: true
     cap_add:
