@@ -437,11 +437,11 @@ bapi_subdomain}
       project.name: cis-auth
       project.stack: auth
     environment:
-      - vip=0.0.0.0
-      - DEX_BE=dex.auth-local.rancher.internal
-      - pemfile=dir.lh.iam.spine2.ncrs.nhs.uk
-      - cafile=root.pem
-      - envcode=${env_shortcode}
+      vip: 0.0.0.0
+      DEX_BE: dex.auth-local.rancher.internal
+      pemfile: dir.lh.iam.spine2.ncrs.nhs.uk
+      cafile: root.pem
+      envcode: ${env_shortcode}
     image: ${registry_url}/auth-haproxy-dex:${auth_version}
     tty: true
     stdin_open: true
