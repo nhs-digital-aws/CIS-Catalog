@@ -458,6 +458,7 @@ services:
       project.name: cis-auth
       project.stack: auth
     environment:
+      GLUSTER_URL: ${gluster_url}
       vip: 0.0.0.0
       DEX_BE: dex.auth-local.rancher.internal
       pemfile: dir.lh.iam.spine2.ncrs.nhs.uk
