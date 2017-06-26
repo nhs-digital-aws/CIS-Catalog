@@ -410,6 +410,7 @@ services:
       OPENDJ_ENABLE_CHLOG: YES
       HOSTNAME: djm.auth-local.rancher.internal
       S6_KEEP_ENV: 1
+      S6_BEHAVIOUR_IF_STAGE2_FAILS: 2
 
   dfa:
   #  ports:
