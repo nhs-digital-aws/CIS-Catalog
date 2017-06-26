@@ -396,7 +396,7 @@ services:
       project.stack: auth
     volumes:
     - /var/log/iam:/var/log/iam
-    image: ${registry_url}/opendj:${auth_version}
+    image: ${registry_url}/opendj-s6:${auth_version}
     tty: true
     stdin_open: true
     environment:
