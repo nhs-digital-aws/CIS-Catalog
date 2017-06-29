@@ -396,7 +396,7 @@ services:
       project.stack: auth
     volumes:
     - /var/log/iam:/var/log/iam
-    image: ${registry_url}/opendj-s6:${auth_version}
+    image: ${registry_url}/opendj:${auth_version}
     tty: true
     stdin_open: true
     environment:
@@ -409,8 +409,6 @@ services:
       USE_AWS_S3: ${use_aws_s3}
       OPENDJ_ENABLE_CHLOG: YES
       HOSTNAME: djm.auth-local.rancher.internal
-      S6_KEEP_ENV: 1
-      S6_BEHAVIOUR_IF_STAGE2_FAILS: 2
 
   dfa:
   #  ports:
@@ -491,7 +489,7 @@ services:
       project.stack: auth
     volumes:
     - /var/log/iam:/var/log/iam
-    image: ${registry_url}/opendj:${auth_version}
+    image: ${registry_url}/opendj-s6:${auth_version}
     tty: true
     stdin_open: true
     environment:
@@ -507,5 +505,7 @@ services:
       OPENDJ_ENABLE_CHLOG: YES
       OPENDJ_EXTERNAL: YES
       HOSTNAME: dex.auth-local.rancher.internal
+      S6_KEEP_ENV: 1
+      S6_BEHAVIOUR_IF_STAGE2_FAILS: 2
     links:
     - dfa:dfa

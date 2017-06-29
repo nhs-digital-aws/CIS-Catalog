@@ -72,7 +72,7 @@
 #      default: "cn=admin"
     - variable: "ldap_auth_password"
       description: "Please enter your LDAP Password for Auth queries"
-      label: "LDAP Auth Passowrd"
+      label: "LDAP Auth Password"
       required: true
       type: "string"
       default: "Password1"
@@ -84,7 +84,7 @@
 #      default: "cn=admin"
     - variable: "ldap_role_password"
       description: "Please enter your LDAP Password for Role queries"
-      label: "LDAP Role Passowrd"
+      label: "LDAP Role Password"
       required: true
       type: "string"
       default: "Password1"
