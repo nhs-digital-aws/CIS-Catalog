@@ -37,6 +37,7 @@ services:
       AUTH_SERVICE_SUBJECT: ${auth_service_subject}
       CRL_FILENAME: ${auth_crl_file1}
       CRL_FILENAME2: ${auth_crl_file2}
+      CRL_FILENAME3: ${auth_crl_file3}
       ENV_SHORTCODE: ${env_shortcode}
 
   LB-AuthBusinessService:
@@ -111,6 +112,7 @@ services:
     environment:
       CRL_FILENAME: ${auth_crl_file1}
       CRL_FILENAME2: ${auth_crl_file2}
+      CRL_FILENAME3: ${auth_crl_file3}
       KEY_MATERIAL: YES
       ENV_SHORTCODE: ${env_shortcode}
       JAVA_OPTS: -server -XX:+UseConcMarkSweepGC -XX:+UseParNewGC -XX:ParallelGCThreads=2 -Xms1024m -Xmx6144m
