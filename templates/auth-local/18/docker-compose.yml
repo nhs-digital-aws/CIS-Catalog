@@ -219,7 +219,7 @@ services:
       project.stack: auth
     environment:
       - vip=0.0.0.0
-      - be_atn=authenticatorservice.auth-lo{{getenv "OPENDJ_ROLE"}}cal.rancher.internal
+      - be_atn=authenticatorservice.auth-local.rancher.internal
       - be_sml=samlservice.auth-local.rancher.internal
       - be_tvs=tokenvalidationservice.auth-local.rancher.internal
       - be_pot=portal.auth-local.rancher.internal
