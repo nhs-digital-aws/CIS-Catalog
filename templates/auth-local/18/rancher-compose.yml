@@ -263,7 +263,7 @@ dex:
     port: 8389
     interval: 2000
     unhealthy_threshold: 3
-    request_line: 'GET /portal/ HTTP/1.0'
+    request_line: 'GET / HTTP/1.0'
     healthy_threshold: 2
     response_timeout: 2000
     initializing_timeout: 600000
