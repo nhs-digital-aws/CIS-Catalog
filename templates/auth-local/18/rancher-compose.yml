@@ -166,7 +166,7 @@
       required: true
       type: "string"
       default: "10.196.94.199"
-    - variable: "use_asw_s3"
+    - variable: "use_aws_s3"
       description: "Use AWS S3 as backup file source"
       label: "Enter YES to use AWS S3 as OpenDJ backup file source"
       required: false
