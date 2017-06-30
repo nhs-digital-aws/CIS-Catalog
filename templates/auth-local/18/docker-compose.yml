@@ -219,7 +219,7 @@ services:
       project.stack: auth
     environment:
       - vip=0.0.0.0
-      - be_atn=authenticatorservice.auth-local.rancher.internal
+      - be_atn=authenticatorservice.auth-lo{{getenv "OPENDJ_ROLE"}}cal.rancher.internal
       - be_sml=samlservice.auth-local.rancher.internal
       - be_tvs=tokenvalidationservice.auth-local.rancher.internal
       - be_pot=portal.auth-local.rancher.internal
@@ -408,6 +408,7 @@ services:
       OPENDJ_BIND_PASSWORD: Password1
       OPENDJ_BACKUP_SOURCE: cis-djm-backups
       OPENDJ_BACKUP_FILE: ${env_shortcode}-backup.tar.gz
+      OPENDJ_ROLE: DEX
       USE_AWS_S3: ${use_aws_s3}
       OPENDJ_ENABLE_CHLOG: YES
       HOSTNAME: djm.auth-local.rancher.internal
@@ -510,4 +511,4 @@ services:
       S6_KEEP_ENV: 1
       S6_BEHAVIOUR_IF_STAGE2_FAILS: 1
     links:
-    - dfa:dfa
+    - djm:djm
