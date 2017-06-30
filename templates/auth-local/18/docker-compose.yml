@@ -508,6 +508,6 @@ services:
       OPENDJ_EXTERNAL: YES
       HOSTNAME: dex.auth-local.rancher.internal
       S6_KEEP_ENV: 1
-      S6_BEHAVIOUR_IF_STAGE2_FAILS: 2
+      S6_BEHAVIOUR_IF_STAGE2_FAILS: 1
     links:
     - dfa:dfa
