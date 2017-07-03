@@ -189,7 +189,7 @@ services:
       project.service.name: token-validation-service
       project.name: cis-auth
       project.stack: auth
-      io.rancher.container.hostname_override: container_name
+      io.rancher.container.hostname_override/sjiveson/: container_name
       io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
       environment_name: ${env_shortcode}
       service_name: $${service_name}
@@ -383,9 +383,6 @@ services:
     - cis-externals/Redis:RedisSessionStore
 
   djm:
-  #  ports:
-  #   - 4444:4444
-  #   - 8989:8989
     labels:
       io.rancher.scheduler.affinity:host_label: stackType=auth
       io.rancher.container.pull_image: always
@@ -398,89 +395,24 @@ services:
       project.stack: auth
     volumes:
     - /var/log/iam:/var/log/iam
-    image: ${registry_url}/opendj:${auth_version}
+    image: ${registry_url}/opendj-s6:${auth_version}
     tty: true
     stdin_open: true
     environment:
       ENV_SHORTCODE: ${env_shortcode}
       REFERENCESERVER: dir.cis-externals.rancher.internal
-      OPENDJ_BIND_USERNAME: cn=Spine2DirMgr
-      OPENDJ_BIND_PASSWORD: Password1
+      OPENDJ_BIND_USERNAME: ${ldap_auth_username}
+      OPENDJ_BIND_PASSWORD: ${ldap_auth_password}
       OPENDJ_BACKUP_SOURCE: cis-djm-backups
       OPENDJ_BACKUP_FILE: ${env_shortcode}-backup.tar.gz
-      OPENDJ_ROLE: DEX
+      OPENDJ_ROLE: DJM
       USE_AWS_S3: ${use_aws_s3}
       OPENDJ_ENABLE_CHLOG: YES
       HOSTNAME: djm.auth-local.rancher.internal
+      S6_KEEP_ENV: 1
+      S6_BEHAVIOUR_IF_STAGE2_FAILS: 1
 
   dfa:
-  #  ports:
-  #   - 4444:4444
-  #   - 8989:8989
-    labels:
-      io.rancher.scheduler.affinity:host_label: stackType=auth
-      io.rancher.container.pull_image: always
-      io.rancher.container.hostname_override: container_name
-      io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
-      service_name: $${service_name}
-      environment_name: ${env_shortcode}
-      project.service.name: dfa
-      project.name: cis-auth
-      project.stack: auth
-    volumes:
-    - /var/log/iam:/var/log/iam
-    image: ${registry_url}/opendj:${auth_version}
-    tty: true
-    stdin_open: true
-    environment:
-      ENV_SHORTCODE: ${env_shortcode}
-      REFERENCESERVER: djm.auth-local.rancher.internal
-      OPENDJ_BIND_USERNAME: cn=Spine2DirMgr
-      OPENDJ_BIND_PASSWORD: Password1
-      OPENDJ_BACKUP_SOURCE: cis-djm-backups
-      OPENDJ_BACKUP_FILE: ${env_shortcode}-backup.tar.gz
-      USE_AWS_S3: ${use_aws_s3}
-      OPENDJ_ROLE: DFA
-      OPENDJ_ENABLE_CHLOG: YES
-      OPENDJ_READONLY: YES
-      HOSTNAME: dfa.auth-local.rancher.internal
-    links:
-    - djm:djm
-
-  haproxy-dex:
-    ports:
-      - 10389:10389
-      - 8389:8389
-    labels:
-      io.rancher.scheduler.affinity:host_label: stackType=auth
-      io.rancher.container.pull_image: always
-      io.rancher.scheduler.global: 'true'
-      io.rancher.container.hostname_override: container_name
-      environment_name: ${env_shortcode}
-      service_name: haproxy-dex
-      project.service.name: haproxy-dex
-      project.name: cis-auth
-      project.stack: auth
-    environment:
-      GLUSTER_URL: ${gluster_url}
-      vip: 0.0.0.0
-      DEX_BE: dex.auth-local.rancher.internal
-      pemfile: dir.lh.iam.spine2.ncrs.nhs.uk
-      cafile: root.pem
-      envcode: ${env_shortcode}
-    image: ${registry_url}/auth-haproxy-dex:${auth_version}
-    tty: true
-    stdin_open: true
-    cap_add:
-    - SYS_ADMIN
-    security_opt:
-    - seccomp:unconfined
-
-  dex:
-  #  ports:
-  #   - 4444:4444
-  #   - 8989:8989
-  #   - 10389:10389
     labels:
       io.rancher.scheduler.affinity:host_label: stackType=auth
       io.rancher.container.pull_image: always
@@ -499,8 +431,45 @@ services:
     environment:
       ENV_SHORTCODE: ${env_shortcode}
       REFERENCESERVER: djm.auth-local.rancher.internal
-      OPENDJ_BIND_USERNAME: cn=Spine2DirMgr
-      OPENDJ_BIND_PASSWORD: Password1
+      OPENDJ_BIND_USERNAME: ${ldap_auth_username}
+      OPENDJ_BIND_PASSWORD: ${ldap_auth_password}
+      OPENDJ_BACKUP_SOURCE: cis-djm-backups
+      OPENDJ_BACKUP_FILE: ${env_shortcode}-backup.tar.gz
+      USE_AWS_S3: ${use_aws_s3}
+      OPENDJ_ROLE: DFA
+      OPENDJ_ENABLE_CHLOG: YES
+      OPENDJ_READONLY: YES
+      HOSTNAME: dfa.auth-local.rancher.internal
+      S6_KEEP_ENV: 1
+      S6_BEHAVIOUR_IF_STAGE2_FAILS: 1
+    links:
+    - djm:djm
+
+  dex:
+  #  ports:
+  #   - 4444:4444
+  #   - 8989:8989
+  #   - 10389:10389
+    labels:
+      io.rancher.scheduler.affinity:host_label: stackType=auth
+      io.rancher.container.pull_image: always
+      io.rancher.container.hostname_override: container_name
+      io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
+      service_name: $${service_name}
+      environment_name: ${env_shortcode}
+      project.service.name: dex
+      project.name: cis-auth
+      project.stack: auth
+    volumes:
+    - /var/log/iam:/var/log/iam
+    image: ${registry_url}/opendj-s6:${auth_version}
+    tty: true
+    stdin_open: true
+    environment:
+      ENV_SHORTCODE: ${env_shortcode}
+      REFERENCESERVER: djm.auth-local.rancher.internal
+      OPENDJ_BIND_USERNAME: ${ldap_auth_username}
+      OPENDJ_BIND_PASSWORD: ${ldap_auth_password}
       OPENDJ_BACKUP_SOURCE: cis-djm-backups
       OPENDJ_BACKUP_FILE: ${env_shortcode}-backup.tar.gz
       USE_AWS_S3: ${use_aws_s3}
@@ -513,3 +482,32 @@ services:
       S6_BEHAVIOUR_IF_STAGE2_FAILS: 1
     links:
     - djm:djm
+
+  haproxy-dex:
+    ports:
+      - 10389:10389
+      - 8389:8389
+    labels:
+      io.rancher.scheduler.affinity:host_label: stackType=auth
+      io.rancher.container.pull_image: always
+      io.rancher.scheduler.global: 'true'
+      io.rancher.container.hostname_override: container_name
+      environment_name: ${env_shortcode}
+      service_name: $${service_name}
+      project.service.name: haproxy-dex
+      project.name: cis-auth
+      project.stack: auth
+    environment:
+      GLUSTER_URL: ${gluster_url}
+      vip: 0.0.0.0
+      DEX_BE: dex.auth-local.rancher.internal
+      pemfile: dir.lh.iam.spine2.ncrs.nhs.uk
+      cafile: root.pem
+      envcode: ${env_shortcode}
+    image: ${registry_url}/auth-haproxy-dex:${auth_version}
+    tty: true
+    stdin_open: true
+    cap_add:
+    - SYS_ADMIN
+    security_opt:
+    - seccomp:unconfined

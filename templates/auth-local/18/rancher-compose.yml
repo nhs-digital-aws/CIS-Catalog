@@ -255,6 +255,32 @@ Portal:
     healthy_threshold: 2
     response_timeout: 2000
 
+djm:
+  upgrade_strategy:
+    start_first: false
+  scale: 1
+  health_check:
+    port: 8389
+    interval: 3000
+    unhealthy_threshold: 3
+    request_line: 'GET / HTTP/1.0'
+    healthy_threshold: 2
+    response_timeout: 2000
+    initializing_timeout: 600000
+
+dfa:
+  upgrade_strategy:
+    start_first: false
+  scale: 1
+  health_check:
+    port: 8389
+    interval: 3000
+    unhealthy_threshold: 3
+    request_line: 'GET / HTTP/1.0'
+    healthy_threshold: 2
+    response_timeout: 2000
+    initializing_timeout: 600000
+
 dex:
   upgrade_strategy:
     start_first: false
