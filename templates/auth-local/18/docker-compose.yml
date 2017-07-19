@@ -407,7 +407,8 @@ services:
       OPENDJ_BACKUP_FILE: ${env_shortcode}-backup.tar.gz
       OPENDJ_ROLE: DJM
       USE_AWS_S3: ${use_aws_s3}
-      OPENDJ_ENABLE_CHLOG: YES
+      USE_AWS_S3_FOR_BACKUPS: PLEASE
+      OPENDJ_ENABLE_CHLOG: PLEASE
       HOSTNAME: djm.auth-local.rancher.internal
       S6_KEEP_ENV: 1
       S6_BEHAVIOUR_IF_STAGE2_FAILS: 1
@@ -437,8 +438,8 @@ services:
       OPENDJ_BACKUP_FILE: ${env_shortcode}-backup.tar.gz
       USE_AWS_S3: ${use_aws_s3}
       OPENDJ_ROLE: DFA
-      OPENDJ_ENABLE_CHLOG: YES
-      OPENDJ_READONLY: YES
+      OPENDJ_ENABLE_CHLOG: PLEASE
+      OPENDJ_READONLY: PLEASE
       HOSTNAME: dfa.auth-local.rancher.internal
       S6_KEEP_ENV: 1
       S6_BEHAVIOUR_IF_STAGE2_FAILS: 2
@@ -474,9 +475,9 @@ services:
       OPENDJ_BACKUP_FILE: ${env_shortcode}-backup.tar.gz
       USE_AWS_S3: ${use_aws_s3}
       OPENDJ_ROLE: DEX
-      OPENDJ_READONLY: YES
-      OPENDJ_ENABLE_CHLOG: YES
-      OPENDJ_EXTERNAL: YES
+      OPENDJ_READONLY: PLEASE
+      OPENDJ_ENABLE_CHLOG: PLEASE
+      OPENDJ_EXTERNAL: PLEASE
       HOSTNAME: dex.auth-local.rancher.internal
       S6_KEEP_ENV: 1
       S6_BEHAVIOUR_IF_STAGE2_FAILS: 2
