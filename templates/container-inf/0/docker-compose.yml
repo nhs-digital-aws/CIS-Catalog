@@ -49,9 +49,9 @@ splunk-uforwarder:
     SPLUNK_START_ARGS: --accept-license
     SPLUNK_FORWARD_SERVER: ${splunk_server}
     SPLUNK_USER: root
-    SPLUNK_ADD_1: monitor "/var/log/containers/*.*" -index bowl
+    SPLUNK_ADD_1: monitor "/docker/log/iam/*.log" -index main
+    SPLUNK_ADD_1: monitor "/docker/log/iam/*.out" -index main
     SPLUNK_FORWARD_SERVER_ARGS: -method clone
-    SPLUNK_ADD_2: monitor "/var/log/containers/ebay/*.*" -index bowl-ebay  -sourcetype ebayUpdateLog
   stdin_open: true
   volumes:
   - /var/lib/docker/containers:/host/containers:ro
