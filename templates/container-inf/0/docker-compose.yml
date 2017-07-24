@@ -1,17 +1,17 @@
-Logging-Fluentd:
-  image: ${registry_url}/fluentd-collector:12
-  volumes:
-  - /var/log:/var/log
-  environment:
-    FLUENTD_CONF=fluent.conf
-    PTL=$PTL
-    elasticfqdn=$
-    env=$ENV_SHORTCODE
-    fluent_no_warnings=yes
-  labels:
-    io.rancher.scheduler.global: 'true'
-  tty: true
-  stdin_open: true
+#Logging-Fluentd:
+#  image: ${registry_url}/fluentd-collector:12
+#  volumes:
+#  - /var/log:/var/log
+#  environment:
+#    FLUENTD_CONF=fluent.conf
+#    PTL=$PTL
+#    elasticfqdn=$
+#    env=$ENV_SHORTCODE
+#    fluent_no_warnings=yes
+#  labels:
+#    io.rancher.scheduler.global: 'true'
+#  tty: true
+#  stdin_open: true
 
 ranch-eye:
   ports:
@@ -34,11 +34,48 @@ prometheus-node-exporter:
   stdin_open: true
   net: "host"
 
-logrotate:
-  labels:
-    io.rancher.scheduler.global: 'true'
-  tty: true
-  image: ${registry_url}/logrotate
+#logrotate:
+#  labels:
+#    io.rancher.scheduler.global: 'true'
+#  tty: true
+#  image: ${registry_url}/logrotate
+#  stdin_open: true
+#  volumes:
+#  - /var/log/iam:/var/log/iam
+
+splunk-uforwarder:
+  image: splunk/universalforwarder:latest
+  environment:
+    SPLUNK_START_ARGS: --accept-license
+    SPLUNK_FORWARD_SERVER: ${splunk_server}
+    SPLUNK_USER: root
+    SPLUNK_ADD_1: monitor "/var/log/containers/*.*" -index bowl
+    SPLUNK_FORWARD_SERVER_ARGS: -method clone
+    SPLUNK_ADD_2: monitor "/var/log/containers/ebay/*.*" -index bowl-ebay  -sourcetype ebayUpdateLog
   stdin_open: true
   volumes:
-  - /var/log/iam:/var/log/iam
+  - /var/lib/docker/containers:/host/containers:ro
+  - /var/log:/docker/log:ro
+  - /var/run/docker.sock:/var/run/docker.sock:ro
+  - /var/log/containers:/var/log/containers
+  tty: true
+  labels:
+    io.rancher.container.pull_image: always
+    io.rancher.scheduler.global: 'true'
+
+logrotate:
+  image: blacklabelops/logrotate
+  environment:
+    LOGS_DIRECTORIES: /var/lib/docker/containers /var/log/containers /var/log/iam
+    LOGROTATE_INTERVAL: hourly
+    LOGROTATE_CRONSCHEDULE: 0 1 * * *
+    LOGROTATE_PARAMETERS: fv
+  stdin_open: true
+  volumes:
+  - /var/lib/docker/containers:/var/lib/docker/containers
+  - /var/log:/var/log
+  tty: true
+  labels:
+    io.rancher.container.pull_image: always
+    io.rancher.scheduler.global: 'true'
+

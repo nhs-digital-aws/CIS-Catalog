@@ -5,7 +5,7 @@
     Enter Description Here
   minimum_rancher_version: "v1.1.4"
   questions:
-    - variable: "Splunk Location"
+    - variable: "splunk_server"
       description: "Which Splunk instance should data be sent to? e.g. splunk.demo.aws.cishackday.com:9997"
       label: "Location"
       required: true
