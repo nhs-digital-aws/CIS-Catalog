@@ -1,0 +1,19 @@
+.catalog:
+  name: "NHS Digital - CIS - Auth Externals"
+  version: "0.1"
+  description: |
+    Enter Description Here
+  minimum_rancher_version: "v1.1.4"
+  questions:
+    - variable: "Splunk Location"
+      description: "Which Splunk instance should data be sent to? e.g. splunk.demo.aws.cishackday.com:9997"
+      label: "Location"
+      required: true
+      default: splunk.demo.aws.cishackday.com:9997
+      type: "string"
+    - variable: "registry_url"
+      description: "Please enter the url of your registry"
+      label: "e.g. registry.nhs.uk:5000"
+      required: true
+      default: 446537062602.dkr.ecr.eu-west-2.amazonaws.com/cishackday
+      type: "string"

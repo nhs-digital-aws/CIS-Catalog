@@ -1,0 +1,44 @@
+Logging-Fluentd:
+  image: ${registry_url}/fluentd-collector:12
+  volumes:
+  - /var/log:/var/log
+  environment:
+    FLUENTD_CONF=fluent.conf
+    PTL=$PTL
+    elasticfqdn=$
+    env=$ENV_SHORTCODE
+    fluent_no_warnings=yes
+  labels:
+    io.rancher.scheduler.global: 'true'
+  tty: true
+  stdin_open: true
+
+ranch-eye:
+  ports:
+  - 9104:9104/tcp
+  labels:
+    io.rancher.scheduler.global: 'true'
+    io.rancher.container.hostname_override: container_name
+  tty: true
+  image: rucknar/ranch-eye:latest
+  stdin_open: true
+  net: host
+
+prometheus-node-exporter:
+  ports:
+    - 9100:9100
+  labels:
+    io.rancher.scheduler.global: 'true'
+  tty: true
+  image: prom/node-exporter
+  stdin_open: true
+  net: "host"
+
+logrotate:
+  labels:
+    io.rancher.scheduler.global: 'true'
+  tty: true
+  image: ${registry_url}/logrotate
+  stdin_open: true
+  volumes:
+  - /var/log/iam:/var/log/iam
