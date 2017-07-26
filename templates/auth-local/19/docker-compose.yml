@@ -468,7 +468,7 @@ services:
       project.stack: auth
       environment_name: ${env_shortcode}
     environment:
-      HOSTNAME: ${}changelog_hostname
+      HOSTNAME: ${changelog_hostname}
       CHANGELOG_LSPEXTRACTOR_PASSWORD: ${changelog_lspextractor_password}
       CHANGELOG_EBSEXTRACTOR_PASSWORD: ${changelog_ebsextractor_password}
       CHANGELOG_PUBLISHER_PASSWORD: ${changelog_publisher_password}
