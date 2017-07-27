@@ -1,0 +1,269 @@
+.catalog:
+  name: "NHS Digital - CIS - AUTH App"
+  version: "0.19"
+  description: "NHS Digital - CIS - AUTH App"
+  minimum_rancher_version: "v1.1.4"
+  questions:
+    - variable: "auth_version"
+      description: "Which version of the app do you want to deploy?"
+      label: "Version"
+      required: true
+      default: portable
+      type: "string"
+    - variable: "registry_url"
+      description: "Please enter the url of your registry"
+      label: "e.g. registry.nhs.uk:5000"
+      required: true
+      default: 446537062602.dkr.ecr.eu-west-2.amazonaws.com/cishackday
+      type: "string"
+    - variable: "env_shortcode"
+      description: "Please enter the shortcode of your environment"
+      label: "Environment Shortcode"
+      required: true
+      default: lh
+      type: "string"
+    - variable: "gluster_url"
+      description: "Please enter your Gluster URL"
+      label: "Gluster Service"
+      required: true
+      type: "string"
+      default: "nfs.cis-externals.rancher.internal"
+    - variable: "fqdn"
+      description: "Please enter your FQDN"
+      label: "Service FQDN"
+      required: true
+      type: "string"
+      default: "demo.cis.spine2.ncrs.nhs.uk"
+    - variable: "portal_cookie_domain"
+      description: "Please enter your cookie domain"
+      label: "Cookie Domain"
+      required: true
+      type: "string"
+      default: ".cis.spine2.ncrs.nhs.uk"
+    - variable: "auth_service_subject"
+      description: "Please enter your auth_service_subject"
+      label: "auth_service_subject"
+      required: true
+      type: "string"
+#      default: "abc123"
+    - variable: "auth_crl_file1"
+      description: "Please enter your auth_crl_file1"
+      label: "auth_crl_file1"
+      required: true
+      type: "string"
+      default: "fa8d522408ae23f60068fc9e71fada376c8ba42f"
+    - variable: "auth_crl_file2"
+      description: "Please enter your auth_crl_file2"
+      label: "auth_crl_file2"
+      required: true
+      type: "string"
+      default: "124a88b782c09809c3dca6c6697b09e52ef0f605"
+    - variable: "auth_crl_file3"
+      description: "Please enter your auth_crl_file3"
+      label: "auth_crl_file3"
+      required: true
+      type: "string"
+      default: "c1e86afb603027f500cb93022e6b9b0be4df1f8e"
+    - variable: "directoryServer"
+      description: "Please enter your Directory server including port"
+      label: "Directory Server"
+      required: true
+      type: "string"
+      default: "dfa.auth-local.rancher.internal:10389"
+    - variable: "ldap_auth_username"
+      description: "Please enter your LDAP Username for Auth queries"
+      label: "LDAP Auth Username"
+      required: true
+      type: "string"
+#      default: "cn=admin"
+    - variable: "ldap_auth_password"
+      description: "Please enter your LDAP Password for Auth queries"
+      label: "LDAP Auth Password"
+      required: true
+      type: "string"
+      default: "Password1"
+    - variable: "ldap_role_username"
+      description: "Please enter your LDAP Username for Role queries"
+      label: "LDAP Role Username"
+      required: true
+      type: "string"
+#      default: "cn=admin"
+    - variable: "ldap_role_password"
+      description: "Please enter your LDAP Password for Role queries"
+      label: "LDAP Role Password"
+      required: true
+      type: "string"
+      default: "Password1"
+    - variable: "use_aws_s3"
+      description: "Use AWS S3 as backup file source"
+      label: "Enter YES to use AWS S3 as OpenDJ backup file source"
+      required: false
+      type: "string"
+      default: "PLEASE"
+    - variable: "changelog_hostname"
+      description: "Enter Changelog hostname"
+      label: "Enter Changelog hostname"
+      required: true
+      type: "string"
+      default: "djm.auth-local.rancher.internal"
+    - variable: "changelog_lspextractor_password"
+      description: "Enter Changelog lspextractor password"
+      label: "Enter Changelog lspextractor password"
+      required: true
+      type: "string"
+      default: ""
+    - variable: "changelog_ebsextractor_password"
+      description: "Enter Changelog ebsextractor password"
+      label: "Enter Changelog ebsextractor password"
+      required: true
+      type: "string"
+      default: ""
+    - variable: "changelog_publisher_password"
+      description: "Enter Changelog publisher password"
+      label: "Enter Changelog publisher password"
+      required: true
+      type: "string"
+      default: ""
+    - variable: "changelog_logs_retention"
+      description: "Enter Change logs retention period"
+      label: "Enter Change logs retention period"
+      required: true
+      type: "string"
+      default: "7"
+
+TLS-Service:
+  upgrade_strategy:
+    start_first: true
+  scale: 1
+  health_check:
+    port: 80
+    unhealthy_threshold: 3
+    healthy_threshold: 2
+
+AuditService:
+  upgrade_strategy:
+    start_first: true
+  scale: 1
+  health_check:
+    port: 8080
+    interval: 2000
+    unhealthy_threshold: 3
+    request_line: 'GET /authauditlogger/?lbchk=1 HTTP/1.0'
+    healthy_threshold: 2
+    response_timeout: 2000
+
+AuthenticatorService:
+  upgrade_strategy:
+    start_first: true
+  scale: 1
+  health_check:
+    port: 8080
+    interval: 2000
+    unhealthy_threshold: 3
+    request_line: 'GET /authenticator/?lbchk=1 HTTP/1.0'
+    healthy_threshold: 2
+    response_timeout: 2000
+
+SessionManager:
+  upgrade_strategy:
+    start_first: true
+  scale: 1
+
+  health_check:
+    port: 8080
+    interval: 2000
+    unhealthy_threshold: 3
+    request_line: 'GET /sessionmanager/?lbchk=1 HTTP/1.0'
+    healthy_threshold: 2
+    response_timeout: 2000
+
+SAMLService:
+  upgrade_strategy:
+    start_first: true
+  scale: 1
+  health_check:
+    port: 8080
+    interval: 2000
+    unhealthy_threshold: 3
+    request_line: 'GET /saml/?lbchk=1 HTTP/1.0'
+    healthy_threshold: 2
+    response_timeout: 2000
+
+TokenValidationService:
+  upgrade_strategy:
+    start_first: true
+  scale: 1
+  health_check:
+    port: 8080
+    interval: 2000
+    unhealthy_threshold: 3
+    request_line: 'GET /amserver/?lbchk=1 HTTP/1.0'
+    healthy_threshold: 2
+    response_timeout: 2000
+
+Portal:
+  upgrade_strategy:
+    start_first: true
+  scale: 1
+  health_check:
+    port: 8080
+    interval: 2000
+    unhealthy_threshold: 3
+    request_line: 'GET /portal/ HTTP/1.0'
+    healthy_threshold: 2
+    response_timeout: 2000
+
+djm:
+  upgrade_strategy:
+    start_first: false
+  scale: 1
+#  health_check:
+#    port: 8389
+#    interval: 5000
+#    unhealthy_threshold: 3
+#    request_line: 'GET / HTTP/1.0'
+#    healthy_threshold: 2
+#    response_timeout: 1000
+#    initializing_timeout: 600000
+
+dfa:
+  upgrade_strategy:
+    start_first: false
+  scale: 1
+  health_check:
+    port: 8389
+    interval: 5000
+    unhealthy_threshold: 3
+    request_line: 'GET / HTTP/1.0'
+    healthy_threshold: 2
+    response_timeout: 1000
+    initializing_timeout: 1200000
+
+dex:
+  upgrade_strategy:
+    start_first: false
+  scale: 1
+  health_check:
+    port: 8389
+    interval: 5000
+    unhealthy_threshold: 3
+    request_line: 'GET / HTTP/1.0'
+    healthy_threshold: 2
+    response_timeout: 1000
+    initializing_timeout: 1200000
+
+Changelog:
+  upgrade_strategy:
+    start_first: true
+  scale: 1
+  health_check:
+    port: 8080
+    interval: 2000
+    unhealthy_threshold: 2
+    healthy_threshold: 1
+    response_timeout: 2000
+
+ChangelogCleanser:
+  upgrade_strategy:
+    start_first: true
+  scale: 1
