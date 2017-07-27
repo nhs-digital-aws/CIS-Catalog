@@ -473,7 +473,7 @@ services:
       CHANGELOG_EBSEXTRACTOR_PASSWORD: ${changelog_ebsextractor_password}
       CHANGELOG_PUBLISHER_PASSWORD: ${changelog_publisher_password}
       CHANGELOG_LOGS_RETENTION: ${changelog_logs_retention}
-    image: ${registry_url}/cis-j7-changelog:${auth_version}
+    image: ${registry_url}/changelog:${auth_version}
     hostname: changelog
     volumes:
     - /var/log/iam:/var/changelog
