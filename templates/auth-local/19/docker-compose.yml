@@ -474,6 +474,8 @@ services:
       CHANGELOG_PUBLISHER_PASSWORD: ${changelog_publisher_password}
       CHANGELOG_LOGS_RETENTION: ${changelog_logs_retention}
     image: ${registry_url}/cis-j7-changelog:${auth_version}
+    hostname: changelog
+    container_name: changelog
     volumes:
     - /var/log/iam:/var/changelog
 
@@ -493,5 +495,7 @@ services:
       CHANGELOG_PUBLISHER_PASSWORD: ${changelog_publisher_password}
       CHANGELOG_LOGS_RETENTION: ${changelog_logs_retention}
     image: ${registry_url}/changelog-cleanser:${auth_version}
+    hostname: changelog-cleanser
+    container_name: changelog-cleanser
     volumes:
     - /var/log/iam:/var/changelog
