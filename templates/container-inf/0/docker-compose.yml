@@ -49,8 +49,15 @@ splunk-uforwarder:
     SPLUNK_START_ARGS: --accept-license
     SPLUNK_FORWARD_SERVER: ${splunk_server}
     SPLUNK_USER: root
-    SPLUNK_ADD_1: monitor "/docker/log/iam/*.log" -index main
-    SPLUNK_ADD_2: monitor "/docker/log/iam/*.out" -index main
+    SPLUNK_ADD_1: monitor "/docker/log/iam/*access.log" -index cis-tomcatsvr
+    SPLUNK_ADD_2: monitor "/docker/log/iam/catalina.out" -index cis-tomcatsvr sourcetype catalina
+    SPLUNK_ADD_3: monitor "/docker/log/iam/*-host-manager.log" -index cis-tomcatsvr -sourcetype tomcat_hostmanager
+    SPLUNK_ADD_4: monitor "/docker/log/iam/*-manager.log" -index cis-tomcatsvr -sourcetype tomcat_manager
+    SPLUNK_ADD_5: monitor "/docker/log/iam/*crashdump.log" -index cis-crashdump -sourcetype crashdump
+    SPLUNK_ADD_6: monitor "/docker/log/iam/*diagnostic.log" -index cis-diagnostic -sourcetype diagnostic
+    SPLUNK_ADD_7: monitor "/docker/log/iam/*error.log" -index cis-error -sourcetype error
+    SPLUNK_ADD_8: monitor "/docker/log/iam/*error.log" -index cis-performance -sourcetype performance
+    SPLUNK_ADD_9: monitor "/docker/log/iam/*-ca.log" -index cis-pki-diagnostic -sourcetype pki-diagnostic
     SPLUNK_FORWARD_SERVER_ARGS: -method clone
   stdin_open: true
   volumes:
@@ -68,7 +75,7 @@ logrotate:
   environment:
     LOGS_DIRECTORIES: /var/lib/docker/containers /var/log/containers /var/log/iam
     LOGROTATE_INTERVAL: hourly
-    LOGROTATE_CRONSCHEDULE: 0 1 * * *
+    LOGROTATE_CRONSCHEDULE: 0 * * * *
     LOGROTATE_PARAMETERS: fv
   stdin_open: true
   volumes:
