@@ -64,18 +64,11 @@ splunk-uforwarder:
     io.rancher.scheduler.global: 'true'
 
 logrotate:
-  image: blacklabelops/logrotate
-  environment:
-    LOGS_DIRECTORIES: /var/lib/docker/containers /var/log/containers /var/log/iam
-    LOGROTATE_INTERVAL: hourly
-    LOGROTATE_CRONSCHEDULE: 0 1 * * *
-    LOGROTATE_PARAMETERS: fv
-  stdin_open: true
-  volumes:
-  - /var/lib/docker/containers:/var/lib/docker/containers
-  - /var/log:/var/log
-  tty: true
   labels:
     io.rancher.container.pull_image: always
     io.rancher.scheduler.global: 'true'
-
+  tty: true
+  image: itsthenetwork/logrotate:latest
+  stdin_open: true
+  volumes:
+  - /var/log/iam:/var/log/iam
