@@ -68,7 +68,7 @@ logrotate:
     io.rancher.container.pull_image: always
     io.rancher.scheduler.global: 'true'
   tty: true
-  image: itsthenetwork/logrotate:latest
+  image: itsthenetwork/alpine-logrotate:latest
   stdin_open: true
   volumes:
   - /var/log/iam:/var/log/iam
