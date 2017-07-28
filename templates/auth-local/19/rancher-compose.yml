@@ -252,7 +252,7 @@ dex:
     response_timeout: 1000
     initializing_timeout: 1200000
 
-Changelog:
+changelog:
   upgrade_strategy:
     start_first: true
   scale: 1
@@ -263,7 +263,7 @@ Changelog:
     healthy_threshold: 1
     response_timeout: 2000
 
-ChangelogCleanser:
+changelog-cleanser:
   upgrade_strategy:
     start_first: true
   scale: 1
