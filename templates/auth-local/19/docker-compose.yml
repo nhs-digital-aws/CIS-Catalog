@@ -473,6 +473,8 @@ services:
       CHANGELOG_EBSEXTRACTOR_PASSWORD: ${changelog_ebsextractor_password}
       CHANGELOG_PUBLISHER_PASSWORD: ${changelog_publisher_password}
       CHANGELOG_LOGS_RETENTION: ${changelog_logs_retention}
+      S6_KEEP_ENV: 1
+      S6_BEHAVIOUR_IF_STAGE2_FAILS: 2
     image: ${registry_url}/changelog:${auth_version}
     hostname: changelog
     volumes:
@@ -493,6 +495,8 @@ services:
       HOSTNAME: ${changelog_hostname}
       CHANGELOG_PUBLISHER_PASSWORD: ${changelog_publisher_password}
       CHANGELOG_LOGS_RETENTION: ${changelog_logs_retention}
+      S6_KEEP_ENV: 1
+      S6_BEHAVIOUR_IF_STAGE2_FAILS: 2
     image: ${registry_url}/changelog-cleanser:${auth_version}
     hostname: changelog-cleanser
     volumes:
