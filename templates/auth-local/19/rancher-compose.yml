@@ -33,7 +33,7 @@
       label: "Service FQDN"
       required: true
       type: "string"
-      default: "demo.cis.spine2.ncrs.nhs.uk"
+      default: "NNN.cis.spine2.ncrs.nhs.uk"
     - variable: "portal_cookie_domain"
       description: "Please enter your cookie domain"
       label: "Cookie Domain"
