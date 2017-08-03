@@ -33,7 +33,7 @@
       label: "Service FQDN"
       required: true
       type: "string"
-      default: "demo.cis.spine2.ncrs.nhs.uk"
+      default: "NNN.cis.spine2.ncrs.nhs.uk"
     - variable: "portal_cookie_domain"
       description: "Please enter your cookie domain"
       label: "Cookie Domain"
@@ -221,47 +221,44 @@ djm:
 #    port: 8389
 #    interval: 5000
 #    unhealthy_threshold: 3
-#    request_line: 'GET / HTTP/1.0'
-#    healthy_threshold: 2
-#    response_timeout: 1000
-#    initializing_timeout: 600000
+#    request_line: 'GET / HTTP/1.1\r\nHost:\ djm'
+#    healthy_threshold: 1
+#    response_timeout: 2000
+#    #7mins
+#    initializing_timeout: 420000
 
 dfa:
   upgrade_strategy:
     start_first: false
   scale: 1
-  health_check:
-    port: 8389
-    interval: 5000
-    unhealthy_threshold: 3
-    request_line: 'GET / HTTP/1.0'
-    healthy_threshold: 2
-    response_timeout: 1000
-    initializing_timeout: 1200000
+#  health_check:
+#    port: 8389
+#    interval: 5000
+#    unhealthy_threshold: 3
+#    request_line: 'GET / HTTP/1.1\r\nHost:\ dfa'
+#    healthy_threshold: 1
+#    response_timeout: 2000
+#    #14mins
+#    initializing_timeout: 840000
 
 dex:
   upgrade_strategy:
     start_first: false
   scale: 1
-  health_check:
-    port: 8389
-    interval: 5000
-    unhealthy_threshold: 3
-    request_line: 'GET / HTTP/1.0'
-    healthy_threshold: 2
-    response_timeout: 1000
-    initializing_timeout: 1200000
+#  health_check:
+#    port: 8389
+#    interval: 5000
+#    unhealthy_threshold: 3
+#    request_line: 'GET / HTTP/1.1\r\nHost:\ dex'
+#    healthy_threshold: 1
+#    response_timeout: 2000
+#    #14mins
+#    initializing_timeout: 840000
 
 changelog:
   upgrade_strategy:
     start_first: true
   scale: 1
-  health_check:
-    port: 8080
-    interval: 2000
-    unhealthy_threshold: 2
-    healthy_threshold: 1
-    response_timeout: 2000
 
 changelog-cleanser:
   upgrade_strategy:
