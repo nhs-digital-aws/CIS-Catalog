@@ -123,7 +123,7 @@ services:
     - PKI-LDAP:dir
 
   PKI-LDAP-LB:
-    image: rancher/load-balancer-service
+    image: rancher/lb-service-haproxy:v0.7.5
     expose:
     - 389:389/tcp
     labels:
