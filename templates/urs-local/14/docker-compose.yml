@@ -19,10 +19,10 @@ services:
       ENV_SHORTCODE: ${env_shortcode}
       FQDN: ${fqdn}
       SPINE_EXTERNAL_SHORTCODE: ${spine_external_shortcode}
-      SESSION_MANAGER_SERVICE_URL: LB-AuthBusinessService.auth-local.rancher.internal:8080/sessionmanager/session
-      SESSION_SERVICE_URL: LB-AuthBusinessService.auth-local.rancher.internal:8080/amserver/sessionservice
-      SAML_SERVICE_URL: LB-AuthBusinessService.auth-local.rancher.internal:8080/saml/RoleAssertion?token=
-      AUTHENTICATOR_ROLE_SELECTION_URL: LB-AuthBusinessService.auth-local.rancher.internal:8080/authenticator/RoleSelectionGP.jsp
+      SESSION_MANAGER_SERVICE_URL: https://gas.${fqdn}/sessionmanager/session
+      SESSION_SERVICE_URL: https://gas.${fqdn}/amserver/sessionservice
+      SAML_SERVICE_URL: https://gas.${fqdn}/saml/RoleAssertion?token=
+      AUTHENTICATOR_ROLE_SELECTION_URL: https://gas.${fqdn}/authenticator/RoleSelectionGP.jsp
       CMS_SOPINRANDOMVALUE: ${cms_sopinrandomvalue}
       CMS_CA1_MANAGER_PORT: 1829
       CMS_CA2_MANAGER_PORT: 2829
@@ -30,8 +30,8 @@ services:
       CMS_CLIENTDLL_UPDATEDATE: ${cms_clientdll_updatedate}
       CMS_OT_SMARTCARD_DLL_MIN_VERSION: ${cms_ot_smartcard_dll_min_version}
       CMS_OT_SMARTCARD_DLL_CURRENT_VERSION: ${cms_ot_smartcard_dll_current_version}
-      INTENG_NOTIFICATION_SERVICE_ENDPOINTADDRESS: LB-BusinessServices:8080/cxf/esrNotification
-      INTENG_NOTIFICATION_SCHEDULAR_ENDPOINTADDRESS: LB-BusinessServices:8080/cxf/esrNotification
+      INTENG_NOTIFICATION_SERVICE_ENDPOINTADDRESS: http://LB-BusinessServices:8080/cxf/esrNotification
+      INTENG_NOTIFICATION_SCHEDULAR_ENDPOINTADDRESS: http://LB-BusinessServices:8080/cxf/esrNotification
       OSCAR_ORIGINATOR1: oscar-lh.npfit.nhs.uk
       OSCAR_ORIGINATOR2:
       MOBILE_AUTHENTICATION: ${mobile_authentication}
