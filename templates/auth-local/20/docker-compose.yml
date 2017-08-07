@@ -498,7 +498,7 @@ services:
     volumes:
     - /var/log/iam:/var/changelog
 
-  SessionManager:
+  SessionTimeout:
     labels:
       io.rancher.scheduler.affinity:host_label: stackType=auth
       io.rancher.container.hostname_override: container_name
