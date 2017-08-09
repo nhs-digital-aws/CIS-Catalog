@@ -252,3 +252,8 @@ changelog-cleanser:
   upgrade_strategy:
     start_first: true
   scale: 1
+
+SessionTimeout:
+  upgrade_strategy:
+    start_first: true
+  scale: 1
