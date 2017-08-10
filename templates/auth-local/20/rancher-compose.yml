@@ -212,8 +212,8 @@ djm:
     request_line: 'GET / HTTP/1.1\r\nHost:\ djm'
     healthy_threshold: 1
     response_timeout: 2000
-    #7mins
-    initializing_timeout: 420000
+    #8mins
+    initializing_timeout: 480000
 
 dfa:
   upgrade_strategy:
