@@ -212,8 +212,8 @@ djm:
     request_line: 'GET / HTTP/1.1\r\nHost:\ djm'
     healthy_threshold: 1
     response_timeout: 2000
-    #8mins
-    initializing_timeout: 480000
+    #9mins
+    initializing_timeout: 540000
 
 dfa:
   upgrade_strategy:
@@ -226,8 +226,8 @@ dfa:
     request_line: 'GET / HTTP/1.1\r\nHost:\ dfa'
     healthy_threshold: 1
     response_timeout: 2000
-    #14mins
-    initializing_timeout: 840000
+    #15mins
+    initializing_timeout: 900000
 
 dex:
   upgrade_strategy:
@@ -240,8 +240,8 @@ dex:
     request_line: 'GET / HTTP/1.1\r\nHost:\ dex'
     healthy_threshold: 1
     response_timeout: 2000
-    #14mins
-    initializing_timeout: 840000
+    #17mins
+    initializing_timeout: 1020000
 
 changelog:
   upgrade_strategy:
