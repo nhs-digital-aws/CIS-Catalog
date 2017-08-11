@@ -45,11 +45,6 @@ services:
     - 8080
     labels:
       io.rancher.scheduler.affinity:host_label: stackType=auth
-      io.rancher.loadbalancer.target.AuthenticatorService: /authenticator=8080
-      io.rancher.loadbalancer.target.TokenValidationService: /amserver=8080
-      io.rancher.loadbalancer.target.SAMLService: /saml=8080
-      io.rancher.loadbalancer.target.AuditService: /authauditlogger=8080
-      io.rancher.loadbalancer.target.SessionManager: /sessionmanager=8080
       environment_name: ${env_shortcode}
       service_name: LB-AuthBusinessService
       project.service.name: lb-auth-business-service
@@ -57,12 +52,6 @@ services:
       project.stack: auth
     tty: true
     image: rancher/load-balancer-service
-    links:
-    - AuthenticatorService:AuthenticatorService
-    - AuditService:AuditService
-    - SessionManager:SessionManager
-    - SAMLService:SAMLService
-    - TokenValidationService:TokenValidationService
     stdin_open: true
 
   AuditService:

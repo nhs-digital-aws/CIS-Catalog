@@ -128,6 +128,47 @@ TLS-Service:
     unhealthy_threshold: 3
     healthy_threshold: 2
 
+LB-AuthBusinessService:
+  upgrade_strategy:
+    start_first: true
+  scale: 1
+  lb_config:
+    certs: []
+    port_rules:
+    - source_port: 8080
+      target_port: 8080
+      protocol: http
+      path: /authenticator
+      service: AuthenticatorService
+    - source_port: 8080
+      target_port: 8080
+      protocol: http
+      path: /amserver
+      service: TokenValidationService
+    - source_port: 8080
+      target_port: 8080
+      protocol: http
+      path: /saml
+      service: SAMLService
+    - source_port: 8080
+      target_port: 8080
+      protocol: http
+      path: /authauditlogger
+      service: AuditService
+    - source_port: 8080
+      target_port: 8080
+      protocol: http
+      path: /sessionmanager
+      service: SessionManager
+  health_check:
+    response_timeout: 2000
+    healthy_threshold: 2
+    port: 42
+    unhealthy_threshold: 3
+    initializing_timeout: 60000
+    interval: 2000
+    reinitializing_timeout: 60000
+    
 AuditService:
   upgrade_strategy:
     start_first: true
