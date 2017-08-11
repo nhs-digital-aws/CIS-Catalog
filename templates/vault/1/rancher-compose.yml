@@ -1,5 +1,10 @@
-version: '2'
-services:
-  vault:
-    scale: 1
-    start_on_create: true
+.catalog:
+  name: "NHS Digital - CIS - Vault"
+  version: "0.1"
+  description: |
+    Creates a Vault stack and single instance
+  minimum_rancher_version: "v1.6.5"
+
+vault:
+  scale: 1
+  start_on_create: true
