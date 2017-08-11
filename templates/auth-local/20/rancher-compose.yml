@@ -156,7 +156,6 @@ SessionManager:
   upgrade_strategy:
     start_first: true
   scale: 1
-
   health_check:
     port: 8080
     interval: 2000
