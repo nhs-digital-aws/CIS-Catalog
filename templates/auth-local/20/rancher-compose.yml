@@ -204,6 +204,7 @@ djm:
   upgrade_strategy:
     start_first: false
   scale: 1
+  strategy: recreate
   health_check:
     port: 8389
     interval: 5000
@@ -213,11 +214,13 @@ djm:
     response_timeout: 2000
     #9mins
     initializing_timeout: 540000
+    reinitializing_timeout: 540000
 
 dfa:
   upgrade_strategy:
     start_first: false
   scale: 1
+  strategy: recreate
   health_check:
     port: 8389
     interval: 5000
@@ -227,11 +230,13 @@ dfa:
     response_timeout: 2000
     #15mins
     initializing_timeout: 900000
+    reinitializing_timeout: 900000
 
 dex:
   upgrade_strategy:
     start_first: false
   scale: 1
+  strategy: recreate
   health_check:
     port: 8389
     interval: 5000
@@ -241,6 +246,7 @@ dex:
     response_timeout: 2000
     #17mins
     initializing_timeout: 1020000
+    reinitializing_timeout: 1020000
 
 changelog:
   upgrade_strategy:
