@@ -168,7 +168,7 @@ LB-AuthBusinessService:
     initializing_timeout: 60000
     interval: 2000
     reinitializing_timeout: 60000
-    
+
 AuditService:
   upgrade_strategy:
     start_first: true
@@ -245,7 +245,6 @@ djm:
   upgrade_strategy:
     start_first: false
   scale: 1
-  strategy: recreate
   health_check:
     port: 8389
     interval: 5000
@@ -256,12 +255,12 @@ djm:
     #9mins
     initializing_timeout: 540000
     reinitializing_timeout: 540000
+    strategy: recreate
 
 dfa:
   upgrade_strategy:
     start_first: false
   scale: 1
-  strategy: recreate
   health_check:
     port: 8389
     interval: 5000
@@ -272,12 +271,12 @@ dfa:
     #15mins
     initializing_timeout: 900000
     reinitializing_timeout: 900000
+    strategy: recreate
 
 dex:
   upgrade_strategy:
     start_first: false
   scale: 1
-  strategy: recreate
   health_check:
     port: 8389
     interval: 5000
@@ -288,6 +287,7 @@ dex:
     #17mins
     initializing_timeout: 1020000
     reinitializing_timeout: 1020000
+    strategy: recreate
 
 changelog:
   upgrade_strategy:
