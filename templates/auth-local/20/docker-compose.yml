@@ -50,6 +50,8 @@ services:
       project.service.name: lb-auth-business-service
       project.name: cis-auth
       project.stack: auth
+      io.rancher.container.agent.role: environmentAdmin
+      io.rancher.container.create_agent: 'true'
     tty: true
     image: rancher/lb-service-haproxy
     stdin_open: true
