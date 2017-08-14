@@ -279,8 +279,6 @@ services:
       S6_BEHAVIOUR_IF_STAGE2_FAILS: 1
 
   dfa:
-    ports:
-      - 8390:8389
     labels:
       io.rancher.scheduler.affinity:host_label: stackType=auth
       io.rancher.container.pull_image: always

@@ -606,8 +606,6 @@ services:
     ports:
     - 8080:8080
     labels:
-      io.rancher.container.agent.role: environmentAdmin
-      io.rancher.container.create_agent: 'true'
       environment_name: ${env_shortcode}
       service_name: LB-BusinessServices
       project.service.name: lb-businessservices
@@ -616,12 +614,10 @@ services:
       io.rancher.scheduler.affinity:host_label_soft: stackType=urs
     tty: true
     stdin_open: true
-    image: rancher/load-balancer-service
+    image: rancher/lb-service-haproxy:v0.7.5
 
   LB-Secure:
     labels:
-      io.rancher.container.agent.role: environmentAdmin
-      io.rancher.container.create_agent: 'true'
       environment_name: ${env_shortcode}
       service_name: LB-Secure
       project.service.name: lb-secure
@@ -630,4 +626,4 @@ services:
       io.rancher.scheduler.affinity:host_label_soft: stackType=urs
     tty: true
     stdin_open: true
-    image: rancher/load-balancer-service
+    image: rancher/lb-service-haproxy:v0.7.5
