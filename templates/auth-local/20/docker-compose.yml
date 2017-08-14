@@ -51,7 +51,7 @@ services:
       project.name: cis-auth
       project.stack: auth
     tty: true
-    image: rancher/load-balancer-service
+    image: rancher/lb-service-haproxy
     stdin_open: true
 
   AuditService:
