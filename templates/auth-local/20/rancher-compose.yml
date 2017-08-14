@@ -135,31 +135,31 @@ LB-AuthBusinessService:
   lb_config:
     certs: []
     port_rules:
-    - source_port: 8080
-      target_port: 8080
+    - path: /authenticator
       protocol: http
-      path: /authenticator
       service: AuthenticatorService
-    - source_port: 8080
+      source_port: 8080
       target_port: 8080
+    - path: /amserver
       protocol: http
-      path: /amserver
       service: TokenValidationService
-    - source_port: 8080
+      source_port: 8080
       target_port: 8080
+    - path: /saml
       protocol: http
-      path: /saml
       service: SAMLService
-    - source_port: 8080
+      source_port: 8080
       target_port: 8080
+    - path: /authauditlogger
       protocol: http
-      path: /authauditlogger
       service: AuditService
-    - source_port: 8080
+      source_port: 8080
       target_port: 8080
+    - path: /sessionmanager
       protocol: http
-      path: /sessionmanager
       service: SessionManager
+      source_port: 8080
+      target_port: 8080
   health_check:
     response_timeout: 2000
     healthy_threshold: 2

@@ -41,8 +41,6 @@ services:
       ENV_SHORTCODE: ${env_shortcode}
 
   LB-AuthBusinessService:
-    expose:
-    - 8080
     labels:
       io.rancher.scheduler.affinity:host_label: stackType=auth
       environment_name: ${env_shortcode}
@@ -50,10 +48,8 @@ services:
       project.service.name: lb-auth-business-service
       project.name: cis-auth
       project.stack: auth
-      io.rancher.container.agent.role: environmentAdmin
-      io.rancher.container.create_agent: 'true'
     tty: true
-    image: rancher/lb-service-haproxy
+    image: rancher/lb-service-haproxy:v0.7.5
     stdin_open: true
 
   AuditService:
