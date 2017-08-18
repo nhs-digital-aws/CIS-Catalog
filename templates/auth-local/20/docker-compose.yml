@@ -41,28 +41,15 @@ services:
       ENV_SHORTCODE: ${env_shortcode}
 
   LB-AuthBusinessService:
-    expose:
-    - 8080
     labels:
       io.rancher.scheduler.affinity:host_label: stackType=auth
-      io.rancher.loadbalancer.target.AuthenticatorService: /authenticator=8080
-      io.rancher.loadbalancer.target.TokenValidationService: /amserver=8080
-      io.rancher.loadbalancer.target.SAMLService: /saml=8080
-      io.rancher.loadbalancer.target.AuditService: /authauditlogger=8080
-      io.rancher.loadbalancer.target.SessionManager: /sessionmanager=8080
       environment_name: ${env_shortcode}
       service_name: LB-AuthBusinessService
       project.service.name: lb-auth-business-service
       project.name: cis-auth
       project.stack: auth
     tty: true
-    image: rancher/load-balancer-service
-    links:
-    - AuthenticatorService:AuthenticatorService
-    - AuditService:AuditService
-    - SessionManager:SessionManager
-    - SAMLService:SAMLService
-    - TokenValidationService:TokenValidationService
+    image: rancher/lb-service-haproxy:v0.7.5
     stdin_open: true
 
   AuditService:
@@ -292,8 +279,6 @@ services:
       S6_BEHAVIOUR_IF_STAGE2_FAILS: 1
 
   dfa:
-    ports:
-      - 8390:8389
     labels:
       io.rancher.scheduler.affinity:host_label: stackType=auth
       io.rancher.container.pull_image: always
