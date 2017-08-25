@@ -1,0 +1,24 @@
+version: '2'
+services:
+  auth-testing:
+    image: ${registry_url}/automated-testing:${image_version}
+    environment:
+      GATLING_SBAPI_SUBDOMAIN: ${env_name}
+      GATLING_DOMAIN: ${fqdn}
+      GATLING_CONCURRENT_USERS: ${gatling_concurrentusers}
+      GATLING_AUTH_SERVICE: gas
+      GATLING_RAMP_UP_PERIOD: ${gatling_rampup}
+      ENV_NAME: ${env_name}
+      UUID: ${gatling_uuid}
+      GATLING_SIMULATION_DURATION: ${gatling_duration}
+      GATLING_URS_SERVICE: wfe
+      GATLING_URS_SUBDOMAIN: ${env_name}
+      GATLING_SBAPI_SERVICE: gas
+      GATLING_AUTH_SUBDOMAIN: ${env_name}
+    stdin_open: true
+    tty: true
+    labels:
+#      io.rancher.scheduler.affinity:host_label: stacktype=urs
+      io.rancher.container.start_once: 'true'
+      io.rancher.container.pull_image: always
+

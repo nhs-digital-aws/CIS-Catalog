@@ -1,0 +1,61 @@
+.catalog:
+  name: "NHS Digital - CIS Authentication test harness"
+  version: "0.1"
+  description: |
+    Enter Description Here
+  minimum_rancher_version: "v1.1.4"
+  questions:
+    - variable: "image_version"
+      description: "Which version of the docker images should be used?"
+      label: "Image Version"
+      required: true
+      default: portable
+      type: "string"
+    - variable: "registry_url"
+      description: "Please enter the url of your registry"
+      label: "e.g. registry.nhs.uk:5000"
+      required: true
+      default: 446537062602.dkr.ecr.eu-west-2.amazonaws.com/cishackday
+      type: "string"
+    - variable: "fqdn"
+      description: "Please enter the domain you are using (excl envName)"
+      label: "e.g. aws.cishackday.com"
+      required: true
+      default: cis.spine2.ncrs.nhs.uk
+      type: "string"
+    - variable: "env_name"
+      description: "Please enter your environment name"
+      label: "Env Name"
+      required: true
+      default: demo
+      type: "string"
+    - variable: "gatling_concurrentusers"
+      description: "Number of concurrent users in the gatling test"
+      label: "Concurrent Users"
+      required: true
+      default: 30
+      type: "string"
+    - variable: "gatling_rampup"
+      description: "Gatling Ramp up time (in seconds)"
+      label: "Ramp up (s)"
+      required: true
+      default: 60
+      type: "string"
+    - variable: "gatling_duration"
+      description: "Gatling test duration [at full throttle] (in seconds)"
+      label: "Duration (s)"
+      required: true
+      default: 120
+      type: "string"
+    - variable: "gatling_uuid"
+      description: "Gatling UUID"
+      label: "Gatling UUID"
+      required: true
+      default: 
+      type: "string"
+
+services:
+  auth-testing:
+    scale: 1
+    start_on_create: true
+
