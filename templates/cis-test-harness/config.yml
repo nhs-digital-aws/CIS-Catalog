@@ -1,5 +1,5 @@
 name: NHS Digital - CIS Test Harness
 description: |
-Test harness to run against Authentication services
+  Test harness to run against Authentication services
 version: 0.1
 category: NHS-Digital
