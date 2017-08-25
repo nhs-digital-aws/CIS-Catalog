@@ -51,11 +51,10 @@
       description: "Gatling UUID"
       label: "Gatling UUID"
       required: true
-      default: 
+      default: 240000153891
       type: "string"
 
-services:
-  auth-testing:
-    scale: 1
-    start_on_create: true
+auth-testing:
+  scale: 1
+  start_on_create: true
 
