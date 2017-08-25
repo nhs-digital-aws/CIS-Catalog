@@ -128,6 +128,47 @@ TLS-Service:
     unhealthy_threshold: 3
     healthy_threshold: 2
 
+LB-AuthBusinessService:
+  upgrade_strategy:
+    start_first: true
+  scale: 1
+  lb_config:
+    certs: []
+    port_rules:
+    - path: /authenticator
+      protocol: http
+      service: AuthenticatorService
+      source_port: 8080
+      target_port: 8080
+    - path: /amserver
+      protocol: http
+      service: TokenValidationService
+      source_port: 8080
+      target_port: 8080
+    - path: /saml
+      protocol: http
+      service: SAMLService
+      source_port: 8080
+      target_port: 8080
+    - path: /authauditlogger
+      protocol: http
+      service: AuditService
+      source_port: 8080
+      target_port: 8080
+    - path: /sessionmanager
+      protocol: http
+      service: SessionManager
+      source_port: 8080
+      target_port: 8080
+  health_check:
+    response_timeout: 2000
+    healthy_threshold: 2
+    port: 42
+    unhealthy_threshold: 3
+    initializing_timeout: 60000
+    interval: 2000
+    reinitializing_timeout: 60000
+
 AuditService:
   upgrade_strategy:
     start_first: true
@@ -156,7 +197,6 @@ SessionManager:
   upgrade_strategy:
     start_first: true
   scale: 1
-
   health_check:
     port: 8080
     interval: 2000
@@ -205,43 +245,49 @@ djm:
   upgrade_strategy:
     start_first: false
   scale: 1
-#  health_check:
-#    port: 8389
-#    interval: 5000
-#    unhealthy_threshold: 3
-#    request_line: 'GET / HTTP/1.1\r\nHost:\ djm'
-#    healthy_threshold: 1
-#    response_timeout: 2000
-#    #7mins
-#    initializing_timeout: 420000
+  health_check:
+    port: 8389
+    interval: 5000
+    unhealthy_threshold: 3
+    request_line: 'GET / HTTP/1.1\r\nHost:\ djm'
+    healthy_threshold: 1
+    response_timeout: 2000
+    #9mins
+    initializing_timeout: 540000
+    reinitializing_timeout: 540000
+    strategy: recreate
 
 dfa:
   upgrade_strategy:
     start_first: false
   scale: 1
-#  health_check:
-#    port: 8389
-#    interval: 5000
-#    unhealthy_threshold: 3
-#    request_line: 'GET / HTTP/1.1\r\nHost:\ dfa'
-#    healthy_threshold: 1
-#    response_timeout: 2000
-#    #14mins
-#    initializing_timeout: 840000
+  health_check:
+    port: 8389
+    interval: 5000
+    unhealthy_threshold: 3
+    request_line: 'GET / HTTP/1.1\r\nHost:\ dfa'
+    healthy_threshold: 1
+    response_timeout: 2000
+    #15mins
+    initializing_timeout: 900000
+    reinitializing_timeout: 900000
+    strategy: recreate
 
 dex:
   upgrade_strategy:
     start_first: false
   scale: 1
-#  health_check:
-#    port: 8389
-#    interval: 5000
-#    unhealthy_threshold: 3
-#    request_line: 'GET / HTTP/1.1\r\nHost:\ dex'
-#    healthy_threshold: 1
-#    response_timeout: 2000
-#    #14mins
-#    initializing_timeout: 840000
+  health_check:
+    port: 8389
+    interval: 5000
+    unhealthy_threshold: 3
+    request_line: 'GET / HTTP/1.1\r\nHost:\ dex'
+    healthy_threshold: 1
+    response_timeout: 2000
+    #17mins
+    initializing_timeout: 1020000
+    reinitializing_timeout: 1020000
+    strategy: recreate
 
 changelog:
   upgrade_strategy:
