@@ -59,6 +59,12 @@
       required: true
       default: x123
       type: "string"
+    - variable: "number_of_atns"
+      description: "Gatling: Number of ATNs in use"
+      label: "Number of ATN hosts"
+      required: true
+      default: 1
+      type: "string"
 
 auth-testing:
   scale: 1

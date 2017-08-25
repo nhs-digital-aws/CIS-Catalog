@@ -16,6 +16,7 @@ services:
       GATLING_SBAPI_SERVICE: gas
       GATLING_AUTH_SUBDOMAIN: ${env_name}
       BUILD_ID: ${build_id}
+      NUMBER_OF_ATNS: ${number_of_atns}
     stdin_open: true
     tty: true
     labels:
