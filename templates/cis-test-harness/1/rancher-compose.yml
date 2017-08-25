@@ -53,6 +53,12 @@
       required: true
       default: 240000153891
       type: "string"
+    - variable: "build_id"
+      description: "Unique Number for the build testing"
+      label: "Unique ID for testing"
+      required: true
+      default: x123
+      type: "string"
 
 auth-testing:
   scale: 1
