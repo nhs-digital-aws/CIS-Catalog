@@ -4,7 +4,7 @@ vault:
   labels:
     io.rancher.container.pull_image: always
   image: vault
-  command: "vault server"
+  command: "vault server -config=/vault/config/local.json"
   environment:
     VAULT_LOCAL_CONFIG: '{"storage": {"dynamodb": {"ha_enabled":"false", "region":"eu-west-2", "table": "mgmt-01-rancher-host-mgmt-table", "disable_clustering": "true"}}, "default_lease_ttl":"168h", "max_lease_ttl": "720h"}'
   stdin_open: true
