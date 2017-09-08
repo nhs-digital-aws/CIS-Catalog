@@ -4,6 +4,13 @@
   description: |
     Creates a Vault stack and single instance
   minimum_rancher_version: "v1.6.5"
+  questions:
+    - variable: "config_data"
+      description: "Configuration Data to be used by the Vault"
+      label: "Configuration Data"
+      required: true
+      default: '{"listener": {"tcp": {"address": "0.0.0.0:8200", "tls_disable": "1"}}, "storage": {"dynamodb": {"ha_enabled":"false", "region":"eu-west-2", "table": "mgmt-01-rancher-host-mgmt-table", "disable_clustering": "true"}}, "default_lease_ttl":"168h", "max_lease_ttl": "720h"}'
+      type: "string"
 
 vault:
   scale: 1
