@@ -1,0 +1,107 @@
+# Prometheus Node Exporter for host level metrics
+prometheus-node-exporter:
+  ports:
+    - 9100:9100
+  labels:
+    io.rancher.container.pull_image: always
+    io.rancher.scheduler.global: 'true'
+    io.rancher.container.dns: 'true'
+    environment_name: ${env_shortcode}
+    service_name: $${service_name}
+    io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
+    io.rancher.container.hostname_override: container_name
+  tty: true
+  image: prom/node-exporter:latest
+  stdin_open: true
+  net: "host"
+  command: "--collectors.enabled=bonding,conntrack,diskstats,filefd,filesystem,hwmon,interrupts,loadavg,mdadm,meminfo,netdev,netstat,sockstat,stat,tcpstat,time,uname,vmstat"
+
+# cAdvisor for container level metrics
+cadvisor:
+  labels:
+    io.rancher.container.pull_image: always
+    io.rancher.scheduler.global: 'true'
+    environment_name: ${env_shortcode}
+    service_name: $${service_name}
+    io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
+    io.rancher.container.hostname_override: container_name
+  tty: true
+  image: google/cadvisor:latest
+  stdin_open: true
+  volumes:
+    - "/:/rootfs:ro"
+    - "/var/run:/var/run:rw"
+    - "/sys:/sys:ro"
+    - "/var/lib/docker/:/var/lib/docker:ro"
+
+# Prometheus to scrap statistics from clients above
+prometheus:
+#  ports:
+#  - 9090:9090/tcp
+  labels:
+    io.rancher.container.pull_image: always
+    io.rancher.sidekicks: prom-conf
+    io.rancher.scheduler.affinity:host_label: ranchergroup_monitoring=true
+    environment_name: ${env_shortcode}
+    service_name: $${service_name}
+    io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
+    io.rancher.container.hostname_override: container_name
+  command:
+  - -config.file=/etc/prom-conf/prometheus.yml
+  - -alertmanager.url=http://alertmanager:9093
+  - -storage.local.path=/prometheus
+  - -web.console.libraries=/etc/prometheus/console_libraries
+  - -web.console.templates=/etc/prometheus/consoles
+  tty: true
+  volumes:
+  - /prometheus/
+  stdin_open: true
+  image: prom/prometheus:v1.7.1
+  volumes_from:
+  - prom-conf
+
+# Prometheus configuration sidekick
+prom-conf:
+  labels:
+    io.rancher.container.pull_image: always
+    environment_name: ${env_shortcode}
+    service_name: $${service_name}
+    io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
+    io.rancher.container.hostname_override: container_name
+  tty: true
+  image: ${registry_url}/prom-conf:14
+  volumes:
+  - /etc/prom-conf/
+  environment:
+    rancher-server: $RANCHER_SERVER
+
+# Grafana is the preferred Prometheus back end database
+grafana:
+#  ports:
+#  - 3555:3000/tcp
+  tty: true
+  labels:
+    io.rancher.container.pull_image: always
+    io.rancher.sidekicks: graf-db
+    io.rancher.scheduler.affinity:host_label: ranchergroup_monitoring=true
+    environment_name: ${env_shortcode}
+    service_name: $${service_name}
+    io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
+    io.rancher.container.hostname_override: container_name
+  volumes_from:
+    - graf-db
+  image: grafana/grafana:4.4.3
+  stdin_open: true
+
+# Grafana configuration sidekick
+graf-db:
+  tty: true
+  image: ${registry_url}/graf-db:01
+  command: cat
+  volumes:
+    - /var/lib/grafana/
+  labels:
+    environment_name: ${env_shortcode}
+    service_name: $${service_name}
+    io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
+    io.rancher.container.hostname_override: container_name
