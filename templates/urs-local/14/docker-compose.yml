@@ -256,7 +256,6 @@ services:
       KEY_MATERIAL: YES
       GLUSTER_URL: ${gluster_url}
       GLUSTER_FOLDER: ${env_shortcode}
-      GLUSTER_PHOTOS: 'false'
       GLUSTER_REPORTS: 'true'
     links:
     - IAM-Database:IAM-Database
@@ -503,7 +502,6 @@ services:
     environment:
       GLUSTER_URL: ${gluster_url}
       GLUSTER_FOLDER: ${env_shortcode}
-      GLUSTER_PHOTOS: false
       GLUSTER_REPORTS: true
       JAVA_OPTS: -server -XX:+UseConcMarkSweepGC -XX:+UseParNewGC -XX:ParallelGCThreads=2 -Xms512m -Xmx1500m
     links:
@@ -530,7 +528,6 @@ services:
     environment:
       GLUSTER_URL: ${gluster_url}
       GLUSTER_FOLDER: ${env_shortcode}
-      GLUSTER_PHOTOS: false
       GLUSTER_REPORTS: true
       JAVA_OPTS: -server -XX:+UseConcMarkSweepGC -XX:+UseParNewGC -XX:ParallelGCThreads=2 -Xms512m -Xmx1500m
     links:
