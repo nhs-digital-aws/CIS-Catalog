@@ -651,7 +651,7 @@ services:
       UID: "500"
       GID: "500"
     volumes:
-    - "/home/rancher/s3fs/gluster:/home/shared/s3:shared"
+    - "/home/rancher/s3fs:/home/shared/s3:shared"
     tty: true
     stdin_open: true
     image: "camptocamp/s3fs:1.80-2"
