@@ -644,9 +644,7 @@ services:
     devices:
       - "/dev/fuse"
     environment:
-      BUCKETNAME: "cis-hackday-gluster -o nonempty"
-      AWSACCESSKEYID: "${AWS_ACCESS_KEY_ID}"
-      AWSSECRETACCESSKEY: "${AWS_SECRET_KEY_ID}"
+      BUCKETNAME: "cis-hackday-gluster -o nonempty -o iam_role=${env_name}-${tag_name}-ecsFromRancher"
       UID: "500"
       GID: "500"
     volumes:

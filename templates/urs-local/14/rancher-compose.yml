@@ -82,16 +82,16 @@
       required: true
       default: "False"
       type: "string"
-    - variable: "AWS_ACCESS_KEY_ID"
-      label: "AWS_ACCESS_KEY_ID"
-      description: "AWS Access Key ID"
+    - variable: "env_name"
+      description: "Please enter the environment name"
+      label: "env_name"
+      required: true
       type: "string"
+    - variable: "tag_name"
+      description: "Please enter the tag name"
+      label: "tag_name"
       required: true
-    - variable: "AWS_SECRET_KEY_ID"
-      label: "AWS_SECRET_KEY_ID"
-      description: "AWS Secret Key ID"
-      type: "password"
-      required: true
+      type: "string"
 
 Services-Properties:
   upgrade_strategy:
