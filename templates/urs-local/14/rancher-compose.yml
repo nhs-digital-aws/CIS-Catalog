@@ -82,6 +82,16 @@
       required: true
       default: "False"
       type: "string"
+    - variable: "AWS_ACCESS_KEY_ID"
+      label: "AWS_ACCESS_KEY_ID"
+      description: "AWS Access Key ID"
+      type: "string"
+      required: true
+    - variable: "AWS_SECRET_KEY_ID"
+      label: "AWS_SECRET_KEY_ID"
+      description: "AWS Secret Key ID"
+      type: "password"
+      required: true
 
 Services-Properties:
   upgrade_strategy:
