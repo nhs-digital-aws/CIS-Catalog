@@ -647,7 +647,7 @@ services:
     devices:
       - "/dev/fuse"
     environment:
-      BUCKETNAME: "cis-hackday-gluster"
+      BUCKETNAME: "cis-hackday-gluster -o nonempty"
       UID: "500"
       GID: "500"
     volumes:
