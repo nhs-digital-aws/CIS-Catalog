@@ -631,7 +631,8 @@ services:
 
   S3FS:
     labels:
-      environment_name: ${env_name}
+      environment_name: ${env_shortcode}
+      io.rancher.container.pull_image: always
       service_name: S3FS
       project.service.name: s3fs
       project.name: cis-urs
