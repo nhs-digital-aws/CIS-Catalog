@@ -10,7 +10,7 @@ services:
       project.stack: urs
       io.rancher.container.hostname_override: container_name
       io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
-      environment_name: ${env_shortcode}
+      environment_name: ${env_name}
       service_name: $${service_name}
     image: ${registry_url}/urs-httpd:${urs_version}
     tty: true
@@ -127,7 +127,7 @@ services:
   Audit:
     labels:
       io.rancher.container.hostname_override: container_name
-      environment_name: ${env_shortcode}
+      environment_name: ${env_name}
       service_name: Audit
       project.service.name: audit
       project.name: cis-urs
@@ -146,7 +146,7 @@ services:
   GuvnorService:
     labels:
       io.rancher.container.hostname_override: container_name
-      environment_name: ${env_shortcode}
+      environment_name: ${env_name}
       service_name: GuvnorService
       project.service.name: guvnor-service
       project.name: cis-urs
@@ -163,7 +163,7 @@ services:
   CMS-BusinessService:
     labels:
       io.rancher.container.hostname_override: container_name
-      environment_name: ${env_shortcode}
+      environment_name: ${env_name}
       service_name: CMS-BusinessService
       project.service.name: cms-businessservice
       project.name: cis-urs
@@ -200,7 +200,7 @@ services:
   EPR-BusinessService:
     labels:
       io.rancher.container.hostname_override: container_name
-      environment_name: ${env_shortcode}
+      environment_name: ${env_name}
       service_name: EPR-BusinessService
       project.service.name: epr-businessservice
       project.name: cis-urs
@@ -222,7 +222,7 @@ services:
     stdin_open: true
     labels:
       io.rancher.container.hostname_override: container_name
-      environment_name: ${env_shortcode}
+      environment_name: ${env_name}
       service_name: UID-Service
       project.service.name: uid-service
       project.name: cis-urs
@@ -241,7 +241,7 @@ services:
     stdin_open: true
     labels:
       io.rancher.container.hostname_override: container_name
-      environment_name: ${env_shortcode}
+      environment_name: ${env_name}
       service_name: URS-BusinessService
       project.service.name: urs-businessservice
       project.name: cis-urs
@@ -264,7 +264,7 @@ services:
   Integration:
     labels:
       io.rancher.container.hostname_override: container_name
-      environment_name: ${env_shortcode}
+      environment_name: ${env_name}
       service_name: Integration
       project.service.name: integration
       project.name: cis-urs
@@ -283,7 +283,7 @@ services:
   OMS-BusinessService:
     labels:
       io.rancher.container.hostname_override: container_name
-      environment_name: ${env_shortcode}
+      environment_name: ${env_name}
       service_name: OMS-BusinessService
       project.service.name: oms-businessservice
       project.name: cis-urs
@@ -303,7 +303,7 @@ services:
   OSCAR-BusinessService:
     labels:
       io.rancher.container.hostname_override: container_name
-      environment_name: ${env_shortcode}
+      environment_name: ${env_name}
       service_name: OSCAR-BusinessService
       project.service.name: oscar-businessservice
       project.name: cis-urs
@@ -322,7 +322,7 @@ services:
   RulesService:
     labels:
       io.rancher.container.hostname_override: container_name
-      environment_name: ${env_shortcode}
+      environment_name: ${env_name}
       service_name: RulesService
       project.service.name: rules-service
       project.name: cis-urs
@@ -341,7 +341,7 @@ services:
   SecureAudit:
     labels:
       io.rancher.container.hostname_override: container_name
-      environment_name: ${env_shortcode}
+      environment_name: ${env_name}
       service_name: SecureAudit
       project.service.name: secure-audit
       project.name: cis-urs
@@ -362,7 +362,7 @@ services:
   Scheduler:
     labels:
       io.rancher.container.hostname_override: container_name
-      environment_name: ${env_shortcode}
+      environment_name: ${env_name}
       service_name: Scheduler
       project.service.name: scheduler
       project.name: cis-urs
@@ -382,7 +382,7 @@ services:
   ID-StoreSyncService:
     labels:
       io.rancher.container.hostname_override: container_name
-      environment_name: ${env_shortcode}
+      environment_name: ${env_name}
       service_name: ID-StoreSyncService
       project.service.name: id-store-sync-service
       project.name: cis-urs
@@ -403,7 +403,7 @@ services:
   CC-CheckerService:
     labels:
       io.rancher.container.hostname_override: container_name
-      environment_name: ${env_shortcode}
+      environment_name: ${env_name}
       service_name: CC-CheckerService
       project.service.name: cc-checker-service
       project.name: cis-urs
@@ -423,7 +423,7 @@ services:
   ReportingService:
     labels:
       io.rancher.container.hostname_override: container_name
-      environment_name: ${env_shortcode}
+      environment_name: ${env_name}
       service_name: ReportingService
       project.service.name: reporting-service
       project.name: cis-urs
@@ -446,7 +446,7 @@ services:
   SCEP:
     labels:
       io.rancher.container.hostname_override: container_name
-      environment_name: ${env_shortcode}
+      environment_name: ${env_name}
       service_name: SCEP
       project.service.name: scep
       project.name: cis-urs
@@ -465,7 +465,7 @@ services:
   EPR-WebFrontEnd:
     labels:
       io.rancher.container.hostname_override: container_name
-      environment_name: ${env_shortcode}
+      environment_name: ${env_name}
       service_name: EPR-WebFrontEnd
       project.service.name: epr-webfrontend
       project.name: cis-urs
@@ -485,7 +485,7 @@ services:
   URS-WebFrontEnd:
     labels:
       io.rancher.container.hostname_override: container_name
-      environment_name: ${env_shortcode}
+      environment_name: ${env_name}
       service_name: URS-WebFrontEnd
       io.rancher.container.dns: true
       project.service.name: urs-webfrontend
@@ -511,7 +511,7 @@ services:
   Portal:
     labels:
       io.rancher.container.hostname_override: container_name
-      environment_name: ${env_shortcode}
+      environment_name: ${env_name}
       service_name: Portal
       io.rancher.container.dns: true
       project.service.name: portal
@@ -539,7 +539,7 @@ services:
       io.rancher.scheduler.global: 'true'
       io.rancher.container.hostname_override: container_name
       io.rancher.container.dns: true
-      environment_name: ${env_shortcode}
+      environment_name: ${env_name}
       service_name: haproxy-fe
       project.service.name: haproxy-fe
       project.name: cis-urs
@@ -593,7 +593,7 @@ services:
     stdin_open: true
     labels:
       io.rancher.container.hostname_override: container_name
-      environment_name: ${env_shortcode}
+      environment_name: ${env_name}
       service_name: EmailService
       project.service.name: emailservice
       project.name: cis-urs
@@ -607,7 +607,7 @@ services:
     ports:
     - 8080:8080
     labels:
-      environment_name: ${env_shortcode}
+      environment_name: ${env_name}
       service_name: LB-BusinessServices
       project.service.name: lb-businessservices
       project.name: cis-urs
@@ -619,7 +619,7 @@ services:
 
   LB-Secure:
     labels:
-      environment_name: ${env_shortcode}
+      environment_name: ${env_name}
       service_name: LB-Secure
       project.service.name: lb-secure
       project.name: cis-urs
@@ -631,7 +631,8 @@ services:
 
   S3FS:
     labels:
-      environment_name: ${env_shortcode}
+      environment_name: ${env_name}
+      io.rancher.container.pull_image: always
       service_name: S3FS
       project.service.name: s3fs
       project.name: cis-urs
