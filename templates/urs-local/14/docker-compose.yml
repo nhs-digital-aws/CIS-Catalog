@@ -250,7 +250,7 @@ services:
     volumes:
     - /var/log/iam:/var/log/iam
   #  - /home/rancher/env_config/${env_shortcode}/secaudit/client:/home/iam_user/secaudcertificates/client
-    - /home/rancher/s3fs/gluster/careidconfig/${env_shortcode}/Photos:/home/iam_user/careidconfig/Photos
+    - /home/rancher/${env_name}/Photos:/home/iam_user/careidconfig/Photos
     privileged: true
     environment:
       KEY_MATERIAL: YES
@@ -494,7 +494,7 @@ services:
       io.rancher.scheduler.affinity:host_label_soft: stackType=urs
     volumes:
     - /var/log/iam:/var/log/iam
-    - /home/rancher/s3fs/gluster/careidconfig/${env_shortcode}/Photos:/home/iam_user/careidconfig/Photos
+    - /home/rancher/${env_name}/Photos:/home/iam_user/careidconfig/Photos
     image: ${registry_url}/cis-urs-webfrontend:${urs_version}
     tty: true
     stdin_open: true
@@ -520,7 +520,7 @@ services:
       io.rancher.scheduler.affinity:host_label_soft: stackType=urs
     volumes:
     - /var/log/iam:/var/log/iam
-    - /home/rancher/s3fs/gluster/careidconfig/${env_shortcode}/Photos:/home/iam_user/careidconfig/Photos
+    - /home/rancher/${env_name}/Photos:/home/iam_user/careidconfig/Photos
     image: ${registry_url}/cis-portal:${urs_version}
     tty: true
     stdin_open: true
@@ -631,7 +631,7 @@ services:
 
   S3FS:
     labels:
-      environment_name: ${env_shortcode}
+      environment_name: ${env_name}
       service_name: S3FS
       project.service.name: s3fs
       project.name: cis-urs
@@ -644,11 +644,11 @@ services:
     devices:
       - "/dev/fuse"
     environment:
-      BUCKETNAME: "cis-hackday-gluster -o nonempty -o iam_role=${env_name}-${tag_name}-ecsFromRancher"
+      BUCKETNAME: "nhs-cis -o nonempty -o iam_role=${env_name}-${tag_name}-ecsFromRancher"
       UID: "500"
       GID: "500"
     volumes:
-    - "/home/rancher/s3fs:/home/shared/s3:shared"
+    - "/home/rancher:/home/shared:shared"
     tty: true
     stdin_open: true
     image: "camptocamp/s3fs:1.80-2"
