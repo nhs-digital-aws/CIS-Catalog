@@ -533,6 +533,31 @@ services:
     links:
     - WebSessionStore:RedisSessionStore
 
+  S3FS:
+    labels:
+      environment_name: ${env_shortcode}
+      io.rancher.container.pull_image: always
+      service_name: S3FS
+      project.service.name: s3fs
+      project.name: cis-urs
+      project.stack: urs
+      io.rancher.scheduler.affinity:host_label_soft: stackType=urs
+    cap_add:
+      - SYS_ADMIN
+      - MKNOD
+    privileged: true
+    devices:
+      - "/dev/fuse"
+    environment:
+      BUCKETNAME: "nhs-cis -o nonempty -o iam_role=${env_name}-${tag_name}-ecsFromRancher"
+      UID: "500"
+      GID: "500"
+    volumes:
+    - "/home/rancher:/home/shared/s3:shared"
+    tty: true
+    stdin_open: true
+    image: "camptocamp/s3fs:1.80-2"
+
   haproxy-fe:
     network_mode: "host"
     labels:
@@ -628,28 +653,3 @@ services:
     tty: true
     stdin_open: true
     image: rancher/lb-service-haproxy:v0.7.6
-
-  S3FS:
-    labels:
-      environment_name: ${env_shortcode}
-      io.rancher.container.pull_image: always
-      service_name: S3FS
-      project.service.name: s3fs
-      project.name: cis-urs
-      project.stack: urs
-      io.rancher.scheduler.affinity:host_label_soft: stackType=urs
-    cap_add:
-      - SYS_ADMIN
-      - MKNOD
-    privileged: true
-    devices:
-      - "/dev/fuse"
-    environment:
-      BUCKETNAME: "nhs-cis -o nonempty -o iam_role=${env_name}-${tag_name}-ecsFromRancher"
-      UID: "500"
-      GID: "500"
-    volumes:
-    - "/home/rancher:/home/shared/s3:shared"
-    tty: true
-    stdin_open: true
-    image: "camptocamp/s3fs:1.80-2"
