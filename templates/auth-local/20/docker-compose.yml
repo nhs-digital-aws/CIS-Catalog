@@ -451,9 +451,9 @@ services:
       io.rancher.container.pull_image: always
       service_name: S3FS
       project.service.name: s3fs
-      project.name: cis-urs
-      project.stack: urs
-      io.rancher.scheduler.affinity:host_label_soft: stackType=urs
+      project.name: cis-auth
+      project.stack: auth
+      io.rancher.scheduler.affinity:host_label_soft: stackType=auth
     cap_add:
       - SYS_ADMIN
       - MKNOD
