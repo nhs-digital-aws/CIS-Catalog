@@ -570,7 +570,7 @@ services:
 #      GLUSTER_REPORTS: true
       JAVA_OPTS: -server -XX:+UseConcMarkSweepGC -XX:+UseParNewGC -XX:ParallelGCThreads=2 -Xms512m -Xmx1500m
     labels:
-      environment_name: lh
+      environment_name: ${env_shortcode}
       io.rancher.container.hostname_override: container_name
       service_name: SelfService-WebFrontEnd
       project.service.name: selfservice-webfrontend

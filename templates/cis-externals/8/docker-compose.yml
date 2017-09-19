@@ -3,7 +3,7 @@ services:
   IAM-Database:
     restart: always
     labels:
-      environment_name: lh
+      environment_name: ${env_shortcode}
       service_name: Database
       io.rancher.container.dns: true
       project.service.name: iam-database
@@ -16,7 +16,7 @@ services:
   Dir:
     restart: always
     labels:
-      environment_name: lh
+      environment_name: ${env_shortcode}
       service_name: Dir
       io.rancher.container.dns: true
       project.service.name: dir
@@ -29,7 +29,7 @@ services:
   PKI-LDAP:
     restart: always
     labels:
-      environment_name: lh
+      environment_name: ${env_shortcode}
       service_name: pki-ldap
       io.rancher.container.dns: true
       project.service.name: pki-ldap
@@ -42,7 +42,7 @@ services:
   Redis:
     restart: always
     labels:
-      environment_name: lh
+      environment_name: ${env_shortcode}
       service_name: redis
       io.rancher.container.dns: true
       project.service.name: redis
