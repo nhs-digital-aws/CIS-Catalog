@@ -359,13 +359,13 @@ services:
       project.service.name: haproxy-dex
       project.name: cis-auth
       project.stack: auth
+    volumes:
+    - /home/rancher/${env_shortcode}:/mnt/gluster
     environment:
-      GLUSTER_URL: ${gluster_url}
       vip: 0.0.0.0
       DEX_BE: dex.auth-local.rancher.internal
       pemfile: dir.lh.iam.spine2.ncrs.nhs.uk
       cafile: root.pem
-      envcode: ${env_shortcode}
     image: ${registry_url}/auth-haproxy-dex:${auth_version}
     tty: true
     stdin_open: true
@@ -444,3 +444,28 @@ services:
     stdin_open: true
     external_links:
     - cis-externals/Redis:RedisSessionStore
+
+  S3FS:
+    labels:
+      environment_name: ${env_shortcode}
+      io.rancher.container.pull_image: always
+      service_name: S3FS
+      project.service.name: s3fs
+      project.name: cis-urs
+      project.stack: urs
+      io.rancher.scheduler.affinity:host_label_soft: stackType=urs
+    cap_add:
+      - SYS_ADMIN
+      - MKNOD
+    privileged: true
+    devices:
+      - "/dev/fuse"
+    environment:
+      BUCKETNAME: "nhs-cis -o nonempty -o iam_role=${env_shortcode}-${tag_name}-ecsFromRancher"
+      UID: "500"
+      GID: "500"
+    volumes:
+    - "/home/rancher:/home/shared/s3:shared"
+    tty: true
+    stdin_open: true
+    image: "camptocamp/s3fs:1.80-2"
