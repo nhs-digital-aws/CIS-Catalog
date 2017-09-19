@@ -453,7 +453,7 @@ services:
       project.service.name: s3fs
       project.name: cis-auth
       project.stack: auth
-      io.rancher.scheduler.affinity:host_label_soft: stackType=auth
+      io.rancher.scheduler.affinity:host_label_soft: stackType=ldap-dex
     cap_add:
       - SYS_ADMIN
       - MKNOD
