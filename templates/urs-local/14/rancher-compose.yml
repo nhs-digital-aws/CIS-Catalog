@@ -82,6 +82,11 @@
       required: true
       default: "False"
       type: "string"
+    - variable: "tag_name"
+      description: "Please enter the tag name"
+      label: "tag_name"
+      required: true
+      type: "string"
 
 Services-Properties:
   upgrade_strategy:

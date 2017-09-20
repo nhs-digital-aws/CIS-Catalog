@@ -171,9 +171,9 @@ services:
       io.rancher.scheduler.affinity:host_label_soft: stackType=urs
     volumes:
     - /var/log/iam:/var/log/iam
+    - /home/rancher/${env_shortcode}:/mnt/gluster/careidconfig/${env_shortcode}
     privileged: true
     environment:
-      GLUSTER_URL: ${gluster_url}
       GLUSTER_FOLDER: ${env_shortcode}
       ENTRUST_AUTHCA_CA_PORT: 1829
       ENTRUST_AUTHCA_MANAGER_PORT: 1709
@@ -250,12 +250,12 @@ services:
     volumes:
     - /var/log/iam:/var/log/iam
   #  - /home/rancher/env_config/${env_shortcode}/secaudit/client:/home/iam_user/secaudcertificates/client
+    - /home/rancher/${env_shortcode}/Photos:/home/iam_user/careidconfig/Photos
     privileged: true
     environment:
       KEY_MATERIAL: YES
       GLUSTER_URL: ${gluster_url}
       GLUSTER_FOLDER: ${env_shortcode}
-      GLUSTER_PHOTOS: 'true'
       GLUSTER_REPORTS: 'true'
     links:
     - IAM-Database:IAM-Database
@@ -494,6 +494,7 @@ services:
       io.rancher.scheduler.affinity:host_label_soft: stackType=urs
     volumes:
     - /var/log/iam:/var/log/iam
+    - /home/rancher/${env_shortcode}/Photos:/home/iam_user/careidconfig/Photos
     image: ${registry_url}/cis-urs-webfrontend:${urs_version}
     tty: true
     stdin_open: true
@@ -501,7 +502,6 @@ services:
     environment:
       GLUSTER_URL: ${gluster_url}
       GLUSTER_FOLDER: ${env_shortcode}
-      GLUSTER_PHOTOS: true
       GLUSTER_REPORTS: true
       JAVA_OPTS: -server -XX:+UseConcMarkSweepGC -XX:+UseParNewGC -XX:ParallelGCThreads=2 -Xms512m -Xmx1500m
     links:
@@ -520,6 +520,7 @@ services:
       io.rancher.scheduler.affinity:host_label_soft: stackType=urs
     volumes:
     - /var/log/iam:/var/log/iam
+    - /home/rancher/${env_shortcode}/Photos:/home/iam_user/careidconfig/Photos
     image: ${registry_url}/cis-portal:${urs_version}
     tty: true
     stdin_open: true
@@ -527,7 +528,6 @@ services:
     environment:
       GLUSTER_URL: ${gluster_url}
       GLUSTER_FOLDER: ${env_shortcode}
-      GLUSTER_PHOTOS: true
       GLUSTER_REPORTS: true
       JAVA_OPTS: -server -XX:+UseConcMarkSweepGC -XX:+UseParNewGC -XX:ParallelGCThreads=2 -Xms512m -Xmx1500m
     links:
@@ -545,18 +545,13 @@ services:
       project.name: cis-urs
       project.stack: urs
       io.rancher.scheduler.affinity:host_label: stackType=urs
-    volumes:
-    - /home/rancher:/mnt/gluster
     environment:
       - vip=0.0.0.0
-      - pemfile=wfe.lh.iam.spine2.ncrs.nhs.uk
       - befqdn1=urs-webfrontend.urs-local.rancher.internal
       - befqdn2=epr-webfrontend.urs-local.rancher.internal
       - befqdn3=portal.urs-local.rancher.internal
       - befqdn4=integration.urs-local.rancher.internal
       - befqdn5=SelfService-WebFrontEnd.urs-local.rancher.internal
-      - GLUSTER_URL=${gluster_url}
-      - envcode=${env_shortcode}
     image: ${registry_url}/cis-fe-haproxy:${urs_version}
     tty: true
     stdin_open: true
@@ -570,7 +565,7 @@ services:
 #      GLUSTER_REPORTS: true
       JAVA_OPTS: -server -XX:+UseConcMarkSweepGC -XX:+UseParNewGC -XX:ParallelGCThreads=2 -Xms512m -Xmx1500m
     labels:
-      environment_name: lh
+      environment_name: ${env_shortcode}
       io.rancher.container.hostname_override: container_name
       service_name: SelfService-WebFrontEnd
       project.service.name: selfservice-webfrontend
@@ -615,7 +610,7 @@ services:
       io.rancher.scheduler.affinity:host_label_soft: stackType=urs
     tty: true
     stdin_open: true
-    image: rancher/lb-service-haproxy:v0.7.5
+    image: rancher/lb-service-haproxy:v0.7.6
 
   LB-Secure:
     labels:
@@ -627,4 +622,29 @@ services:
       io.rancher.scheduler.affinity:host_label_soft: stackType=urs
     tty: true
     stdin_open: true
-    image: rancher/lb-service-haproxy:v0.7.5
+    image: rancher/lb-service-haproxy:v0.7.6
+
+  S3FS:
+    labels:
+      environment_name: ${env_shortcode}
+      io.rancher.container.pull_image: always
+      service_name: S3FS
+      project.service.name: s3fs
+      project.name: cis-urs
+      project.stack: urs
+      io.rancher.scheduler.affinity:host_label_soft: stackType=urs
+    cap_add:
+      - SYS_ADMIN
+      - MKNOD
+    privileged: true
+    devices:
+      - "/dev/fuse"
+    environment:
+      BUCKETNAME: "nhs-cis -o nonempty -o iam_role=${env_shortcode}-${tag_name}-ecsFromRancher"
+      UID: "500"
+      GID: "500"
+    volumes:
+    - "/home/rancher:/home/shared/s3:shared"
+    tty: true
+    stdin_open: true
+    image: "camptocamp/s3fs:1.80-2"

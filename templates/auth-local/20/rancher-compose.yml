@@ -118,6 +118,11 @@
       required: true
       type: "string"
       default: "7"
+    - variable: "tag_name"
+      description: "Please enter the tag name"
+      label: "tag_name"
+      required: true
+      type: "string"
 
 TLS-Service:
   upgrade_strategy:

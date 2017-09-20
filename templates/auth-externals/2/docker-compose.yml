@@ -3,7 +3,7 @@ services:
   Dir:
     restart: always
     labels:
-      environment_name: lh
+      environment_name: ${env_shortcode}
       service_name: Dir
       io.rancher.container.dns: true
       project.service.name: dir
@@ -16,7 +16,7 @@ services:
   Redis:
     restart: always
     labels:
-      environment_name: lh
+      environment_name: ${env_shortcode}
       service_name: redis
       io.rancher.container.dns: true
       project.service.name: redis

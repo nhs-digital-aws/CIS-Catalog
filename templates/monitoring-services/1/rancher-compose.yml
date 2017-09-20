@@ -1,0 +1,24 @@
+.catalog:
+  name: "NHS Digital - CIS - Monitoring"
+  version: "0.14"
+  description: "NHS Digital - CIS - Monitoring Stack Clients & Servers"
+  minimum_rancher_version: "v1.2.0"
+  questions:
+    - variable: "registry_url"
+      description: "Please enter the url of your registry"
+      label: "e.g. registry.nhs.uk:5000"
+      required: true
+      default: 446537062602.dkr.ecr.eu-west-2.amazonaws.com/cishackday
+      type: "string"
+    - variable: "env_shortcode"
+      description: "Please enter the shortcode of your environment"
+      label: "Environment Shortcode"
+      required: true
+      default: lh
+      type: "string"
+
+prometheus:
+  scale: 1
+
+grafana:
+  scale: 1

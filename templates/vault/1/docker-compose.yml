@@ -4,8 +4,10 @@ vault:
   labels:
     io.rancher.container.pull_image: always
   image: vault
+  command: "vault server -config=/vault/config/local.json -log-level=info"
   environment:
-    VAULT_LOCAL_CONFIG: '{"backend": {"file": {"path": "/vault/file"}}, "default_lease_ttl":"168h", "max_lease_ttl": "720h"}'
+    VAULT_LOCAL_CONFIG: ${config_data}
+    VAULT_ADDR: http://127.0.0.1:8200
   stdin_open: true
   tty: true
   cap_add:

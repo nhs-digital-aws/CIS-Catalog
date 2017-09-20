@@ -49,7 +49,7 @@ services:
       project.name: cis-auth
       project.stack: auth
     tty: true
-    image: rancher/lb-service-haproxy:v0.7.5
+    image: rancher/lb-service-haproxy:v0.7.6
     stdin_open: true
 
   AuditService:
@@ -260,8 +260,11 @@ services:
       project.service.name: djm
       project.name: cis-auth
       project.stack: auth
+      io.rancher.sidekicks: djm-data
     volumes:
     - /var/log/iam:/var/log/iam
+    volumes_from:
+      - djm-data
     image: ${registry_url}/opendj-s6:${auth_version}
     tty: true
     stdin_open: true
@@ -277,6 +280,21 @@ services:
       HOSTNAME: djm.auth-local.rancher.internal
       S6_KEEP_ENV: 1
       S6_BEHAVIOUR_IF_STAGE2_FAILS: 1
+
+  djm-data:
+    labels:
+      io.rancher.scheduler.affinity:host_label: stackType=auth
+      io.rancher.container.pull_image: always
+      io.rancher.container.hostname_override: container_name
+      io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
+      service_name: $${service_name}
+      environment_name: ${env_shortcode}
+      project.service.name: djm
+      project.name: cis-auth
+      project.stack: auth
+    tty: true
+    stdin_open: true
+    image: ${registry_url}/opendj-data:${auth_version}
 
   dfa:
     labels:
@@ -359,13 +377,13 @@ services:
       project.service.name: haproxy-dex
       project.name: cis-auth
       project.stack: auth
+    volumes:
+    - /home/rancher/${env_shortcode}:/mnt/gluster
     environment:
-      GLUSTER_URL: ${gluster_url}
       vip: 0.0.0.0
       DEX_BE: dex.auth-local.rancher.internal
       pemfile: dir.lh.iam.spine2.ncrs.nhs.uk
       cafile: root.pem
-      envcode: ${env_shortcode}
     image: ${registry_url}/auth-haproxy-dex:${auth_version}
     tty: true
     stdin_open: true
@@ -444,3 +462,28 @@ services:
     stdin_open: true
     external_links:
     - cis-externals/Redis:RedisSessionStore
+
+  S3FS:
+    labels:
+      environment_name: ${env_shortcode}
+      io.rancher.container.pull_image: always
+      service_name: S3FS
+      project.service.name: s3fs
+      project.name: cis-auth
+      project.stack: auth
+      io.rancher.scheduler.affinity:host_label_soft: stackType=ldap-dex
+    cap_add:
+      - SYS_ADMIN
+      - MKNOD
+    privileged: true
+    devices:
+      - "/dev/fuse"
+    environment:
+      BUCKETNAME: "nhs-cis -o nonempty -o iam_role=${env_shortcode}-${tag_name}-ecsFromRancher"
+      UID: "500"
+      GID: "500"
+    volumes:
+    - "/home/rancher:/home/shared/s3:shared"
+    tty: true
+    stdin_open: true
+    image: "camptocamp/s3fs:1.80-2"
