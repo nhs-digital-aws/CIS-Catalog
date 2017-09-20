@@ -55,7 +55,7 @@ services:
   Nfs:
     restart: always
     labels:
-      environment_name: lh
+      environment_name: ${env_shortcode}
       service_name: nfs
       project.service.name: nfs
       project.name: cis
@@ -71,7 +71,7 @@ services:
   RootCA:
     restart: always
     labels:
-      environment_name: lh
+      environment_name: ${env_shortcode}
       service_name: rootca
       io.rancher.container.dns: true
       io.rancher.container.hostname_override: container_name
@@ -90,7 +90,7 @@ services:
   SubCA:
     restart: always
     labels:
-      environment_name: lh
+      environment_name: ${env_shortcode}
       service_name: subca
       io.rancher.container.dns: true
       io.rancher.container.hostname_override: container_name
@@ -108,7 +108,7 @@ services:
   SubCC:
     restart: always
     labels:
-      environment_name: lh
+      environment_name: ${env_shortcode}
       service_name: subcc
       io.rancher.container.dns: true
       project.service.name: sub-cc
