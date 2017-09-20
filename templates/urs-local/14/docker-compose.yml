@@ -171,10 +171,9 @@ services:
       io.rancher.scheduler.affinity:host_label_soft: stackType=urs
     volumes:
     - /var/log/iam:/var/log/iam
+    - /home/rancher/${env_shortcode}:/mnt/gluster/careidconfig/${env_shortcode}
     privileged: true
     environment:
-      GLUSTER_URL: ${gluster_url}
-      GLUSTER_FOLDER: ${env_shortcode}
       ENTRUST_AUTHCA_CA_PORT: 1829
       ENTRUST_AUTHCA_MANAGER_PORT: 1709
       ENTRUST_AUTHCA_ASH_PORT: 1710
