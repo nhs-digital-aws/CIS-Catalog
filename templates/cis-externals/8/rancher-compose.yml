@@ -29,6 +29,12 @@
       required: true
       default: lh
       type: "string"
+    - variable: "urs_db_snapshot"
+      description: "Please enter the ARN of the snapshot loaded into RDS"
+      label: "RDS ARN"
+      required: false
+      default: 
+      type: "string"
 
 IAM-Database:
   scale: 1
