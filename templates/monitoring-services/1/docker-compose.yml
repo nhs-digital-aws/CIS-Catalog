@@ -17,7 +17,7 @@ services:
     stdin_open: true
     network_mode: "host"
     command: "--collectors.enabled=bonding,conntrack,diskstats,filefd,filesystem,hwmon,interrupts,loadavg,mdadm,meminfo,netdev,netstat,sockstat,stat,tcpstat,time,uname,vmstat"
-  
+
   # cAdvisor for container level metrics
   cadvisor:
     labels:
@@ -35,8 +35,9 @@ services:
       - "/var/run:/var/run:rw"
       - "/sys:/sys:ro"
       - "/var/lib/docker/:/var/lib/docker:ro"
-  
-  # Prometheus to scrap statistics from clients above prometheus:
+
+  # Prometheus to scrap statistics from clients above
+  prometheus:
   #  ports:
   #  - 9090:9090/tcp
     labels:
@@ -59,7 +60,7 @@ services:
     image: prom/prometheus:v1.7.1
     volumes_from:
     - prom-conf
-  
+
   # Prometheus configuration sidekick
   prom-conf:
     labels:
@@ -74,8 +75,9 @@ services:
     - /etc/prom-conf/
     environment:
       rancher-server: $RANCHER_SERVER
-  
-  # Grafana is the preferred Prometheus back end database grafana:
+
+  # Grafana is the preferred Prometheus back end database
+  grafana:
   #  ports:
   #  - 3555:3000/tcp
     tty: true
@@ -90,7 +92,7 @@ services:
       - graf-db
     image: grafana/grafana:4.4.3
     stdin_open: true
-  
+
   # Grafana configuration sidekick
   graf-db:
     tty: true
