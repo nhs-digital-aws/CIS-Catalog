@@ -1,4 +1,4 @@
-name: NHS Digital - Monitoring Clients Stack
+name: NHS Digital - Monitoring Client's Stack
 description: |
   Stands up monitoring clients with Prometheus, Splunk and others.
 version: 0.1
