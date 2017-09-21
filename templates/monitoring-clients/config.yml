@@ -1,0 +1,5 @@
+name: NHS Digital - Monitoring System Stack
+description: |
+  Stands up a Monitoring clients, containing Prometheus, Splunk and others.
+version: 0.1
+category: NHS-Digital
