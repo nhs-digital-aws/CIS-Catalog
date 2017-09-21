@@ -6,8 +6,20 @@
   minimum_rancher_version: "v1.1.4"
   questions:
     - variable: "splunk_server"
-      description: "Which Splunk instance should data be sent to? e.g. splunk.demo.aws.cishackday.com:9997"
+      description: "Which Splunk instance should data be sent to? e.g. splunk.private.mgmt.cis.spine2.ncrs.nhs.uk:9997"
       label: "Location"
       required: true
-      default: splunk.demo.aws.cishackday.com:9997
+      default: splunk.private.mgmt.cis.spine2.ncrs.nhs.uk:9997
+      type: "string"
+    - variable: "description"
+      description: "Monitoring services for clients"
+      label: "Description"
+      required: true
+      default: "Monitoring services for clients"
+      type: "string"
+    - variable: "monitoring-clients"
+      description: "The name of the stack"
+      label: "Name"
+      required: true
+      default: "monitoring-clients"
       type: "string"
