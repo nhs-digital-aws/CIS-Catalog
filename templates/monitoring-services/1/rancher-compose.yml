@@ -4,6 +4,12 @@
   description: "NHS Digital - CIS - Monitoring Stack Clients & Servers"
   minimum_rancher_version: "v1.2.0"
   questions:
+    - variable: "monitoring_services_version"
+      description: "Which version of the app do you want to deploy?"
+      label: "Version"
+      required: true
+      default: portable
+      type: "string"
     - variable: "registry_url"
       description: "Please enter the url of your registry"
       label: "e.g. registry.nhs.uk:5000"
