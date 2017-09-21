@@ -1,6 +1,6 @@
 .catalog:
   name: "NHS Digital - CIS - Monitoring"
-  version: "0.14"
+  version: "0.1"
   description: "NHS Digital - CIS - Monitoring Stack Clients & Servers"
   minimum_rancher_version: "v1.2.0"
   questions:
