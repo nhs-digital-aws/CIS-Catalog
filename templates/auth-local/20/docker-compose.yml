@@ -274,7 +274,7 @@ services:
       OPENDJ_BIND_USERNAME: ${ldap_auth_username}
       OPENDJ_BIND_PASSWORD: ${ldap_auth_password}
       OPENDJ_ROLE: DJM
-      USE_AWS_S3: ${use_aws_s3}
+      USE_AWS_S3:
       USE_AWS_S3_FOR_BACKUPS:
       OPENDJ_ENABLE_CHLOG: PLEASE
       HOSTNAME: djm.auth-local.rancher.internal
@@ -289,7 +289,7 @@ services:
       io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
       service_name: $${service_name}
       environment_name: ${env_shortcode}
-      project.service.name: djm
+      project.service.name: djm-data
       project.name: cis-auth
       project.stack: auth
     tty: true
