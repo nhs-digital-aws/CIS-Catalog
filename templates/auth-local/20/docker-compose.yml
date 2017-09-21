@@ -297,6 +297,8 @@ services:
     image: ${registry_url}/opendj-data:${auth_version}
     environment:
       ENV_SHORTCODE: ${env_shortcode}
+      OPENDJ_BACKUP_SOURCE: cis-djm-backups
+      EXPECTED_SIZE: 124000000
 
   dfa:
     labels:
