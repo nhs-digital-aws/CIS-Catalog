@@ -1,5 +1,5 @@
 .catalog:
-  name: "NHS Digital - Monitoring Client's Stack"
+  name: "NHS Digital - Monitoring Clients"
   version: "0.1"
   description: "Monitoring services for clients"
   minimum_rancher_version: "v1.1.4"
