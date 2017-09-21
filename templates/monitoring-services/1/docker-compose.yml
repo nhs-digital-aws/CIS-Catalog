@@ -70,7 +70,7 @@ services:
       io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
       io.rancher.container.hostname_override: container_name
     tty: true
-    image: ${registry_url}/prom-conf:14
+    image: ${registry_url}/prom-conf:${monitoring_version}
     volumes:
     - /etc/prom-conf/
     environment:
@@ -96,7 +96,7 @@ services:
   # Grafana configuration sidekick
   graf-db:
     tty: true
-    image: ${registry_url}/graf-db:01
+    image: ${registry_url}/graf-db:${monitoring_version}
     command: cat
     volumes:
       - /var/lib/grafana/
