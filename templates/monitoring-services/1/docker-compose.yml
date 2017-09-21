@@ -15,7 +15,7 @@ services:
     tty: true
     image: prom/node-exporter:latest
     stdin_open: true
-    net: "host"
+    network_mode: "host"
     command: "--collectors.enabled=bonding,conntrack,diskstats,filefd,filesystem,hwmon,interrupts,loadavg,mdadm,meminfo,netdev,netstat,sockstat,stat,tcpstat,time,uname,vmstat"
   
   # cAdvisor for container level metrics
