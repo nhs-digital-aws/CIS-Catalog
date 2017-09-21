@@ -1,0 +1,12 @@
+.catalog:
+  name: "NHS Digital - Monitoring Clients"
+  version: "0.1"
+  description: "Monitoring services for clients"
+  minimum_rancher_version: "v1.1.4"
+  questions:
+    - variable: "splunk_server"
+      description: "Which Splunk instance should data be sent to? e.g. splunk.private.mgmt.cis.spine2.ncrs.nhs.uk:9997"
+      label: "Location"
+      required: true
+      default: splunk.private.mgmt.cis.spine2.ncrs.nhs.uk:9997
+      type: "string"

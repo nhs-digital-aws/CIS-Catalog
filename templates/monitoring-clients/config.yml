@@ -1,0 +1,5 @@
+name: NHS Digital - Monitoring Clients
+description: |
+  Stands up monitoring clients with Prometheus, Splunk and others.
+version: 0.1
+category: NHS-Digital

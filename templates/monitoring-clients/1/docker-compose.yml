@@ -1,0 +1,49 @@
+version: '2'
+services:
+  ranch-eye:
+    ports:
+    - 9104:9104/tcp
+    labels:
+      io.rancher.scheduler.global: 'true'
+      io.rancher.container.hostname_override: container_name
+    tty: true
+    image: rucknar/ranch-eye:latest
+    stdin_open: true
+    network_mode: host
+
+  prometheus-node-exporter:
+    ports:
+      - 9100:9100
+    labels:
+      io.rancher.scheduler.global: 'true'
+    tty: true
+    image: prom/node-exporter
+    stdin_open: true
+    network_mode: "host"
+
+  splunk-uforwarder:
+    image: splunk/universalforwarder:latest
+    environment:
+      SPLUNK_START_ARGS: --accept-license
+      SPLUNK_FORWARD_SERVER: ${splunk_server}
+      SPLUNK_USER: root
+      SPLUNK_ADD_1: monitor "/docker/log/iam/*access.log" -index "cis-tomcatsvr"
+      SPLUNK_ADD_2: monitor "/docker/log/iam/catalina.*" -index "cis-tomcatsvr" -sourcetype "catalina"
+      SPLUNK_ADD_3: monitor "/docker/log/iam/*-host-manager.log" -index "cis-tomcatsvr" -sourcetype "tomcat_hostmanager"
+      SPLUNK_ADD_4: monitor "/docker/log/iam/*-manager.log" -index "cis-tomcatsvr" -sourcetype "tomcat_manager"
+      SPLUNK_ADD_5: monitor "/docker/log/iam/*crashdump.log" -index "cis-crashdump" -sourcetype "crashdump"
+      SPLUNK_ADD_6: monitor "/docker/log/iam/*diagnostic.log" -index "cis-diagnostic" -sourcetype "diagnostic"
+      SPLUNK_ADD_7: monitor "/docker/log/iam/*error.log" -index "cis-error" -sourcetype "error"
+      SPLUNK_ADD_8: monitor "/docker/log/iam/*performance.log" -index "cis-performance" -sourcetype "performance"
+      SPLUNK_ADD_9: monitor "/docker/log/iam/*-ca.log" -index "cis-pki-diagnostic" -sourcetype "pki-diagnostic"
+      SPLUNK_FORWARD_SERVER_ARGS: -method clone
+    stdin_open: true
+    volumes:
+    - /var/lib/docker/containers:/host/containers:ro
+    - /var/log:/docker/log:ro
+    - /var/run/docker.sock:/var/run/docker.sock:ro
+    - /var/log/containers:/var/log/containers
+    tty: true
+    labels:
+      io.rancher.container.pull_image: always
+      io.rancher.scheduler.global: 'true'
