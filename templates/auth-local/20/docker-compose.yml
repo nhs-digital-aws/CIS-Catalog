@@ -260,7 +260,6 @@ services:
       project.service.name: djm
       project.name: cis-auth
       project.stack: auth
-      io.rancher.sidekicks: djm-data
     volumes:
     - /var/log/iam:/var/log/iam
     volumes_from:
@@ -278,27 +277,6 @@ services:
       USE_AWS_S3_FOR_BACKUPS:
       OPENDJ_ENABLE_CHLOG: PLEASE
       HOSTNAME: djm.auth-local.rancher.internal
-      S6_KEEP_ENV: 1
-      S6_BEHAVIOUR_IF_STAGE2_FAILS: 1
-
-  djm-data:
-    labels:
-      io.rancher.scheduler.affinity:host_label: stackType=auth
-      io.rancher.container.pull_image: always
-      io.rancher.container.hostname_override: container_name
-      io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
-      service_name: $${service_name}
-      environment_name: ${env_shortcode}
-      project.service.name: djm-data
-      project.name: cis-auth
-      project.stack: auth
-    tty: true
-    stdin_open: true
-    image: ${registry_url}/opendj-data:${auth_version}
-    environment:
-      ENV_SHORTCODE: ${env_shortcode}
-      OPENDJ_BACKUP_SOURCE: cis-djm-backups
-      EXPECTED_SIZE: 124000000
       S6_KEEP_ENV: 1
       S6_BEHAVIOUR_IF_STAGE2_FAILS: 1
 
