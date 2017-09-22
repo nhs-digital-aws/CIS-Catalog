@@ -262,8 +262,6 @@ services:
       project.stack: auth
     volumes:
     - /var/log/iam:/var/log/iam
-    volumes_from:
-      - djm-data
     image: ${registry_url}/opendj-s6:${auth_version}
     tty: true
     stdin_open: true
