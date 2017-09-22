@@ -38,8 +38,8 @@ services:
 
   # Prometheus to scrap statistics from clients above
   prometheus:
-  #  ports:
-  #  - 9090:9090/tcp
+    ports:
+    - 9090:9090/tcp
     labels:
       io.rancher.container.pull_image: always
       io.rancher.sidekicks: prom-conf
@@ -78,8 +78,8 @@ services:
 
   # Grafana is the preferred Prometheus back end database
   grafana:
-  #  ports:
-  #  - 3555:3000/tcp
+    ports:
+    - 3000:3000/tcp
     tty: true
     labels:
       io.rancher.container.pull_image: always
