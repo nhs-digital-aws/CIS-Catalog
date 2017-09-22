@@ -265,7 +265,7 @@ services:
     - /var/log/iam:/var/log/iam
     volumes_from:
       - djm-data
-    image: ${registry_url}/opendj-s6:nip572
+    image: ${registry_url}/opendj-s6:${auth_version}
     tty: true
     stdin_open: true
     environment:
