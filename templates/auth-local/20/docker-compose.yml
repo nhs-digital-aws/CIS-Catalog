@@ -299,6 +299,8 @@ services:
       ENV_SHORTCODE: ${env_shortcode}
       OPENDJ_BACKUP_SOURCE: cis-djm-backups
       EXPECTED_SIZE: 124000000
+      S6_KEEP_ENV: 1
+      S6_BEHAVIOUR_IF_STAGE2_FAILS: 1
 
   dfa:
     labels:
