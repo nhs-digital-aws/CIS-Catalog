@@ -262,6 +262,8 @@ services:
       project.stack: auth
     volumes:
     - /var/log/iam:/var/log/iam
+    - /var/log/opendj:/opt/opendj/logs
+    - /tmp/backup/opendj:/opt/opendj/bak
     image: ${registry_url}/opendj-s6:${auth_version}
     tty: true
     stdin_open: true
