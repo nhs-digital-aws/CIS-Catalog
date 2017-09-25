@@ -264,7 +264,7 @@ services:
     - /var/log/iam:/var/log/iam
     - /var/log/opendj:/opt/opendj/logs
     - /tmp/backup/opendj:/opt/opendj/bak
-    image: ${registry_url}/opendj-backup:${auth_version}
+    image: ${registry_url}/opendj-s6:${auth_version}
     tty: true
     stdin_open: true
     environment:
@@ -294,7 +294,7 @@ services:
     volumes:
     - /var/log/opendj:/opt/opendj/logs
     - /tmp/backup/opendj:/opt/opendj/bak
-    image: ${registry_url}/opendj-s6:${auth_version}
+    image: ${registry_url}/opendj-backup:${auth_version}
     tty: true
     stdin_open: true
     environment:
