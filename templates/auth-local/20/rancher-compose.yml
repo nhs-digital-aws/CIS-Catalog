@@ -262,7 +262,7 @@ djm:
     reinitializing_timeout: 540000
     strategy: recreate
 
-opendj-backup:
+djm-backup:
   upgrade_strategy:
     start_first: false
   scale: 1
