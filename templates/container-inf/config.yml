@@ -1,5 +1,0 @@
-name: NHS Digital - Service Monitoring Stack
-description: |
-  Stands up monitoring services to feed central monitoring components, such as Splunk and Prometheus
-version: 0.2
-category: NHS-Digital
