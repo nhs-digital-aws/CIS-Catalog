@@ -280,55 +280,6 @@ services:
       S6_KEEP_ENV: 1
       S6_BEHAVIOUR_IF_STAGE2_FAILS: 1
 
-  djm-backup:
-    labels:
-      io.rancher.container.start_once: "true"
-      io.rancher.scheduler.affinity:host_label: stackType=auth
-      io.rancher.container.pull_image: always
-      io.rancher.container.hostname_override: container_name
-      io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
-      service_name: $${service_name}
-      environment_name: ${env_shortcode}
-      project.service.name: djm-backup
-      project.name: cis-auth
-      project.stack: auth
-    volumes:
-    - /var/log/opendj:/opt/opendj/logs
-    - /tmp/backup/opendj:/opt/opendj/bak
-    image: ${registry_url}/opendj-backup:${auth_version}
-    tty: true
-    stdin_open: true
-    environment:
-      OPENDJ_BACKUP_SOURCE: cis-djm-backups
-      EXPECTED_SIZE: 120000000
-      ENV_SHORTCODE: ${env_shortcode}
-      S6_KEEP_ENV: 1
-      S6_BEHAVIOUR_IF_STAGE2_FAILS: 1
-
-  djm-backup-shipper:
-    labels:
-      io.rancher.container.start_once: "true"
-      io.rancher.scheduler.affinity:host_label: stackType=auth
-      io.rancher.container.pull_image: always
-      io.rancher.container.hostname_override: container_name
-      io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
-      service_name: $${service_name}
-      environment_name: ${env_shortcode}
-      project.service.name: djm-backup-shipper
-      project.name: cis-auth
-      project.stack: auth
-    volumes:
-    - /var/log/opendj:/opt/opendj/logs
-    - /tmp/backup/opendj:/opt/opendj/bak
-    image: ${registry_url}/opendj-shipit:${auth_version}
-    tty: true
-    stdin_open: true
-    environment:
-      OPENDJ_BACKUP_SOURCE: cis-djm-backups
-      ENV_SHORTCODE: ${env_shortcode}
-      S6_KEEP_ENV: 1
-      S6_BEHAVIOUR_IF_STAGE2_FAILS: 1
-
   dfa:
     labels:
       io.rancher.scheduler.affinity:host_label: stackType=ldap-dfa

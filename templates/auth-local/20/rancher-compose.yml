@@ -262,19 +262,6 @@ djm:
     reinitializing_timeout: 540000
     strategy: recreate
 
-djm-backup:
-  upgrade_strategy:
-    start_first: false
-  scale: 1
-  health_check:
-    port: 8080
-    interval: 5000
-    unhealthy_threshold: 3
-    request_line: 'GET /health-check'
-    healthy_threshold: 1
-    response_timeout: 2000
-    strategy: recreate
-
 dfa:
   upgrade_strategy:
     start_first: false
