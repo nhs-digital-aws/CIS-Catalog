@@ -27,7 +27,7 @@
       description: "Please enter the expected backup archive file size"
       label: "Backup Archive Minimum Size"
       required: true
-      default: "120000000""
+      default: "120000000"
       type: "string"
 
 djm-backup:
