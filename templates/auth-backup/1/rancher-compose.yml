@@ -29,7 +29,7 @@
       required: true
       default: "120000000"
       type: "string"
-    - variable: "opendj-host"
+    - variable: "opendj_host"
       description: "Please enter the hostname of the OpenDJ service to be backed up"
       label: "OpenDJ Service Hostname"
       required: true
