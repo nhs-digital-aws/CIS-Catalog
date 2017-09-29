@@ -23,3 +23,4 @@ services:
       ENV_SHORTCODE: ${env_shortcode}
       S6_KEEP_ENV: 1
       S6_BEHAVIOUR_IF_STAGE2_FAILS: 2
+      REFERENCESERVER: ${opendj-host}

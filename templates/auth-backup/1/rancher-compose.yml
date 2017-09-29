@@ -29,6 +29,12 @@
       required: true
       default: "120000000"
       type: "string"
+    - variable: "opendj-host"
+      description: "Please enter the hostname of the OpenDJ service to be backed up"
+      label: "OpenDJ Service Hostname"
+      required: true
+      default: "djm.auth-local.rancher.internal"
+      type: "string"
 
 djm-backup:
   scale: 1
