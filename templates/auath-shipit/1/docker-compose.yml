@@ -1,6 +1,6 @@
 version: '2'
 services:
-  djm-backup:
+  djm-shipit:
     labels:
       io.rancher.container.start_once: "true"
       io.rancher.scheduler.affinity:host_label: stackType=auth
@@ -9,18 +9,16 @@ services:
       io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
       service_name: $${service_name}
       environment_name: ${env_shortcode}
-      project.service.name: djm-backup
+      project.service.name: djm-shipit
       project.name: cis-auth
       project.stack: auth
     volumes:
-    - /var/log/opendj:/opt/opendj/logs
     - /tmp/backup/opendj:/opt/opendj/bak
-    image: ${registry_url}/opendj-backup:${auth_version}
+    image: ${registry_url}/opendj-shipit:${auth_version}
     tty: true
     stdin_open: true
     environment:
-      EXPECTED_SIZE: ${backup_file_size}
       ENV_SHORTCODE: ${env_shortcode}
+      S3_BUCKET: ${s3_bucket}
       S6_KEEP_ENV: 1
       S6_BEHAVIOUR_IF_STAGE2_FAILS: 2
-      OPENDJ_SERVICE: ${opendj_host}

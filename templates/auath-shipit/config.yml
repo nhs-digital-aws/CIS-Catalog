@@ -1,0 +1,8 @@
+name: NHS Digital - Authentication Data Transfer
+description: |
+  Copies a backup archive of DJM to S3
+version: 0.1
+category: NHS-Digital
+maintainer: NHS-Digital # The maintainer of the catalog entry
+license: "N/A" # The license
+projectURL: "N/A" # A URL related to the catalog entry

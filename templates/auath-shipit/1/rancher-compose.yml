@@ -1,0 +1,35 @@
+.catalog:
+  name: "NHS Digital - CIS - Authentication Data Backup"
+  version: "0.1"
+  description: |
+    Triggers a backup of DJM and archives the resulting files
+  minimum_rancher_version: "v1.6.5"
+  questions:
+    - variable: "auth_version"
+      description: "Which version of the app do you want to deploy?"
+      label: "Version"
+      required: true
+      default: "portable"
+      type: "string"
+    - variable: "registry_url"
+      description: "Please enter the url of your registry"
+      label: "e.g. registry.nhs.uk:5000"
+      required: true
+      default: "446537062602.dkr.ecr.eu-west-2.amazonaws.com/cishackday"
+      type: "string"
+    - variable: "env_shortcode"
+      description: "Please enter the shortcode of your environment"
+      label: "Environment Shortcode"
+      required: true
+      default: "lh"
+      type: "string"
+    - variable: "s3_bucket"
+      description: "Please enter the name of the S3 bucket the backup will be transferred to"
+      label: "S3 Bucket"
+      required: true
+      default: "cis-djm-backups"
+      type: "string"
+
+djm-shipit:
+  scale: 1
+  start_on_create: true
