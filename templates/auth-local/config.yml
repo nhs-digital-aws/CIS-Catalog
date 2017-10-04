@@ -1,5 +1,5 @@
 name: NHS Digital - CIS Auth Service
 description: |
   Stands up a local instance of CIS Auth stack. Requires CIS-Externals for access to Directory.
-version: 0.20
+version: 0.1
 category: NHS-Digital

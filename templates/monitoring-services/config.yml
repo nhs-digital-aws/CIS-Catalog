@@ -3,6 +3,4 @@ description: |
   Stands up monitoring related clients and servers to enable metrics collection and display
 version: 0.1
 category: NHS-Digital
-maintainer: NHS-Digital # The maintainer of the catalog entry
-license: "N/A" # The license
-projectURL: "N/A" # A URL related to the catalog entry
+maintainer: NHS-Digital

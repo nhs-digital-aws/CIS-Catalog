@@ -1,8 +1,6 @@
 name: NHS Digital - CIS URS Service
 description: |
   Stands up CIS URS Service, requires CIS-Externals stack for access to PKI, Directory and Database.
-version: 0.14
+version: 0.1
 category: NHS-Digital
-maintainer: NHS-Digital # The maintainer of the catalog entry
-license: "N/A" # The license
-projectURL: "N/A" # A URL related to the catalog entry
+maintainer: NHS-Digital

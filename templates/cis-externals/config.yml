@@ -1,8 +1,6 @@
 name: NHS Digital - CIS Externals
 description: |
   Creates external dependencies needed by both the URS and Auth stacks. Contains Gluster, Directory, DB and PKI (rootca/ca/cc)
-version: 0.8
+version: 0.1
 category: NHS-Digital
-maintainer: NHS-Digital # The maintainer of the catalog entry
-license: "N/A" # The license
-projectURL: "N/A" # A URL related to the catalog entry
+maintainer: NHS-Digital
