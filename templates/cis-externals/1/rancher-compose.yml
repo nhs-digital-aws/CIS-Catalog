@@ -1,6 +1,6 @@
 .catalog:
   name: "NHS Digital - CIS - Externals"
-  version: "0.8"
+  version: "0.1"
   description: |
     NHS Digital - CIS - Externals
   minimum_rancher_version: "v1.1.4"
