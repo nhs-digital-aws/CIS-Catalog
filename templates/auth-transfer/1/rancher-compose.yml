@@ -2,7 +2,7 @@
   name: "NHS Digital - CIS - Authentication Data Backup"
   version: "0.1"
   description: |
-    Triggers a backup of DJM and archives the resulting files
+    Check for a DJM backup archive and transfers it to AWS S3
   minimum_rancher_version: "v1.6.5"
   questions:
     - variable: "auth_version"
