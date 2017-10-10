@@ -17,7 +17,7 @@ services:
     labels:
       io.rancher.scheduler.global: 'true'
     tty: true
-    image: prom/node-exporter
+    image: prom/node-exporter:v0.14.0
     stdin_open: true
     network_mode: "host"
 
