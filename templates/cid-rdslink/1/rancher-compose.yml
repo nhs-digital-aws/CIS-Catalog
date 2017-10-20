@@ -32,7 +32,7 @@ rds-lb:
     reinitializing_timeout: 60000
 
   rds-link:
-    hostname: ${rds-fqdn}
+    hostname: keycloak-rds.private.cid.cis.spine2.ncrs.nhs.uk
     start_on_create: true
     health_check:
       response_timeout: 2000
