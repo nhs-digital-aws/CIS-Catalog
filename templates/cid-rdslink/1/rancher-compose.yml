@@ -4,14 +4,14 @@
   description: "NHS Digital - CID - RDS Loadbalancer"
   minimum_rancher_version: "v1.1.4"
   questions:
-    - variable: "fqdn"
+    - variable: "rds-fqdn"
       description: "Please enter your FQDN"
-      label: "Service FQDN"
+      label: "RDS FQDN"
       required: true
       type: "string"
       default: "keycloak-rds.private.cid.cis.spine2.ncrs.nhs.uk"
 
-LB-external-rds:
+rds-lb:
   upgrade_strategy:
     start_first: true
   scale: 1
@@ -19,7 +19,7 @@ LB-external-rds:
     certs: []
     port_rules:
     - protocol: tcp
-      service: external-rds
+      service: rds-link
       source_port: 5432
       target_port: 5432
   health_check:
@@ -30,4 +30,17 @@ LB-external-rds:
     initializing_timeout: 60000
     interval: 2000
     reinitializing_timeout: 60000
+
+  rds-link:
+    hostname: ${rds-fqdn}
+    start_on_create: true
+    health_check:
+      response_timeout: 2000
+      healthy_threshold: 2
+      port: 5432
+      unhealthy_threshold: 3
+      initializing_timeout: 60000
+      interval: 2000
+      strategy: recreate
+      reinitializing_timeout: 60000
 
