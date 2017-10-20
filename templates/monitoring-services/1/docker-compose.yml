@@ -16,7 +16,7 @@ services:
     image: prom/node-exporter:latest
     stdin_open: true
     network_mode: "host"
-    command: "--collectors.enabled=bonding,conntrack,diskstats,filefd,filesystem,hwmon,interrupts,loadavg,mdadm,meminfo,netdev,netstat,sockstat,stat,tcpstat,time,uname,vmstat"
+    command: "--collector.bonding --collector.ntp --collector.tcpstat --collector.interrupts --no-collector.wifi --no-collector.zfs --no-collector.infiniband --no-collector.xfs"
 
   # cAdvisor for container level metrics
   cadvisor:

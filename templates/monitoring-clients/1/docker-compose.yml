@@ -16,6 +16,7 @@ services:
       - 9100:9100
     labels:
       io.rancher.scheduler.global: 'true'
+    command: "--collector.bonding --collector.ntp --collector.tcpstat --collector.interrupts --no-collector.wifi --no-collector.zfs --no-collector.infiniband --no-collector.xfs"
     tty: true
     image: prom/node-exporter
     stdin_open: true
