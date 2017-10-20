@@ -29,7 +29,7 @@ services:
     environment:
       POSTGRES_DB: concourse
       POSTGRES_USER: concourse
-      POSTGRES_PASSWORD: changeme
+      POSTGRES_PASSWORD: ${concourse_password}
       PGDATA: /database
 
   web:
@@ -46,10 +46,10 @@ services:
       - data
     environment:
       CONCOURSE_BASIC_AUTH_USERNAME: concourse
-      CONCOURSE_BASIC_AUTH_PASSWORD: changeme
-      CONCOURSE_EXTERNAL_URL: "https://ci.build.aws.cishackday.com/"
+      CONCOURSE_BASIC_AUTH_PASSWORD: ${concourse_password}
+      CONCOURSE_EXTERNAL_URL: ${concourse_external_url}
       CONCOURSE_POSTGRES_DATA_SOURCE: |-
-        postgres://concourse:changeme@concourse-db:5432/concourse?sslmode=disable
+        postgres://concourse:${concourse_password}@database:5432/concourse?sslmode=disable
 
   worker:
     labels:
@@ -63,4 +63,4 @@ services:
     volumes_from:
       - data
     environment:
-      CONCOURSE_TSA_HOST: concourse-web
+      CONCOURSE_TSA_HOST: web

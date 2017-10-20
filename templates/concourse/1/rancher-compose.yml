@@ -13,7 +13,7 @@
       type: "string"
     - variable: "registry_url"
       description: "Please enter the url of your registry"
-      label: "e.g. registry.nhs.uk:5000"
+      label: "Registry"
       required: true
       default: "446537062602.dkr.ecr.eu-west-2.amazonaws.com/cishackday"
       type: "string"
@@ -23,17 +23,15 @@
       required: true
       default: "lh"
       type: "string"
-    - variable: "backup_file_size"
-      description: "Please enter the expected backup archive file size"
-      label: "Backup Archive Minimum Size"
+    - variable: "concourse_password"
+      description: "Please enter the Concourse password to use"
+      label: "Concourse Password"
       required: true
-      default: "120000000"
       type: "string"
-    - variable: "opendj_host"
-      description: "Please enter the hostname of the OpenDJ service to be backed up"
-      label: "OpenDJ Service Hostname"
+    - variable: "concourse_external_url"
+      description: "Please enter the Concourse external URL to use"
+      label: "Concourse External URL"
       required: true
-      default: "djm.auth-local.rancher.internal"
       type: "string"
 
 data:
