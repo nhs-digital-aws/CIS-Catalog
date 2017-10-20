@@ -1,0 +1,8 @@
+version: '2'
+services:
+  LB-external-rds:
+    labels:
+#      io.rancher.scheduler.affinity:host_label: stackType=auth
+    tty: true
+    image: rancher/lb-service-haproxy:v0.7.6
+    stdin_open: true
