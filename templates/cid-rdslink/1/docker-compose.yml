@@ -1,11 +1,13 @@
 version: '2'
 services:
-  rds-lb:
-#    labels:
-#      io.rancher.scheduler.affinity:host_label: stackType=auth
-    tty: true
-    image: rancher/lb-service-haproxy:v0.7.6
-    stdin_open: true
-
   rds-link:
     image: rancher/external-service
+  rds-lb:
+    image: rancher/lb-service-haproxy:v0.7.6
+    ports:
+    - 5432:5432/tcp
+    labels:
+      io.rancher.container.agent.role: environmentAdmin
+      io.rancher.container.create_agent: 'true'
+      io.rancher.scheduler.global: 'true'
+
