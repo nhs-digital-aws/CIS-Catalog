@@ -12,8 +12,7 @@
       default: "keycloak-rds.private.cid.cis.spine2.ncrs.nhs.uk"
 
 rds-link:
-  external_ips:
-  - 1.2.3.4
+  hostname: keycloak-rds.private.cid.cis.spine2.ncrs.nhs.uk
   start_on_create: true
 rds-lb:
   start_on_create: true
