@@ -10,37 +10,28 @@
       required: true
       type: "string"
       default: "keycloak-rds.private.cid.cis.spine2.ncrs.nhs.uk"
-services:
 
-  rds-lb:
-    start_on_create: true
-    lb_config:
-      certs: []
-      port_rules:
-      - priority: 1
-        protocol: tcp
-        service: rds-link
-        source_port: 5432
-        target_port: 5432
-    health_check:
-      response_timeout: 2000
-      healthy_threshold: 2
-      port: 42
-      unhealthy_threshold: 3
-      initializing_timeout: 60000
-      interval: 2000
-      reinitializing_timeout: 60000
+rds-link:
+  external_ips:
+  - 1.2.3.4
+  start_on_create: true
+rds-lb:
+  start_on_create: true
+  lb_config:
+    certs: []
+    port_rules:
+    - priority: 1
+      protocol: tcp
+      service: rds-link
+      source_port: 5432
+      target_port: 5432
+  health_check:
+    response_timeout: 2000
+    healthy_threshold: 2
+    port: 42
+    unhealthy_threshold: 3
+    initializing_timeout: 60000
+    interval: 2000
+    reinitializing_timeout: 60000
 
-  rds-link:
-    hostname: keycloak-rds.private.cid.cis.spine2.ncrs.nhs.uk
-    start_on_create: true
-    health_check:
-      response_timeout: 2000
-      healthy_threshold: 2
-      port: 5432
-      unhealthy_threshold: 3
-      initializing_timeout: 60000
-      interval: 2000
-      strategy: recreate
-      reinitializing_timeout: 60000
 
