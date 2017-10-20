@@ -1,0 +1,66 @@
+version: '2'
+services:
+  data:
+    labels:
+      io.rancher.container.hostname_override: container_name
+      io.rancher.scheduler.affinity:host_label: concourse=true
+      io.rancher.container.pull_image: always
+      io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
+      service_name: $${service_name}
+      environment_name: ${env_shortcode}
+      project.service.name: concourse-data
+      project.name: cis-concourse
+      project.stack: concourse
+    image: ${registry_url}/concourse-build-volumes:latest
+    tty: true
+    stdin_open: true
+
+  database:
+    labels:
+      io.rancher.container.hostname_override: container_name
+      io.rancher.scheduler.affinity:host_label: concourse=true
+      io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
+      service_name: $${service_name}
+      environment_name: ${env_shortcode}
+      project.service.name: concourse-database
+      project.name: cis-concourse
+      project.stack: concourse
+    image: postgres:9.5
+    environment:
+      POSTGRES_DB: concourse
+      POSTGRES_USER: concourse
+      POSTGRES_PASSWORD: changeme
+      PGDATA: /database
+
+  web:
+    labels:
+      io.rancher.container.hostname_override: container_name
+      io.rancher.scheduler.affinity:host_label: concourse=true
+      io.rancher.os.after: database
+      io.rancher.sidekicks: data, worker
+    image: concourse/concourse
+    links: [database]
+    command: web
+    ports: ["8000:8080"]
+    volumes_from:
+      - data
+    environment:
+      CONCOURSE_BASIC_AUTH_USERNAME: concourse
+      CONCOURSE_BASIC_AUTH_PASSWORD: changeme
+      CONCOURSE_EXTERNAL_URL: "https://ci.build.aws.cishackday.com/"
+      CONCOURSE_POSTGRES_DATA_SOURCE: |-
+        postgres://concourse:changeme@concourse-db:5432/concourse?sslmode=disable
+
+  worker:
+    labels:
+      io.rancher.container.hostname_override: container_name
+      io.rancher.scheduler.affinity:host_label: concourse=true
+      io.rancher.os.after: database
+    image: concourse/concourse
+    privileged: true
+    links: [web]
+    command: worker
+    volumes_from:
+      - data
+    environment:
+      CONCOURSE_TSA_HOST: concourse-web
