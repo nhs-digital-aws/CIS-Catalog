@@ -1,0 +1,5 @@
+name: NHS Digital - CID RDS Loadbalancer
+description: |
+  Stands up a load balancer and external service to allow access to the external RDS instance
+version: 0.1
+category: NHS-Digital
