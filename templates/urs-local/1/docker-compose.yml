@@ -610,7 +610,7 @@ services:
       io.rancher.scheduler.affinity:host_label_soft: stackType=urs
     tty: true
     stdin_open: true
-    image: rancher/lb-service-haproxy:v0.7.6
+    image: rancher/lb-service-haproxy:v0.7.9
 
   LB-Secure:
     labels:
@@ -622,7 +622,7 @@ services:
       io.rancher.scheduler.affinity:host_label_soft: stackType=urs
     tty: true
     stdin_open: true
-    image: rancher/lb-service-haproxy:v0.7.6
+    image: rancher/lb-service-haproxy:v0.7.9
 
   S3FS:
     labels:
