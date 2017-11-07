@@ -123,6 +123,11 @@
       label: "tag_name"
       required: true
       type: "string"
+    - variable: "s3_bucket_name"
+      description: "Please enter the name of the S3 bucket the backup will be transferred to"
+      label: "S3 Bucket"
+      required: true
+      type: "string"
 
 TLS-Service:
   upgrade_strategy:

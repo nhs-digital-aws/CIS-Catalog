@@ -21,6 +21,6 @@ services:
     stdin_open: true
     environment:
       ENV_SHORTCODE: ${env_shortcode}
-      S3_BUCKET: ${s3_bucket}
+      S3_BUCKET: ${s3_bucket_name}
       S6_KEEP_ENV: 1
       S6_BEHAVIOUR_IF_STAGE2_FAILS: 2
