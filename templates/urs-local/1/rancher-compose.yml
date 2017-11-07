@@ -87,6 +87,11 @@
       label: "tag_name"
       required: true
       type: "string"
+    - variable: "aws_account_id"
+      description: "Please enter the numeric AWS account ID"
+      label: "AWS Account"
+      required: true
+      type: "string"
 
 Services-Properties:
   upgrade_strategy:

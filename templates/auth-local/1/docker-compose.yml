@@ -463,7 +463,7 @@ services:
     devices:
       - "/dev/fuse"
     environment:
-      BUCKETNAME: "nhs-cis -o nonempty -o iam_role=${env_shortcode}-${tag_name}-ecsFromRancher"
+      BUCKETNAME: "${aws_account_id}-cis-data -o nonempty -o iam_role=${env_shortcode}-${tag_name}-ecsFromRancher"
       UID: "500"
       GID: "500"
     volumes:

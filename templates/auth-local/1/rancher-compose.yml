@@ -128,6 +128,11 @@
       label: "S3 Bucket"
       required: true
       type: "string"
+    - variable: "aws_account_id"
+      description: "Please enter the numeric AWS account ID"
+      label: "AWS Account"
+      required: true
+      type: "string"
 
 TLS-Service:
   upgrade_strategy:
