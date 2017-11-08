@@ -5,6 +5,11 @@
     Enter Description Here
   minimum_rancher_version: "v1.1.4"
   questions:
+    - variable: "aws_account_id"
+      description: "Please enter the numeric AWS account ID"
+      label: "AWS Account"
+      required: true
+      type: "string"
     - variable: "image_version"
       description: "Which version of the docker images should be used?"
       label: "Image Version"
@@ -69,4 +74,3 @@
 auth-testing:
   scale: 1
   start_on_create: true
-

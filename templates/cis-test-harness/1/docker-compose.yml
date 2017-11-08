@@ -3,6 +3,7 @@ services:
   auth-testing:
     image: ${registry_url}/automated-testing:${image_version}
     environment:
+      AWS_ACCOUNT_ID: ${aws_account_id}
       GATLING_SBAPI_SUBDOMAIN: ${env_name}
       GATLING_DOMAIN: ${fqdn}
       GATLING_CONCURRENT_USERS: ${gatling_concurrentusers}
@@ -23,4 +24,3 @@ services:
       io.rancher.scheduler.affinity:host_label: stacktype=urs
       io.rancher.container.start_once: 'true'
       io.rancher.container.pull_image: always
-
