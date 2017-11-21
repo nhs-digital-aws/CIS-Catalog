@@ -4,7 +4,7 @@ services:
     image: ${registry_url}/automated-testing:${image_version}
     environment:
       AWS_ACCOUNT_ID: ${aws_account_id}
-      GATLING_SBAPI_SUBDOMAIN: ${env_name}
+      GATLING_SBAPI_SUBDOMAIN: ${env_shortcode}
       GATLING_DOMAIN: ${fqdn}
       GATLING_CONCURRENT_USERS: ${gatling_concurrentusers}
       GATLING_AUTH_SERVICE: gas
@@ -13,9 +13,9 @@ services:
       UUID: ${gatling_uuid}
       GATLING_SIMULATION_DURATION: ${gatling_duration}
       GATLING_URS_SERVICE: wfe
-      GATLING_URS_SUBDOMAIN: ${env_name}
+      GATLING_URS_SUBDOMAIN: ${env_shortcode}
       GATLING_SBAPI_SERVICE: gas
-      GATLING_AUTH_SUBDOMAIN: ${env_name}
+      GATLING_AUTH_SUBDOMAIN: ${env_shortcode}
       BUILD_ID: ${build_id}
       NUMBER_OF_ATNS: ${number_of_atns}
     stdin_open: true
