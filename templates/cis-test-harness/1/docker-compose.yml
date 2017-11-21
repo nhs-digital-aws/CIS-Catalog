@@ -9,7 +9,7 @@ services:
       GATLING_CONCURRENT_USERS: ${gatling_concurrentusers}
       GATLING_AUTH_SERVICE: gas
       GATLING_RAMP_UP_PERIOD: ${gatling_rampup}
-      ENV_NAME: ${env_name}
+      ENV_NAME: ${env_shortcode}
       UUID: ${gatling_uuid}
       GATLING_SIMULATION_DURATION: ${gatling_duration}
       GATLING_URS_SERVICE: wfe

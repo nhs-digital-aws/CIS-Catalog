@@ -28,7 +28,7 @@
       required: true
       default: cis.spine2.ncrs.nhs.uk
       type: "string"
-    - variable: "env_name"
+    - variable: "env_shortcode"
       description: "Please enter your environment name"
       label: "Env Name"
       required: true
