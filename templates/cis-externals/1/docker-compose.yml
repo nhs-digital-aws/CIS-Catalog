@@ -45,6 +45,8 @@ services:
     stdin_open: true
 
   Redis:
+    ports:
+      - 6379:6379
     restart: always
     labels:
       io.rancher.scheduler.affinity:host_label: stackType=urs
