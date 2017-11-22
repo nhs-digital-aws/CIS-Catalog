@@ -3,7 +3,7 @@ services:
   IAM-Database:
     restart: always
     labels:
-      io.rancher.scheduler.affinity:host_label: stackType=urs
+      io.rancher.scheduler.affinity:host_label: stackType=auth
       environment_name: ${env_shortcode}
       service_name: Database
       io.rancher.container.dns: true
@@ -19,7 +19,7 @@ services:
   Dir:
     restart: always
     labels:
-      io.rancher.scheduler.affinity:host_label: stackType=urs
+      io.rancher.scheduler.affinity:host_label: stackType=auth
       environment_name: ${env_shortcode}
       service_name: Dir
       io.rancher.container.dns: true
@@ -33,7 +33,7 @@ services:
   PKI-LDAP:
     restart: always
     labels:
-      io.rancher.scheduler.affinity:host_label: stackType=urs
+      io.rancher.scheduler.affinity:host_label: stackType=auth
       environment_name: ${env_shortcode}
       service_name: pki-ldap
       io.rancher.container.dns: true
@@ -49,7 +49,7 @@ services:
       - 6379:6379
     restart: always
     labels:
-      io.rancher.scheduler.affinity:host_label: stackType=urs
+      io.rancher.scheduler.affinity:host_label: stackType=auth
       environment_name: ${env_shortcode}
       service_name: redis
       io.rancher.container.dns: true
@@ -63,7 +63,7 @@ services:
   Nfs:
     restart: always
     labels:
-      io.rancher.scheduler.affinity:host_label: stackType=urs
+      io.rancher.scheduler.affinity:host_label: stackType=auth
       environment_name: ${env_shortcode}
       service_name: nfs
       project.service.name: nfs
@@ -80,7 +80,7 @@ services:
   RootCA:
     restart: always
     labels:
-      io.rancher.scheduler.affinity:host_label: stackType=urs
+      io.rancher.scheduler.affinity:host_label: stackType=auth
       environment_name: ${env_shortcode}
       service_name: rootca
       io.rancher.container.dns: true
@@ -100,7 +100,7 @@ services:
   SubCA:
     restart: always
     labels:
-      io.rancher.scheduler.affinity:host_label: stackType=urs
+      io.rancher.scheduler.affinity:host_label: stackType=auth
       environment_name: ${env_shortcode}
       service_name: subca
       io.rancher.container.dns: true
@@ -119,7 +119,7 @@ services:
   SubCC:
     restart: always
     labels:
-      io.rancher.scheduler.affinity:host_label: stackType=urs
+      io.rancher.scheduler.affinity:host_label: stackType=auth
       environment_name: ${env_shortcode}
       service_name: subcc
       io.rancher.container.dns: true
@@ -139,6 +139,6 @@ services:
     expose:
     - 389:389/tcp
     labels:
-      io.rancher.scheduler.affinity:host_label: stackType=urs
+      io.rancher.scheduler.affinity:host_label: stackType=auth
       io.rancher.container.agent.role: environmentAdmin
       io.rancher.container.create_agent: 'true'
