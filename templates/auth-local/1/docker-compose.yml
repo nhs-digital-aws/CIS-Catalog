@@ -17,7 +17,7 @@ services:
     stdin_open: true
     environment:
       INTERNAL_LB: LB-AuthBusinessService:8080
-      REDIS_INSTANCE: RedisSessionStore:6379
+      REDIS_INSTANCE: redis.cis-externals.rancher.internal:6379
       LDAP_ROLE_LOCATION: ${directoryServer}
       LDAP_ROLE_USERNAME: ${ldap_role_username}
       LDAP_ROLE_PASSWORD: ${ldap_role_password}
@@ -442,7 +442,7 @@ services:
     tty: true
     stdin_open: true
     environment:
-      redishosts: RedisSessionStore:6379
+      redishosts: redis.cis-externals.rancher.internal:6379
     image: ${registry_url}/auth-sessiontimeout:${auth_version}
     tty: true
     stdin_open: true
