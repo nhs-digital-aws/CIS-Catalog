@@ -135,7 +135,7 @@ services:
     - PKI-LDAP:dir
 
   PKI-LDAP-LB:
-    image: rancher/lb-service-haproxy:v0.7.9
+    image: rancher/lb-service-haproxy:v0.7.15
     expose:
     - 389:389/tcp
     labels:
