@@ -533,20 +533,19 @@ services:
     links:
     - WebSessionStore:RedisSessionStore
 
-  haproxy-fe:
-    network_mode: "host"
+  haproxy-internal:
+    ports:
+      - 80:80
     labels:
       io.rancher.scheduler.global: 'true'
       io.rancher.container.hostname_override: container_name
       io.rancher.container.dns: true
       environment_name: ${env_shortcode}
-      service_name: haproxy-fe
-      project.service.name: haproxy-fe
+      service_name: haproxy-internal
+      project.service.name: haproxy-internal
       project.name: cis-urs
       project.stack: urs
       io.rancher.scheduler.affinity:host_label: stackType=urs
-    volumes:
-    - /home/rancher/${env_shortcode}:/mnt/gluster/careidconfig/${env_shortcode}
     environment:
       - vip=0.0.0.0
       - befqdn1=urs-webfrontend.urs-local.rancher.internal
@@ -554,8 +553,7 @@ services:
       - befqdn3=portal.urs-local.rancher.internal
       - befqdn4=integration.urs-local.rancher.internal
       - befqdn5=SelfService-WebFrontEnd.urs-local.rancher.internal
-      - envcode=${env_shortcode}
-    image: ${registry_url}/cis-fe-haproxy:${urs_version}
+    image: ${registry_url}/urs-haproxy-int:${urs_version}
     tty: true
     stdin_open: true
     privileged: true
