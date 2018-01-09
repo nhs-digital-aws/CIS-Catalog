@@ -535,7 +535,7 @@ services:
 
   haproxy-internal:
     ports:
-      - 80:80
+    - 80:80
     labels:
       io.rancher.scheduler.global: 'true'
       io.rancher.container.hostname_override: container_name
