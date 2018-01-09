@@ -545,6 +545,8 @@ services:
       project.name: cis-urs
       project.stack: urs
       io.rancher.scheduler.affinity:host_label: stackType=urs
+    volumes:
+    - /home/rancher/${env_shortcode}:/mnt/gluster/careidconfig/${env_shortcode}
     environment:
       - vip=0.0.0.0
       - befqdn1=urs-webfrontend.urs-local.rancher.internal
@@ -557,8 +559,6 @@ services:
     tty: true
     stdin_open: true
     privileged: true
-    volumes:
-    - /home/rancher/${env_shortcode}:/mnt/gluster/careidconfig/${env_shortcode}
 
   SelfService-WebFrontEnd:
     environment:
