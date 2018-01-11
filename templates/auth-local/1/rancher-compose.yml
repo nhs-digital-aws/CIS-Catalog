@@ -138,6 +138,7 @@
       label: "e.g. dir.lh.iam.spine2.ncrs.nhs.uk"
       required: true
       default: dir.lh.iam.spine2.ncrs.nhs.uk
+      type: "string"
 
 TLS-Service:
   upgrade_strategy:
