@@ -133,6 +133,11 @@
       label: "AWS Account"
       required: true
       type: "string"
+    - variable: "premfile"
+      description: "The name of the PEM file"
+      label: "e.g. dir.lh.iam.spine2.ncrs.nhs.uk"
+      required: true
+      default: dir.lh.iam.spine2.ncrs.nhs.uk
 
 TLS-Service:
   upgrade_strategy:
