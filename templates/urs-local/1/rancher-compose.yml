@@ -142,7 +142,7 @@ WebSessionStore:
 RedisSessionStore:
   hostname: redis.cis-externals.rancher.internal
 
-haproxy-fe:
+haproxy-internal:
   upgrade_strategy:
     start_first: true
 

@@ -368,7 +368,7 @@ services:
     environment:
       vip: 0.0.0.0
       DEX_BE: dex.auth-local.rancher.internal
-      pemfile: dir.lh.iam.spine2.ncrs.nhs.uk
+      pemfile: ${pemfile}
       cafile: root.pem
     image: ${registry_url}/auth-haproxy-dex:latest
     tty: true
