@@ -65,16 +65,16 @@ services:
       io.rancher.scheduler.affinity:host_label_soft: stackType=urs
 
   URS-Directory:
-      image: rancher/load-balancer-service
-      expose:
-      - 389:389/tcp
-      labels:
-        io.rancher.container.agent.role: environmentAdmin
-        io.rancher.container.create_agent: 'true'
-        project.service.name: urs-directory
-        project.name: cis-urs
-        project.stack: urs
-        io.rancher.scheduler.affinity:host_label_soft: stackType=urs
+    image: rancher/load-balancer-service
+    expose:
+    - 389:389/tcp
+    labels:
+      io.rancher.container.agent.role: environmentAdmin
+      io.rancher.container.create_agent: 'true'
+      project.service.name: urs-directory
+      project.name: cis-urs
+      project.stack: urs
+      io.rancher.scheduler.affinity:host_label_soft: stackType=urs
 
   Entrust-CA1-Manager:
     image: rancher/external-service
