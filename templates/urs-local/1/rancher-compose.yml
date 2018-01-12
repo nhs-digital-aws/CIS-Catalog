@@ -106,22 +106,22 @@ IAM-Database:
   hostname: iam-database.cis-externals.rancher.internal
 
 URS-Directory:
-    scale: 1
-    start_on_create: true
-    lb_config:
-      certs: []
-      port_rules:
-      - priority: 1
-        protocol: tcp
-        service: cis-externals/Dir
-        source_port: 389
-        target_port: 10389
-    health_check:
-      response_timeout: 2000
-      healthy_threshold: 2
-      port: 42
-      unhealthy_threshold: 3
-      interval: 2000
+  scale: 1
+  start_on_create: true
+  lb_config:
+    certs: []
+    port_rules:
+    - priority: 1
+      protocol: tcp
+      service: cis-externals/Dir
+      source_port: 389
+      target_port: 10389
+  health_check:
+    response_timeout: 2000
+    healthy_threshold: 2
+    port: 42
+    unhealthy_threshold: 3
+    interval: 2000
 
 Entrust-CA1-Manager:
   hostname: subca.cis-externals.rancher.internal
