@@ -1,0 +1,72 @@
+.catalog:
+  name: "NHS Digital - CIS - Externals"
+  version: "0.1"
+  description: |
+    NHS Digital - CIS - Externals
+  minimum_rancher_version: "v1.1.4"
+  questions:
+    - variable: "externals_version"
+      description: "Which version of the CIS Externals do you want to deploy?"
+      label: "Version"
+      required: true
+      default: latest
+      type: "string"
+    - variable: "pki_version"
+      description: "Which version of the PKI Services do you want to deploy?"
+      label: "PKI Image Version"
+      required: true
+      default: latest
+      type: "string"
+    - variable: "registry_url"
+      description: "Please enter the url of your registry"
+      label: "e.g. registry.nhs.uk:5000"
+      required: true
+      default: 446537062602.dkr.ecr.eu-west-2.amazonaws.com/cishackday
+      type: "string"
+    - variable: "env_shortcode"
+      description: "Please enter the shortcode of your environment"
+      label: "Environment Shortcode"
+      required: true
+      default: lh
+      type: "string"
+    - variable: "urs_db_snapshot"
+      description: "Please enter the ARN of the snapshot loaded into RDS"
+      label: "RDS ARN"
+      required: false
+      default: 
+      type: "string"
+
+IAM-Database:
+  scale: 1
+
+Dir:
+  scale: 1
+
+PKI-LDAP:
+  scale: 1
+
+Redis:
+  scale: 1
+
+Nfs:
+  scale: 1
+
+PKI-LDAP-LB:
+  scale: 1
+  start_on_create: true
+  lb_config:
+    certs: []
+    port_rules:
+    - priority: 1
+      protocol: tcp
+      service: PKI-LDAP
+      source_port: 389
+      target_port: 10389
+  health_check:
+    healthy_threshold: 2
+    response_timeout: 2000
+    port: 42
+    unhealthy_threshold: 3
+    interval: 2000
+    strategy: recreate
+

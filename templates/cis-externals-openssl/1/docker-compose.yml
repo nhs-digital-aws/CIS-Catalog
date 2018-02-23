@@ -1,0 +1,87 @@
+version: '2'
+services:
+  IAM-Database:
+    restart: always
+    labels:
+      io.rancher.scheduler.affinity:host_label: stackType=auth
+      environment_name: ${env_shortcode}
+      service_name: Database
+      io.rancher.container.dns: true
+      project.service.name: iam-database
+      project.name: cis
+      project.stack: cis-externals-openssl
+    tty: true
+    image: ${registry_url}/cis-dbs:${externals_version}
+    stdin_open: true
+    environment:
+      urs_db_snapshot: ${urs_db_snapshot}
+
+  Dir:
+    restart: always
+    labels:
+      io.rancher.scheduler.affinity:host_label: stackType=auth
+      environment_name: ${env_shortcode}
+      service_name: Dir
+      io.rancher.container.dns: true
+      project.service.name: dir
+      project.name: cis
+      project.stack: cis-externals-openssl
+    tty: true
+    image: ${registry_url}/dir:${externals_version}
+    stdin_open: true
+
+  OpenSSL-HTTP:
+    restart: always
+    labels:
+      io.rancher.scheduler.affinity:host_label: stackType=auth
+      environment_name: ${env_shortcode}
+      service_name: openssl-http
+      io.rancher.container.dns: true
+      project.service.name: openssl-http
+      project.name: cis
+      project.stack: cis-externals-openssl
+    tty: true
+    image: ${registry_url}/urs-openssl-http:${externals_version}
+    stdin_open: true
+
+  Redis:
+    ports:
+      - 6379:6379
+    restart: always
+    labels:
+      io.rancher.scheduler.affinity:host_label: stackType=auth
+      environment_name: ${env_shortcode}
+      service_name: redis
+      io.rancher.container.dns: true
+      project.service.name: redis
+      project.name: cis
+      project.stack: cis-externals-openssl
+    tty: true
+    image: ${registry_url}/redis:3.2.4
+    stdin_open: true
+
+  Nfs:
+    restart: always
+    labels:
+      io.rancher.scheduler.affinity:host_label: stackType=auth
+      environment_name: ${env_shortcode}
+      service_name: nfs
+      project.service.name: nfs
+      project.name: cis
+      project.stack: cis-externals-openssl
+    tty: true
+    image: ${registry_url}/nfs-server-ubuntu:${externals_version}
+    stdin_open: true
+    volumes:
+    - /home/rancher/gluster:/gv0
+    privileged: true
+    command: /gv0
+
+  PKI-LDAP-LB:
+    image: rancher/lb-service-haproxy:v0.7.15
+    expose:
+    - 389:389/tcp
+    labels:
+      io.rancher.scheduler.affinity:host_label: stackType=auth
+      io.rancher.container.agent.role: environmentAdmin
+      io.rancher.container.create_agent: 'true'
