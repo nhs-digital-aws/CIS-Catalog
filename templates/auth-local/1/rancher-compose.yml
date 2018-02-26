@@ -27,7 +27,7 @@
       label: "Gluster Service"
       required: true
       type: "string"
-      default: "nfs.cis-externals.rancher.internal"
+      default: "nfs.${externals_stack_name}.rancher.internal"
     - variable: "fqdn"
       description: "Please enter your FQDN"
       label: "Service FQDN"
@@ -138,6 +138,12 @@
       label: "e.g. dir.lh.iam.spine2.ncrs.nhs.uk"
       required: true
       default: dir.lh.iam.spine2.ncrs.nhs.uk
+      type: "string"
+    - variable: "externals_stack_name"
+      description: "Please enter the name of the Rancher externals stack name"
+      label: "Rancher externals stack name"
+      required: true
+      default: "cis-externals"
       type: "string"
 
 TLS-Service:
