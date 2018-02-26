@@ -32,7 +32,7 @@
       description: "Please enter your Gluster URL"
       label: "GlusterURL"
       required: true
-      default: nfs.${name}.rancher.internal
+      default: nfs.${externals_stack_name}.rancher.internal
       type: "string"
     - variable: "spine_external_shortcode"
       description: "Please enter Spine external shortcode"
@@ -96,7 +96,7 @@
       description: "Please enter the name of the Rancher externals stack name"
       label: "Rancher externals stack name"
       required: true
-      default: "cis-externals-openssl"
+      default: "cis-externals"
       type: "string"
 
 Services-Properties:
