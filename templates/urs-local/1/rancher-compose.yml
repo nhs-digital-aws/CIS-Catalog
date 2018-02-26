@@ -32,7 +32,7 @@
       description: "Please enter your Gluster URL"
       label: "GlusterURL"
       required: true
-      default: nfs.cis-externals.rancher.internal
+      default: nfs.${externals_stack_name}.rancher.internal
       type: "string"
     - variable: "spine_external_shortcode"
       description: "Please enter Spine external shortcode"
@@ -92,6 +92,12 @@
       label: "AWS Account"
       required: true
       type: "string"
+    - variable: "externals_stack_name"
+      description: "Please enter the name of the Rancher externals stack name"
+      label: "Rancher externals stack name"
+      required: true
+      default: "cis-externals"
+      type: "string"
 
 Services-Properties:
   upgrade_strategy:
@@ -103,7 +109,7 @@ Services-Properties:
     healthy_threshold: 2
 
 IAM-Database:
-  hostname: iam-database.cis-externals.rancher.internal
+  hostname: iam-database.${externals_stack_name}.rancher.internal
 
 URS-Directory:
   scale: 1
@@ -113,7 +119,7 @@ URS-Directory:
     port_rules:
     - priority: 1
       protocol: tcp
-      service: cis-externals/Dir
+      service: ${externals_stack_name}/Dir
       source_port: 389
       target_port: 10389
   health_check:
@@ -125,23 +131,23 @@ URS-Directory:
     strategy: recreate
 
 Entrust-CA1-Manager:
-  hostname: subca.cis-externals.rancher.internal
+  hostname: subca.${externals_stack_name}.rancher.internal
 
 Entrust-CA2-Manager:
-  hostname: subcc.cis-externals.rancher.internal
+  hostname: subcc.${externals_stack_name}.rancher.internal
 
 Entrust-CA3-Manager:
-  hostname: subca.cis-externals.rancher.internal
+  hostname: subca.${externals_stack_name}.rancher.internal
 
 Outbound-Messaging-Service:
   external_ips:
     - 127.0.0.1
 
 WebSessionStore:
-  hostname: redis.cis-externals.rancher.internal
+  hostname: redis.${externals_stack_name}.rancher.internal
 
 RedisSessionStore:
-  hostname: redis.cis-externals.rancher.internal
+  hostname: redis.${externals_stack_name}.rancher.internal
 
 haproxy-internal:
   upgrade_strategy:
