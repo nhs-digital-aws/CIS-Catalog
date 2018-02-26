@@ -32,7 +32,7 @@
       description: "Please enter your Gluster URL"
       label: "GlusterURL"
       required: true
-      default: nfs.${externals_stack_name}.rancher.internal
+      default: nfs.${name}.rancher.internal
       type: "string"
     - variable: "spine_external_shortcode"
       description: "Please enter Spine external shortcode"
