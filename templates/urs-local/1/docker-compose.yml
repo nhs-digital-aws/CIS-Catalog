@@ -196,7 +196,7 @@ services:
     - Entrust-CA2-Manager:Entrust-CA2-Manager
     - Entrust-CA3-Manager:Entrust-CA3-Manager
     external_links:
-    - cis-externals/PKI-LDAP-LB:Directory
+    - cis-externals-openssl/PKI-LDAP-LB:Directory
 
   EPR-BusinessService:
     labels:
