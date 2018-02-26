@@ -42,7 +42,7 @@ IAM-Database:
 Dir:
   scale: 1
 
-PKI-LDAP:
+OpenSSL-HTTP:
   scale: 1
 
 Redis:
@@ -59,7 +59,7 @@ PKI-LDAP-LB:
     port_rules:
     - priority: 1
       protocol: tcp
-      service: PKI-LDAP
+      service: OpenSSL-HTTP
       source_port: 389
       target_port: 10389
   health_check:

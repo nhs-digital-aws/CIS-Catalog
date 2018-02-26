@@ -34,6 +34,7 @@ services:
     restart: always
     labels:
       io.rancher.scheduler.affinity:host_label: stackType=auth
+      io.rancher.container.pull_image: always
       environment_name: ${env_shortcode}
       service_name: openssl-http
       io.rancher.container.dns: true
