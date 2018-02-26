@@ -96,7 +96,7 @@
       description: "Please enter the name of the Rancher externals stack name"
       label: "Rancher externals stack name"
       required: true
-      default: "cis-externals"
+      default: "cis-externals-openssl"
       type: "string"
 
 Services-Properties:
