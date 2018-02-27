@@ -35,6 +35,11 @@
       required: true
       type: "string"
       default: "Password1"
+    - variable: "aws_account_id"
+      description: "Please enter the numeric AWS account ID"
+      label: "AWS Account"
+      required: true
+      type: "string"
 
 IAM-Database:
   scale: 1
