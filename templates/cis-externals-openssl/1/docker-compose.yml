@@ -3,7 +3,7 @@ services:
   IAM-Database:
     restart: always
     labels:
-      io.rancher.scheduler.affinity:host_label: stackType=urs
+      io.rancher.scheduler.affinity:host_label: stackType=auth
       environment_name: ${env_shortcode}
       service_name: Database
       io.rancher.container.dns: true
@@ -19,7 +19,7 @@ services:
   Dir:
     restart: always
     labels:
-      io.rancher.scheduler.affinity:host_label: stackType=urs
+      io.rancher.scheduler.affinity:host_label: stackType=auth
       environment_name: ${env_shortcode}
       service_name: Dir
       io.rancher.container.dns: true
@@ -35,7 +35,7 @@ services:
       - 5000:5000
     restart: always
     labels:
-      io.rancher.scheduler.affinity:host_label: stackType=urs
+      io.rancher.scheduler.affinity:host_label: stackType=auth
       io.rancher.container.pull_image: always
       environment_name: ${env_shortcode}
       service_name: openssl-http
@@ -57,7 +57,7 @@ services:
       - 6379:6379
     restart: always
     labels:
-      io.rancher.scheduler.affinity:host_label: stackType=urs
+      io.rancher.scheduler.affinity:host_label: stackType=auth
       environment_name: ${env_shortcode}
       service_name: redis
       io.rancher.container.dns: true
@@ -71,7 +71,7 @@ services:
   Nfs:
     restart: always
     labels:
-      io.rancher.scheduler.affinity:host_label: stackType=urs
+      io.rancher.scheduler.affinity:host_label: stackType=auth
       environment_name: ${env_shortcode}
       service_name: nfs
       project.service.name: nfs
@@ -90,6 +90,31 @@ services:
     expose:
     - 389:389/tcp
     labels:
-      io.rancher.scheduler.affinity:host_label: stackType=urs
+      io.rancher.scheduler.affinity:host_label: stackType=auth
       io.rancher.container.agent.role: environmentAdmin
       io.rancher.container.create_agent: 'true'
+
+  S3FS:
+    labels:
+      environment_name: ${env_shortcode}
+      io.rancher.container.pull_image: always
+      service_name: S3FS
+      project.service.name: s3fs
+      project.name: cis-auth
+      project.stack: auth
+      io.rancher.scheduler.affinity:host_label_soft: stackType=auth
+    cap_add:
+      - SYS_ADMIN
+      - MKNOD
+    privileged: true
+    devices:
+      - "/dev/fuse"
+    environment:
+      BUCKETNAME: "${aws_account_id}-cis-data -o nonempty -o iam_role=${env_shortcode}-${tag_name}-ecsFromRancher"
+      UID: "500"
+      GID: "500"
+    volumes:
+    - "/home/rancher:/home/shared/s3:shared"
+    tty: true
+    stdin_open: true
+    image: "camptocamp/s3fs:1.80-2"
