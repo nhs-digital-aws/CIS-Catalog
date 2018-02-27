@@ -48,6 +48,7 @@ services:
     stdin_open: true
     volumes:
     - /home/rancher/gluster:/pki
+    - /var/log/iam:/var/log/iam
     environment:
       PKIPASS: ${openssl_pki_password}
 
