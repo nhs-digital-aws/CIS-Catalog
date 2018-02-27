@@ -51,8 +51,8 @@ services:
     - /var/log/iam:/var/log/iam
     environment:
       PKIPASS: ${openssl_pki_password}
-    depends_on:
-      - "S3FS"
+    links:
+      - S3FS:S3FS
 
   Redis:
     ports:
