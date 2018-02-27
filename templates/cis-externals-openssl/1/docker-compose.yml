@@ -47,7 +47,7 @@ services:
     image: ${registry_url}/urs-openssl-http:${externals_version}
     stdin_open: true
     volumes:
-    - /home/rancher/${env_shortcode}:/pki
+    - /home/rancher/${env_shortcode}/pki-openssl:/pki
     - /var/log/iam:/var/log/iam
     environment:
       PKIPASS: ${openssl_pki_password}
