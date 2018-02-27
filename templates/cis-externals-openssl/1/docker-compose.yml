@@ -100,8 +100,8 @@ services:
       io.rancher.container.pull_image: always
       service_name: S3FS
       project.service.name: s3fs
-      project.name: cis-auth
-      project.stack: auth
+      project.name: cis
+      project.stack: cis-externals-openssl
       io.rancher.scheduler.affinity:host_label_soft: stackType=auth
     cap_add:
       - SYS_ADMIN
