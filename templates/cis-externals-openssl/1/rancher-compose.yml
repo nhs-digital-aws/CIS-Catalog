@@ -40,6 +40,11 @@
       label: "AWS Account"
       required: true
       type: "string"
+    - variable: "tag_name"
+      description: "Please enter the tag name"
+      label: "tag_name"
+      required: true
+      type: "string"
 
 IAM-Database:
   scale: 1
