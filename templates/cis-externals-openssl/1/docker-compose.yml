@@ -31,6 +31,8 @@ services:
     stdin_open: true
 
   OpenSSL-HTTP:
+    ports:
+      - 5000:5000
     restart: always
     labels:
       io.rancher.scheduler.affinity:host_label: stackType=auth
@@ -44,6 +46,10 @@ services:
     tty: true
     image: ${registry_url}/urs-openssl-http:${externals_version}
     stdin_open: true
+    volumes:
+    - /home/rancher/gluster:/pki
+    environment:
+      PKIPASS: ${openssl_pki_password}
 
   Redis:
     ports:

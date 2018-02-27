@@ -35,6 +35,12 @@
       required: false
       default: 
       type: "string"
+    - variable: "openssl_pki_password"
+      description: "Please enter the OpenSSL Password"
+      label: "OpenSSL PKI Password"
+      required: true
+      type: "string"
+      default: "Password1"
 
 IAM-Database:
   scale: 1
