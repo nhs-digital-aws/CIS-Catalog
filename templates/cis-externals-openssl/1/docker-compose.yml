@@ -3,7 +3,7 @@ services:
   IAM-Database:
     restart: always
     labels:
-      io.rancher.scheduler.affinity:host_label: stackType=auth
+      io.rancher.scheduler.affinity:host_label: stackType=urs
       environment_name: ${env_shortcode}
       service_name: Database
       io.rancher.container.dns: true
@@ -19,7 +19,7 @@ services:
   Dir:
     restart: always
     labels:
-      io.rancher.scheduler.affinity:host_label: stackType=auth
+      io.rancher.scheduler.affinity:host_label: stackType=urs
       environment_name: ${env_shortcode}
       service_name: Dir
       io.rancher.container.dns: true
@@ -35,7 +35,7 @@ services:
       - 5000:5000
     restart: always
     labels:
-      io.rancher.scheduler.affinity:host_label: stackType=auth
+      io.rancher.scheduler.affinity:host_label: stackType=urs
       io.rancher.container.pull_image: always
       environment_name: ${env_shortcode}
       service_name: openssl-http
@@ -57,7 +57,7 @@ services:
       - 6379:6379
     restart: always
     labels:
-      io.rancher.scheduler.affinity:host_label: stackType=auth
+      io.rancher.scheduler.affinity:host_label: stackType=urs
       environment_name: ${env_shortcode}
       service_name: redis
       io.rancher.container.dns: true
@@ -71,7 +71,7 @@ services:
   Nfs:
     restart: always
     labels:
-      io.rancher.scheduler.affinity:host_label: stackType=auth
+      io.rancher.scheduler.affinity:host_label: stackType=urs
       environment_name: ${env_shortcode}
       service_name: nfs
       project.service.name: nfs
@@ -90,6 +90,6 @@ services:
     expose:
     - 389:389/tcp
     labels:
-      io.rancher.scheduler.affinity:host_label: stackType=auth
+      io.rancher.scheduler.affinity:host_label: stackType=urs
       io.rancher.container.agent.role: environmentAdmin
       io.rancher.container.create_agent: 'true'
