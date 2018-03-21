@@ -51,6 +51,8 @@ services:
     - /var/log/iam:/var/log/iam
     environment:
       PKIPASS: ${openssl_pki_password}
+      PRIV_KEY_END: ${priv_key_end}
+      PRIV_KEY_START: ${priv_key_start}
     links:
       - S3FS:S3FS
 
