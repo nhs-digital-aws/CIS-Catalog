@@ -98,6 +98,12 @@
       required: true
       default: "cis-externals"
       type: "string"
+    - variable: "feature_iam_smartcard_openssl_enabled"
+      description: "Feature toggle to use OpenSSL as the PKI"
+      label: "OpenSSL as PKI"
+      required: true
+      default: "False"
+      type: "string"
 
 Services-Properties:
   upgrade_strategy:
