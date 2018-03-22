@@ -35,6 +35,19 @@
       required: true
       type: "string"
       default: "Password1"
+
+    - variable: "priv_key_end"
+      description: "Please enter the private key send date"
+      label: "Private key end date"
+      required: true
+      type: "string"
+      default: "20200117155000.0Z"
+    - variable: "priv_key_start"
+      description: "Please enter the private key start date"
+      label: "Private key start date"
+      required: true
+      type: "string"
+      default: "20180117162229"
     - variable: "aws_account_id"
       description: "Please enter the numeric AWS account ID"
       label: "AWS Account"

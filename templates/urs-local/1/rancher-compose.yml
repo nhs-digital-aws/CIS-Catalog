@@ -82,6 +82,12 @@
       required: true
       default: "False"
       type: "string"
+    - variable: "feature_iam_smartcard_openssl_enabled"
+      description: "Toggle feature to enable OpenSSL as a PKI"
+      label: "FEATURE_IAM_SMARTCARD_OPENSSL_ENABLED"
+      required: true
+      default: "False"
+      type: "string"
     - variable: "tag_name"
       description: "Please enter the tag name"
       label: "tag_name"
