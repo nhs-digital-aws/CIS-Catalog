@@ -250,8 +250,6 @@ services:
     - ${externals_stack_name}/Redis:RedisSessionStore
 
   djm:
-    ports:
-      - 8080:8080
     labels:
       io.rancher.scheduler.affinity:host_label: stackType=auth
       io.rancher.container.pull_image: always
