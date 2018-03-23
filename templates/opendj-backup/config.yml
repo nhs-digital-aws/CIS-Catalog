@@ -3,6 +3,6 @@ description: |
   Triggers a backup of DJM and archives the resulting files
 version: 0.1
 category: NHS-Digital
-maintainer: NHS-Digital # The maintainer of the catalog entry
-license: "N/A" # The license
-projectURL: "N/A" # A URL related to the catalog entry
+maintainer: NHS-Digital
+license: "N/A"
+projectURL: "N/A"
