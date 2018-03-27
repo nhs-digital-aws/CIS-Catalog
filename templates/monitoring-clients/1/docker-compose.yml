@@ -29,7 +29,7 @@ services:
       SPLUNK_FORWARD_SERVER: ${splunk_server}
       SPLUNK_USER: root
       SPLUNK_ADD_1: monitor "/docker/log/iam/*access.log" -index "cis-tomcatsvr"
-      SPLUNK_ADD_2: monitor "/docker/log/iam/catalina.*" -index "cis-tomcatsvr" -sourcetype "catalina"
+      SPLUNK_ADD_2: monitor "/docker/log/iam/*catalina.*" -index "cis-tomcatsvr" -sourcetype "catalina"
       SPLUNK_ADD_3: monitor "/docker/log/iam/*-host-manager.log" -index "cis-tomcatsvr" -sourcetype "tomcat_hostmanager"
       SPLUNK_ADD_4: monitor "/docker/log/iam/*-manager.log" -index "cis-tomcatsvr" -sourcetype "tomcat_manager"
       SPLUNK_ADD_5: monitor "/docker/log/iam/*crashdump.log" -index "cis-crashdump" -sourcetype "crashdump"
