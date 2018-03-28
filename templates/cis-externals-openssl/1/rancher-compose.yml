@@ -47,7 +47,7 @@
       label: "Private key start date"
       required: true
       type: "string"
-      default: "20180117162229"
+      default: "20180117162229.0Z"
     - variable: "aws_account_id"
       description: "Please enter the numeric AWS account ID"
       label: "AWS Account"
