@@ -13,10 +13,10 @@ services:
       io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
       environment_name: ${env_shortcode}
       service_name: $${service_name}
-    tty: true
 #    image: ${registry_url}/cis-openvpn:${urs_version}
     image: cdrage/openvpn-client
     stdin_open: true
+    privileged: true
     network_mode: "host"
     devices:
       - "/dev/net/tun:/dev/net/tun"
