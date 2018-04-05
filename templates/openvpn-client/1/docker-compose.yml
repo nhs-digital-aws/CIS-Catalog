@@ -21,6 +21,6 @@ services:
     devices:
       - "/dev/net/tun:/dev/net/tun"
     volumes:
-    - /home/rancher/${env_shortcode}/openvpn/opentest.ovpn:/etc/openvpn/opentest.ovpn
+      - /home/rancher/${env_shortcode}/openvpn/opentest.ovpn:/etc/openvpn/opentest.ovpn
     cap_add:
       - NET_ADMIN
