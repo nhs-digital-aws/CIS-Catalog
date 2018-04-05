@@ -17,3 +17,9 @@
       required: true
       default: 446537062602.dkr.ecr.eu-west-2.amazonaws.com/cishackday
       type: "string"
+    - variable: "env_shortcode"
+      description: "Please enter the shortcode of your environment"
+      label: "Environment Shortcode"
+      required: true
+      default: lh
+      type: "string"
