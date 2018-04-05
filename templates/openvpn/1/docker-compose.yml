@@ -1,0 +1,20 @@
+version: '2'
+services:
+  OpenVPN:
+    restart: always
+    labels:
+      io.rancher.scheduler.affinity:host_label: stackType=urs
+      io.rancher.container.pull_image: always
+      service_name: OpenVPNClient
+      project.service.name: openvpn-client
+      project.name: cis-urs
+      project.stack: urs
+      io.rancher.container.hostname_override: container_name
+      io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
+      environment_name: ${env_shortcode}
+      service_name: $${service_name}
+    tty: true
+    image: ${registry_url}/cis-openvpn:${urs_version}
+    stdin_open: true
+    environment:
+      urs_db_snapshot: ${urs_db_snapshot}

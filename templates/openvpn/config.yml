@@ -1,0 +1,6 @@
+name: NHS Digital - CIS URS OpenVPN
+description: |
+  Creates an OpenVPN Client to create an encrypted tunnel to access Spine services.
+version: 0.1
+category: NHS-Digital
+maintainer: NHS-Digital
