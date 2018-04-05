@@ -19,7 +19,7 @@ services:
     stdin_open: true
     network_mode: "host"
     devices:
-      - "/dev/net/tun"
+      - "/dev/net/tun:/dev/net/tun"
     volumes:
     - /home/rancher/${env_shortcode}/openvpn/opentest.ovpn:/etc/openvpn/opentest.ovpn
     cap_add:
