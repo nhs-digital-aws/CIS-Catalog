@@ -1,6 +1,6 @@
 version: '2'
 services:
-  OpenVPN:
+  OpenVPNClient:
     restart: always
     labels:
       io.rancher.scheduler.affinity:host_label: stackType=urs
