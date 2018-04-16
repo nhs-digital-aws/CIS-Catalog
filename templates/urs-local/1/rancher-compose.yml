@@ -121,7 +121,8 @@ Services-Properties:
     healthy_threshold: 2
 
 IAM-Database:
-  hostname: iam-database.${externals_stack_name}.rancher.internal
+  external_ips:
+  - postgres-9-5-12.chtkyat7g61o.eu-west-2.rds.amazonaws.com
 
 URS-Directory:
   scale: 1
