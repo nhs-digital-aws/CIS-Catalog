@@ -122,7 +122,7 @@ Services-Properties:
 
 IAM-Database:
   external_ips:
-  - postgres-9-5-12.chtkyat7g61o.eu-west-2.rds.amazonaws.com
+  - postgres-9-6-6.chtkyat7g61o.eu-west-2.rds.amazonaws.com
 
 URS-Directory:
   scale: 1
