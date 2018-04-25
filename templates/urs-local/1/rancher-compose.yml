@@ -121,8 +121,7 @@ Services-Properties:
     healthy_threshold: 2
 
 IAM-Database:
-  external_ips:
-  - postgres-9-6-6-r1-tmp.chtkyat7g61o.eu-west-2.rds.amazonaws.com
+  hostname: postgres-9-6-6-r1-tmp.chtkyat7g61o.eu-west-2.rds.amazonaws.com
 
 URS-Directory:
   scale: 1
