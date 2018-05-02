@@ -16,6 +16,7 @@ services:
     tty: true
     stdin_open: true
     environment:
+      FQDN: ${fqdn}
       INTERNAL_LB: LB-AuthBusinessService:8080
       REDIS_INSTANCE: redis.${externals_stack_name}.rancher.internal:6379
       LDAP_ROLE_LOCATION: ${directoryServer}
