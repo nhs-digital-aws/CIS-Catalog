@@ -66,6 +66,25 @@ services:
       project.stack: urs
       io.rancher.scheduler.affinity:host_label_soft: stackType=urs
 
+  pg-agent:
+    labels:
+      io.rancher.container.hostname_override: container_name
+      environment_name: ${env_shortcode}
+      service_name: pg-agent
+      project.service.name: pg-agent
+      project.name: cis-urs
+      project.stack: urs
+      io.rancher.scheduler.affinity:host_label_soft: stackType=urs
+    volumes:
+    - /home/rancher/${env_shortcode}/reports:/home/iam_user/careidconfig/reports
+    - /home/rancher/${env_shortcode}/RAReports:/home/iam_user/careidconfig/RAReports
+    image: ${registry_url}/pg-agent:${urs_version}
+    environment:
+      VAR_HOSTADDR: ${rds_hostname}
+      PGPASSWORD: ${rds_pgpassword}
+    tty: true
+    stdin_open: true
+
   URS-Directory:
     image: rancher/lb-service-haproxy:v0.7.15
     expose:
