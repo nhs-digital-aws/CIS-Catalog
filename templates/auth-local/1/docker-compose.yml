@@ -16,30 +16,32 @@ services:
     tty: true
     stdin_open: true
     environment:
-      FQDN: ${fqdn}
-      INTERNAL_LB: LB-AuthBusinessService:8080
-      REDIS_INSTANCE: redis.${externals_stack_name}.rancher.internal:6379
-      LDAP_ROLE_LOCATION: ${directoryServer}
-      LDAP_ROLE_USERNAME: ${ldap_role_username}
-      LDAP_ROLE_PASSWORD: ${ldap_role_password}
-      LDAP_AUTH_LOCATION: ${directoryServer}
-      LDAP_AUTH_USERNAME: ${ldap_auth_username}
-      LDAP_AUTH_PASSWORD: ${ldap_auth_password}
-      CRL_LOCATION: 10.196.94.238
       ATN_FQDN: gas.${fqdn}
+      AUDIT_DB: ${auditDatabaseServer}
+      AUTH_AUDIT_PASSWORD: ${aad_password}
+      AUTH_AUDIT_USERNAME: ${aad_username}
       AUTH_SERVERID: 192.168.118.105
-      WFE_FQDN: wfe.${fqdn}
-      PORTAL_FQDN: portal.${fqdn}
-      PORTAL_COOKIE_DOMAIN: ${portal_cookie_domain}
-#      AUDIT_DB: ${auditDatabaseServer}
-      OUT_HOST:
-      OUT_HOST_ENABLED: false
-      CRL_FILE: IAM_crlfile.crl
       AUTH_SERVICE_SUBJECT: ${auth_service_subject}
+      CRL_FILE: IAM_crlfile.crl
       CRL_FILENAME: ${auth_crl_file1}
       CRL_FILENAME2: ${auth_crl_file2}
       CRL_FILENAME3: ${auth_crl_file3}
+      CRL_LOCATION: 10.196.94.238
       ENV_SHORTCODE: ${env_shortcode}
+      FQDN: ${fqdn}
+      INTERNAL_LB: LB-AuthBusinessService:8080
+      LDAP_AUTH_LOCATION: ${directoryServer}
+      LDAP_AUTH_PASSWORD: ${ldap_auth_password}
+      LDAP_AUTH_USERNAME: ${ldap_auth_username}
+      LDAP_ROLE_LOCATION: ${directoryServer}
+      LDAP_ROLE_PASSWORD: ${ldap_role_password}
+      LDAP_ROLE_USERNAME: ${ldap_role_username}
+      OUT_HOST:
+      OUT_HOST_ENABLED: false
+      PORTAL_COOKIE_DOMAIN: ${portal_cookie_domain}
+      PORTAL_FQDN: portal.${fqdn}
+      REDIS_INSTANCE: redis.${externals_stack_name}.rancher.internal:6379
+      WFE_FQDN: wfe.${fqdn}
 
   LB-AuthBusinessService:
     labels:
