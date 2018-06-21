@@ -126,3 +126,12 @@ services:
       io.rancher.scheduler.affinity:host_label: stackType=auth
       io.rancher.container.agent.role: environmentAdmin
       io.rancher.container.create_agent: 'true'
+
+  Redis:
+    image: rancher/external-service
+    labels:
+      project.service.name: redis
+      project.name: cis
+      project.stack: cis-externals
+      io.rancher.scheduler.affinity:host_label_soft: stackType=auth
+
