@@ -46,7 +46,7 @@ PKI-LDAP:
   scale: 1
 
 Redis:
-  scale: 1
+  hostname: redis.auth.private.${fqdn}
 
 Nfs:
   scale: 1

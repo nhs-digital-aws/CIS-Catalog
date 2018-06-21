@@ -44,22 +44,6 @@ services:
     image: ${registry_url}/dir:${externals_version}
     stdin_open: true
 
-  Redis:
-    ports:
-      - 6379:6379
-    restart: always
-    labels:
-      io.rancher.scheduler.affinity:host_label: stackType=auth
-      environment_name: ${env_shortcode}
-      service_name: redis
-      io.rancher.container.dns: true
-      project.service.name: redis
-      project.name: cis
-      project.stack: cis-externals
-    tty: true
-    image: ${registry_url}/redis:3.2.4
-    stdin_open: true
-
   Nfs:
     restart: always
     labels:
