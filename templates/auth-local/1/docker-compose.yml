@@ -52,7 +52,7 @@ services:
       project.name: cis-auth
       project.stack: auth
     tty: true
-    image: rancher/lb-service-haproxy:v0.7.15
+    image: rancher/lb-service-haproxy:v0.9.1
     stdin_open: true
 
   AuditService:
