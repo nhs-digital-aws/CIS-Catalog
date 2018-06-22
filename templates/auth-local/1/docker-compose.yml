@@ -275,8 +275,8 @@ services:
       REFERENCESERVER: dir.${externals_stack_name}.rancher.internal
       OPENDJ_BIND_USERNAME: ${ldap_auth_username}
       OPENDJ_BIND_PASSWORD: ${ldap_auth_password}
-#      OPENDJ_BACKUP_SOURCE: ${s3_bucket_name}
-#      OPENDJ_BACKUP_FILE: ${env_shortcode}-opendj-backup.tar.gz
+      OPENDJ_BACKUP_SOURCE: ${s3_bucket_name}
+      OPENDJ_BACKUP_FILE: ${env_shortcode}-opendj-backup.tar.gz
       OPENDJ_ROLE: DJM
       USE_AWS_S3: ${use_aws_s3}
       USE_AWS_S3_FOR_BACKUPS:
