@@ -74,11 +74,11 @@ services:
     volumes:
     - /etc/prom-conf/
     environment:
-      rancher-server: rancher.private.${fqdn}
-      rancher-host-1: auth.auth.private.${fqdn}
-      rancher-host-2: ldap-dex.auth.private.${fqdn}
-      rancher-host-3: ldap-dfa.auth.private.${fqdn}
-      rancher-host-4: urs.urs.private.${fqdn}
+      rancher_server: rancher.private.${rancher_stack_env_shortcode}.${fqdn}
+      rancher_host_1: auth.private.${rancher_stack_env_shortcode}.${fqdn}
+      rancher_host_2: ldap-dex.private.${rancher_stack_env_shortcode}.${fqdn}
+      rancher_host_3: ldap-dfa.private.${rancher_stack_env_shortcode}.${fqdn}
+      rancher_host_4: urs.private.${rancher_stack_env_shortcode}.${fqdn}
 
   # Grafana is the preferred Prometheus back end database
   grafana:
