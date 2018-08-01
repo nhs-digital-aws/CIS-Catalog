@@ -52,7 +52,7 @@ services:
 
   cadvisor:
     ports:
-      - 9344:9344
+      - 9344:8080
     image: google/cadvisor:latest
     volumes:
     - /:/rootfs:ro
