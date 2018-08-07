@@ -156,10 +156,10 @@ Outbound-Messaging-Service:
     - 127.0.0.1
 
 WebSessionStore:
-  hostname: redis.${externals_stack_name}.rancher.internal
+  hostname: secure-redis.${externals_stack_name}.rancher.internal
 
 RedisSessionStore:
-  hostname: redis.${externals_stack_name}.rancher.internal
+  hostname: secure-redis.${externals_stack_name}.rancher.internal
 
 haproxy-internal:
   upgrade_strategy:

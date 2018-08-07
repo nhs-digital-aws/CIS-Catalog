@@ -135,3 +135,23 @@ services:
       project.stack: cis-externals
       io.rancher.scheduler.affinity:host_label_soft: stackType=auth
 
+  Secure-Redis:
+    image: vimagick/stunnel
+    expose:
+    - 6379:6379
+    labels:
+      io.rancher.scheduler.affinity:host_label: stackType=auth
+      environment_name: ${env_shortcode}
+      service_name: secure-redis
+      io.rancher.container.dns: true
+      io.rancher.container.hostname_override: container_name
+      project.service.name: secure-redis
+      project.name: cis
+      project.stack: cis-externals
+    environment:
+      - CLIENT=yes
+      - SERVICE=redis-cli
+      - ACCEPT=secure-redis.cis-externals.rancher.internal:6379
+      - CONNECT=redis.cis-externals.rancher.internal:6379
+    tty: true
+    restart: always

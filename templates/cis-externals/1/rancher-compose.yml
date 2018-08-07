@@ -48,10 +48,8 @@ PKI-LDAP:
 Redis:
   hostname: redis.private.${env_shortcode}.${fqdn}
 
-
 IAM-Database:
   hostname: ${rds_hostname}
-
 
 Nfs:
   scale: 1
@@ -74,4 +72,3 @@ PKI-LDAP-LB:
     unhealthy_threshold: 3
     interval: 2000
     strategy: recreate
-

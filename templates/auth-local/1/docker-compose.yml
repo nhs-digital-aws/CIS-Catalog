@@ -40,7 +40,7 @@ services:
       OUT_HOST_ENABLED: false
       PORTAL_COOKIE_DOMAIN: ${portal_cookie_domain}
       PORTAL_FQDN: portal.${fqdn}
-      REDIS_INSTANCE: redis.${externals_stack_name}.rancher.internal:6379
+      REDIS_INSTANCE: secure-redis.${externals_stack_name}.rancher.internal:6379
       WFE_FQDN: wfe.${fqdn}
 
   LB-AuthBusinessService:
@@ -140,7 +140,7 @@ services:
     tty: true
     stdin_open: true
     external_links:
-    - ${externals_stack_name}/Redis:RedisSessionStore
+    - ${externals_stack_name}/Secure-Redis:RedisSessionStore
 
   SAMLService:
     labels:
@@ -250,7 +250,7 @@ services:
     security_opt:
     - seccomp:unconfined
     external_links:
-    - ${externals_stack_name}/Redis:RedisSessionStore
+    - ${externals_stack_name}/Secure-Redis:RedisSessionStore
 
   djm:
     labels:
@@ -447,12 +447,12 @@ services:
     tty: true
     stdin_open: true
     environment:
-      redishosts: redis.${externals_stack_name}.rancher.internal:6379
+      redishosts: secure-redis.${externals_stack_name}.rancher.internal:6379
     image: ${registry_url}/auth-sessiontimeout:${auth_version}
     tty: true
     stdin_open: true
     external_links:
-    - ${externals_stack_name}/Redis:RedisSessionStore
+    - ${externals_stack_name}/Secure-Redis:RedisSessionStore
 
   S3FS:
     labels:
