@@ -145,6 +145,12 @@
       required: true
       default: "cis-externals"
       type: "string"
+    - variable: "region"
+      description: "Please enter the AWS region"
+      label: "AWS region"
+      required: true
+      default: "eu-west-2"
+      type: "string"
 
 TLS-Service:
   upgrade_strategy:

@@ -470,11 +470,11 @@ services:
     devices:
       - "/dev/fuse"
     environment:
-      BUCKETNAME: "${aws_account_id}-cis-data -o nonempty -o iam_role=${env_shortcode}-${tag_name}-ecsFromRancher"
+      BUCKETNAME: "${aws_account_id}-cis-data -o iam_role=${env_shortcode}-${tag_name}-ecsFromRancher,url=https://s3.amazonaws.com,allow_other,nonempty,endpoint=${region},retries=6,use_sse"
       UID: "500"
       GID: "500"
     volumes:
     - "/home/rancher:/home/shared/s3:shared"
     tty: true
     stdin_open: true
-    image: "camptocamp/s3fs:1.80-2"
+    image: ${aws_account_id}.dkr.ecr.${region}.amazonaws.com/cis-infra/s3fs:latest
