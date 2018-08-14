@@ -57,20 +57,33 @@ services:
       - S3FS:S3FS
 
   Redis:
-    ports:
-      - 6379:6379
-    restart: always
+    image: rancher/external-service
+    labels:
+      project.service.name: redis
+      project.name: cis
+      project.stack: cis-externals
+      io.rancher.scheduler.affinity:host_label_soft: stackType=auth
+
+  Secure-Redis:
+    image: vimagick/stunnel
+    expose:
+    - 6379:6379
     labels:
       io.rancher.scheduler.affinity:host_label: stackType=auth
       environment_name: ${env_shortcode}
-      service_name: redis
+      service_name: secure-redis
       io.rancher.container.dns: true
-      project.service.name: redis
+      io.rancher.container.hostname_override: container_name
+      project.service.name: secure-redis
       project.name: cis
-      project.stack: cis-externals-openssl
+      project.stack: cis-externals
+    environment:
+      - CLIENT=yes
+      - SERVICE=redis-cli
+      - ACCEPT=secure-redis.cis-externals.rancher.internal:6379
+      - CONNECT=redis.cis-externals.rancher.internal:6379
     tty: true
-    image: ${registry_url}/redis:3.2.4
-    stdin_open: true
+    restart: always
 
   Nfs:
     restart: always
