@@ -70,6 +70,7 @@ services:
     - 6379:6379
     labels:
       io.rancher.scheduler.affinity:host_label: stackType=auth
+      io.rancher.container.pull_image: always
       environment_name: ${env_shortcode}
       service_name: secure-redis
       io.rancher.container.dns: true

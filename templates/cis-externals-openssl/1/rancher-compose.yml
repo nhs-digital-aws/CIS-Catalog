@@ -69,7 +69,7 @@ OpenSSL-HTTP:
   scale: 1
 
 Redis:
-  scale: 1
+  hostname: redis.private.${env_shortcode}.${fqdn}
 
 Nfs:
   scale: 1
