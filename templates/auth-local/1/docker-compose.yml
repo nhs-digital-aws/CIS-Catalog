@@ -214,7 +214,7 @@ services:
       - be_tvs=tokenvalidationservice.auth-local.rancher.internal
       - be_pot=portal.auth-local.rancher.internal
       - envcode=${env_shortcode}
-    image: ${registry_url}/auth-haproxy-int:latest
+    image: ${registry_url}/auth-haproxy-int:${auth_version}
     tty: true
     stdin_open: true
     cap_add:
@@ -267,7 +267,7 @@ services:
     - /var/log/iam:/var/log/iam
     - /var/log/opendj:/opt/opendj/logs
     - /tmp/backup/opendj:/opt/opendj/bak
-    image: ${registry_url}/opendj-s6:latest
+    image: ${registry_url}/opendj-s6:${auth_version}
     tty: true
     stdin_open: true
     environment:
@@ -300,7 +300,7 @@ services:
       project.stack: auth
     volumes:
     - /var/log/iam:/var/log/iam
-    image: ${registry_url}/opendj-s6:latest
+    image: ${registry_url}/opendj-s6:${auth_version}
     tty: true
     stdin_open: true
     environment:
@@ -333,7 +333,7 @@ services:
       project.stack: auth
     volumes:
     - /var/log/iam:/var/log/iam
-    image: ${registry_url}/opendj-s6:latest
+    image: ${registry_url}/opendj-s6:${auth_version}
     tty: true
     stdin_open: true
     environment:
@@ -375,7 +375,7 @@ services:
       DEX_BE: dex.auth-local.rancher.internal
       pemfile: ${pemfile}
       cafile: root.pem
-    image: ${registry_url}/auth-haproxy-dex:latest
+    image: ${registry_url}/auth-haproxy-dex:${auth_version}
     tty: true
     stdin_open: true
     cap_add:
@@ -400,7 +400,7 @@ services:
       CHANGELOG_LOGS_RETENTION: ${changelog_logs_retention}
       S6_KEEP_ENV: 1
       S6_BEHAVIOUR_IF_STAGE2_FAILS: 2
-    image: ${registry_url}/changelog:${auth_version}
+    image: ${registry_url}/cis-j7-changelog:${auth_version}
     hostname: changelog
     volumes:
     - /var/log/iam:/var/changelog
