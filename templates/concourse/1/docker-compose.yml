@@ -11,7 +11,7 @@ services:
       project.service.name: concourse-data
       project.name: cis-concourse
       project.stack: concourse
-    image: ${registry_url}/concourse-build-volumes:latest
+    image: ${registry_url}/concourse-concourse-build-volumes:latest
     tty: true
     stdin_open: true
 

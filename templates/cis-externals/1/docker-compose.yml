@@ -75,7 +75,7 @@ services:
     container_name: rootca
     privileged: true
     tty: true
-    image: ${registry_url}/rootca:${pki_version}
+    image: ${registry_url}/rootca:latest
     stdin_open: true
     links:
     - RootCA:rootca
@@ -94,7 +94,7 @@ services:
       project.stack: cis-externals
     privileged: true
     tty: true
-    image: ${registry_url}/subca:${pki_version}
+    image: ${registry_url}/subca:latest
     stdin_open: true
     links:
     - RootCA:rootca
@@ -112,7 +112,7 @@ services:
       project.stack: cis-externals
     privileged: true
     tty: true
-    image: ${registry_url}/subcc:${pki_version}
+    image: ${registry_url}/subcc:latest
     stdin_open: true
     links:
     - RootCA:rootca
