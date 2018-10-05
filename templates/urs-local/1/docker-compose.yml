@@ -663,11 +663,11 @@ services:
     devices:
       - "/dev/fuse"
     environment:
-      BUCKETNAME: "${aws_account_id}-cis-data -o iam_role=${env_shortcode}-${tag_name}-ecsFromRancher,url=https://s3.amazonaws.com,allow_other,nonempty,endpoint=${region},retries=6"
+      BUCKETNAME: "${aws_account_id}-cis-data -o iam_role=${env_shortcode}-${tag_name}-ecsFromRancher,url=https://s3.amazonaws.com,allow_other,nonempty,endpoint=${region},retries=6,use_sse"
       UID: "500"
       GID: "500"
     volumes:
     - "/home/rancher:/home/shared/s3:shared"
     tty: true
     stdin_open: true
-    image: camptocamp/s3fs:1.80-4
+    image: ${aws_account_id}.dkr.ecr.${region}.amazonaws.com/cis-infra/fuse-s3fs:latest
