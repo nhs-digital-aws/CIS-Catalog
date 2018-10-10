@@ -470,9 +470,10 @@ services:
     devices:
       - "/dev/fuse"
     environment:
-      BUCKETNAME: "${aws_account_id}-cis-data -o iam_role=${env_shortcode}-${tag_name}-ecsFromRancher,url=https://s3.amazonaws.com,allow_other,nonempty,endpoint=${region},retries=6,use_sse"
+      BUCKETNAME: "${aws_account_id}-cis-data -o iam_role=${env_shortcode}-${tag_name}-ecsFromRancher,url=https://s3.${region}.amazonaws.com,allow_other,nonempty,endpoint=${region},retries=6,use_sse=kmsid"
       UID: "500"
       GID: "500"
+      AWSSSEKMSID: "${kms_key_arn}"
     volumes:
     - "/home/rancher:/home/shared/s3:shared"
     tty: true
