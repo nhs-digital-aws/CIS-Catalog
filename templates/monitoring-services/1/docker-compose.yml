@@ -87,23 +87,23 @@ services:
     tty: true
     labels:
       io.rancher.container.pull_image: always
-      io.rancher.sidekicks: graf-db
+      io.rancher.sidekicks: grafana-dashboards
       environment_name: ${env_shortcode}
       service_name: $${service_name}
       io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
       io.rancher.container.hostname_override: container_name
     volumes_from:
-      - graf-db
-    image: grafana/grafana:4.4.3
+      - grafana-dashboards
+    image: grafana/grafana:5.2.4
     stdin_open: true
 
-  # Grafana configuration sidekick
-  graf-db:
+  # Grafana dashboards sidekick
+  grafana-dashboards:
     tty: true
-    image: ${registry_url}/graf-db:${monitoring_services_version}
+    image: ${registry_url}/grafana-dashboards:${monitoring_services_version}
     command: cat
     volumes:
-      - /var/lib/grafana/
+      - /etc/grafana/provisioning/
     labels:
       environment_name: ${env_shortcode}
       service_name: $${service_name}
