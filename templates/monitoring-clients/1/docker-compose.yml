@@ -23,7 +23,7 @@ services:
     network_mode: "host"
 
   splunk-uforwarder:
-    image: splunk/universalforwarder:6.6.0
+    image: splunk/universalforwarder:7.0.3
     environment:
       SPLUNK_START_ARGS: --accept-license
       SPLUNK_FORWARD_SERVER: ${splunk_server}
