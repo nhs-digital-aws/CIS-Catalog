@@ -98,6 +98,14 @@ services:
       project.service.name: urs-directory
       io.rancher.scheduler.affinity:host_label_soft: stackType=urs
 
+  PKI:
+    image: rancher/external-service
+    labels:
+      project.service.name: pki
+      project.name: cis-urs
+      project.stack: urs
+      io.rancher.scheduler.affinity:host_label_soft: stackType=urs
+
   Entrust-CA1-Manager:
     image: rancher/external-service
     labels:
@@ -216,8 +224,7 @@ services:
     - Entrust-CA1-Manager:Entrust-CA1-Manager
     - Entrust-CA2-Manager:Entrust-CA2-Manager
     - Entrust-CA3-Manager:Entrust-CA3-Manager
-    external_links:
-    - ${externals_stack_name}/PKI-LDAP-LB:Directory
+    - PKI:Directory
 
   EPR-BusinessService:
     labels:

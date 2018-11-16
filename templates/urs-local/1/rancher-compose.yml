@@ -148,14 +148,17 @@ URS-Directory:
     interval: 2000
     strategy: recreate
 
+PKI:
+  hostname: pki.private.${env_shortcode}.${fqdn}
+
 Entrust-CA1-Manager:
-  hostname: subca.${externals_stack_name}.rancher.internal
+  hostname: pki.private.${env_shortcode}.${fqdn}
 
 Entrust-CA2-Manager:
-  hostname: subcc.${externals_stack_name}.rancher.internal
+  hostname: pki.private.${env_shortcode}.${fqdn}
 
 Entrust-CA3-Manager:
-  hostname: subca.${externals_stack_name}.rancher.internal
+  hostname: pki.private.${env_shortcode}.${fqdn}
 
 Outbound-Messaging-Service:
   external_ips:
