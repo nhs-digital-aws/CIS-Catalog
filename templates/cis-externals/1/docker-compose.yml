@@ -30,19 +30,19 @@ services:
     image: ${registry_url}/dir:${externals_version}
     stdin_open: true
 
-  PKI-LDAP:
-    restart: always
-    labels:
-      io.rancher.scheduler.affinity:host_label: stackType=auth
-      environment_name: ${env_shortcode}
-      service_name: pki-ldap
-      io.rancher.container.dns: true
-      project.service.name: pki-ldap
-      project.name: cis
-      project.stack: cis-externals
-    tty: true
-    image: ${registry_url}/dir:${externals_version}
-    stdin_open: true
+#  PKI-LDAP:
+#    restart: always
+#    labels:
+#      io.rancher.scheduler.affinity:host_label: stackType=auth
+#      environment_name: ${env_shortcode}
+#      service_name: pki-ldap
+#      io.rancher.container.dns: true
+#      project.service.name: pki-ldap
+#      project.name: cis
+#      project.stack: cis-externals
+#    tty: true
+#    image: ${registry_url}/dir:${externals_version}
+#    stdin_open: true
 
   Nfs:
     restart: always
@@ -61,71 +61,71 @@ services:
     privileged: true
     command: /gv0
 
-  RootCA:
-    restart: always
-    labels:
-      io.rancher.scheduler.affinity:host_label: stackType=auth
-      environment_name: ${env_shortcode}
-      service_name: rootca
-      io.rancher.container.dns: true
-      io.rancher.container.hostname_override: container_name
-      project.service.name: root-ca
-      project.name: cis
-      project.stack: cis-externals
-    container_name: rootca
-    privileged: true
-    tty: true
-    image: ${registry_url}/rootca:latest
-    stdin_open: true
-    links:
-    - RootCA:rootca
-    - PKI-LDAP:dir
-
-  SubCA:
-    restart: always
-    labels:
-      io.rancher.scheduler.affinity:host_label: stackType=auth
-      environment_name: ${env_shortcode}
-      service_name: subca
-      io.rancher.container.dns: true
-      io.rancher.container.hostname_override: container_name
-      project.service.name: sub-ca
-      project.name: cis
-      project.stack: cis-externals
-    privileged: true
-    tty: true
-    image: ${registry_url}/subca:latest
-    stdin_open: true
-    links:
-    - RootCA:rootca
-    - PKI-LDAP:dir
-
-  SubCC:
-    restart: always
-    labels:
-      io.rancher.scheduler.affinity:host_label: stackType=auth
-      environment_name: ${env_shortcode}
-      service_name: subcc
-      io.rancher.container.dns: true
-      project.service.name: sub-cc
-      project.name: cis
-      project.stack: cis-externals
-    privileged: true
-    tty: true
-    image: ${registry_url}/subcc:latest
-    stdin_open: true
-    links:
-    - RootCA:rootca
-    - PKI-LDAP:dir
-
-  PKI-LDAP-LB:
-    image: rancher/lb-service-haproxy:v0.9.1
-    expose:
-    - 389:389/tcp
-    labels:
-      io.rancher.scheduler.affinity:host_label: stackType=auth
-      io.rancher.container.agent.role: environmentAdmin
-      io.rancher.container.create_agent: 'true'
+#  RootCA:
+#    restart: always
+#    labels:
+#      io.rancher.scheduler.affinity:host_label: stackType=auth
+#      environment_name: ${env_shortcode}
+#      service_name: rootca
+#      io.rancher.container.dns: true
+#      io.rancher.container.hostname_override: container_name
+#      project.service.name: root-ca
+#      project.name: cis
+#      project.stack: cis-externals
+#    container_name: rootca
+#    privileged: true
+#    tty: true
+#    image: ${registry_url}/rootca:latest
+#    stdin_open: true
+#    links:
+#    - RootCA:rootca
+#    - PKI-LDAP:dir
+#
+#  SubCA:
+#    restart: always
+#    labels:
+#      io.rancher.scheduler.affinity:host_label: stackType=auth
+#      environment_name: ${env_shortcode}
+#      service_name: subca
+#      io.rancher.container.dns: true
+#      io.rancher.container.hostname_override: container_name
+#      project.service.name: sub-ca
+#      project.name: cis
+#      project.stack: cis-externals
+#    privileged: true
+#    tty: true
+#    image: ${registry_url}/subca:latest
+#    stdin_open: true
+#    links:
+#    - RootCA:rootca
+#    - PKI-LDAP:dir
+#
+#  SubCC:
+#    restart: always
+#    labels:
+#      io.rancher.scheduler.affinity:host_label: stackType=auth
+#      environment_name: ${env_shortcode}
+#      service_name: subcc
+#      io.rancher.container.dns: true
+#      project.service.name: sub-cc
+#      project.name: cis
+#      project.stack: cis-externals
+#    privileged: true
+#    tty: true
+#    image: ${registry_url}/subcc:latest
+#    stdin_open: true
+#    links:
+#    - RootCA:rootca
+#    - PKI-LDAP:dir
+#
+#  PKI-LDAP-LB:
+#    image: rancher/lb-service-haproxy:v0.9.1
+#    expose:
+#    - 389:389/tcp
+#    labels:
+#      io.rancher.scheduler.affinity:host_label: stackType=auth
+#      io.rancher.container.agent.role: environmentAdmin
+#      io.rancher.container.create_agent: 'true'
 
   Redis:
     image: rancher/external-service

@@ -42,8 +42,8 @@ IAM-Database:
 Dir:
   scale: 1
 
-PKI-LDAP:
-  scale: 1
+#PKI-LDAP:
+#  scale: 1
 
 Redis:
   hostname: redis.private.${env_shortcode}.${fqdn}
@@ -54,21 +54,21 @@ IAM-Database:
 Nfs:
   scale: 1
 
-PKI-LDAP-LB:
-  scale: 1
-  start_on_create: true
-  lb_config:
-    certs: []
-    port_rules:
-    - priority: 1
-      protocol: tcp
-      service: PKI-LDAP
-      source_port: 389
-      target_port: 10389
-  health_check:
-    healthy_threshold: 2
-    response_timeout: 2000
-    port: 42
-    unhealthy_threshold: 3
-    interval: 2000
-    strategy: recreate
+#PKI-LDAP-LB:
+#  scale: 1
+#  start_on_create: true
+#  lb_config:
+#    certs: []
+#    port_rules:
+#    - priority: 1
+#      protocol: tcp
+#      service: PKI-LDAP
+#      source_port: 389
+#      target_port: 10389
+#  health_check:
+#    healthy_threshold: 2
+#    response_timeout: 2000
+#    port: 42
+#    unhealthy_threshold: 3
+#    interval: 2000
+#    strategy: recreate
