@@ -149,16 +149,16 @@ URS-Directory:
     strategy: recreate
 
 PKI:
-  hostname: pki.private.${env_shortcode}.${fqdn}
+  hostname: pki.private.${fqdn}
 
 Entrust-CA1-Manager:
-  hostname: pki.private.${env_shortcode}.${fqdn}
+  hostname: pki.private.${fqdn}
 
 Entrust-CA2-Manager:
-  hostname: pki.private.${env_shortcode}.${fqdn}
+  hostname: pki.private.${fqdn}
 
 Entrust-CA3-Manager:
-  hostname: pki.private.${env_shortcode}.${fqdn}
+  hostname: pki.private.${fqdn}
 
 Outbound-Messaging-Service:
   external_ips:
