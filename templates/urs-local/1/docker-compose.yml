@@ -110,7 +110,7 @@ services:
     image: rancher/external-service
     labels:
       project.service.name: entrust-ca1-manager
-      project.name: cis-urs
+      project.name: cis
       project.stack: urs-local
       io.rancher.scheduler.affinity:host_label_soft: stackType=urs
 
