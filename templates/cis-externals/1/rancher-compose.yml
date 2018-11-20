@@ -36,8 +36,8 @@
       default: 
       type: "string"
 
-IAM-Database:
-  scale: 1
+#IAM-Database:
+#  scale: 1
 
 Dir:
   scale: 1
@@ -48,8 +48,9 @@ Dir:
 Redis:
   hostname: redis.private.${env_shortcode}.${fqdn}
 
-IAM-Database:
-  hostname: ${rds_hostname}
+#IAM-Database:
+#  hostname: ${rds_hostname}
+#  scale: 1
 
 Nfs:
   scale: 1
