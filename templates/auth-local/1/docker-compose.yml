@@ -24,8 +24,8 @@ services:
       AUTH_SERVICE_SUBJECT: ${auth_service_subject}
       CRL_FILE: IAM_crlfile.crl
       CRL_FILENAME: ${auth_crl_file1}
-      CRL_FILENAME2: ${auth_crl_file2}
-      CRL_FILENAME3: ${auth_crl_file3}
+#      CRL_FILENAME2: ${auth_crl_file2}
+#      CRL_FILENAME3: ${auth_crl_file3}
       CRL_LOCATION: 10.196.94.238
       ENV_SHORTCODE: ${env_shortcode}
       FQDN: ${fqdn}
@@ -101,8 +101,8 @@ services:
     privileged: true
     environment:
       CRL_FILENAME: ${auth_crl_file1}
-      CRL_FILENAME2: ${auth_crl_file2}
-      CRL_FILENAME3: ${auth_crl_file3}
+#      CRL_FILENAME2: ${auth_crl_file2}
+#      CRL_FILENAME3: ${auth_crl_file3}
       KEY_MATERIAL: YES
       ENV_SHORTCODE: ${env_shortcode}
       JAVA_OPTS: -server -XX:+UseConcMarkSweepGC -XX:+UseParNewGC -XX:ParallelGCThreads=2 -Xms1024m -Xmx6144m
