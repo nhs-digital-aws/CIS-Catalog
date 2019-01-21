@@ -33,14 +33,14 @@
       description: "Please enter the ARN of the snapshot loaded into RDS"
       label: "RDS ARN"
       required: false
-      default: 
+      default:
       type: "string"
 
 #IAM-Database:
 #  scale: 1
 
-Dir:
-  scale: 1
+#Dir:
+#  scale: 1
 
 #PKI-LDAP:
 #  scale: 1

@@ -137,7 +137,7 @@ URS-Directory:
     port_rules:
     - priority: 1
       protocol: tcp
-      service: ${externals_stack_name}/Dir
+      service: ${auth_stack_name}/Dir
       source_port: 389
       target_port: 10389
   health_check:

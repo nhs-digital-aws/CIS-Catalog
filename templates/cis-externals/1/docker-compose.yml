@@ -15,21 +15,21 @@ services:
 #    stdin_open: true
 #    environment:
 #      urs_db_snapshot: ${urs_db_snapshot}
-
-  Dir:
-    restart: always
-    labels:
-      io.rancher.scheduler.affinity:host_label: stackType=auth
-      environment_name: ${env_shortcode}
-      service_name: Dir
-      io.rancher.container.dns: true
-      project.service.name: dir
-      project.name: cis
-      project.stack: cis-externals
-    tty: true
-    image: ${registry_url}/dir:${externals_version}
-    stdin_open: true
-
+#
+#  Dir:
+#   restart: always
+#   labels:
+#     io.rancher.scheduler.affinity:host_label: stackType=auth
+#     environment_name: ${env_shortcode}
+#     service_name: Dir
+#     io.rancher.container.dns: true
+#     project.service.name: dir
+#     project.name: cis
+#     project.stack: cis-externals
+#   tty: true
+#   image: ${registry_url}/dir:${externals_version}
+#   stdin_open: true
+#
 #  PKI-LDAP:
 #    restart: always
 #    labels:
