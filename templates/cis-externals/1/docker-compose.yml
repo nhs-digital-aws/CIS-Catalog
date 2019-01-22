@@ -39,10 +39,10 @@ services:
       io.rancher.container.pull_image: always
       io.rancher.container.hostname_override: container_name
       io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
-      service_name: $${service_name}
+      service_name: Dir
       environment_name: ${env_shortcode}
       project.service.name: dir
-      project.name: cis-auth
+      project.name: cis
       project.stack: cis-externals
     volumes:
     - /var/log/iam:/var/log/iam
@@ -59,12 +59,12 @@ services:
       USE_AWS_S3: ${use_aws_s3}
       OPENDJ_ROLE: DIR
       OPENDJ_ENABLE_CHLOG: PLEASE
-      HOSTNAME: dir.cis-externalS.rancher.internal
+      HOSTNAME: dir.cis-externals.rancher.internal
       S6_KEEP_ENV: 1
       S6_BEHAVIOUR_IF_STAGE2_FAILS: 2
     links:
     - djm:djm
-  
+
 #  PKI-LDAP:
 #    restart: always
 #    labels:
