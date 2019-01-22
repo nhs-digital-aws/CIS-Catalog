@@ -354,39 +354,39 @@ services:
     links:
     - djm:djm
 
-dir:
-  ports:
-    - 10389:10389
-  labels:
-    io.rancher.scheduler.affinity:host_label: stackType=auth
-    io.rancher.container.pull_image: always
-    io.rancher.container.hostname_override: container_name
-    io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
-    service_name: $${service_name}
-    environment_name: ${env_shortcode}
-    project.service.name: dir
-    project.name: cis-auth
-    project.stack: auth
-  volumes:
-  - /var/log/iam:/var/log/iam
-  image: ${registry_url}/opendj-s6:${auth_version}
-  tty: true
-  stdin_open: true
-  environment:
-    ENV_SHORTCODE: ${env_shortcode}
-    REFERENCESERVER: djm.auth-local.rancher.internal
-    OPENDJ_BIND_USERNAME: ${ldap_auth_username}
-    OPENDJ_BIND_PASSWORD: ${ldap_auth_password}
-    OPENDJ_BACKUP_SOURCE: ${s3_bucket_name}
-    OPENDJ_BACKUP_FILE: ${env_shortcode}-opendj-backup.tar.gz
-    USE_AWS_S3: ${use_aws_s3}
-    OPENDJ_ROLE: DIR
-    OPENDJ_ENABLE_CHLOG: PLEASE
-    HOSTNAME: dir.auth-local.rancher.internal
-    S6_KEEP_ENV: 1
-    S6_BEHAVIOUR_IF_STAGE2_FAILS: 2
-  links:
-  - djm:djm
+# dir:
+#   ports:
+#     - 10389:10389
+#   labels:
+#     io.rancher.scheduler.affinity:host_label: stackType=auth
+#     io.rancher.container.pull_image: always
+#     io.rancher.container.hostname_override: container_name
+#     io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
+#     service_name: $${service_name}
+#     environment_name: ${env_shortcode}
+#     project.service.name: dir
+#     project.name: cis-auth
+#     project.stack: auth
+#   volumes:
+#   - /var/log/iam:/var/log/iam
+#   image: ${registry_url}/opendj-s6:${auth_version}
+#   tty: true
+#   stdin_open: true
+#   environment:
+#     ENV_SHORTCODE: ${env_shortcode}
+#     REFERENCESERVER: djm.auth-local.rancher.internal
+#     OPENDJ_BIND_USERNAME: ${ldap_auth_username}
+#     OPENDJ_BIND_PASSWORD: ${ldap_auth_password}
+#     OPENDJ_BACKUP_SOURCE: ${s3_bucket_name}
+#     OPENDJ_BACKUP_FILE: ${env_shortcode}-opendj-backup.tar.gz
+#     USE_AWS_S3: ${use_aws_s3}
+#     OPENDJ_ROLE: DIR
+#     OPENDJ_ENABLE_CHLOG: PLEASE
+#     HOSTNAME: dir.auth-local.rancher.internal
+#     S6_KEEP_ENV: 1
+#     S6_BEHAVIOUR_IF_STAGE2_FAILS: 2
+#   links:
+#   - djm:djm
 
   haproxy-dex:
     ports:
