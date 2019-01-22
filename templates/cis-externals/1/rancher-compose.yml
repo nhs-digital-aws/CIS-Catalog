@@ -42,7 +42,7 @@
 #Dir:
 #  scale: 1
 
-dir:
+Dir:
   upgrade_strategy:
     start_first: false
   scale: 1
