@@ -322,22 +322,6 @@ dex:
     reinitializing_timeout: 1020000
     strategy: recreate
 
-# dir:
-#   upgrade_strategy:
-#     start_first: false
-#   scale: 1
-#   health_check:
-#     port: 8389
-#     interval: 5000
-#     unhealthy_threshold: 3
-#     request_line: 'GET / HTTP/1.1\r\nHost:\ dir'
-#     healthy_threshold: 1
-#     response_timeout: 2000
-#     #15mins
-#     initializing_timeout: 900000
-#     reinitializing_timeout: 900000
-#     strategy: recreate
-
 changelog:
   upgrade_strategy:
     start_first: true

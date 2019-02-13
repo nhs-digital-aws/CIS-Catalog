@@ -33,30 +33,14 @@
       description: "Please enter the ARN of the snapshot loaded into RDS"
       label: "RDS ARN"
       required: false
-      default:
+      default: 
       type: "string"
 
 #IAM-Database:
 #  scale: 1
 
-#Dir:
-#  scale: 1
-
-# Dir:
-#   upgrade_strategy:
-#     start_first: false
-#   scale: 1
-#   health_check:
-#     port: 8389
-#     interval: 5000
-#     unhealthy_threshold: 3
-#     request_line: 'GET / HTTP/1.1\r\nHost:\ dir'
-#     healthy_threshold: 1
-#     response_timeout: 2000
-#     #15mins
-#     initializing_timeout: 900000
-#     reinitializing_timeout: 900000
-#     strategy: recreate
+Dir:
+  scale: 1
 
 #PKI-LDAP:
 #  scale: 1
